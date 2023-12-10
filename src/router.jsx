@@ -5,7 +5,10 @@ import {
 } from "react-router-dom";
 import RootLayout from "@layouts/RootLayout";
 import Home from "@pages/Home";
-import Login from "@pages/Login";
+import withAuth from "./hocs/withAuth";
+
+const WrappedComponentWithAuth = withAuth(RootLayout)
+
 
 const PATH = {
   base: "/",
@@ -18,12 +21,10 @@ const PATH = {
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path={PATH.base} element={<RootLayout />}>
+      <Route path={PATH.base} element={<WrappedComponentWithAuth />}>
         <Route index element={<Home />} />
         <Route path={PATH.products} element={<Home />} />
       </Route>
-
-      <Route path={PATH.login} element={<Login />} />
     </>
   )
 );
