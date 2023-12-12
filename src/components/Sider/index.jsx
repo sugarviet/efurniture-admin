@@ -1,24 +1,50 @@
 import { Menu } from 'antd';
-import { HomeOutlined } from '@ant-design/icons';
-import { Link, useLocation } from 'react-router-dom';
+import { HomeOutlined, SettingOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
 
-const menuItems = [
-  { key: 'home', label: 'Home', icon: <HomeOutlined />, to: '/' },
-  { key: 'about', label: 'About', icon: <HomeOutlined />, to: '/about' },
-  { key: 'contact', label: 'Contact', icon: <HomeOutlined />, to: '/contact' },
+function getItem(label, key, icon, children, type) {
+  return {
+    key,
+    icon,
+    children,
+    label,
+    type,
+  };
+}
+
+const items = [
+  getItem('Dashboard', '/', <HomeOutlined />),
+  getItem('Products', '/products', <HomeOutlined />),
+  getItem('Events', '/events', <HomeOutlined />),
+  getItem('Account', '/account', <SettingOutlined />, [
+    getItem('User', '/users'),
+    getItem('Partner', '/partners'),
+  ]),
+  getItem('Vouchers', '/vouchers', <HomeOutlined />),
+
+  {
+    type: 'divider',
+  },
 ];
 
 const AppSider = () => {
-  const location = useLocation();
+  const navigate = useNavigate();
+  const onClick = (e) => {
+    navigate(e.key);
+  };
 
   return (
-    <Menu mode="vertical" theme="dark" style={{ height: '100%' }} selectedKeys={[location.pathname]}>
-      {menuItems.map((menuItem) => (
-        <Menu.Item key={menuItem.to} icon={menuItem.icon}>
-          <Link to={menuItem.to}>{menuItem.label}</Link>
-        </Menu.Item>
-      ))}
-    </Menu>
+    <Menu
+    theme='dark'
+      onClick={onClick}
+      style={{
+        height: '100%',
+      }}
+      defaultSelectedKeys={['1']}
+      defaultOpenKeys={['sub1']}
+      mode="inline"
+      items={items}
+    />
   );
 };
 
