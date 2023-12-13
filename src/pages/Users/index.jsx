@@ -12,12 +12,20 @@ const Users = () => {
     return <Loading />;
   }
 
+  const getSorter = (dataIndex, customSorter) => {
+    return {
+      onFilter: (value, record) => record[dataIndex].indexOf(value) === 0,
+    sorter: customSorter ? customSorter : (a, b) => a[dataIndex].length - b[dataIndex].length,
+    }
+  }
+
   const columns = [
     {
       title: "Name",
       dataIndex: "name",
       key: "name",
       width: "30%",
+      ...getSorter('name'),
       ...getColumnSearchProps("name"),
     },
     {

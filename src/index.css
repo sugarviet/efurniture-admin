@@ -4,8 +4,13 @@
 
 :root{
   --primary-color: #001529;
+  --primary-blue-color: #0958d9;
 }
 
 .primary_background {
   background-color: var(--primary-color);
+}
+
+.primary {
+  background-color: var(--primary-blue-color);
 }

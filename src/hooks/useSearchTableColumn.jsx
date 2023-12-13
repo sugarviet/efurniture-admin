@@ -43,6 +43,7 @@ export function useSearchTableColumn(){
           />
           <Space>
             <Button
+            className='primary text-white'
               type="primary"
               onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
               icon={<SearchOutlined />}
