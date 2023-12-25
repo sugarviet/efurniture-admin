@@ -59,7 +59,7 @@ const Products = () => {
       <List
         grid={{ gutter: 16, column: 4 }}
         dataSource={filteredProducts}
-        renderItem={(item) => (
+        renderItem={() => (
           <List.Item>
             <Card
               hoverable

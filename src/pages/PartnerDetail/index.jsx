@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+
 import { Avatar, Card, Descriptions, List } from "antd";
 import { EditOutlined, EllipsisOutlined, SettingOutlined } from "@ant-design/icons";
 const { Meta } = Card;
@@ -34,7 +34,6 @@ const productList = [
     },
   ];
 const PartnerDetail = () => {
-  const { id } = useParams();
   const items = [
     {
       key: '1',
@@ -85,7 +84,7 @@ const PartnerDetail = () => {
       <List
         grid={{ gutter: 16, column: 4 }}
         dataSource={productList}
-        renderItem={(item) => (
+        renderItem={() => (
           <List.Item>
             <Card
               hoverable

@@ -6,7 +6,7 @@ import { useSearchTableColumn } from '../../hooks/useSearchTableColumn';
 const Vouchers = () => {
   const { getColumnSearchProps } = useSearchTableColumn();
 
-  const [vouchers, setVouchers] = useState([
+  const [vouchers] = useState([
     {
       id: 1,
       name: 'Summer Sale',
@@ -58,7 +58,7 @@ const Vouchers = () => {
     {
       title: 'Action',
       key: 'action',
-      render: (text, record) => (
+      render: () => (
         <Space size="middle">
             <Button type="primary" danger>Delete</Button>
         </Space>

@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import {
   createBrowserRouter,
   Route,
@@ -16,7 +17,7 @@ import PartnerDetail from "./pages/PartnerDetail";
 
 const WrappedComponentWithAuth = withAuth(RootLayout)
 
-const PATH = {
+const path = {
   base: "/",
   products: "/products",
   about: "/",
@@ -32,38 +33,38 @@ const PATH = {
 
 const routes = {
   layout: <WrappedComponentWithAuth />,
-  path: PATH.base,
+  path: path.base,
   children: [
     {
-      path: PATH.base,
+      path: path.base,
       element: <Home />
     },
     {
-      path: PATH.products,
+      path: path.products,
       element: <Products />
     },
     {
-      path: PATH.users,
+      path: path.users,
       element: <Users />
     },
     {
-      path: PATH.userDetail,
+      path: path.userDetail,
       element: <UserDetail />
     },
     {
-      path: PATH.partners,
+      path: path.partners,
       element: <Partners />
     },
     {
-      path: PATH.partnerDetail,
+      path: path.partnerDetail,
       element: <PartnerDetail />
     },
     {
-      path: PATH.vouchers,
+      path: path.vouchers,
       element: <Vouchers />
     },
     {
-      path: PATH.events,
+      path: path.events,
       element: <Events />
     },
     

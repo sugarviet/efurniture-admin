@@ -8,18 +8,7 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "prepare": "husky install",
-    "lint-staged": "cross-env FORCE_COLOR=1 lint-staged --quiet"
-  },
-  "lint-staged": {
-    "*.(js|jsx|ts|tsx)": [
-      "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+    "prepare": "husky install"
   },
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
@@ -51,5 +40,8 @@
     "tailwindcss": "^3.3.6",
     "vite": "^5.0.0",
     "husky": "^8.0.0"
+  },
+  "lint-staged": {
+    "src/**/*.{jsx, js}": "eslint"
   }
 }
