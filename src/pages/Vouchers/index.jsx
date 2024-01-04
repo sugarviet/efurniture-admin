@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Table, Button, Space } from 'antd';
 import { useSearchTableColumn } from '../../hooks/useSearchTableColumn';
+import { CSVLink } from "react-csv";
 
 
 const Vouchers = () => {
@@ -69,6 +70,7 @@ const Vouchers = () => {
 
   return (
     <div>
+      <CSVLink data={vouchers}>Download me</CSVLink>
       <Table dataSource={vouchers} columns={columns} />
     </div>
   );

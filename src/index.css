@@ -4,7 +4,12 @@
 
 :root{
   --primary-color: #001529;
-  --primary-blue-color: #0958d9;
+  --primary-blue-color: #1677FF;
+  --primary-white-color: #fff;
+}
+
+body {
+  overflow-x: hidden;
 }
 
 .primary_background {
@@ -13,4 +18,5 @@
 
 .primary {
   background-color: var(--primary-blue-color);
+  color: var(--primary-white-color);
 }

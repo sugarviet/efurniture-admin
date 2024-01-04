@@ -1,6 +1,6 @@
 import { Button, Table } from "antd";
-import { useSearchTableColumn } from "../../hooks/useSearchTableColumn";
-import Loading from "../../components/Loading";
+import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
+import Loading from "@components/Loading";
 import { Link } from "react-router-dom";
 import usePartners from "./hooks/usePartners";
 

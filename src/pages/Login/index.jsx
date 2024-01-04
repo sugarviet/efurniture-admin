@@ -6,7 +6,9 @@ const { Meta } = Card;
 
 const Login = () => {
     const onFinish = () => {
-      localStorage.setItem('token', "123");
+      // localStorage.setItem('token', 'admin');
+      localStorage.setItem('token', "partner");
+
       refreshPage(true)
       };
 
