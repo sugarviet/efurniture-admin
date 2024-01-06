@@ -37,9 +37,16 @@ export function useGetSiderItem() {
     getItem("Products", "/products", <ShopOutlined />),
   ];
 
+
+  const itemsForStaff = [
+    getItem("Products", "/products", <ShopOutlined />),
+  ];
+
+
   const getItemByRole = {
     admin: itemsForAdmin,
     partner: itemsForPartner,
+    staff: itemsForStaff
   }
 
   return {

@@ -1,3 +1,3 @@
-export function refreshPage(refresh = false){
+export function refreshPage(refresh = true){
     return window.location.reload(refresh);
 }

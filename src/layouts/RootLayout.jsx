@@ -6,7 +6,7 @@ import AppSider from '../components/Sider';
 import { Outlet } from 'react-router-dom';
 
 const RootLayout = () => (
-  <div
+  <main
   className="flex h-screen"
   >
     <Layout>
@@ -22,6 +22,6 @@ const RootLayout = () => (
         </Content>
       </Layout>
     </Layout>
-  </div>
+  </main>
 );
 export default RootLayout;

@@ -17,6 +17,7 @@
     "@tanstack/react-query-devtools": "^4.29.7",
     "antd": "^5.11.5",
     "axios": "^1.6.2",
+    "dayjs": "^1.11.10",
     "husky": "^8.0.3",
     "lint-staged": "^15.2.0",
     "moment": "^2.29.4",

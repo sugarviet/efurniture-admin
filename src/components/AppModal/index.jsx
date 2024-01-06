@@ -29,7 +29,7 @@ export default AppModal;
 
 
 AppModal.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   isOpen: PropTypes.bool.isRequired,
   setIsModalOpen: PropTypes.func.isRequired,
 };

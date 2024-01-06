@@ -1,15 +1,14 @@
 import { Form, Input, Button, Card, Divider } from "antd";
 import styles from "./Login.module.css";
-import { refreshPage } from "@utils/refreshPage";
+import { useLogin } from "./hooks/useLogin";
 
 const { Meta } = Card;
 
 const Login = () => {
-    const onFinish = () => {
-      // localStorage.setItem('token', 'admin');
-      localStorage.setItem('token', "partner");
-
-      refreshPage(true)
+  const {handleLogin} = useLogin();
+  
+    const onFinish = (values) => {
+      handleLogin(values)
       };
 
   return (

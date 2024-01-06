@@ -1,5 +1,5 @@
-import HorizontalList from "../../../../components/HorizontalList";
-import ProductCard from "../../../../components/ProductCard";
+import HorizontalList from "@components/HorizontalList";
+import ProductCard from "@components/ProductCard";
 
 const TopSellingProducts = () => {
   const data = [

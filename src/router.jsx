@@ -29,7 +29,7 @@ import ProductDetail from "./pages/ProductDetail";
 const WrappedComponentWithAuth = withAuth(RootLayout)
 const UserPageWithVerifyAdmin = withVerifyAdmin(Users)
 
-const path = {
+const pathAdmin = {
   base: "/",
   products: "/products",
   events: '/events',
@@ -38,6 +38,10 @@ const path = {
   userDetail: '/user/:id',
   partnerDetail: '/partner/:id',
   vouchers: "/vouchers"
+};
+
+const pathStaff = {
+  base: "/",
 };
 
 const pathPartners = {
@@ -50,38 +54,38 @@ const pathPartners = {
 
 const routesForAdmin = {
   layout: <WrappedComponentWithAuth />,
-  path: path.base,
+  path: pathAdmin.base,
   children: [
     {
-      path: path.base,
+      path: pathAdmin.base,
       element: <Home />
     },
     {
-      path: path.products,
+      path: pathAdmin.products,
       element: <Products />
     },
     {
-      path: path.users,
+      path: pathAdmin.users,
       element: <UserPageWithVerifyAdmin />
     },
     {
-      path: path.userDetail,
+      path: pathAdmin.userDetail,
       element: <UserDetail />
     },
     {
-      path: path.partners,
+      path: pathAdmin.partners,
       element: <Partners />
     },
     {
-      path: path.partnerDetail,
+      path: pathAdmin.partnerDetail,
       element: <PartnerDetail />
     },
     {
-      path: path.vouchers,
+      path: pathAdmin.vouchers,
       element: <Vouchers />
     },
     {
-      path: path.events,
+      path: pathAdmin.events,
       element: <Events />
     },
     {
@@ -117,12 +121,30 @@ const routesForPartners = {
   ]
 }
 
+const routesForStaff = {
+  layout: <WrappedComponentWithAuth />,
+  path: pathStaff.base,
+  children: [
+    {
+      path: pathStaff.base,
+      element: <PartnerDashboard />
+    },
+    {
+      path: "*",
+      element: <NotFound />
+    }
+
+    
+  ]
+}
+
 const getRoutesBasedOnRole = () => {
-  const userRole = localStorage.getItem('token');
+  const userRole = localStorage.getItem('token') || 'admin';
 
   const routesForCharacter = {
     admin: routesForAdmin,
-    partner: routesForPartners
+    partner: routesForPartners,
+    staff: routesForStaff
   }
 
   return routesForCharacter[userRole]

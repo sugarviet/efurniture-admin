@@ -6,10 +6,12 @@
   --primary-color: #001529;
   --primary-blue-color: #1677FF;
   --primary-white-color: #fff;
+  --primary-gray-color: #F5F5F5;
 }
 
 body {
-  overflow-x: hidden;
+  background-color: var(--primary-gray-color);
+  overflow: hidden;
 }
 
 .primary_background {

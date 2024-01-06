@@ -12,17 +12,22 @@ const AppSider = () => {
   };
 
   return (
-    <Menu
-      theme="dark"
-      onClick={onClick}
-      style={{
-        height: "100%",
-      }}
-      defaultSelectedKeys={["1"]}
-      defaultOpenKeys={["sub1"]}
-      mode="inline"
-      items={getItemByRole[currentUserRole]}
-    />
+    <sider>
+      <div className="mx-auto mt-2">
+        <img src="/logo.png" alt="logo" className="w-20 h-16 flex justify-center mx-auto"/>
+      </div>
+      <Menu
+        theme="dark"
+        onClick={onClick}
+        style={{
+          height: "100%",
+        }}
+        defaultSelectedKeys={["1"]}
+        defaultOpenKeys={["sub1"]}
+        mode="inline"
+        items={getItemByRole[currentUserRole]}
+      />
+    </sider>
   );
 };
 

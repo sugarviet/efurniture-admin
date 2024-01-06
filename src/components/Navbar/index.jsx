@@ -1,4 +1,5 @@
 import { Avatar, Dropdown } from "antd";
+import { logout } from "@utils/logout";
 
 const Navbar = () => {
   const items = [
@@ -18,7 +19,7 @@ const Navbar = () => {
       type: "divider",
     },
     {
-      label: <p>Logout</p>,
+      label: <p onClick={logout}>Logout</p>,
       key: "4",
     },
   ];
@@ -28,6 +29,7 @@ const Navbar = () => {
       id="navbar"
       className="flex justify-between primary_background w-full h-full text-white items-center px-6"
     >
+     
       <div className="ml-auto">
         <Dropdown
           menu={{
