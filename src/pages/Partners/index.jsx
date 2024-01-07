@@ -3,6 +3,7 @@ import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
 import Loading from "@components/Loading";
 import { Link } from "react-router-dom";
 import usePartners from "./hooks/usePartners";
+import ExcelButton from "@components/ExcelButton";
 
 const Partners = () => {
   const { partnerData, isLoading } = usePartners();
@@ -43,13 +44,18 @@ const Partners = () => {
         <Link to={`/partner/${record.id}`}>
           <Button type="link">View Details</Button>
         </Link>
-
       ),
     },
   ];
 
   return (
     <div>
+      <h1 className="text-3xl font-bold">Partner management</h1>
+
+      <div className="float-right">
+        <ExcelButton data={partnerData} />
+      </div>
+
       <Table columns={columns} dataSource={partnerData} />
     </div>
   );

@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Table, Button, Space, Popconfirm } from 'antd';
-import AppModal from '../../components/AppModal';
+import AppModal from '@components/AppModal';
 import EventCreateForm from './components/EventCreateForm';
 import EventUpdateForm from './components/EventUpdateForm';
+import ExcelButton from '@components/ExcelButton';
 
 const Events = () => {
   const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
@@ -80,10 +81,15 @@ const Events = () => {
 
   return (
     <div>
-      <h1 className='text-2xl font-bold mb-3'>Events Management</h1>
-      <Button type="primary" className='primary text-white' onClick={handleToggleModalCreateModal} style={{ marginBottom: 16 }}>
-        Create Event
-      </Button>
+      <div className="flex justify-between items-center px-2">
+        <h1 className='text-2xl font-bold mb-3'>Events Management</h1>
+        <Button type="primary" className='primary text-white' onClick={handleToggleModalCreateModal} style={{ marginBottom: 16 }}>
+          Create Event
+        </Button>
+      </div>
+      <div className='float-right'>
+        <ExcelButton data={events}/>
+      </div>
       <Table dataSource={events} columns={columns} />
 
 

@@ -153,6 +153,8 @@ const routesForStaff = {
 const getRoutesBasedOnRole = () => {
   const userRole = localStorage.getItem('token') || 'admin';
 
+  console.log(userRole);
+
   const routesForCharacter = {
     admin: routesForAdmin,
     partner: routesForPartners,

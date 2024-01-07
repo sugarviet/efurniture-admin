@@ -18,8 +18,8 @@ ExcelButton.propTypes = {
 };
 
 ExcelButton.defaultProps = {
-  data: null,
-  headers: null,
+  data: [],
+  headers: [],
 };
 
 export default ExcelButton;

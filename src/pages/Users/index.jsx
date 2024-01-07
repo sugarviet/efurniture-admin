@@ -1,8 +1,9 @@
 import { Button, Table } from "antd";
-import { useSearchTableColumn } from "../../hooks/useSearchTableColumn";
+import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
 import { useUser } from "./hooks/useUser";
-import Loading from "../../components/Loading";
+import Loading from "@components/Loading";
 import { Link } from "react-router-dom";
+import ExcelButton from "@components/ExcelButton";
 
 const Users = () => {
   const { userData, isLoading } = useUser();
@@ -15,9 +16,11 @@ const Users = () => {
   const getSorter = (dataIndex, customSorter) => {
     return {
       onFilter: (value, record) => record[dataIndex].indexOf(value) === 0,
-    sorter: customSorter ? customSorter : (a, b) => a[dataIndex].length - b[dataIndex].length,
-    }
-  }
+      sorter: customSorter
+        ? customSorter
+        : (a, b) => a[dataIndex].length - b[dataIndex].length,
+    };
+  };
 
   const columns = [
     {
@@ -25,7 +28,7 @@ const Users = () => {
       dataIndex: "name",
       key: "name",
       width: "30%",
-      ...getSorter('name'),
+      ...getSorter("name"),
       ...getColumnSearchProps("name"),
     },
     {
@@ -51,13 +54,16 @@ const Users = () => {
         <Link to={`/user/${record.id}`}>
           <Button type="link">View Details</Button>
         </Link>
-
       ),
     },
   ];
 
   return (
     <div>
+      <h1 className="text-3xl font-bold">User management</h1>
+      <div className="float-right">
+        <ExcelButton data={userData} />
+      </div>
       <Table columns={columns} dataSource={userData} />
     </div>
   );

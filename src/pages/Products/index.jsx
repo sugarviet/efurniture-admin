@@ -4,8 +4,9 @@ import HorizontalList from "@components/HorizontalList";
 import ProductCard from "@components/ProductCard";
 import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
 import { Link } from "react-router-dom";
-import AppModal from "../../components/AppModal";
-import AppSuspense from "../../components/AppSuspense";
+import AppModal from "@components/AppModal";
+import AppSuspense from "@components/AppSuspense";
+import ExcelButton from "@components/ExcelButton";
 
 const { Search } = Input;
 
@@ -48,6 +49,7 @@ const productList = [
     image: "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png",
   },
 ];
+
 const Products = () => {
   const { getColumnSearchProps } = useSearchTableColumn();
   const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
@@ -88,36 +90,46 @@ const Products = () => {
       render: (item) => (
         <Space className="flex gap-4">
           <Link to={`/products/${item.id}`}>
-            <Button className="primary" type="primary">View {item.id}</Button>
+            <Button className="primary" type="primary">
+              Detail
+            </Button>
           </Link>
-            <Button onClick={handleToggleModalEditProduct}>Edit {item.id}</Button>
+          <Button onClick={handleToggleModalEditProduct}>Edit</Button>
         </Space>
       ),
     },
   ];
   return (
     <section>
-      <div className="flex px-2 justify-between items-center my-2">
+      <div className="flex px-2 justify-between items-center my-4">
         <h1 className="text-3xl font-bold">Product management</h1>
-        <Button className="primary mb-3" onClick={handleToggleModalCreateProduct} type="primary">
+        <Button
+          className="primary"
+          onClick={handleToggleModalCreateProduct}
+          type="primary"
+        >
           Create product
         </Button>
       </div>
+
       <Search
         placeholder="Search products"
         onChange={handleSearch}
         style={{ marginBottom: 16 }}
       />
 
+      <div className="float-right">
+      
+        <ExcelButton data={productList}/>
+      </div>
       <Table dataSource={productList} columns={columns} />
 
       <HorizontalList cols={4} data={filteredProducts} dataItem={ProductCard} />
 
-
       {/* Modals */}
       <AppModal isOpen={isModalCreateOpen} setIsOpen={setIsModalCreateOpen}>
         <AppSuspense>
-          <ProductCreateForm setIsOpen={setIsModalCreateOpen}/>
+          <ProductCreateForm setIsOpen={setIsModalCreateOpen} />
         </AppSuspense>
       </AppModal>
 
