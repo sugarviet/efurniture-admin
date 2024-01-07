@@ -1,14 +1,13 @@
-import { Layout } from 'antd';
+import { Layout } from "antd";
 const { Header, Sider, Content } = Layout;
+import AppSuspense from "../components/AppSuspense";
 
-import Navbar from "../components/Navbar"
-import AppSider from '../components/Sider';
-import { Outlet } from 'react-router-dom';
+import Navbar from "../components/Navbar";
+import AppSider from "../components/Sider";
+import { Outlet } from "react-router-dom";
 
 const RootLayout = () => (
-  <main
-  className="flex h-screen"
-  >
+  <main className="flex h-screen">
     <Layout>
       <Sider className="flex-none w-64 text-white h-screen">
         <AppSider />
@@ -17,9 +16,11 @@ const RootLayout = () => (
         <Header className="bg-white shadow-md h-20 w-full p-0">
           <Navbar />
         </Header>
-        <Content className="flex-1 p-4 overflow-y-auto">
-          <Outlet />
-        </Content>
+        <AppSuspense>
+          <Content className="flex-1 p-4 overflow-y-auto">
+            <Outlet />
+          </Content>
+        </AppSuspense>
       </Layout>
     </Layout>
   </main>

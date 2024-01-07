@@ -5,26 +5,33 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 
+import { lazy } from "react";
 // Layouts
 import RootLayout from "@layouts/RootLayout";
 
 // Pages
 import Home from "@pages/Home";
-import Users from "./pages/Users";
-import Partners from "./pages/Partners";
-import UserDetail from "./pages/UserDetail";
-import Products from "./pages/Products";
-import Vouchers from "./pages/Vouchers";
-import Events from "./pages/Events";
-import PartnerDetail from "./pages/PartnerDetail";
-import PartnerDashboard from "./pages/PartnerDashboard";
+
+const Users = lazy(() => import('./pages/Users'))
+const Partners = lazy(() => import('./pages/Partners'))
+const UserDetail = lazy(() => import('./pages/UserDetail'))
+const Products = lazy(() => import('./pages/Products'))
+
+const Vouchers = lazy(() => import('./pages/Vouchers'))
+const Events = lazy(() => import('./pages/Events'))
+const PartnerDetail = lazy(() => import('./pages/PartnerDetail'))
+
+const PartnerDashboard = lazy(() => import('./pages/PartnerDashboard'))
+const NotFound = lazy(() => import('./pages/NotFound'))
+const PartnerProduct = lazy(() => import('./pages/PartnerProduct'))
+const ProductDetail = lazy(() => import('./pages/ProductDetail'))
+
+
 
 // HOCs
 import withAuth from "./hocs/withAuth";
 import withVerifyAdmin from "./hocs/withVerifyAdmin";
-import NotFound from "./pages/NotFound";
-import PartnerProduct from "./pages/PartnerProduct";
-import ProductDetail from "./pages/ProductDetail";
+
 
 const WrappedComponentWithAuth = withAuth(RootLayout)
 const UserPageWithVerifyAdmin = withVerifyAdmin(Users)
@@ -32,6 +39,7 @@ const UserPageWithVerifyAdmin = withVerifyAdmin(Users)
 const pathAdmin = {
   base: "/",
   products: "/products",
+  productDetail: '/products/:id',
   events: '/events',
   users: '/users',
   partners: '/partners',
@@ -63,6 +71,10 @@ const routesForAdmin = {
     {
       path: pathAdmin.products,
       element: <Products />
+    },
+    {
+      path: pathAdmin.productDetail,
+      element: <ProductDetail />
     },
     {
       path: pathAdmin.users,

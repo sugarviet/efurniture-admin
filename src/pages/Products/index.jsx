@@ -58,9 +58,9 @@ const Products = () => {
     setIsModalCreateOpen(!isModalCreateOpen);
   };
 
-  // const handleToggleModalEditProduct = () => {
-  //   setIsModalUpdateOpen(!isModalUpdateOpen);
-  // };
+  const handleToggleModalEditProduct = () => {
+    setIsModalUpdateOpen(!isModalUpdateOpen);
+  };
 
   const handleSearch = (e) => {
     const filtered = productList.filter((product) =>
@@ -88,18 +88,21 @@ const Products = () => {
       render: (item) => (
         <Space className="flex gap-4">
           <Link to={`/products/${item.id}`}>
-            <Button className="primary">View {item.id}</Button>
-            <Button>Edit {item.id}</Button>
+            <Button className="primary" type="primary">View {item.id}</Button>
           </Link>
+            <Button onClick={handleToggleModalEditProduct}>Edit {item.id}</Button>
         </Space>
       ),
     },
   ];
   return (
     <section>
-      <Button className="primary mb-3" onClick={handleToggleModalCreateProduct} type="primary">
-        Create product
-      </Button>
+      <div className="flex px-2 justify-between items-center my-2">
+        <h1 className="text-3xl font-bold">Product management</h1>
+        <Button className="primary mb-3" onClick={handleToggleModalCreateProduct} type="primary">
+          Create product
+        </Button>
+      </div>
       <Search
         placeholder="Search products"
         onChange={handleSearch}
