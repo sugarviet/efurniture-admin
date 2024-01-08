@@ -1,13 +1,21 @@
 import { Button, Form, Input, DatePicker, Select } from "antd";
+import { formateDate } from "@utils/formateDate";
 
 const { Option } = Select;
 const VoucherUpdateForm = () => {
+  const initialValue = {
+    name: 'Viet',
+    products: ['Product A', 'Product B', 'Product C'],
+    startDate: formateDate('20/11/2023'),
+    endDate: formateDate('20/11/2023'),
+  }
+
   const [form] = Form.useForm();
   const onFinish = () => {};
   return (
     <div>
-      <Form form={form} layout="vertical" onFinish={onFinish}>
-        <Form.Item name="id" hidden />
+      <Form form={form} layout="vertical" onFinish={onFinish} initialValues={initialValue}>
+
         <Form.Item
           name="name"
           label="Event Name"

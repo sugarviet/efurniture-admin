@@ -1,10 +1,30 @@
+import { UploadOutlined } from "@ant-design/icons";
 import { Form, Input, Button, Upload, Select, message } from "antd";
 import axios from "axios";
-
-export const API_KEY = "cdf8a2e8f87e68a84232b583cd4997b7";
-export const UPLOAD_IMG_URL = "https://api.imgbb.com/1/upload";
+import { API_KEY, UPLOAD_IMG_URL } from "@config/uploadImage";
 
 const ProductEditForm = () => {
+  const initialValues = {
+    name: "Viet",
+    products: ["Product A", "Product B", "Product C"],
+    price: "10",
+    quantity: 100,
+    partner: 'jack',
+    image: [
+      {
+        uid: "-1",
+        name: "image.png",
+        status: "done",
+        url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+      },
+      {
+        uid: "-2",
+        name: "image.png",
+        status: "done",
+        url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+      },
+    ],
+  };
   const [form] = Form.useForm();
   const handleSubmit = async (values) => {
     console.log(values);
@@ -23,7 +43,6 @@ const ProductEditForm = () => {
 
   const filterOption = (input, option) =>
     (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
-
 
   const customRequest = async ({ file, onSuccess, onError }) => {
     console.log(file);
@@ -55,6 +74,7 @@ const ProductEditForm = () => {
   return (
     <div className="px-4 py-2">
       <Form
+        initialValues={initialValues}
         form={form}
         labelAlign="left"
         labelCol={{
@@ -152,13 +172,14 @@ const ProductEditForm = () => {
           <Upload
             multiple
             showUploadList
+            defaultFileList={initialValues.image}
             // onChange={onUploadImage}
             customRequest={customRequest}
             action={
               "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
             }
           >
-            Upload
+            <Button icon={<UploadOutlined />}>Click to Upload</Button>
           </Upload>
         </Form.Item>
 
@@ -174,7 +195,7 @@ const ProductEditForm = () => {
         </Form.Item>
       </Form>
     </div>
-  )
-}
+  );
+};
 
-export default ProductEditForm
+export default ProductEditForm;

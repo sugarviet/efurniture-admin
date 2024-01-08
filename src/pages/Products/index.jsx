@@ -79,6 +79,11 @@ const Products = () => {
       ...getColumnSearchProps("name"),
     },
     {
+      title: "Price",
+      dataIndex: "price",
+      key: "price",
+    },
+    {
       title: "Quantity",
       dataIndex: "quantity",
       key: "quantity",

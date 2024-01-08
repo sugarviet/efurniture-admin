@@ -1,3 +1,4 @@
+import { UploadOutlined } from "@ant-design/icons";
 import { Form, Input, Button, Upload, Select, message } from "antd";
 import axios from "axios";
 import Proptypes from 'prop-types'
@@ -178,7 +179,7 @@ const ProductCreateForm = ({ setIsOpen }) => {
               "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
             }
           >
-            Upload
+            <Button icon={<UploadOutlined />}>Click to Upload</Button>
           </Upload>
         </Form.Item>
 

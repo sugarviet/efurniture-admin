@@ -1,10 +1,40 @@
-import { Button, Form, Input, DatePicker, Select } from "antd";
-
+import { UploadOutlined } from "@ant-design/icons";
+import { Button, Form, Input, DatePicker, Select, Upload, message } from "antd";
+import axios from "axios";
+import { API_KEY, UPLOAD_IMG_URL } from "@config/uploadImage";
 const { Option } = Select;
+
 
 const EventCreateForm = () => {
   const [form] = Form.useForm();
   const onFinish = () => {};
+  const customRequest = async ({ file, onSuccess, onError }) => {
+    console.log(file);
+    const formData = new FormData();
+    formData.set("key", API_KEY);
+    formData.append("image", file);
+
+    try {
+      const response = await axios.post(UPLOAD_IMG_URL, formData);
+
+      if (response.status === 200 && response.data && response.data.data) {
+        // Successful upload
+        const imageUrl = response.data.data.url;
+
+        file.url = imageUrl;
+
+        onSuccess();
+        message.success(`${file.name} uploaded successfully`);
+      } else {
+        onError();
+        message.error(`Failed to upload ${file.name}`);
+      }
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      onError(error);
+      message.error(`Failed to upload ${file.name}`);
+    }
+  };
   return (
     <div>
       <Form form={form} layout="vertical" onFinish={onFinish}>
@@ -45,6 +75,28 @@ const EventCreateForm = () => {
             <Option value="Product C">Product C</Option>
             <Option value="Product D">Product D</Option>
           </Select>
+        </Form.Item>
+        <Form.Item
+          label="Product Images"
+          name="image"
+          rules={[
+            {
+              required: false,
+              message: "Please input your quantity!",
+            },
+          ]}
+        >
+          <Upload
+            multiple
+            showUploadList
+            // onChange={onUploadImage}
+            customRequest={customRequest}
+            action={
+              "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
+            }
+          >
+            <Button icon={<UploadOutlined />}>Click to Upload</Button>
+          </Upload>
         </Form.Item>
         <Form.Item
           wrapperCol={{
