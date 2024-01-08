@@ -1,9 +1,10 @@
 import {
   DashboardOutlined,
-  HomeOutlined,
   ScheduleOutlined,
   ShopOutlined,
   UserOutlined,
+  AlertOutlined,
+  TagsOutlined
 } from "@ant-design/icons";
 
 export function useGetSiderItem() {
@@ -25,11 +26,13 @@ export function useGetSiderItem() {
       getItem("User", "/users"),
       getItem("Partner", "/partners"),
     ]),
-    getItem("Vouchers", "/vouchers", <HomeOutlined />),
+    getItem("Vouchers", "/vouchers", <AlertOutlined />),
 
     {
       type: "divider",
     },
+    getItem("Orders", "/orders", <TagsOutlined />),
+
   ];
 
   const itemsForPartner = [
