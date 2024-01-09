@@ -1,31 +1,19 @@
 import { useState } from 'react';
 import { Table, Button, Space, Popconfirm } from 'antd';
 import AppModal from '@components/AppModal';
+import Loading from '@components/Loading';
 import EventCreateForm from './components/EventCreateForm';
 import EventUpdateForm from './components/EventUpdateForm';
 import ExcelButton from '@components/ExcelButton';
+import { useEvents } from './hooks/useEvents';
 
 const Events = () => {
   const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
   const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
+  const {events, isLoading} = useEvents();
 
-  const [events, setEvents] = useState([
-    {
-      id: 1,
-      name: 'Event 1',
-      startDate: '2023-01-01',
-      endDate: '2023-01-10',
-      products: ['Product A', 'Product B'],
-    },
-    {
-      id: 2,
-      name: 'Event 2',
-      startDate: '2023-02-01',
-      endDate: '2023-02-10',
-      products: ['Product C', 'Product D'],
-    },
-    // Add more events as needed
-  ]);
+  if(isLoading) return <Loading />
+
 
 
   const handleToggleModalCreateModal = () => {
@@ -74,9 +62,7 @@ const Events = () => {
 
 
   
-  const handleDelete = (eventId) => {
-    const updatedEvents = events.filter((event) => event.id !== eventId);
-    setEvents(updatedEvents);
+  const handleDelete = () => {
   };
 
   return (
@@ -90,7 +76,7 @@ const Events = () => {
       <div className='float-right'>
         <ExcelButton data={events}/>
       </div>
-      <Table dataSource={events} columns={columns} />
+      <Table rowKey="id" dataSource={events} columns={columns} />
 
 
 

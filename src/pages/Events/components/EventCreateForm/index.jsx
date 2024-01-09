@@ -38,7 +38,7 @@ const EventCreateForm = () => {
   return (
     <div>
       <Form form={form} layout="vertical" onFinish={onFinish}>
-        <Form.Item name="id" hidden />
+        
         <Form.Item
           name="name"
           label="Event Name"

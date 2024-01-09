@@ -1,19 +1,48 @@
 import { Button, Form, Input, DatePicker, Select } from "antd";
 
+import { formateDateByDMY } from "@utils/formateDateByDMY";
+import { useCreateVoucher } from "@services/Vouchers/services";
+
 const { Option } = Select;
 const VoucherCreateForm = () => {
+  const {mutate:createVoucher} = useCreateVoucher();
   const [form] = Form.useForm();
-  const onFinish = () => {};
+  const onFinish = (values) => {
+    const data = {
+      ...values,
+      startDate: formateDateByDMY(values.startDate),
+      endDate: formateDateByDMY(values.endDate),
+    }
+    createVoucher(data);
+
+    console.log(data);
+  };
   return (
     <div>
       <Form form={form} layout="vertical" onFinish={onFinish}>
-        <Form.Item name="id" hidden />
         <Form.Item
           name="name"
           label="Voucher Name"
           rules={[{ required: true, message: "Please enter the event name!" }]}
         >
-          <Input />
+          <Input placeholder="Voucher name"/>
+        </Form.Item>
+       
+        <Form.Item
+          name="quantity"
+          label="Quantity"
+
+          rules={[{ required: true, message: "Please enter the voucher quantity!" }]}
+        >
+          <Input placeholder="Voucher quantity" inputMode="numeric" type="number"/>
+        </Form.Item>
+        <Form.Item
+          name="discount"
+          label="Discount"
+
+          rules={[{ required: true, message: "Please enter the voucher discount %!" }]}
+        >
+          <Input placeholder="Voucher discount %"/>
         </Form.Item>
         <Form.Item
           name="startDate"

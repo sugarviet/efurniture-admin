@@ -7,54 +7,21 @@ import { Link } from "react-router-dom";
 import AppModal from "@components/AppModal";
 import AppSuspense from "@components/AppSuspense";
 import ExcelButton from "@components/ExcelButton";
+import Loading from "@components/Loading";
+import useProducts from "./hooks/useProducts";
 
 const { Search } = Input;
 
 const ProductCreateForm = lazy(() => import("./components/ProductCreateForm"));
 const ProductEditForm = lazy(() => import("./components/ProductEditForm"));
 
-const productList = [
-  {
-    id: 1,
-    name: "Haha",
-    price: "$19.99",
-    quantity: 100,
-    manufacturer: "Manufacturer 1",
-    image: "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png",
-  },
-  {
-    id: 2,
-    name: "Product 2",
-    price: "$29.99",
-    quantity: 100,
-    manufacturer: "Manufacturer 2",
-    image: "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png",
-  },
-  {
-    id: 3,
-    name: "Product 2",
-    price: "$29.99",
-    quantity: 100,
-
-    manufacturer: "Manufacturer 2",
-    image: "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png",
-  },
-  {
-    id: 4,
-    name: "Product 2",
-    price: "$29.99",
-    quantity: 100,
-
-    manufacturer: "Manufacturer 2",
-    image: "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png",
-  },
-];
-
 const Products = () => {
+  const { products, isLoading } = useProducts();
   const { getColumnSearchProps } = useSearchTableColumn();
   const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
   const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
-  const [filteredProducts, setFilteredProducts] = useState(productList);
+
+  if (isLoading) return <Loading />;
 
   const handleToggleModalCreateProduct = () => {
     setIsModalCreateOpen(!isModalCreateOpen);
@@ -64,12 +31,7 @@ const Products = () => {
     setIsModalUpdateOpen(!isModalUpdateOpen);
   };
 
-  const handleSearch = (e) => {
-    const filtered = productList.filter((product) =>
-      product.name.toLowerCase().includes(e.target.value.toLowerCase())
-    );
-    setFilteredProducts(filtered);
-  };
+  const handleSearch = () => {};
 
   const columns = [
     {
@@ -124,12 +86,11 @@ const Products = () => {
       />
 
       <div className="float-right">
-      
-        <ExcelButton data={productList}/>
+        <ExcelButton data={products} />
       </div>
-      <Table dataSource={productList} columns={columns} />
+      <Table rowKey="id" dataSource={products} columns={columns} />
 
-      <HorizontalList cols={4} data={filteredProducts} dataItem={ProductCard} />
+      <HorizontalList cols={4} data={products} dataItem={ProductCard} />
 
       {/* Modals */}
       <AppModal isOpen={isModalCreateOpen} setIsOpen={setIsModalCreateOpen}>

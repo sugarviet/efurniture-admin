@@ -1,11 +1,13 @@
 import { useState, lazy } from "react";
 import { Table, Button, Space } from "antd";
-import { useSearchTableColumn } from "../../hooks/useSearchTableColumn";
+import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
 
 import AppSuspense from '@components/AppSuspense';
+import Loading from '@components/Loading';
 
-import ExcelButton from "../../components/ExcelButton";
-import AppModal from "../../components/AppModal";
+import ExcelButton from "@components/ExcelButton";
+import AppModal from "@components/AppModal";
+import { useGetVouchers } from "./hooks/useGetVouchers";
 
 const VoucherCreateForm = lazy(() => import('./components/VoucherCreateForm'))
 const VoucherUpdateForm = lazy(() => import('./components/VoucherUpdateForm'))
@@ -14,34 +16,20 @@ const Vouchers = () => {
   const { getColumnSearchProps } = useSearchTableColumn();
   const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
   const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
+  const [selectedVoucherId, setSelectedVoucherId] = useState(null);
+
+  const {vouchers, isLoading} = useGetVouchers();
 
   const handleToggleModalCreateVoucher = () => {
     setIsModalCreateOpen(!isModalCreateOpen);
   };
 
-  const handleToggleModalEditVoucher = () => {
+  const handleToggleModalEditVoucher = (id) => {
     setIsModalUpdateOpen(!isModalUpdateOpen);
+    setSelectedVoucherId(id);
   };
 
-  const [vouchers] = useState([
-    {
-      id: 1,
-      name: "Summer Sale",
-      quantity: 100,
-      products: ["Product A", "Product B"],
-      discount: 15,
-      expiryDate: "2023-08-31",
-    },
-    {
-      id: 2,
-      name: "Back to School",
-      quantity: 50,
-      products: ["Product C"],
-      discount: 10,
-      expiryDate: "2023-09-15",
-    },
-    // Add more vouchers as needed
-  ]);
+  
 
   const columns = [
     {
@@ -74,9 +62,9 @@ const Vouchers = () => {
     {
       title: "Action",
       key: "action",
-      render: () => (
+      render: (_, record) => (
         <Space size="middle">
-          <Button onClick={handleToggleModalEditVoucher}>Edit</Button>
+          <Button onClick={() => handleToggleModalEditVoucher(record.id)}>Edit</Button>
           <Button type="primary" danger>
             Delete
           </Button>
@@ -84,6 +72,8 @@ const Vouchers = () => {
       ),
     },
   ];
+
+  if(isLoading) return <Loading />
 
   return (
     <section>
@@ -96,7 +86,7 @@ const Vouchers = () => {
       <div className="float-right my-2">
       <ExcelButton data={vouchers} />
       </div>
-      <Table dataSource={vouchers} columns={columns} />
+      <Table rowKey={"id"} dataSource={vouchers} columns={columns} />
 
 
     {/* Modals */}
@@ -108,7 +98,7 @@ const Vouchers = () => {
 
       <AppModal isOpen={isModalUpdateOpen} setIsOpen={setIsModalUpdateOpen}>
         <AppSuspense>
-          <VoucherUpdateForm />
+          <VoucherUpdateForm id={selectedVoucherId}/>
         </AppSuspense>
       </AppModal>
     </section>

@@ -15,7 +15,7 @@ const API_KEY = {
 
 export const useGetAllProducts = () => {
     return useQuery({
-      queryKey: API_KEY.GET_ALL_PRODUCTS,
+      queryKey: [API_KEY.GET_ALL_PRODUCTS],
       queryFn: getAllProduct,
     });
   };

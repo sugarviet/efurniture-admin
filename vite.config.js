@@ -12,7 +12,7 @@ export default defineConfig({
       '@pages': '/src/pages',
       '@layouts': '/src/layouts',
       '@config': '/src/config',
-
+      '@services': '/src/services',
     },
   },
 })

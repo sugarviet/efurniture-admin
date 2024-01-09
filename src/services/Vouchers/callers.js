@@ -13,20 +13,20 @@ export const getVoucherDetail = async (id) => {
   return res.data;
 };
 
-export const createVoucher = async(data) => {
+export const createVoucher = async (data) => {
   const res = await request.post('/vouchers', data);
 
   return res.data
 }
 
-export const updateVoucher = async(data) => {
-  const [id, ...rest] = data;
-  const res = await request.put(urlcat('/vouchers/:id', id), rest);
+export const updateVoucher = async (data) => {
+  const { id, ...rest } = data;
+  const res = await request.put(urlcat('/vouchers/:id', { id }), rest);
 
   return res.data
 }
 
-export const disableVoucher = async(data) => {
+export const disableVoucher = async (data) => {
   const [id, ...rest] = data;
   const res = await request.delete(urlcat('/vouchers/:id', id), rest);
 

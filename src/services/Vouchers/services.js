@@ -15,7 +15,7 @@ const API_KEY = {
 
 export const useGetAllVouchers = () => {
     return useQuery({
-      queryKey: API_KEY.GET_ALL_VOUCHERS,
+      queryKey: [API_KEY.GET_ALL_VOUCHERS],
       queryFn: getAllVouchers,
     });
   };

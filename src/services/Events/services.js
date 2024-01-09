@@ -15,7 +15,7 @@ const API_KEY = {
 
 export const useGetAllEvents = () => {
     return useQuery({
-      queryKey: API_KEY.GET_ALL_EVENTS,
+      queryKey: [API_KEY.GET_ALL_EVENTS],
       queryFn: getAllEvents,
     });
   };

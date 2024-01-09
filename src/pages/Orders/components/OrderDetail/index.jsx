@@ -1,38 +1,33 @@
 import Proptypes from "prop-types";
 import useGetOrderStatus from "../../hooks/useGetOrderStatus";
+import { useOrderDetail } from "../../hooks/useOrderDetail";
 
-const init = {
-  key: 1,
-  id: 1,
-  product: "Product 1",
-  user: "User 1",
-  address: "Address 1",
-  method: "Credit Card",
-  status: "pending",
-};
+import Loading from '@components/loading';
 
 const OrderDetail = ({ id }) => {
-  const orderDetails = init;
+  const {order, isLoading} = useOrderDetail(id);
   const { handleGetOrderStatus } = useGetOrderStatus();
+
+  if(isLoading) return <Loading />
 
   return (
     <div>
       <div className="p-4 bg-white rounded shadow-md">
         <h1 className="text-2xl font-bold mb-4">Order Detail - #{id}</h1>
         <p className="mb-2 flex gap-2">
-          <strong>Product:</strong> <span>{orderDetails.product}</span>
+          <strong>Product:</strong> <span>{order.product}</span>
         </p>
         <p className="mb-2 flex gap-2">
-          <strong>User:</strong> <span>{orderDetails.user}</span>
+          <strong>User:</strong> <span>{order.user}</span>
         </p>
         <p className="mb-2 flex gap-2">
-          <strong>Address:</strong> <span>{orderDetails.address}</span>
+          <strong>Address:</strong> <span>{order.address}</span>
         </p>
         <p className="mb-2 flex gap-2">
-          <strong>Payment Method:</strong> <span>{orderDetails.method}</span>
+          <strong>Payment Method:</strong> <span>{order.method}</span>
         </p>
         <p className="mb-2 flex gap-2">
-          <strong>Status:</strong> {handleGetOrderStatus(orderDetails.status)}
+          <strong>Status:</strong> {handleGetOrderStatus(order.status)}
         </p>
       </div>
     </div>

@@ -12,7 +12,7 @@ const AppSider = () => {
   };
 
   return (
-    <sider>
+    <div>
       <div className="mx-auto mt-2">
         <img src="/logo.png" alt="logo" className="w-20 h-16 flex justify-center mx-auto"/>
       </div>
@@ -27,7 +27,7 @@ const AppSider = () => {
         mode="inline"
         items={getItemByRole[currentUserRole]}
       />
-    </sider>
+    </div>
   );
 };
 

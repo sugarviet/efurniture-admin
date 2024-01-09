@@ -1,0 +1,108 @@
+{
+  "vouchers": [
+    {
+      "id": "1",
+      "name": "Summer Sale",
+      "quantity": 100,
+      "products": [
+        "Product A",
+        "Product B"
+      ],
+      "discount": 15,
+      "startDate": "20/11/2023",
+      "endDate": "20/11/2023"
+    },
+    {
+      "id": "2",
+      "name": "Back to School",
+      "quantity": 50,
+      "products": [
+        "Product C"
+      ],
+      "discount": 10,
+      "startDate": "20/11/2023",
+      "endDate": "20/11/2023"
+    },
+    {
+      "name": "Sale heheee",
+      "startDate": "09/01/2024",
+      "endDate": "12/01/2024",
+      "products": [
+        "Product A",
+        "Product B",
+        "Product C"
+      ],
+      "id": "2cdf"
+    }
+  ],
+  "orders": [
+    {
+      "key": 1,
+      "id": "1",
+      "product": "Product 1",
+      "user": "User 1",
+      "address": "Address 1",
+      "method": "Credit Card",
+      "status": "pending"
+    },
+    {
+      "key": 2,
+      "id": "2",
+      "product": "Product 2",
+      "user": "User 2",
+      "address": "Address 2",
+      "method": "PayPal",
+      "status": "shipping"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Haha",
+      "price": "$19.99",
+      "quantity": 100,
+      "manufacturer": "Manufacturer 1",
+      "image": "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+    },
+    {
+      "id": 2,
+      "name": "Product 2",
+      "price": "$29.99",
+      "quantity": 100,
+      "manufacturer": "Manufacturer 2",
+      "image": "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+    },
+    {
+      "id": 3,
+      "name": "Product 2",
+      "price": "$29.99",
+      "quantity": 100,
+      "manufacturer": "Manufacturer 2",
+      "image": "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+    },
+    {
+      "id": 4,
+      "name": "Product 2",
+      "price": "$29.99",
+      "quantity": 100,
+      "manufacturer": "Manufacturer 2",
+      "image": "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+    }
+  ],
+  "events": [
+    {
+      "id": 1,
+      "name": "Event 1",
+      "startDate": "2023-01-01",
+      "endDate": "2023-01-10",
+      "products": ["Product A", "Product B"]
+    },
+    {
+      "id": 2,
+      "name": "Event 2",
+      "startDate": "2023-02-01",
+      "endDate": "2023-02-10",
+      "products": ["Product C", "Product D"]
+    }
+  ]
+}
