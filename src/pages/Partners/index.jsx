@@ -56,7 +56,14 @@ const Partners = () => {
         <ExcelButton data={partnerData} />
       </div>
 
-      <Table columns={columns} dataSource={partnerData} />
+      <Table
+        columns={columns}
+        dataSource={partnerData}
+        pagination={{
+          pageSize: 10,
+          hideOnSinglePage: true,
+        }}
+      />
     </div>
   );
 };
