@@ -1,17 +1,14 @@
 import { useState } from "react";
-import { Table, Button, Space, Tag } from "antd";
-import AppModal from "../../components/AppModal";
+import { Table, Button, Space } from "antd";
+import AppModal from "@components/AppModal";
 import OrderDetail from "./components/OrderDetail";
+import useGetOrderStatus from "./hooks/useGetOrderStatus";
 
-const shippingStatus = {
-    'pending': <Tag color="yellow">Pending</Tag>,
-    'shipping': <Tag color="processing">Shipping</Tag>,
-    'done': <Tag color="success">Pending</Tag>,
-}
 
 const Orders = () => {
-const [isModalDetailOpen, setIsModalDetailOpen] = useState(false);
-const [selectedOrderId, setSelectedOrderId] = useState(null);
+  const [isModalDetailOpen, setIsModalDetailOpen] = useState(false);
+  const {handleGetOrderStatus} = useGetOrderStatus();
+  const [selectedOrderId, setSelectedOrderId] = useState(null);
 
   const [orders] = useState([
     {
@@ -36,7 +33,7 @@ const [selectedOrderId, setSelectedOrderId] = useState(null);
   const handleToggleDetailModal = (id) => {
     setIsModalDetailOpen(!isModalDetailOpen);
     setSelectedOrderId(id);
-  }
+  };
   const columns = [
     {
       title: "Product",
@@ -62,9 +59,23 @@ const [selectedOrderId, setSelectedOrderId] = useState(null);
       title: "Status",
       dataIndex: "status",
       key: "status",
-      render:(text) => (
-        shippingStatus[text]
-      )
+      render: (text) => handleGetOrderStatus(text),
+      filters: [
+        {
+          text: 'Pending',
+          value: 'pending',
+        },
+        {
+          text: 'Shipping',
+          value: 'shipping',
+        },
+        {
+          text: 'Done',
+          value: 'done',
+        }
+      ],
+      onFilter: (value, record) => record.status.indexOf(value) === 0,
+      
     },
 
     {
@@ -72,10 +83,13 @@ const [selectedOrderId, setSelectedOrderId] = useState(null);
       key: "action",
       render: (text, record) => (
         <Space size="middle">
-          <Button type="primary" className="primary text-white" onClick={() => handleToggleDetailModal(record.id)}>
+          <Button
+            type="primary"
+            className="primary text-white"
+            onClick={() => handleToggleDetailModal(record.id)}
+          >
             Detail
           </Button>
-         
         </Space>
       ),
     },
@@ -87,7 +101,7 @@ const [selectedOrderId, setSelectedOrderId] = useState(null);
       <Table dataSource={orders} columns={columns} />
 
       <AppModal isOpen={isModalDetailOpen} setIsOpen={setIsModalDetailOpen}>
-        <OrderDetail id={selectedOrderId}/>
+        <OrderDetail id={selectedOrderId} />
       </AppModal>
     </main>
   );

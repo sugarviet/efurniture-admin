@@ -42,7 +42,7 @@ export function useGetSiderItem() {
 
 
   const itemsForStaff = [
-    getItem("Products", "/products", <ShopOutlined />),
+    getItem("Partner", "/partners", <UserOutlined />),
   ];
 
 

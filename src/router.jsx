@@ -53,6 +53,10 @@ const pathAdmin = {
 
 const pathStaff = {
   base: "/",
+  users: '/users',
+  partners: '/partners',
+  userDetail: '/user/:id',
+  partnerDetail: '/partner/:id',
 };
 
 const pathPartners = {
@@ -147,6 +151,22 @@ const routesForStaff = {
     {
       path: pathStaff.base,
       element: <PartnerDashboard />
+    },
+    {
+      path: pathAdmin.users,
+      element: <UserPageWithVerifyAdmin />
+    },
+    {
+      path: pathAdmin.userDetail,
+      element: <UserDetail />
+    },
+    {
+      path: pathStaff.partners,
+      element: <Partners />
+    },
+    {
+      path: pathStaff.partnerDetail,
+      element: <PartnerDetail />
     },
     {
       path: "*",
