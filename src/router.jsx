@@ -17,7 +17,7 @@ const Partners = lazy(() => import('./pages/Partners'))
 const UserDetail = lazy(() => import('./pages/UserDetail'))
 const Products = lazy(() => import('./pages/Products'))
 const Orders = lazy(() => import('./pages/Orders'))
-
+const Catalogs = lazy(() => import('./pages/Catalogs'))
 
 const Vouchers = lazy(() => import('./pages/Vouchers'))
 const Events = lazy(() => import('./pages/Events'))
@@ -49,6 +49,7 @@ const pathAdmin = {
   partnerDetail: '/partner/:id',
   vouchers: "/vouchers",
   orders: '/orders',
+  catelogs: '/catelogs',
 };
 
 const pathStaff = {
@@ -104,6 +105,10 @@ const routesForAdmin = {
       element: <Vouchers />
     },
     {
+      path: pathAdmin.catelogs,
+      element: <Catalogs />
+    },
+    {
       path: pathAdmin.events,
       element: <Events />
     },
@@ -139,8 +144,6 @@ const routesForPartners = {
       path: "*",
       element: <NotFound />
     }
-
-    
   ]
 }
 
