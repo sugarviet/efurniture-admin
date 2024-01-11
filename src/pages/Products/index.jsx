@@ -67,7 +67,7 @@ const Products = () => {
     },
   ];
   return (
-    <section>
+    <main>
       <div className="flex px-2 justify-between items-center my-4">
         <h1 className="text-3xl font-bold">Product management</h1>
         <Button
@@ -108,7 +108,7 @@ const Products = () => {
           <ProductEditForm />
         </AppSuspense>
       </AppModal>
-    </section>
+    </main>
   );
 };
 

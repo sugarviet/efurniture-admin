@@ -32,6 +32,8 @@ export function useGetSiderItem() {
       type: "divider",
     },
     getItem("Orders", "/orders", <TagsOutlined />),
+    getItem("Catelogs", "/catelogs", <TagsOutlined />),
+
 
   ];
 

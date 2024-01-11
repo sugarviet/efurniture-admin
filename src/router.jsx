@@ -18,6 +18,8 @@ const UserDetail = lazy(() => import('./pages/UserDetail'))
 const Products = lazy(() => import('./pages/Products'))
 const Orders = lazy(() => import('./pages/Orders'))
 const Catalogs = lazy(() => import('./pages/Catalogs'))
+const CatalogDetail = lazy(() => import('./pages/CatalogDetail'))
+
 
 const Vouchers = lazy(() => import('./pages/Vouchers'))
 const Events = lazy(() => import('./pages/Events'))
@@ -29,7 +31,6 @@ const PartnerProduct = lazy(() => import('./pages/PartnerProduct'))
 const ProductDetail = lazy(() => import('./pages/ProductDetail'))
 
 
-
 // HOCs
 import withAuth from "./hocs/withAuth";
 import withVerifyAdmin from "./hocs/withVerifyAdmin";
@@ -38,82 +39,104 @@ import withVerifyAdmin from "./hocs/withVerifyAdmin";
 const WrappedComponentWithAuth = withAuth(RootLayout)
 const UserPageWithVerifyAdmin = withVerifyAdmin(Users)
 
-const pathAdmin = {
+const pathSystem  = {
   base: "/",
   products: "/products",
   productDetail: '/products/:id',
   events: '/events',
   users: '/users',
   partners: '/partners',
+  
   userDetail: '/user/:id',
   partnerDetail: '/partner/:id',
   vouchers: "/vouchers",
   orders: '/orders',
   catelogs: '/catelogs',
-};
+  catelogDetail: '/catelog/:id',
 
-const pathStaff = {
-  base: "/",
-  users: '/users',
-  partners: '/partners',
-  userDetail: '/user/:id',
-  partnerDetail: '/partner/:id',
-};
-
-const pathPartners = {
-  base: '/',
-  product: '/products',
-  productDetail: '/products/:id'
 }
 
 
 
-const routesForAdmin = {
+const routesForSuperAdmin = {
   layout: <WrappedComponentWithAuth />,
-  path: pathAdmin.base,
+  path: pathSystem.base,
   children: [
     {
-      path: pathAdmin.base,
-      element: <Home />
-    },
-    {
-      path: pathAdmin.products,
-      element: <Products />
-    },
-    {
-      path: pathAdmin.productDetail,
-      element: <ProductDetail />
-    },
-    {
-      path: pathAdmin.users,
+      path: pathSystem.users,
       element: <UserPageWithVerifyAdmin />
     },
     {
-      path: pathAdmin.userDetail,
+      path: pathSystem.userDetail,
       element: <UserDetail />
     },
     {
-      path: pathAdmin.partners,
+      path: pathSystem.partners,
       element: <Partners />
     },
     {
-      path: pathAdmin.partnerDetail,
+      path: pathSystem.partnerDetail,
       element: <PartnerDetail />
     },
     {
-      path: pathAdmin.vouchers,
+      path: "*",
+      element: <NotFound />
+    }
+    
+  ]
+}
+
+
+const routesForAdmin = {
+  layout: <WrappedComponentWithAuth />,
+  path: pathSystem.base,
+  children: [
+    {
+      path: pathSystem.base,
+      element: <Home />
+    },
+    {
+      path: pathSystem.products,
+      element: <Products />
+    },
+    {
+      path: pathSystem.productDetail,
+      element: <ProductDetail />
+    },
+    {
+      path: pathSystem.users,
+      element: <UserPageWithVerifyAdmin />
+    },
+    {
+      path: pathSystem.userDetail,
+      element: <UserDetail />
+    },
+    {
+      path: pathSystem.partners,
+      element: <Partners />
+    },
+    {
+      path: pathSystem.partnerDetail,
+      element: <PartnerDetail />
+    },
+    {
+      path: pathSystem.vouchers,
       element: <Vouchers />
     },
     {
-      path: pathAdmin.catelogs,
+      path: pathSystem.catelogs,
       element: <Catalogs />
     },
     {
-      path: pathAdmin.events,
+      path: pathSystem.catelogDetail,
+      element: <CatalogDetail />
+    },
+    {
+      path: pathSystem.events,
       element: <Events />
     },
     {
-      path: pathAdmin.orders,
+      path: pathSystem.orders,
       element: <Orders />
     },
     {
@@ -126,18 +149,18 @@ const routesForAdmin = {
 
 const routesForPartners = {
   layout: <WrappedComponentWithAuth />,
-  path: pathPartners.base,
+  path: pathSystem.base,
   children: [
     {
-      path: pathPartners.base,
+      path: pathSystem.base,
       element: <PartnerDashboard />
     },
     {
-      path: pathPartners.product,
+      path: pathSystem.products,
       element: <PartnerProduct />
     },
     {
-      path: pathPartners.productDetail,
+      path: pathSystem.productDetail,
       element: <ProductDetail />
     },
     {
@@ -149,26 +172,26 @@ const routesForPartners = {
 
 const routesForStaff = {
   layout: <WrappedComponentWithAuth />,
-  path: pathStaff.base,
+  path: pathSystem.base,
   children: [
     {
-      path: pathStaff.base,
+      path: pathSystem.base,
       element: <PartnerDashboard />
     },
     {
-      path: pathAdmin.users,
+      path: pathSystem.users,
       element: <UserPageWithVerifyAdmin />
     },
     {
-      path: pathAdmin.userDetail,
+      path: pathSystem.userDetail,
       element: <UserDetail />
     },
     {
-      path: pathStaff.partners,
+      path: pathSystem.partners,
       element: <Partners />
     },
     {
-      path: pathStaff.partnerDetail,
+      path: pathSystem.partnerDetail,
       element: <PartnerDetail />
     },
     {
@@ -188,7 +211,8 @@ const getRoutesBasedOnRole = () => {
   const routesForCharacter = {
     admin: routesForAdmin,
     partner: routesForPartners,
-    staff: routesForStaff
+    staff: routesForStaff,
+    superAdmin: routesForSuperAdmin
   }
 
   return routesForCharacter[userRole]
