@@ -42,8 +42,9 @@ const VoucherCreateForm = () => {
 
           rules={[{ required: true, message: "Please enter the voucher discount %!" }]}
         >
-          <Input placeholder="Voucher discount %"/>
+          <Input placeholder="Voucher discount %" type="number"/>
         </Form.Item>
+        <div className="flex justify-between">
         <Form.Item
           name="startDate"
           label="Start Date"
@@ -58,6 +59,7 @@ const VoucherCreateForm = () => {
         >
           <DatePicker />
         </Form.Item>
+        </div>
 
         <Form.Item
           name="products"

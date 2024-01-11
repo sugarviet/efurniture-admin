@@ -24,13 +24,15 @@
       "endDate": "20/11/2023"
     },
     {
-      "name": "Sale heheee",
-      "startDate": "09/01/2024",
+      "id": "77e2",
+      "name": "Tra Buoi",
+      "quantity": "20",
+      "discount": "20",
+      "startDate": "10/01/2024",
       "endDate": "12/01/2024",
       "products": [
         "Product A",
-        "Product B",
-        "Product C"
+        "Product B"
       ]
     }
   ],
@@ -94,14 +96,20 @@
       "name": "Event 1",
       "startDate": "2023-01-01",
       "endDate": "2023-01-10",
-      "products": ["Product A", "Product B"]
+      "products": [
+        "Product A",
+        "Product B"
+      ]
     },
     {
       "id": 2,
       "name": "Event 2",
       "startDate": "2023-02-01",
       "endDate": "2023-02-10",
-      "products": ["Product C", "Product D"]
+      "products": [
+        "Product C",
+        "Product D"
+      ]
     }
   ]
 }

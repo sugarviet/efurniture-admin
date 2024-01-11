@@ -85,7 +85,14 @@ const Orders = () => {
   return (
     <main>
       <h1 className="text-3xl font-bold">Orders managment</h1>
-      <Table dataSource={orders} columns={columns} />
+      <Table
+        dataSource={orders}
+        columns={columns}
+        pagination={{
+          pageSize: 10,
+          hideOnSinglePage: true,
+        }}
+      />
 
       <AppModal isOpen={isModalDetailOpen} setIsOpen={setIsModalDetailOpen}>
         <OrderDetail id={selectedOrderId} />

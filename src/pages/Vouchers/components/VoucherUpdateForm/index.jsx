@@ -10,9 +10,8 @@ const { Option } = Select;
 const VoucherUpdateForm = ({ id }) => {
   const { voucher, isLoading } = useVoucherDetail(id);
   const [form] = Form.useForm();
-  const {mutate} = useUpdateVoucher();
+  const { mutate } = useUpdateVoucher();
   console.log(voucher);
-
 
   if (isLoading) return <Loading />;
 
@@ -28,10 +27,9 @@ const VoucherUpdateForm = ({ id }) => {
       id: id,
       startDate: formateDateByDMY(values.startDate),
       endDate: formateDateByDMY(values.endDate),
-    }
+    };
     mutate(data);
   };
-
 
   return (
     <div>
@@ -46,22 +44,49 @@ const VoucherUpdateForm = ({ id }) => {
           label="Event Name"
           rules={[{ required: true, message: "Please enter the event name!" }]}
         >
-          <Input />
+          <Input placeholder="Voucher name" />
         </Form.Item>
         <Form.Item
-          name="startDate"
-          label="Start Date"
-          rules={[{ required: true, message: "Please select the start date!" }]}
+          name="quantity"
+          label="Quantity"
+          rules={[
+            { required: true, message: "Please enter the voucher quantity!" },
+          ]}
         >
-          <DatePicker />
+          <Input
+            placeholder="Voucher quantity"
+            inputMode="numeric"
+            type="number"
+          />
         </Form.Item>
         <Form.Item
-          name="endDate"
-          label="End Date"
-          rules={[{ required: true, message: "Please select the end date!" }]}
+          name="discount"
+          label="Discount"
+          rules={[
+            { required: true, message: "Please enter the voucher discount %!" },
+          ]}
         >
-          <DatePicker />
+          <Input placeholder="Voucher discount %" type="number" />
         </Form.Item>
+
+        <div className="flex justify-between">
+          <Form.Item
+            name="startDate"
+            label="Start Date"
+            rules={[
+              { required: true, message: "Please select the start date!" },
+            ]}
+          >
+            <DatePicker />
+          </Form.Item>
+          <Form.Item
+            name="endDate"
+            label="End Date"
+            rules={[{ required: true, message: "Please select the end date!" }]}
+          >
+            <DatePicker />
+          </Form.Item>
+        </div>
 
         <Form.Item
           name="products"

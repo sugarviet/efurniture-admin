@@ -1,4 +1,4 @@
-import { Input, Space, Button, Table } from "antd";
+import { Input, Space, Button, Table, Divider } from "antd";
 import { useState, lazy } from "react";
 import HorizontalList from "@components/HorizontalList";
 import ProductCard from "@components/ProductCard";
@@ -88,8 +88,12 @@ const Products = () => {
       <div className="float-right">
         <ExcelButton data={products} />
       </div>
-      <Table rowKey="id" dataSource={products} columns={columns} />
+      <Table rowKey="id" dataSource={products} columns={columns} pagination={{
+        pageSize: 10,
+        hideOnSinglePage: true
+      }}/>
 
+      <Divider />
       <HorizontalList cols={4} data={products} dataItem={ProductCard} />
 
       {/* Modals */}

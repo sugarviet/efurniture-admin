@@ -48,6 +48,7 @@ const Vouchers = () => {
       dataIndex: "products",
       key: "products",
       render: (products) => products.join(", "),
+      ellipsis: true,
     },
     {
       title: "% Discount",
@@ -86,7 +87,10 @@ const Vouchers = () => {
       <div className="float-right my-2">
       <ExcelButton data={vouchers} />
       </div>
-      <Table rowKey={"id"} dataSource={vouchers} columns={columns} />
+      <Table rowKey={"id"} dataSource={vouchers} columns={columns}  pagination={{
+        pageSize: 10,
+        hideOnSinglePage: true
+      }}/>
 
 
     {/* Modals */}
