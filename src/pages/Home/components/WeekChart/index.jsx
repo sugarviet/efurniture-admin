@@ -1,74 +1,53 @@
 import {
-    CartesianGrid,
-    Legend,
-    Line,
-    LineChart,
-    Tooltip,
-    XAxis,
-    YAxis,
-  } from "recharts";
+  CartesianGrid,
+  Legend,
+  Line,
+  LineChart,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+import { DatePicker } from "antd";
+import { useState } from "react";
 
-  const data = [
-    {
-      name: 'Page A',
-      uv: 4000,
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      name: 'Page B',
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
-    },
-    {
-      name: 'Page C',
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
-    },
-    {
-      name: 'Page D',
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
-    },
-    {
-      name: 'Page E',
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
-    },
-    {
-      name: 'Page F',
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
-    },
-    {
-      name: 'Page G',
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
-    },
-  ];
-  
+import dayjs from "dayjs";
+
+const { RangePicker } = DatePicker;
+
+const newData = [
+  { name: "Day 1", value: 200 },
+  { name: "Day 2", value: 200 },
+  { name: "Day 3", value: 300 },
+  { name: "Day 4", value: 400 },
+  { name: "Day 5", value: 200 },
+  { name: "Day 6", value: 300 },
+];
+
 const WeekChart = () => {
-  return (
-         <LineChart
-          width={1200}
-          height={300}
-          data={data}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
-          <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-        </LineChart>
-  )
-}
+  const [startDate] = useState(dayjs().weekday(-7).format("DD/MM/YYYY"));
+  const [endDate] = useState(dayjs().format("DD/MM/YYYY"));
 
-export default WeekChart
+  console.log(startDate, endDate);
+
+  const onRangeChange = (e) => {
+    console.log(e[0].format("DD/MM/YYYY"));
+  };
+  return (
+    <>
+    <div className="mb-4">
+      <RangePicker onChange={onRangeChange} format={"DD/MM/YYYY"} />
+
+    </div>
+      <LineChart width={1200} height={300} data={newData}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis tick={["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6"]} />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Line type="monotone" stroke="#82ca9d" dataKey="value" />
+      </LineChart>
+    </>
+  );
+};
+
+export default WeekChart;

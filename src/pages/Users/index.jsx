@@ -1,17 +1,38 @@
 import { Button, Space, Table } from "antd";
 import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
-import { useUser } from "./hooks/useUser";
-import Loading from "@components/Loading";
+import { useState, lazy } from "react";
+import AppModal from "@components/AppModal";
+import AppSuspense from "@components/AppSuspense";
+
+
+// import { useUser } from "./hooks/useUser";
+// import Loading from "@components/Loading";
 import { Link } from "react-router-dom";
 import ExcelButton from "@components/ExcelButton";
 
-const Users = () => {
-  const { userData, isLoading } = useUser();
-  const { getColumnSearchProps } = useSearchTableColumn();
+const AccountCreateForm = lazy(() => import("./components/AccountCreateForm"));
+const AccountUpdateForm = lazy(() => import("./components/AccountUpdateForm"));
 
-  if (isLoading) {
-    return <Loading />;
-  }
+
+const Users = () => {
+  // const { userData, isLoading } = useUser();
+  // if (isLoading) {
+  //   return <Loading />;
+  // }
+  const { getColumnSearchProps } = useSearchTableColumn();
+  const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
+  const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
+  const [selectedUserId, setSelectedUserId] = useState(null);
+
+  const handleToggleModalCreateUser = () => {
+    setIsModalCreateOpen(!isModalCreateOpen);
+  };
+
+  const handleToggleModalEditUser = (id) => {
+    setSelectedUserId(id)
+    setIsModalUpdateOpen(!isModalUpdateOpen);
+  };
+
 
   const getSorter = (dataIndex, customSorter) => {
     return {
@@ -59,6 +80,7 @@ const Users = () => {
           <Link to={`/user/${record.id}`}>
             <Button type="link">View Details</Button>
           </Link>
+          <Button onClick={() => handleToggleModalEditUser(record.id)}>Edit</Button>
           <Button
             danger
             type="primary"
@@ -73,14 +95,27 @@ const Users = () => {
 
   return (
     <div>
-      <div className="flex justify-between px-3">
+      <div className="flex justify-between px-3 pt-2 pb-4 items-center">
         <h1 className="text-3xl font-bold">User management</h1>
-        <Button>Create new account</Button>
+        <Button className="primary" type="primary" onClick={handleToggleModalCreateUser}>Create new account</Button>
       </div>
       <div className="float-right">
-        <ExcelButton data={userData} />
+        <ExcelButton data={[]} />
       </div>
-      <Table columns={columns} dataSource={userData} />
+      <Table columns={columns} dataSource={[]} />
+
+      {/* Modals */}
+      <AppModal isOpen={isModalCreateOpen} setIsOpen={setIsModalCreateOpen}>
+        <AppSuspense>
+          <AccountCreateForm />
+        </AppSuspense>
+      </AppModal>
+
+      <AppModal isOpen={isModalUpdateOpen} setIsOpen={setIsModalUpdateOpen}>
+        <AppSuspense>
+          <AccountUpdateForm id={selectedUserId}/>
+        </AppSuspense>
+      </AppModal>
     </div>
   );
 };
