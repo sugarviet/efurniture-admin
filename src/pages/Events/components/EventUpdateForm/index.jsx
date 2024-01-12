@@ -4,10 +4,11 @@ import axios from "axios";
 import { API_KEY, UPLOAD_IMG_URL } from "@config/uploadImage";
 import dayjs from "dayjs";
 import { formateDate } from "@utils/formateDate";
+import Proptypes from "prop-types";
 
 const { Option } = Select;
-const EventUpdateForm = () => {
-
+const EventUpdateForm = ({ id }) => {
+  console.log(id);
   const initialValue = {
     name: "Viet",
     products: ["Product A", "Product B", "Product C"],
@@ -30,14 +31,13 @@ const EventUpdateForm = () => {
   };
   const [form] = Form.useForm();
   const onFinish = (values) => {
-    console.log(values)
+    console.log(values);
     const final = {
       ...values,
       startDate: dayjs(values.startDate).format("DD/MM/YYYY"),
       endDate: formateDate(values.endDate),
-    }
-    console.log(final)
-
+    };
+    console.log(final);
   };
   const customRequest = async ({ file, onSuccess, onError }) => {
     console.log(file);
@@ -66,7 +66,7 @@ const EventUpdateForm = () => {
       message.error(`Failed to upload ${file.name}`);
     }
   };
-  
+
   return (
     <div>
       <Form
@@ -75,7 +75,6 @@ const EventUpdateForm = () => {
         initialValues={initialValue}
         onFinish={onFinish}
       >
-
         <Form.Item
           name="name"
           label="Event Name"
@@ -127,12 +126,8 @@ const EventUpdateForm = () => {
             defaultFileList={initialValue.image}
             multiple
             showUploadList
-            
             // onChange={onUploadImage}
             customRequest={customRequest}
-            action={
-              "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
-            }
           >
             <Button icon={<UploadOutlined />}>Click to Upload</Button>
           </Upload>
@@ -150,6 +145,10 @@ const EventUpdateForm = () => {
       </Form>
     </div>
   );
+};
+
+EventUpdateForm.propTypes = {
+  id: Proptypes.number,
 };
 
 export default EventUpdateForm;

@@ -2,14 +2,17 @@ import { UploadOutlined } from "@ant-design/icons";
 import { Form, Input, Button, Upload, Select, message } from "antd";
 import axios from "axios";
 import { API_KEY, UPLOAD_IMG_URL } from "@config/uploadImage";
+import Proptypes from "prop-types";
 
-const ProductEditForm = () => {
+const ProductEditForm = ({ id }) => {
+  console.log(id);
+
   const initialValues = {
     name: "Viet",
     products: ["Product A", "Product B", "Product C"],
     price: "10",
     quantity: 100,
-    partner: 'jack',
+    partner: "jack",
     image: [
       {
         uid: "-1",
@@ -196,6 +199,10 @@ const ProductEditForm = () => {
       </Form>
     </div>
   );
+};
+
+ProductEditForm.propTypes = {
+  id: Proptypes.number,
 };
 
 export default ProductEditForm;

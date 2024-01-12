@@ -1,4 +1,4 @@
-import { Button, Table } from "antd";
+import { Button, Space, Table } from "antd";
 import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
 import { useUser } from "./hooks/useUser";
 import Loading from "@components/Loading";
@@ -20,6 +20,10 @@ const Users = () => {
         ? customSorter
         : (a, b) => a[dataIndex].length - b[dataIndex].length,
     };
+  };
+
+  const handleDisableUser = (id) => {
+    console.log(id);
   };
 
   const columns = [
@@ -51,16 +55,28 @@ const Users = () => {
       key: "actions",
       width: "20%",
       render: (text, record) => (
-        <Link to={`/user/${record.id}`}>
-          <Button type="link">View Details</Button>
-        </Link>
+        <Space>
+          <Link to={`/user/${record.id}`}>
+            <Button type="link">View Details</Button>
+          </Link>
+          <Button
+            danger
+            type="primary"
+            onClick={() => handleDisableUser(record.id)}
+          >
+            Disable
+          </Button>
+        </Space>
       ),
     },
   ];
 
   return (
     <div>
-      <h1 className="text-3xl font-bold">User management</h1>
+      <div className="flex justify-between px-3">
+        <h1 className="text-3xl font-bold">User management</h1>
+        <Button>Create new account</Button>
+      </div>
       <div className="float-right">
         <ExcelButton data={userData} />
       </div>

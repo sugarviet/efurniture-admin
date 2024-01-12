@@ -22,7 +22,7 @@ const HorizontalList = ({ cols, gutters , data, dataItem }) => {
 
 HorizontalList.propTypes = {
   cols: Proptypes.number,
-  data: Proptypes.array,
+  data: Proptypes.array.isRequired,
   dataItem: Proptypes.func.isRequired,
   gutters: Proptypes.number,
 };

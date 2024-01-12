@@ -102,6 +102,7 @@ const Catalogs = () => {
         hideOnSinglePage: true
       }}/>
 
+
        {/* Modals */}
        <AppModal isOpen={isModalCreateOpen} setIsOpen={setIsModalCreateOpen}>
         <AppSuspense>
