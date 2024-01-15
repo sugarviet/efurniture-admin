@@ -18,7 +18,7 @@ const ProductEditForm = lazy(() => import("./components/ProductEditForm"));
 const Products = () => {
   const { products, isLoading } = useProducts();
   const { getColumnSearchProps } = useSearchTableColumn();
-  const [isModalCreateOpen, setIsModalCreateOpen] = useState(true);
+  const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
   const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null);
 

@@ -11,7 +11,7 @@ import {
   Select,
   message,
   Flex,
-  InputNumber 
+  InputNumber,
 } from "antd";
 import axios from "axios";
 import Proptypes from "prop-types";
@@ -90,20 +90,6 @@ const ProductCreateForm = ({ setIsOpen }) => {
     console.log(`selected ${value}`);
     form.setFieldValue("typeDetail", []);
     setTypeOptions(dynamicSelect[value]);
-
-    // switch (value) {
-    //   case "chair":
-    //     setTypeOptions(chairSelect);
-    //     break;
-    //   case "table":
-    //     setTypeOptions(tableSelect);
-    //     break;
-    //   case "sofa":
-    //     setTypeOptions(sofaSelect);
-    //     break;
-    //   default:
-    //     setTypeOptions([]);
-    // }
   };
 
   const handleSubmit = async (values) => {
@@ -340,14 +326,15 @@ const ProductCreateForm = ({ setIsOpen }) => {
               {fields.map(({ key, name, fieldKey, ...restField }) => (
                 // <Space key={key} classNames="mb-4" align="center" className="bg-red-200">
 
-                 <Flex
-                 className="bg-red-400"
-                   key={key}
-                   justify="space-between"
-                   align="middle"
-                 >
+                <Flex
+                  key={key}
+                  gap={8}
+                  justify="space-between"
+                  align="middle"
+                >
                   <Form.Item
                     {...restField}
+                    className="w-3/4"
                     name={[name, "color"]}
                     fieldKey={[fieldKey, "color"]}
                     label="Color"
@@ -361,10 +348,12 @@ const ProductCreateForm = ({ setIsOpen }) => {
                     {/* <Input placeholder="Color" /> */}
                     <Select
                       placeholder="Select color"
-                      options={colorOptions}
+                      // options={colorOptions}
                       showSearch
                       filterOption={(input, option) =>
-                        option.label.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                        option.label
+                          .toLowerCase()
+                          .indexOf(input.toLowerCase()) >= 0
                       }
                       optionLabelProp="label"
                     >
@@ -373,7 +362,9 @@ const ProductCreateForm = ({ setIsOpen }) => {
                           key={option.value}
                           value={option.value}
                           label={
-                            <div style={{ display: "flex", alignItems: "center" }}>
+                            <div
+                              style={{ display: "flex", alignItems: "center" }}
+                            >
                               <div
                                 style={{
                                   width: "20px",
@@ -382,7 +373,10 @@ const ProductCreateForm = ({ setIsOpen }) => {
                                   backgroundColor: option.color,
                                 }}
                               />
-                              {option.label}
+                              <p>
+                                {option.label}
+                              
+                              </p>
                             </div>
                           }
                         />
@@ -391,6 +385,7 @@ const ProductCreateForm = ({ setIsOpen }) => {
                   </Form.Item>
                   <Form.Item
                     {...restField}
+                    className="w-full"
                     name={[name, "quantity"]}
                     fieldKey={[fieldKey, "quantity"]}
                     label="Quantity"
@@ -404,11 +399,12 @@ const ProductCreateForm = ({ setIsOpen }) => {
                     <InputNumber placeholder="Quantity" />
                   </Form.Item>
                   <Button
+                  style={{width: 70}}
                     onClick={() => remove(name)}
                     icon={<DeleteOutlined />}
                   />
                   {/* </Space> */}
-                 </Flex>
+                </Flex>
               ))}
               <Form.Item className="mx-auto flex justify-center">
                 <Button
