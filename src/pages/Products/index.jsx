@@ -20,6 +20,7 @@ const Products = () => {
   const { getColumnSearchProps } = useSearchTableColumn();
   const [isModalCreateOpen, setIsModalCreateOpen] = useState(true);
   const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
+  const [selectedProductId, setSelectedProductId] = useState(null);
 
   if (isLoading) return <Loading />;
 
@@ -27,8 +28,9 @@ const Products = () => {
     setIsModalCreateOpen(!isModalCreateOpen);
   };
 
-  const handleToggleModalEditProduct = () => {
+  const handleToggleModalEditProduct = (id) => {
     setIsModalUpdateOpen(!isModalUpdateOpen);
+    setSelectedProductId(id)
   };
 
   const handleSearch = () => {};
@@ -54,14 +56,14 @@ const Products = () => {
       title: "Action",
       key: "action",
       width: "30%",
-      render: (item) => (
+      render: (item, record) => (
         <Space className="flex gap-4">
           <Link to={`/products/${item.id}`}>
             <Button className="primary" type="primary">
               Detail
             </Button>
           </Link>
-          <Button onClick={handleToggleModalEditProduct}>Edit</Button>
+          <Button onClick={() => handleToggleModalEditProduct(record.id)}>Edit</Button>
         </Space>
       ),
     },
@@ -105,7 +107,7 @@ const Products = () => {
 
       <AppModal isOpen={isModalUpdateOpen} setIsOpen={setIsModalUpdateOpen}>
         <AppSuspense>
-          <ProductEditForm />
+          <ProductEditForm id={selectedProductId}/>
         </AppSuspense>
       </AppModal>
     </main>
