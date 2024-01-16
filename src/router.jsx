@@ -19,6 +19,8 @@ const Products = lazy(() => import('./pages/Products'))
 const Orders = lazy(() => import('./pages/Orders'))
 const Catalogs = lazy(() => import('./pages/Catalogs'))
 const CatalogDetail = lazy(() => import('./pages/CatalogDetail'))
+const Transactions = lazy(() => import('./pages/Transactions'))
+const Contracts = lazy(() => import('./pages/Contracts'))
 
 
 const Vouchers = lazy(() => import('./pages/Vouchers'))
@@ -29,12 +31,12 @@ const PartnerDashboard = lazy(() => import('./pages/PartnerDashboard'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 const PartnerProduct = lazy(() => import('./pages/PartnerProduct'))
 const ProductDetail = lazy(() => import('./pages/ProductDetail'))
+const CashRequest = lazy(() => import('./pages/CashRequest'))
 
 
 // HOCs
 import withAuth from "./hocs/withAuth";
 import withVerifyAdmin from "./hocs/withVerifyAdmin";
-
 
 const WrappedComponentWithAuth = withAuth(RootLayout)
 const UserPageWithVerifyAdmin = withVerifyAdmin(Users)
@@ -46,11 +48,13 @@ const pathSystem  = {
   events: '/events',
   users: '/users',
   partners: '/partners',
-  
+  contracts: '/contracts',
+  transactions: '/transactions',
   userDetail: '/user/:id',
   partnerDetail: '/partner/:id',
   vouchers: "/vouchers",
   orders: '/orders',
+  cashRequest: '/cash-request',
   catelogs: '/catelogs',
   catelogDetail: '/catelog/:id',
 
@@ -102,6 +106,18 @@ const routesForAdmin = {
     {
       path: pathSystem.productDetail,
       element: <ProductDetail />
+    },
+    {
+      path: pathSystem.transactions,
+      element: <Transactions />
+    },
+    {
+      path: pathSystem.contracts,
+      element: <Contracts />
+    },
+    {
+      path: pathSystem.cashRequest,
+      element: <CashRequest />
     },
     {
       path: pathSystem.users,
