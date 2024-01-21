@@ -21,8 +21,8 @@ const Catalogs = lazy(() => import('./pages/Catalogs'))
 const CatalogDetail = lazy(() => import('./pages/CatalogDetail'))
 const Transactions = lazy(() => import('./pages/Transactions'))
 const Contracts = lazy(() => import('./pages/Contracts'))
-
-
+const Reports = lazy(() => import('./pages/Reports'))
+const Categories = lazy(() => import('./pages/Categories'))
 const Vouchers = lazy(() => import('./pages/Vouchers'))
 const Events = lazy(() => import('./pages/Events'))
 const PartnerDetail = lazy(() => import('./pages/PartnerDetail'))
@@ -56,6 +56,8 @@ const pathSystem  = {
   orders: '/orders',
   cashRequest: '/cash-request',
   catelogs: '/catelogs',
+  reports: '/reports',
+  categories: '/categories',
   catelogDetail: '/catelog/:id',
 
 }
@@ -154,6 +156,14 @@ const routesForAdmin = {
     {
       path: pathSystem.orders,
       element: <Orders />
+    },
+    {
+      path: pathSystem.categories,
+      element: <Categories />
+    },
+    {
+      path: pathSystem.reports,
+      element: <Reports />
     },
     {
       path: "*",

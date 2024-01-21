@@ -5,7 +5,6 @@ import {
   UserOutlined,
   AlertOutlined,
   TagsOutlined,
-  MoneyCollectOutlined
 } from "@ant-design/icons";
 
 export function useGetSiderItem() {
@@ -34,9 +33,11 @@ export function useGetSiderItem() {
     },
     getItem("Orders", "/orders", <TagsOutlined />),
     getItem("Catelogs", "/catelogs", <TagsOutlined />),
-    getItem("Transactions", "/transactions", <TagsOutlined />),
-    getItem("Contracts", "/contracts", <TagsOutlined />),
-    getItem("Cash out", "/cash-request", <MoneyCollectOutlined />),
+    // getItem("Transactions", "/transactions", <TagsOutlined />),
+    // getItem("Contracts", "/contracts", <TagsOutlined />),
+    // getItem("Cash out", "/cash-request", <MoneyCollectOutlined />),
+    getItem("Reports", "/reports", <TagsOutlined />),
+    getItem("Categories", "/categories", <TagsOutlined />),
 
 
 
