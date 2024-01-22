@@ -9,14 +9,13 @@ import {
   Button,
   Upload,
   Select,
-  message,
   Flex,
   InputNumber,
 } from "antd";
-import axios from "axios";
-import { API_KEY, UPLOAD_IMG_URL } from "@config/uploadImage";
+
 import Proptypes from "prop-types";
 import { useState } from "react";
+import useUploadImage from "@hooks/useUploadImage";
 
 const dynamicSelect = {
   sofa: [
@@ -83,6 +82,7 @@ const colorOptions = [
 ];
 
 const ProductEditForm = ({ id }) => {
+  const { handleUploadImage } = useUploadImage();
   const [typeOptions, setTypeOptions] = useState([]);
 
   console.log(id);
@@ -129,33 +129,7 @@ const ProductEditForm = ({ id }) => {
   const filterOption = (input, option) =>
     (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
 
-  const customRequest = async ({ file, onSuccess, onError }) => {
-    console.log(file);
-    const formData = new FormData();
-    formData.set("key", API_KEY);
-    formData.append("image", file);
-
-    try {
-      const response = await axios.post(UPLOAD_IMG_URL, formData);
-
-      if (response.status === 200 && response.data && response.data.data) {
-        // Successful upload
-        const imageUrl = response.data.data.url;
-
-        file.url = imageUrl;
-
-        onSuccess();
-        message.success(`${file.name} uploaded successfully`);
-      } else {
-        onError();
-        message.error(`Failed to upload ${file.name}`);
-      }
-    } catch (error) {
-      console.error("Error uploading image:", error);
-      onError(error);
-      message.error(`Failed to upload ${file.name}`);
-    }
-  };
+ 
   return (
     <div className="px-4 py-2">
       <Form
@@ -258,11 +232,7 @@ const ProductEditForm = ({ id }) => {
             multiple
             showUploadList
             defaultFileList={initialValues.image}
-            // onChange={onUploadImage}
-            customRequest={customRequest}
-            action={
-              "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
-            }
+            customRequest={handleUploadImage}
           >
             <Button icon={<UploadOutlined />}>Click to Upload</Button>
           </Upload>
