@@ -1,11 +1,10 @@
 import { Form, Input, Button, Select, Upload } from "antd";
-import useUploadImage from "@hooks/useUploadImage";
 import { UploadOutlined } from "@ant-design/icons";
+import { handleUploadImage } from "@utils/handleUploadImage";
 
 const { Option } = Select;
 
 const CatalogCreateForm = () => {
-  const { handleUploadImage } = useUploadImage();
   const [form] = Form.useForm();
   const handleSubmit = async (values) => {
     console.log(values);

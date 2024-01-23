@@ -9,6 +9,7 @@ import AppSuspense from "@components/AppSuspense";
 // import Loading from "@components/Loading";
 import { Link } from "react-router-dom";
 import ExcelButton from "@components/ExcelButton";
+import PageTitle from "../../components/PageTitle";
 
 const AccountCreateForm = lazy(() => import("./components/AccountCreateForm"));
 const AccountUpdateForm = lazy(() => import("./components/AccountUpdateForm"));
@@ -96,7 +97,7 @@ const Users = () => {
   return (
     <div>
       <div className="flex justify-between px-3 pt-2 pb-4 items-center">
-        <h1 className="text-3xl font-bold">User management</h1>
+        <PageTitle title="User management"/>
         <Button className="primary" type="primary" onClick={handleToggleModalCreateUser}>Create new account</Button>
       </div>
       <div className="float-right">

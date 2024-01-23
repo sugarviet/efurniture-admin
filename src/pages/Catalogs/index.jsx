@@ -4,6 +4,7 @@ import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
 import { Link } from "react-router-dom";
 import AppModal from "@components/AppModal";
 import AppSuspense from "@components/AppSuspense";
+import PageTitle from "@components/PageTitle";
 
 const CatalogCreateForm = lazy(() => import("./components/CatalogCreateForm"));
 const CatalogUpdateForm = lazy(() => import("./components/CatalogUpdateForm"));
@@ -88,7 +89,9 @@ const Catalogs = () => {
   ];
   return <main>
     <div className="flex px-2 justify-between items-center my-4">
-        <h1 className="text-3xl font-bold">Catelog management</h1>
+       
+        <PageTitle title="Catelog management"/>
+
         <Button
           className="primary"
           onClick={handleToggleModalCreateProduct}

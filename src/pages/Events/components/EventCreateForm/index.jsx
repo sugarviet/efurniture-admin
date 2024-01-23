@@ -1,12 +1,11 @@
 import { UploadOutlined } from "@ant-design/icons";
 import { Button, Form, Input, DatePicker, Select, Upload } from "antd";
+import { handleUploadImage } from "@utils/handleUploadImage";
 
-import useUploadImage from "@hooks/useUploadImage";
 const { Option } = Select;
 
 
 const EventCreateForm = () => {
-  const { handleUploadImage } = useUploadImage();
   const [form] = Form.useForm();
   const onFinish = () => {};
  

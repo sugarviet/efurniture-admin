@@ -2,8 +2,7 @@ import { API_KEY, UPLOAD_IMG_URL } from "@config/uploadImage";
 import {  message } from "antd";
 import axios from "axios";
 
-export default function useUploadImage() {
-  const handleUploadImage = async ({ file, onSuccess, onError }) => {
+export const handleUploadImage = async ({ file, onSuccess, onError }) => {
     console.log(file);
     const formData = new FormData();
     formData.set("key", API_KEY);
@@ -30,8 +29,3 @@ export default function useUploadImage() {
       message.error(`Failed to upload ${file.name}`);
     }
   };
-
-  return {
-    handleUploadImage
-  }
-}

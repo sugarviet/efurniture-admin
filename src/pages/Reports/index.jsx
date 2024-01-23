@@ -2,6 +2,7 @@ import { useState, lazy } from "react";
 import { Table, Button, Space } from "antd";
 import AppModal from "@components/AppModal";
 import AppSuspense from "@components/AppSuspense";
+import PageTitle from "../../components/PageTitle";
 
 const data = [
   {
@@ -81,7 +82,7 @@ const Reports = () => {
       ];
   return (
     <div>
-      <h1 className="text-3xl font-bold my-3">Reports</h1>
+      <PageTitle title="Reports management"/>
       <Table dataSource={data} columns={columns} />
 
       <AppModal isOpen={isModalDetailOpen} setIsOpen={setIsModalDetailOpen}>

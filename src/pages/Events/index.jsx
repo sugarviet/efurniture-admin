@@ -6,6 +6,7 @@ import EventCreateForm from "./components/EventCreateForm";
 import EventUpdateForm from "./components/EventUpdateForm";
 import ExcelButton from "@components/ExcelButton";
 import { useEvents } from "./hooks/useEvents";
+import PageTitle from "../../components/PageTitle";
 
 const Events = () => {
   const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
@@ -70,7 +71,7 @@ const Events = () => {
   return (
     <div>
       <div className="flex justify-between items-center px-2">
-        <h1 className="text-2xl font-bold mb-3">Events Management</h1>
+        <PageTitle title="Events Management"/>
         <Button
           type="primary"
           className="primary text-white"

@@ -7,6 +7,7 @@ import OrderDetail from "./components/OrderDetail";
 import useGetOrderStatus from "./hooks/useGetOrderStatus";
 
 import useGetOrders from "./hooks/useGetOrders";
+import PageTitle from "../../components/PageTitle";
 
 const Orders = () => {
   const [isModalDetailOpen, setIsModalDetailOpen] = useState(false);
@@ -84,7 +85,7 @@ const Orders = () => {
 
   return (
     <main>
-      <h1 className="text-3xl font-bold">Orders managment</h1>
+      <PageTitle title="Orders managment"/>
       <Table
         dataSource={orders}
         columns={columns}

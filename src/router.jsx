@@ -26,7 +26,7 @@ const Categories = lazy(() => import('./pages/Categories'))
 const Vouchers = lazy(() => import('./pages/Vouchers'))
 const Events = lazy(() => import('./pages/Events'))
 const PartnerDetail = lazy(() => import('./pages/PartnerDetail'))
-
+const CategoryDetail = lazy(() => import('./pages/CategoryDetail'))
 const PartnerDashboard = lazy(() => import('./pages/PartnerDashboard'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 const PartnerProduct = lazy(() => import('./pages/PartnerProduct'))
@@ -57,8 +57,9 @@ const pathSystem  = {
   cashRequest: '/cash-request',
   catelogs: '/catelogs',
   reports: '/reports',
-  categories: '/categories',
   catelogDetail: '/catelog/:id',
+  categories: '/categories',
+  categoryDetail: '/category/:id',
 
 }
 
@@ -164,6 +165,10 @@ const routesForAdmin = {
     {
       path: pathSystem.reports,
       element: <Reports />
+    },
+    {
+      path: pathSystem.categoryDetail,
+      element: <CategoryDetail />
     },
     {
       path: "*",

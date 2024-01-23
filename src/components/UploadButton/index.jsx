@@ -1,11 +1,10 @@
 import { Upload, Button } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import Proptypes from 'prop-types'
-import useUploadImage from "../../hooks/useUploadImage";
+import { handleUploadImage } from "@utils/handleUploadImage";
 
 const UploadButton = ({callback}) => {
     console.log(callback)
-const {handleUploadImage} = useUploadImage();
   return (
       <Upload
         multiple

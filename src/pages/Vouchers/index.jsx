@@ -8,6 +8,7 @@ import Loading from '@components/Loading';
 import ExcelButton from "@components/ExcelButton";
 import AppModal from "@components/AppModal";
 import { useGetVouchers } from "./hooks/useGetVouchers";
+import PageTitle from "../../components/PageTitle";
 
 const VoucherCreateForm = lazy(() => import('./components/VoucherCreateForm'))
 const VoucherUpdateForm = lazy(() => import('./components/VoucherUpdateForm'))
@@ -79,7 +80,7 @@ const Vouchers = () => {
   return (
     <section>
       <div className="flex px-3 justify-between items-center mt-2 mb-4">
-        <h1 className="text-3xl font-bold">Voucher management</h1>
+        <PageTitle title="Voucher management"/>
         <Button className="primary" type="primary" onClick={handleToggleModalCreateVoucher}>
           Create vouchers
         </Button>

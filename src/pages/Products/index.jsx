@@ -9,6 +9,7 @@ import AppSuspense from "@components/AppSuspense";
 import ExcelButton from "@components/ExcelButton";
 import Loading from "@components/Loading";
 import useProducts from "./hooks/useProducts";
+import PageTitle from "../../components/PageTitle";
 
 const { Search } = Input;
 
@@ -70,8 +71,8 @@ const Products = () => {
   ];
   return (
     <main>
-      <div className="flex px-2 justify-between items-center my-4">
-        <h1 className="text-3xl font-bold">Product management</h1>
+      <div className="flex px-2 justify-between items-center my-4"> 
+        <PageTitle title="Product management"/>
         <Button
           className="primary"
           onClick={handleToggleModalCreateProduct}

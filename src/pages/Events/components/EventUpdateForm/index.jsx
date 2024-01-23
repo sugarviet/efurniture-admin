@@ -3,13 +3,12 @@ import { Button, Form, Input, DatePicker, Select, Upload } from "antd";
 
 import dayjs from "dayjs";
 import { formateDate } from "@utils/formateDate";
-import useUploadImage from "@hooks/useUploadImage";
+import { handleUploadImage } from "@utils/handleUploadImage";
 
 import Proptypes from "prop-types";
 
 const { Option } = Select;
 const EventUpdateForm = ({ id }) => {
-  const { handleUploadImage } = useUploadImage();
 
   console.log(id);
   const initialValue = {

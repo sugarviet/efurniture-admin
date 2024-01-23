@@ -15,7 +15,7 @@ import {
 import Proptypes from "prop-types";
 import { useState } from "react";
 
-import useUploadImage from "@hooks/useUploadImage";
+import { handleUploadImage } from "@utils/handleUploadImage";
 
 const dynamicSelect = {
   sofa: [
@@ -82,7 +82,6 @@ const colorOptions = [
 ];
 
 const ProductCreateForm = ({ setIsOpen }) => {
-  const { handleUploadImage } = useUploadImage();
   const [form] = Form.useForm();
   const [typeOptions, setTypeOptions] = useState([]);
 
