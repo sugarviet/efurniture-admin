@@ -16,6 +16,7 @@ const Users = lazy(() => import('./pages/Users'))
 const Partners = lazy(() => import('./pages/Partners'))
 const UserDetail = lazy(() => import('./pages/UserDetail'))
 const Products = lazy(() => import('./pages/Products'))
+const CreatingProduct = lazy(() => import('./pages/CreatingProduct'))
 const Orders = lazy(() => import('./pages/Orders'))
 const Catalogs = lazy(() => import('./pages/Catalogs'))
 const CatalogDetail = lazy(() => import('./pages/CatalogDetail'))
@@ -29,7 +30,6 @@ const PartnerDetail = lazy(() => import('./pages/PartnerDetail'))
 const CategoryDetail = lazy(() => import('./pages/CategoryDetail'))
 const PartnerDashboard = lazy(() => import('./pages/PartnerDashboard'))
 const NotFound = lazy(() => import('./pages/NotFound'))
-const PartnerProduct = lazy(() => import('./pages/PartnerProduct'))
 const ProductDetail = lazy(() => import('./pages/ProductDetail'))
 const CashRequest = lazy(() => import('./pages/CashRequest'))
 
@@ -41,9 +41,10 @@ import withVerifyAdmin from "./hocs/withVerifyAdmin";
 const WrappedComponentWithAuth = withAuth(RootLayout)
 const UserPageWithVerifyAdmin = withVerifyAdmin(Users)
 
-const pathSystem  = {
+export const pathSystem  = {
   base: "/",
   products: "/products",
+  createProduct: '/products/create',
   productDetail: '/products/:id',
   events: '/events',
   users: '/users',
@@ -105,6 +106,10 @@ const routesForAdmin = {
     {
       path: pathSystem.products,
       element: <Products />
+    },
+    {
+      path: pathSystem.createProduct,
+      element: <CreatingProduct />
     },
     {
       path: pathSystem.productDetail,
@@ -178,29 +183,6 @@ const routesForAdmin = {
   ]
 }
 
-const routesForPartners = {
-  layout: <WrappedComponentWithAuth />,
-  path: pathSystem.base,
-  children: [
-    {
-      path: pathSystem.base,
-      element: <PartnerDashboard />
-    },
-    {
-      path: pathSystem.products,
-      element: <PartnerProduct />
-    },
-    {
-      path: pathSystem.productDetail,
-      element: <ProductDetail />
-    },
-    {
-      path: "*",
-      element: <NotFound />
-    }
-  ]
-}
-
 const routesForStaff = {
   layout: <WrappedComponentWithAuth />,
   path: pathSystem.base,
@@ -241,7 +223,6 @@ const getRoutesBasedOnRole = () => {
 
   const routesForCharacter = {
     admin: routesForAdmin,
-    partner: routesForPartners,
     staff: routesForStaff,
     superAdmin: routesForSuperAdmin
   }

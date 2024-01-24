@@ -1,4 +1,4 @@
-import { useGetAllUsers } from "../../../services/Users/services";
+import { useGetAllUsers } from "@services/Users/services";
 
 
 export function useUser(){

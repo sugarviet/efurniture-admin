@@ -1,7 +1,5 @@
-import { Input, Space, Button, Table, Divider } from "antd";
+import { Space, Button, Table } from "antd";
 import { useState, lazy } from "react";
-import HorizontalList from "@components/HorizontalList";
-import ProductCard from "@components/ProductCard";
 import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
 import { Link } from "react-router-dom";
 import AppModal from "@components/AppModal";
@@ -11,7 +9,10 @@ import Loading from "@components/Loading";
 import useProducts from "./hooks/useProducts";
 import PageTitle from "../../components/PageTitle";
 
-const { Search } = Input;
+
+import { pathSystem } from "../../router";
+import urlcat from "urlcat";
+import { handleSort } from "../../utils/handleSort";
 
 const ProductCreateForm = lazy(() => import("./components/ProductCreateForm"));
 const ProductEditForm = lazy(() => import("./components/ProductEditForm"));
@@ -34,19 +35,31 @@ const Products = () => {
     setSelectedProductId(id)
   };
 
-  const handleSearch = () => {};
-
   const columns = [
     {
       title: "Product Name",
       dataIndex: "name",
       key: "name",
       ...getColumnSearchProps("name"),
+      render: (text, record) => (
+        <Link to={urlcat(pathSystem.productDetail, {
+          id: record.id
+        })} className="link">{text}</Link>
+      ),
+    },
+    {
+      title: "Image",
+      dataIndex: "image",
+      key: "image",
+      render: (text, record) => (
+        <img src={record.image} alt={record.name} width="100" />
+      ),
     },
     {
       title: "Price",
       dataIndex: "price",
       key: "price",
+      sorter: (a, b) => a.price - b.price,
     },
     {
       title: "Quantity",
@@ -59,12 +72,8 @@ const Products = () => {
       width: "30%",
       render: (item, record) => (
         <Space className="flex gap-4">
-          <Link to={`/products/${item.id}`}>
-            <Button className="primary" type="primary">
-              Detail
-            </Button>
-          </Link>
           <Button onClick={() => handleToggleModalEditProduct(record.id)}>Edit</Button>
+          <Button danger>Disable</Button>
         </Space>
       ),
     },
@@ -82,11 +91,7 @@ const Products = () => {
         </Button>
       </div>
 
-      <Search
-        placeholder="Search products"
-        onChange={handleSearch}
-        style={{ marginBottom: 16 }}
-      />
+
 
       <div className="float-right">
         <ExcelButton data={products} />
@@ -95,9 +100,6 @@ const Products = () => {
         pageSize: 10,
         hideOnSinglePage: true
       }}/>
-
-      <Divider />
-      <HorizontalList cols={4} data={products} dataItem={ProductCard} />
 
       {/* Modals */}
       <AppModal isOpen={isModalCreateOpen} setIsOpen={setIsModalCreateOpen}>

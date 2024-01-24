@@ -4,22 +4,22 @@ import { useState, lazy } from "react";
 import AppModal from "@components/AppModal";
 import AppSuspense from "@components/AppSuspense";
 
-
-// import { useUser } from "./hooks/useUser";
-// import Loading from "@components/Loading";
+import { useUser } from "./hooks/useUser";
+import Loading from "@components/Loading";
 import { Link } from "react-router-dom";
 import ExcelButton from "@components/ExcelButton";
-import PageTitle from "../../components/PageTitle";
+import PageTitle from "@components/PageTitle";
+
+import { pathSystem } from "../../router";
+import urlcat from "urlcat";
 
 const AccountCreateForm = lazy(() => import("./components/AccountCreateForm"));
 const AccountUpdateForm = lazy(() => import("./components/AccountUpdateForm"));
 
 
 const Users = () => {
-  // const { userData, isLoading } = useUser();
-  // if (isLoading) {
-  //   return <Loading />;
-  // }
+  const { userData, isLoading } = useUser();
+ 
   const { getColumnSearchProps } = useSearchTableColumn();
   const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
   const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
@@ -56,6 +56,11 @@ const Users = () => {
       width: "30%",
       ...getSorter("name"),
       ...getColumnSearchProps("name"),
+      render: (text, record) => (
+        <Link to={urlcat(pathSystem.userDetail, {
+          id: record.id
+        })} className="link">{text}</Link>
+      ),
     },
     {
       title: "Age",
@@ -78,9 +83,7 @@ const Users = () => {
       width: "20%",
       render: (text, record) => (
         <Space>
-          <Link to={`/user/${record.id}`}>
-            <Button type="link">View Details</Button>
-          </Link>
+         
           <Button onClick={() => handleToggleModalEditUser(record.id)}>Edit</Button>
           <Button
             danger
@@ -94,6 +97,10 @@ const Users = () => {
     },
   ];
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <div>
       <div className="flex justify-between px-3 pt-2 pb-4 items-center">
@@ -101,9 +108,9 @@ const Users = () => {
         <Button className="primary" type="primary" onClick={handleToggleModalCreateUser}>Create new account</Button>
       </div>
       <div className="float-right">
-        <ExcelButton data={[]} />
+        <ExcelButton data={userData} />
       </div>
-      <Table columns={columns} dataSource={[]} />
+      <Table columns={columns} dataSource={userData} />
 
       {/* Modals */}
       <AppModal isOpen={isModalCreateOpen} setIsOpen={setIsModalCreateOpen}>
