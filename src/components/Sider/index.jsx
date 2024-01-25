@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useGetCurrentUserRole } from "@hooks/useGetCurrentUserRole";
 import { useGetSiderItem } from "./hooks/useGetSiderItem";
 
+const activeTab = window.location.pathname; 
+
 const AppSider = () => {
   const { getItemByRole } = useGetSiderItem();
   const currentUserRole = useGetCurrentUserRole();
@@ -13,17 +15,13 @@ const AppSider = () => {
 
   return (
     <div>
-      <div className="mx-auto mt-2">
-        <img src="/logo.png" alt="logo" className="w-20 h-16 flex justify-center mx-auto"/>
-      </div>
       <Menu
-        theme="dark"
+        theme="light"
         onClick={onClick}
         style={{
           height: "100%",
         }}
-        defaultSelectedKeys={["1"]}
-        defaultOpenKeys={["sub1"]}
+        defaultSelectedKeys={[activeTab]}
         mode="inline"
         items={getItemByRole[currentUserRole]}
       />
