@@ -1,12 +1,7 @@
-import ReportList from "./components/ReportList";
-import SaleChart from "./components/SaleChart";
-import { DatePicker } from "antd";
-
-
 import { ICONS } from "../../constants/icons";
 import ECommerceStatusCard from "../../components/ECommerceStatusCard";
+import TotalSellByMonth from "./components/TotalSellByMonth";
 
-const { RangePicker } = DatePicker;
 
 const Home = () => {
   return (
@@ -29,9 +24,7 @@ const Home = () => {
         />
       </div>
 
-      <RangePicker format={"DD/MM/YYYY"} />
-      <ReportList />
-      <SaleChart />
+      <TotalSellByMonth />
     </main>
   );
 };
