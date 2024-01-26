@@ -27,7 +27,7 @@ const Navbar = () => {
   return (
     <nav
       id="navbar"
-      className="flex justify-between primary_background w-full h-full text-white items-center px-6"
+      className="flex justify-between w-full h-full text-white items-center px-6"
     >
      
       <div className="ml-auto">

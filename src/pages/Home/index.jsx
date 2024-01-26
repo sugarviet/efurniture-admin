@@ -2,14 +2,15 @@ import ReportList from "./components/ReportList";
 import SaleChart from "./components/SaleChart";
 import { DatePicker } from "antd";
 
-import ECommerceStatusCard from "../../components/EcommerceStatusCard";
+
 import { ICONS } from "../../constants/icons";
+import ECommerceStatusCard from "../../components/ECommerceStatusCard";
 
 const { RangePicker } = DatePicker;
 
 const Home = () => {
   return (
-    <div>
+    <main>
       <div className="flex gap-4">
         <ECommerceStatusCard
           icon={ICONS.onProcessing}
@@ -31,7 +32,7 @@ const Home = () => {
       <RangePicker format={"DD/MM/YYYY"} />
       <ReportList />
       <SaleChart />
-    </div>
+    </main>
   );
 };
 
