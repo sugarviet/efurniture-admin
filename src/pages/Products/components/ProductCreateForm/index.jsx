@@ -377,8 +377,10 @@ const ProductCreateForm = ({ setIsOpen }) => {
           <p>Variants</p>
           <FormList name="variants">
             {({ name, restField, remove }) => (
-              <Flex >
-                <FormItem {...restField} label="Option" name={[name, "Size"]}>
+              <>
+              <Flex gap={8} justify="space-between" align="middle">
+                <div>
+                <FormItem {...restField} name={[name, "Size"]}>
                   <Select
                     defaultValue="lucy"
                     style={{
@@ -401,7 +403,6 @@ const ProductCreateForm = ({ setIsOpen }) => {
                     ]}
                   />
                 </FormItem>
-                
                 <FormItem {...restField} name={[name, "Size"]}>
                   <Select
                     defaultValue="lucy"
@@ -421,16 +422,21 @@ const ProductCreateForm = ({ setIsOpen }) => {
                         value: "Yiminghe",
                         label: "yiminghe",
                       },
-                    
+                      
                     ]}
                   />
                 </FormItem>
+
+                </div>
+                
+                
                 <Button
                   type="text"
                   onClick={() => remove(name)}
                   icon={<DeleteOutlined />}
                 />
               </Flex>
+              </>
             )}
           </FormList>
         </Card>
