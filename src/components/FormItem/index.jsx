@@ -37,7 +37,7 @@ const FORM_TYPES = {
   },
 };
 
-const FormItem = ({ children, label, name, type, message, required }) => {
+const FormItem = ({ children, label, name, type, message, required, ...others }) => {
   const customRules = [
     { required: true, message },
     validateWhitespace,
@@ -47,6 +47,7 @@ const FormItem = ({ children, label, name, type, message, required }) => {
       label={label}
       name={name}
       rules={required ? customRules : FORM_TYPES[type].rules}
+      {...others}
     >
       {children}
     </Form.Item>
@@ -55,8 +56,8 @@ const FormItem = ({ children, label, name, type, message, required }) => {
 
 FormItem.propTypes = {
   children: PropTypes.node,
-  label: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+  label: PropTypes.string,
+  name: PropTypes.any,
   type: PropTypes.string,
   required: PropTypes.bool,
   message: PropTypes.string,
