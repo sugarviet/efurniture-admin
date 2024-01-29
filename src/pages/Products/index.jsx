@@ -8,6 +8,7 @@ import PageTitle from "@components/PageTitle";
 
 import { pathSystem } from "../../router";
 import urlcat from "urlcat";
+import ProductCreateForm from "./components/ProductCreateForm";
 
 const Products = () => {
   const { products, isLoading } = useProducts();
@@ -81,6 +82,8 @@ const Products = () => {
         pageSize: 10,
         hideOnSinglePage: true
       }}/>
+
+      <ProductCreateForm />
     </main>
   );
 };

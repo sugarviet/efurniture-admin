@@ -1,21 +1,9 @@
-import {
-  DeleteOutlined,
-  PlusOutlined,
-  UploadOutlined,
-} from "@ant-design/icons";
-import {
-  Form,
-  Input,
-  Button,
-  Upload,
-  Select,
-  Flex,
-  InputNumber,
-} from "antd";
+import { DeleteOutlined, PlusOutlined } from "@ant-design/icons";
+import { Form, Input, Button, Select, Flex, InputNumber } from "antd";
 import Proptypes from "prop-types";
 import { useState } from "react";
-
-import { handleUploadImage } from "@utils/handleUploadImage";
+import UploadButton from "@components/UploadButton";
+import FormItem from "../../../../components/FormItem";
 
 const dynamicSelect = {
   sofa: [
@@ -125,8 +113,6 @@ const ProductCreateForm = ({ setIsOpen }) => {
   //     console.log(newFileList);
   //   };
 
-
-
   return (
     <div className="px-4 py-2">
       <Form
@@ -141,7 +127,28 @@ const ProductCreateForm = ({ setIsOpen }) => {
         onFinish={handleSubmit}
         autoComplete="off"
       >
-        <Form.Item
+        <FormItem
+          name="name"
+          label="Product name"
+          required
+          message="Please enter a product name"
+        >
+          <Input placeholder="Product name" />
+        </FormItem>
+
+        <FormItem name="password" label="Password" type="password">
+          <Input placeholder="Password" />
+        </FormItem>
+
+        <FormItem
+          name="confirmPassword"
+          label="Confirm Password"
+          type="confirmPassword"
+        >
+          <Input placeholder="Confirm" />
+        </FormItem>
+
+        {/* <Form.Item
           label="Product Name"
           name="name"
           rules={[
@@ -152,19 +159,19 @@ const ProductCreateForm = ({ setIsOpen }) => {
           ]}
         >
           <Input placeholder="Product name" />
-        </Form.Item>
+        </Form.Item> */}
 
-        <Form.Item
+        {/* <Form.Item
           label="Quantity"
           name="quantity"
           rules={[
             {
-              required: true,
+              required: false,
               message: "Please input your quantity!",
             },
           ]}
         >
-          <Input type="number" placeholder="Product quantity" />
+          <Input placeholder="Product quantity" />
         </Form.Item>
 
         <Form.Item
@@ -172,7 +179,7 @@ const ProductCreateForm = ({ setIsOpen }) => {
           name="price"
           rules={[
             {
-              required: true,
+              required: false,
               message: "Please input your quantity!",
             },
           ]}
@@ -185,7 +192,7 @@ const ProductCreateForm = ({ setIsOpen }) => {
           name="partner"
           rules={[
             {
-              required: true,
+              required: false,
               message: "Please input your quantity!",
             },
           ]}
@@ -211,26 +218,11 @@ const ProductCreateForm = ({ setIsOpen }) => {
               },
             ]}
           />
-        </Form.Item>
+        </Form.Item> */}
 
-        <Form.Item
-          label="Product Images"
-          name="image"
-          rules={[
-            {
-              required: false,
-              message: "Please input your quantity!",
-            },
-          ]}
-        >
-          <Upload
-            multiple
-            showUploadList
-            customRequest={handleUploadImage}
-          >
-            <Button icon={<UploadOutlined />}>Click to Upload</Button>
-          </Upload>
-        </Form.Item>
+        <FormItem label="Product Images" name="image">
+          <UploadButton />
+        </FormItem>
 
         <Form.Item
           label="Type"
@@ -295,12 +287,7 @@ const ProductCreateForm = ({ setIsOpen }) => {
               {fields.map(({ key, name, fieldKey, ...restField }) => (
                 // <Space key={key} classNames="mb-4" align="center" className="bg-red-200">
 
-                <Flex
-                  key={key}
-                  gap={8}
-                  justify="space-between"
-                  align="middle"
-                >
+                <Flex key={key} gap={8} justify="space-between" align="middle">
                   <Form.Item
                     {...restField}
                     className="w-3/4"
@@ -342,10 +329,7 @@ const ProductCreateForm = ({ setIsOpen }) => {
                                   backgroundColor: option.color,
                                 }}
                               />
-                              <p>
-                                {option.label}
-                              
-                              </p>
+                              <p>{option.label}</p>
                             </div>
                           }
                         />
@@ -368,7 +352,7 @@ const ProductCreateForm = ({ setIsOpen }) => {
                     <InputNumber placeholder="Quantity" />
                   </Form.Item>
                   <Button
-                  style={{width: 70}}
+                    style={{ width: 70 }}
                     onClick={() => remove(name)}
                     icon={<DeleteOutlined />}
                   />
@@ -404,7 +388,7 @@ const ProductCreateForm = ({ setIsOpen }) => {
 };
 
 ProductCreateForm.propTypes = {
-  setIsOpen: Proptypes.func.isRequired,
+  setIsOpen: Proptypes.func,
 };
 
 export default ProductCreateForm;
