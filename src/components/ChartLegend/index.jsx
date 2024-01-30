@@ -23,7 +23,13 @@ function ChartLegend({ color, title, value }) {
 export default ChartLegend;
 
 ChartLegend.propTypes = {
-  color: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired,
+  color: PropTypes.string,
+  title: PropTypes.string,
+  value: PropTypes.number,
+};
+
+ChartLegend.defaultProps = {
+  color: "#cccccc",
+  title: "ChartLegend",
+  value: 5173,
 };
