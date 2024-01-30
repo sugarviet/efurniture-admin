@@ -44,7 +44,7 @@ const FormItem = ({ children, label, name, type, message, required, ...others })
   ];
   return (
     <Form.Item
-      label={label}
+      label={label ? <span className="text-lg text-gray-800 font-semibold">{label}</span> : label}
       name={name}
       rules={required ? customRules : FORM_TYPES[type].rules}
       {...others}
@@ -64,6 +64,7 @@ FormItem.propTypes = {
 };
 
 FormItem.defaultProps = {
+  label: null,
   required: false,
   message: "Please fill in this field",
   type: "default",
