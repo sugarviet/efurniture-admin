@@ -5,12 +5,12 @@ import FormItem from '../FormItem';
 
 const FormList = ({children, name, initialValues, ...others}) => {
   return (
-    <Form.List name={name} {...others} initialValues={initialValues}>
+    <Form.List name={name} {...others} initialValue={initialValues}>
       {(fields, { add, remove }) => (
         <>
-          {fields.map(({ key, name, fieldKey, ...restField }) => (
+          {fields.map(({ key, name, fieldKey, ...restField }, index) => (
             <div key={key}>
-              {children({ name, fieldKey, restField, remove })}
+              {children({ name, fieldKey, restField, remove }, index)}
             </div>
           ))}
           <FormItem className="mx-auto flex justify-center">

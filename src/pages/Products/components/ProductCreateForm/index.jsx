@@ -1,5 +1,5 @@
 import { DeleteOutlined } from "@ant-design/icons";
-import { Form, Input, Button, Select, Flex, InputNumber, Card } from "antd";
+import { Form, Input, Button, Select, Flex, InputNumber, Card, Divider } from "antd";
 import Proptypes from "prop-types";
 import { useState } from "react";
 import UploadButton from "@components/UploadButton";
@@ -122,6 +122,27 @@ const ProductCreateForm = ({ setIsOpen }) => {
         autoComplete="off"
         layout="vertical"
       >
+        <Select
+                    defaultValue="lucy"
+                    style={{
+                      width: '100%',
+                    }}
+                    options={[
+                      {
+                        value: "jack",
+                        label: "Jack",
+                      },
+                      {
+                        value: "lucy",
+                        label: "Lucy",
+                      },
+                      {
+                        value: "Yiminghe",
+                        label: "yiminghe",
+                      },
+                      
+                    ]}
+                  />
         <FormItem
           name="name"
           label="Product name"
@@ -373,19 +394,22 @@ const ProductCreateForm = ({ setIsOpen }) => {
           )}
         </FormList>
 
-        <Card>
-          <p>Variants</p>
-          <FormList name="variants">
-            {({ name, restField, remove }) => (
-              <>
-              <Flex gap={8} justify="space-between" align="middle">
-                <div>
-                <FormItem {...restField} name={[name, "Size"]}>
+        <Card className="w-1/2 flex justify-center flex-col">
+          <p className="text-2xl font-bold mb-4">Variants</p>
+          <FormList name="variants" initialValues={[
+            {size: "lucy", name: "lucy"},
+          ]}>   
+            {({ name, restField, remove }, index) => (
+              <div className="w-full">
+              <div className="flex justify-between">
+              <p>Option {index + 1}</p>
+              <p onClick={() => remove(name)} className="cursor-pointer">Remove</p>
+              </div>
+          
+                <FormItem name={[name, "size"]} className="w-full bg-red-200" {...restField}>
                   <Select
                     defaultValue="lucy"
-                    style={{
-                      width: 500,
-                    }}
+                    className="translate-x-1/4"
                     options={[
                       {
                         value: "jack",
@@ -403,41 +427,13 @@ const ProductCreateForm = ({ setIsOpen }) => {
                     ]}
                   />
                 </FormItem>
-                <FormItem {...restField} name={[name, "Size"]}>
-                  <Select
-                    defaultValue="lucy"
-                    style={{
-                      width: 500,
-                    }}
-                    options={[
-                      {
-                        value: "jack",
-                        label: "Jack",
-                      },
-                      {
-                        value: "lucy",
-                        label: "Lucy",
-                      },
-                      {
-                        value: "Yiminghe",
-                        label: "yiminghe",
-                      },
-                      
-                    ]}
-                  />
-                </FormItem>
-
-                </div>
                 
-                
-                <Button
-                  type="text"
-                  onClick={() => remove(name)}
-                  icon={<DeleteOutlined />}
-                />
-              </Flex>
-              </>
+               
+              
+              <Divider dashed/>
+              </div>
             )}
+            
           </FormList>
         </Card>
 
