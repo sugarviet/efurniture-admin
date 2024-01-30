@@ -1,30 +1,22 @@
-import { ICONS } from "../../constants/icons";
-import ECommerceStatusCard from "../../components/ECommerceStatusCard";
+import ECommerceStatusCard from "../../components/EcommerceStatusCard";
+import StatisticCard from "../../components/StatisticCard";
 import TotalSellByMonth from "./components/TotalSellByMonth";
 
+const E_COMMERCE_STATUS_KEYS = ["new orders", "on hold", "out of stock"];
 
 const Home = () => {
   return (
     <main>
       <div className="flex gap-4">
-        <ECommerceStatusCard
-          icon={ICONS.onProcessing}
-          title={"57 new orders"}
-          status={"Awaiting processing"}
-        />
-        <ECommerceStatusCard
-          icon={ICONS.onHold}
-          title={"5 orders"}
-          status={"On hold"}
-        />
-        <ECommerceStatusCard
-          icon={ICONS.outOfStock}
-          title={"15 products"}
-          status={"Out of stock"}
-        />
+        {E_COMMERCE_STATUS_KEYS.map((key) => (
+          <ECommerceStatusCard key={key} type={key} />
+        ))}
       </div>
 
       <TotalSellByMonth />
+      <div className="grid grid-cols-2 gap-4">
+        <StatisticCard label={"Total orders"} description={"Last 7 days"} />
+      </div>
     </main>
   );
 };
