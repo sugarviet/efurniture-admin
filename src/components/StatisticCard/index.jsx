@@ -3,9 +3,39 @@ import CountUp from "react-countup";
 import FurnitureBarChart from "../FurnitureBarChart";
 import PropTypes from "prop-types";
 
-const formatter = (value) => <CountUp end={value} separator="," />;
+const data = [
+  {
+    completed: 50,
+    pendingPayment: 50,
+  },
+  {
+    completed: 50,
+    pendingPayment: 50,
+  },
+  {
+    completed: 12,
+    pendingPayment: 88,
+  },
+  {
+    completed: 15,
+    pendingPayment: 85,
+  },
+  {
+    completed: 20,
+    pendingPayment: 80,
+  },
+  {
+    completed: 60,
+    pendingPayment: 40,
+  },
+  {
+    completed: 80,
+    pendingPayment: 20,
+  },
+];
 
-function StatisticCard({ data, label, description, statisticValue }) {
+const formatter = (value) => <CountUp end={value} separator="," />;
+function StatisticCard({ label, description }) {
   return (
     <section className="flex flex-col items-center justify-between w-full border bg-white rounded-md p-6">
       <div className="flex items-center justify-between w-full">
@@ -15,7 +45,7 @@ function StatisticCard({ data, label, description, statisticValue }) {
         </div>
         <Statistic
           className="text-xl font-semibold"
-          value={statisticValue}
+          value={12651}
           formatter={formatter}
         />
       </div>
@@ -27,8 +57,6 @@ function StatisticCard({ data, label, description, statisticValue }) {
 export default StatisticCard;
 
 StatisticCard.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
   label: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  statisticValue: PropTypes.string.isRequired,
 };

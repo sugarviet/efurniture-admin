@@ -3,7 +3,7 @@ import { BarChart, Bar, Tooltip } from "recharts";
 import ChartLegend from "../ChartLegend";
 import PropTypes from "prop-types";
 
-const DATA_KEY_COLORS = ["#8884d8", "#cccccc"];
+const DATA_KEY_COLORS = ["#8884d8", "#cccccc", "#373471"];
 
 function FurnitureBarChart({ data }) {
   const dataKeys = useMemo(() => Object.keys(data[0]), [data]);
