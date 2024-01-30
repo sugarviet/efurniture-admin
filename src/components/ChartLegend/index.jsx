@@ -1,7 +1,7 @@
 import { classNames } from "../../utils/classNames";
 import PropTypes from "prop-types";
 
-function formatString(inputString) {
+function formatCamelCaseToTitleCase(inputString) {
   return inputString.replace(/([a-z])([A-Z])/g, "$1 $2");
 }
 
@@ -13,7 +13,7 @@ function ChartLegend({ color, title, value }) {
           style={{ backgroundColor: color }}
           className={classNames("w-6 h-3 rounded-sm mr-2")}
         ></div>
-        <span className="capitalize">{formatString(title)}</span>
+        <span className="capitalize">{formatCamelCaseToTitleCase(title)}</span>
       </div>
       <span>{value} %</span>
     </div>
