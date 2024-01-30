@@ -3,8 +3,9 @@ import { Form, Input, Button, Select, Flex, InputNumber, Card, Divider } from "a
 import Proptypes from "prop-types";
 import { useState } from "react";
 import UploadButton from "@components/UploadButton";
-import FormItem from "../../../../components/FormItem";
-import FormList from "../../../../components/FormList";
+import FormItem from "@components/FormItem";
+import FormList from "@components/FormList";
+import RichTextInput from "@components/RichTextInput";
 
 const dynamicSelect = {
   sofa: [
@@ -122,27 +123,12 @@ const ProductCreateForm = ({ setIsOpen }) => {
         autoComplete="off"
         layout="vertical"
       >
-        <Select
-                    defaultValue="lucy"
-                    style={{
-                      width: '100%',
-                    }}
-                    options={[
-                      {
-                        value: "jack",
-                        label: "Jack",
-                      },
-                      {
-                        value: "lucy",
-                        label: "Lucy",
-                      },
-                      {
-                        value: "Yiminghe",
-                        label: "yiminghe",
-                      },
-                      
-                    ]}
-                  />
+        <FormItem name="description">
+          <RichTextInput />
+        </FormItem>
+
+        
+
         <FormItem
           name="name"
           label="Product name"
@@ -164,64 +150,6 @@ const ProductCreateForm = ({ setIsOpen }) => {
           <Input placeholder="Confirm" />
         </FormItem>
 
-        {/* <Form.Item
-          label="Quantity"
-          name="quantity"
-          rules={[
-            {
-              required: false,
-              message: "Please input your quantity!",
-            },
-          ]}
-        >
-          <Input placeholder="Product quantity" />
-        </Form.Item>
-
-        <Form.Item
-          label="Price"
-          name="price"
-          rules={[
-            {
-              required: false,
-              message: "Please input your quantity!",
-            },
-          ]}
-        >
-          <Input type="number" placeholder="Product price" />
-        </Form.Item>
-
-        <Form.Item
-          label="Partner"
-          name="partner"
-          rules={[
-            {
-              required: false,
-              message: "Please input your quantity!",
-            },
-          ]}
-        >
-          <Select
-            showSearch
-            placeholder="Select a person"
-            optionFilterProp="children"
-            onSearch={onSearch}
-            filterOption={filterOption}
-            options={[
-              {
-                value: "jack",
-                label: "Jack",
-              },
-              {
-                value: "lucy",
-                label: "Lucy",
-              },
-              {
-                value: "tom",
-                label: "Tom",
-              },
-            ]}
-          />
-        </Form.Item> */}
 
         <FormItem label="Product Images" name="image">
           <UploadButton />
@@ -406,7 +334,7 @@ const ProductCreateForm = ({ setIsOpen }) => {
               <p onClick={() => remove(name)} className="cursor-pointer">Remove</p>
               </div>
           
-                <FormItem name={[name, "size"]} className="w-full bg-red-200" {...restField}>
+                <FormItem name={[name, "size"]} className="w-full" {...restField}>
                   <Select
                     defaultValue="lucy"
                     className="translate-x-1/4"
