@@ -10,7 +10,8 @@ function ChartLegend({ color, title, value }) {
     <div className="flex items-center justify-between">
       <div className="flex items-center">
         <div
-          className={classNames("w-6 h-3 rounded-sm mr-2", `bg-[${color}]`)}
+          style={{ backgroundColor: color }}
+          className={classNames("w-6 h-3 rounded-sm mr-2")}
         ></div>
         <span className="capitalize">{formatString(title)}</span>
       </div>

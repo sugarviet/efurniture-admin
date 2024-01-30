@@ -1,13 +1,14 @@
 import ECommerceStatusCard from "../../components/EcommerceStatusCard";
 import StatisticCard from "../../components/StatisticCard";
-import { ECommerceStatus } from "../../constants/enums";
 import TotalSellByMonth from "./components/TotalSellByMonth";
+
+const E_COMMERCE_STATUS_KEYS = ["new orders", "on hold", "out of stock"];
 
 const Home = () => {
   return (
     <main>
       <div className="flex gap-4">
-        {[...ECommerceStatus].map(([key]) => (
+        {E_COMMERCE_STATUS_KEYS.map((key) => (
           <ECommerceStatusCard key={key} type={key} />
         ))}
       </div>
