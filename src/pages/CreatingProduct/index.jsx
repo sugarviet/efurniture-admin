@@ -1,10 +1,9 @@
 import { Form, Button, Input, Card, Select, Divider } from "antd";
 import FormItem from "../../components/FormItem";
-import RichTextInput from "../../components/RichTextInput";
 import UploadButton from "@components/UploadButton";
 import FormList from "@components/FormList";
 
-
+const { TextArea } = Input;
 const CreatingProduct = () => {
   const onFinish = (values) => {
     console.log("Success:", values);
@@ -13,7 +12,7 @@ const CreatingProduct = () => {
     console.log("Failed:", errorInfo);
   };
   return (
-    <main>
+    <main className="px-4">
       <section className="flex justify-between items-end mb-6">
         <div>
           <h1 className="text-3xl font-bold">Add Product</h1>
@@ -22,7 +21,7 @@ const CreatingProduct = () => {
         <div className="flex gap-2">
           <Button>Discard</Button>
           <Button>Save draft</Button>
-          <Button>Publish</Button>
+          <Button type="primary" className="primary">Publish</Button>
         </div>
       </section>
 
@@ -42,14 +41,14 @@ const CreatingProduct = () => {
             <Input placeholder="Write title here..."/>
           </FormItem>
           <FormItem label="Product Description" name="description">
-            <RichTextInput placeholder="Write description here..."/>
+            <TextArea placeholder="Write description here..." allowClear size="large"/>
           </FormItem>
           <FormItem label="Display images" name="image">
             <UploadButton />
           </FormItem>
           </div>
           
-          <div className="flex-1">
+          <div className="flex-1 flex flex-col gap-4">
           <Card>
           <p className="text-2xl font-bold mb-4">Variants</p>
           <FormList name="variants" initialValues={[
@@ -57,8 +56,48 @@ const CreatingProduct = () => {
           ]}>   
             {({ name, restField, remove }, index) => (
               <div className="w-full">
-              <div className="flex justify-between bg-red-300">
-              <p>Option {index + 1}</p>
+              <div className="flex justify-between my-2">
+              <p className="text-base">Option {index + 1}</p>
+              <p onClick={() => remove(name)} className="cursor-pointer">Remove</p>
+              </div>
+          
+                <FormItem name={[name, "size"]} className="w-full" {...restField}>
+                  <Select
+                    defaultValue="lucy"
+                    options={[
+                      {
+                        value: "jack",
+                        label: "Jack",
+                      },
+                      {
+                        value: "lucy",
+                        label: "Lucy",
+                      },
+                      {
+                        value: "Yiminghe",
+                        label: "yiminghe",
+                      },
+                      
+                    ]}
+                  />
+                </FormItem>
+                
+              
+              <Divider dashed/>
+              </div>
+            )}
+            
+          </FormList>
+        </Card>
+          <Card>
+          <p className="text-2xl font-bold mb-4">Variants</p>
+          <FormList name="variants" initialValues={[
+            {size: "lucy", name: "lucy"},
+          ]}>   
+            {({ name, restField, remove }, index) => (
+              <div className="w-full">
+              <div className="flex justify-between my-2">
+              <p className="text-base">Option {index + 1}</p>
               <p onClick={() => remove(name)} className="cursor-pointer">Remove</p>
               </div>
           
