@@ -15,7 +15,6 @@ import {
 
 import Proptypes from "prop-types";
 import { useState } from "react";
-import { handleUploadImage } from "@utils/handleUploadImage";
 
 const dynamicSelect = {
   sofa: [
@@ -231,7 +230,6 @@ const ProductEditForm = ({ id }) => {
             multiple
             showUploadList
             defaultFileList={initialValues.image}
-            customRequest={handleUploadImage}
           >
             <Button icon={<UploadOutlined />}>Click to Upload</Button>
           </Upload>

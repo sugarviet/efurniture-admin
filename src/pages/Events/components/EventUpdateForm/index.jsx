@@ -3,7 +3,6 @@ import { Button, Form, Input, DatePicker, Select, Upload } from "antd";
 
 import dayjs from "dayjs";
 import { formateDate } from "@utils/formateDate";
-import { handleUploadImage } from "@utils/handleUploadImage";
 
 import Proptypes from "prop-types";
 
@@ -102,7 +101,6 @@ const EventUpdateForm = ({ id }) => {
             defaultFileList={initialValue.image}
             multiple
             showUploadList
-            customRequest={handleUploadImage}
           >
             <Button icon={<UploadOutlined />}>Click to Upload</Button>
           </Upload>
