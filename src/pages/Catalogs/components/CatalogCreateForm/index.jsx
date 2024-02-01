@@ -1,6 +1,5 @@
 import { Form, Input, Button, Select, Upload } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-import { handleUploadImage } from "@utils/handleUploadImage";
 
 const { Option } = Select;
 
@@ -82,7 +81,6 @@ const CatalogCreateForm = () => {
            <Upload
             multiple
             showUploadList
-            customRequest={handleUploadImage}
             
           >
             <Button icon={<UploadOutlined />}>Click to Upload</Button>

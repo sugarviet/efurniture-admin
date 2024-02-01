@@ -5,7 +5,6 @@ import { useState } from "react";
 import UploadButton from "@components/UploadButton";
 import FormItem from "@components/FormItem";
 import FormList from "@components/FormList";
-import RichTextInput from "@components/RichTextInput";
 
 const dynamicSelect = {
   sofa: [
@@ -123,12 +122,6 @@ const ProductCreateForm = ({ setIsOpen }) => {
         autoComplete="off"
         layout="vertical"
       >
-        <FormItem name="description">
-          <RichTextInput />
-        </FormItem>
-
-        
-
         <FormItem
           name="name"
           label="Product name"
