@@ -1,16 +1,16 @@
-import { Form, Button, Input, Card, Select, Divider, Tabs } from "antd";
-import FormItem from "../../components/FormItem";
-import UploadButton from "@components/UploadButton";
+import { Form, Button, Card, Divider, Tabs } from "antd";
+import FormUploadButton from "@components/FormUploadButton";
 import FormList from "@components/FormList";
+import FormInput from "../../components/FormInput";
+import FormTextArea from "../../components/FormTextArea";
+import FormSelect from "../../components/FormSelect";
 
-const { TextArea } = Input;
 const { TabPane } = Tabs;
 
 const CreatingProduct = () => {
   const [form] = Form.useForm();
   const onFinish = (values) => {
     console.log("Success:", values);
-
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
@@ -18,69 +18,75 @@ const CreatingProduct = () => {
   return (
     <main className="px-4">
       <Form
-          form={form}
-          layout="vertical"
-          initialValues={{
-            label: "Viet Dang",
-            description: "Viet Dang",
-            variants: [
-              {size: 'lucy', color: 'lucy'},
-              {size: 'lucy', color: 'lucy'},
-              {size: 'lucy', color: 'lucy'},
-              {size: 'lucy', color: 'lucy'},
-            ],
-            regularPrice: 100
-          }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          autoComplete="off"
-        >
-      <section className="flex justify-between items-end mb-6">
-        <div>
-          <h1 className="text-3xl font-bold">Add Product</h1>
-          <p className="text-gray-500">Orders placed across your store</p>
-        </div>
-        <div className="flex gap-2">
-          <Button>Discard</Button>
-          <Button>Save draft</Button>
-          <Button type="primary" className="primary" htmlType="submit">
-            Publish
-          </Button>
-        </div>
-      </section>
+        form={form}
+        layout="vertical"
+        initialValues={{
+          label: "Viet Dang",
+          description: "Viet Dang",
+          variants: [
+            { size: "lucy", color: "lucy" },
+          ],
+          regularPrice: 100,
+        }}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        autoComplete="off"
+      >
+        <section className="flex justify-between items-end mb-6">
+          <div>
+            <h1 className="text-3xl font-bold">Add Product</h1>
+            <p className="text-gray-500">Orders placed across your store</p>
+          </div>
+          <div className="flex gap-2">
+            <Button>Discard</Button>
+            <Button>Save draft</Button>
+            <Button type="primary" className="primary" htmlType="submit">
+              Publish
+            </Button>
+          </div>
+        </section>
 
-      <section className="flex gap-6">
+        <section className="flex gap-6">
           {/* Left */}
           <div className="flex-1">
-            <FormItem label="Product Title" name="label">
-              <Input placeholder="Write title here..." />
-            </FormItem>
-            <FormItem label="Product Description" name="description">
-              <TextArea
-                placeholder="Write description here..."
-                allowClear
-                size="large"
-              />
-            </FormItem>
-            <FormItem label="Display images" name="image">
-              <UploadButton />
-            </FormItem>
+            <FormInput
+              label="Product Title"
+              name="label"
+              placeholder="Write title here..."
+            />
+            <FormTextArea
+              label="Product Description"
+              name="description"
+              placeholder="Write description here..."
+            />
+
+            <FormUploadButton label="Display images" name="image" />
 
             <Tabs tabPosition="left">
               <TabPane tab="Pricing" key="pricing">
                 <div className="flex gap-10">
-                  <FormItem name="regularPrice" label="Regular Pricing">
-                    <Input placeholder="$$$" />
-                  </FormItem>
-                  <FormItem name="salePrice" label="Sale Pricing">
-                    <Input placeholder="$$$" />
-                  </FormItem>
+                  <FormInput
+                    label="Regular Pricing"
+                    name="regularPrice"
+                    placeholder="$$$"
+                    inputType="number"
+                  />
+                  <FormInput
+                    label="Sale Pricing"
+                    name="salePrice"
+                    placeholder="$$$"
+                    inputType="number"
+                  />
                 </div>
               </TabPane>
               <TabPane tab="Restock" key="restock">
-                <FormItem name="quantity" label="Add to stock">
-                  <Input placeholder="Quantity" />
-                </FormItem>
+                
+                <FormInput
+                    label="Add to stock"
+                    name="quantity"
+                    placeholder="Quantity"
+                    inputType="number"
+                  />
 
                 <div className="w-64 mt-11">
                   <div className="flex justify-between">
@@ -111,82 +117,103 @@ const CreatingProduct = () => {
           <div className="flex-1 flex flex-col gap-4">
             <Card>
               <p className="text-2xl font-bold mb-4">Organize</p>
-              <FormItem label="Category" name="category">
-                <Select
-                  defaultValue="lucy"
-                  options={[
-                    {
-                      value: "jack",
-                      label: "Jack",
-                    },
-                    {
-                      value: "lucy",
-                      label: "Lucy",
-                    },
-                    {
-                      value: "Yiminghe",
-                      label: "yiminghe",
-                    },
-                  ]}
-                />
-              </FormItem>
-              <FormItem label="Vendor" name="vendor">
-                <Select
-                  defaultValue="lucy"
-                  options={[
-                    {
-                      value: "jack",
-                      label: "Jack",
-                    },
-                    {
-                      value: "lucy",
-                      label: "Lucy",
-                    },
-                    {
-                      value: "Yiminghe",
-                      label: "yiminghe",
-                    },
-                  ]}
-                />
-              </FormItem>
-              <FormItem label="Collection" name="collection">
-                <Select
-                  defaultValue="lucy"
-                  options={[
-                    {
-                      value: "jack",
-                      label: "Jack",
-                    },
-                    {
-                      value: "lucy",
-                      label: "Lucy",
-                    },
-                    {
-                      value: "Yiminghe",
-                      label: "yiminghe",
-                    },
-                  ]}
-                />
-              </FormItem>
-              <FormItem label="Tas" name="tags">
-                <Select
-                  defaultValue="lucy"
-                  options={[
-                    {
-                      value: "jack",
-                      label: "Jack",
-                    },
-                    {
-                      value: "lucy",
-                      label: "Lucy",
-                    },
-                    {
-                      value: "Yiminghe",
-                      label: "yiminghe",
-                    },
-                  ]}
-                />
-              </FormItem>
+
+              <FormSelect
+                label="Category"
+                name="category"
+                defaultValue="lucy"
+                options={[
+                  {
+                    value: "jack",
+                    label: "Jack",
+                  },
+                  {
+                    value: "lucy",
+                    label: "Lucy",
+                  },
+                  {
+                    value: "Yiminghe",
+                    label: "yiminghe",
+                  },
+                ]}
+              />
+              <FormSelect
+                label="Vendor"
+                name="vendor"
+                defaultValue="lucy"
+                options={[
+                  {
+                    value: "jack",
+                    label: "Jack",
+                  },
+                  {
+                    value: "lucy",
+                    label: "Lucy",
+                  },
+                  {
+                    value: "Yiminghe",
+                    label: "yiminghe",
+                  },
+                ]}
+              />
+
+              <FormSelect
+                label="Category"
+                name="category"
+                defaultValue="lucy"
+                options={[
+                  {
+                    value: "jack",
+                    label: "Jack",
+                  },
+                  {
+                    value: "lucy",
+                    label: "Lucy",
+                  },
+                  {
+                    value: "Yiminghe",
+                    label: "yiminghe",
+                  },
+                ]}
+              />
+              <FormSelect
+                label="Collection"
+                name="collection"
+                defaultValue="lucy"
+                options={[
+                  {
+                    value: "jack",
+                    label: "Jack",
+                  },
+                  {
+                    value: "lucy",
+                    label: "Lucy",
+                  },
+                  {
+                    value: "Yiminghe",
+                    label: "yiminghe",
+                  },
+                ]}
+              />
+              <FormSelect
+                label="Tags"
+                name="tags"
+                defaultValue="lucy"
+                options={[
+                  {
+                    value: "jack",
+                    label: "Jack",
+                  },
+                  {
+                    value: "lucy",
+                    label: "Lucy",
+                  },
+                  {
+                    value: "Yiminghe",
+                    label: "yiminghe",
+                  },
+                ]}
+              />
             </Card>
 
             <Card>
@@ -206,30 +233,27 @@ const CreatingProduct = () => {
                         Remove
                       </p>
                     </div>
-
-                    <FormItem
-                      name={[name, "size"]}
-                      className="w-full"
-                      {...restField}
-                    >
-                      <Select
-                        defaultValue="lucy"
-                        options={[
-                          {
-                            value: "jack",
-                            label: "Jack",
-                          },
-                          {
-                            value: "lucy",
-                            label: "Lucy",
-                          },
-                          {
-                            value: "Yiminghe",
-                            label: "yiminghe",
-                          },
-                        ]}
-                      />
-                    </FormItem>
+                    <FormSelect
+                     name={[name, "size"]}
+                     className="w-full"
+                     label="Collection"
+                     defaultValue="lucy"
+                     {...restField}
+                      options={[
+                        {
+                          value: "jack",
+                          label: "Jack",
+                        },
+                        {
+                          value: "lucy",
+                          label: "Lucy",
+                        },
+                        {
+                          value: "Yiminghe",
+                          label: "yiminghe",
+                        },
+                      ]}
+                    />
 
                     <Divider dashed />
                   </div>
@@ -237,7 +261,7 @@ const CreatingProduct = () => {
               </FormList>
             </Card>
           </div>
-      </section>
+        </section>
       </Form>
     </main>
   );

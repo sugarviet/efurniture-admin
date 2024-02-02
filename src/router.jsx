@@ -32,7 +32,7 @@ const PartnerDashboard = lazy(() => import('./pages/PartnerDashboard'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 const ProductDetail = lazy(() => import('./pages/ProductDetail'))
 const CashRequest = lazy(() => import('./pages/CashRequest'))
-
+const OrderDetail = lazy(() => import('./pages/OrderDetail'));
 
 // HOCs
 import withAuth from "./hocs/withAuth";
@@ -55,6 +55,7 @@ export const pathSystem  = {
   partnerDetail: '/partner/:id',
   vouchers: "/vouchers",
   orders: '/orders',
+  orderDetail: '/order/:id',
   cashRequest: '/cash-request',
   catelogs: '/catelogs',
   reports: '/reports',
@@ -162,6 +163,10 @@ const routesForAdmin = {
     {
       path: pathSystem.orders,
       element: <Orders />
+    },
+    {
+      path: pathSystem.orderDetail,
+      element: <OrderDetail />
     },
     {
       path: pathSystem.categories,

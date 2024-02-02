@@ -8,6 +8,9 @@ import useGetOrderStatus from "./hooks/useGetOrderStatus";
 
 import useGetOrders from "./hooks/useGetOrders";
 import PageTitle from "../../components/PageTitle";
+import { Link } from "react-router-dom";
+import urlcat from "urlcat";
+import { pathSystem } from "../../router";
 
 const Orders = () => {
   const [isModalDetailOpen, setIsModalDetailOpen] = useState(false);
@@ -24,6 +27,14 @@ const Orders = () => {
     setSelectedOrderId(id);
   };
   const columns = [
+    {
+      title: "Order",
+      dataIndex: "id",
+      key: "id",
+      render: (text) => (
+        <Link to={urlcat(pathSystem.orderDetail, { id: text })} className="link">#{text}</Link>
+      ),
+    },
     {
       title: "Product",
       dataIndex: "product",
@@ -85,7 +96,7 @@ const Orders = () => {
 
   return (
     <main>
-      <PageTitle title="Orders managment"/>
+      <PageTitle title="Orders managment" />
       <Table
         dataSource={orders}
         columns={columns}
