@@ -27,6 +27,7 @@ const ReportDetail = lazy(() => import('./pages/ReportDetail'))
 
 const Categories = lazy(() => import('./pages/Categories'))
 const Vouchers = lazy(() => import('./pages/Vouchers'))
+const CreateVoucher = lazy(() => import('./pages/CreatingVoucher'))
 const Events = lazy(() => import('./pages/Events'))
 const PartnerDetail = lazy(() => import('./pages/PartnerDetail'))
 const CategoryDetail = lazy(() => import('./pages/CategoryDetail'))
@@ -56,6 +57,7 @@ export const pathSystem  = {
   userDetail: '/user/:id',
   partnerDetail: '/partner/:id',
   vouchers: "/vouchers",
+  createVoucher: "/voucher/create",
   orders: '/orders',
   orderDetail: '/order/:id',
   cashRequest: '/cash-request',
@@ -150,6 +152,10 @@ const routesForAdmin = {
     {
       path: pathSystem.vouchers,
       element: <Vouchers />
+    },
+    {
+      path: pathSystem.createVoucher,
+      element: <CreateVoucher />
     },
     {
       path: pathSystem.catelogs,

@@ -1,15 +1,17 @@
-import { Input } from "antd";
+import { DatePicker } from "antd";
 import FormItem from "../FormItem";
 import PropTypes from "prop-types";
 
-const FormInput = ({
+const { RangePicker } = DatePicker;
+
+const FormRangePicker = ({
   label,
   name,
   placeholder,
   type,
   required,
   message,
-  inputType,
+  picker,
   className,
 }) => {
   return (
@@ -20,29 +22,33 @@ const FormInput = ({
       required={required}
       message={message}
     >
-      <Input placeholder={placeholder} type={inputType} className={className} />
+      <RangePicker
+        placeholder={placeholder}
+        picker={picker}
+        className={className}
+      />
     </FormItem>
   );
 };
 
-FormInput.propTypes = {
+FormRangePicker.propTypes = {
   placeholder: PropTypes.string,
   label: PropTypes.string,
   name: PropTypes.any,
   type: PropTypes.string,
   required: PropTypes.bool,
   message: PropTypes.string,
-  inputType: PropTypes.string,
+  picker: PropTypes.string,
   className: PropTypes.string,
 };
 
-FormInput.defaultProps = {
+FormRangePicker.defaultProps = {
   label: null,
-  inputType: "text",
+  picker: "",
   required: false,
   message: "Please fill in this field",
   type: "default",
   className: "",
 };
 
-export default FormInput;
+export default FormRangePicker;

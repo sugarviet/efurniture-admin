@@ -1,15 +1,14 @@
-import { Input } from "antd";
+import { InputNumber } from "antd";
 import FormItem from "../FormItem";
 import PropTypes from "prop-types";
 
-const FormInput = ({
+const FormInputNumber = ({
   label,
   name,
   placeholder,
   type,
   required,
   message,
-  inputType,
   className,
 }) => {
   return (
@@ -20,29 +19,27 @@ const FormInput = ({
       required={required}
       message={message}
     >
-      <Input placeholder={placeholder} type={inputType} className={className} />
+      <InputNumber placeholder={placeholder} className={className} type="number"/>
     </FormItem>
   );
 };
 
-FormInput.propTypes = {
+FormInputNumber.propTypes = {
   placeholder: PropTypes.string,
   label: PropTypes.string,
   name: PropTypes.any,
   type: PropTypes.string,
   required: PropTypes.bool,
   message: PropTypes.string,
-  inputType: PropTypes.string,
   className: PropTypes.string,
 };
 
-FormInput.defaultProps = {
+FormInputNumber.defaultProps = {
   label: null,
-  inputType: "text",
   required: false,
   message: "Please fill in this field",
   type: "default",
   className: "",
 };
 
-export default FormInput;
+export default FormInputNumber;

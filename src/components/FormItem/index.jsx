@@ -40,7 +40,6 @@ const FORM_TYPES = {
 const FormItem = ({ children, label, name, type, message, required, ...others }) => {
   const customRules = [
     { required: true, message },
-    validateWhitespace,
   ];
   return (
     <Form.Item
