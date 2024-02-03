@@ -20,27 +20,36 @@ export function useGetSiderItem() {
 
   const itemsForAdmin = [
     getItem("Dashboard", "/", <DashboardOutlined />),
-    getItem("Products", "/products", <ShopOutlined />),
-    getItem("Events", "/events", <ScheduleOutlined />),
+    getItem("Products", "/products", <ShopOutlined />, [
+      getItem("List Product", "/products"),
+      getItem("Create Product", "/product/create"),
+    ]),
+    getItem("Events", "/events", <ScheduleOutlined />, [
+      getItem("List Events", "/events"),
+      getItem("Create Events", "/event/create"),
+    ]),
     getItem("Account", "/account", <UserOutlined />, [
       getItem("User", "/users"),
       getItem("Partner", "/partners"),
     ]),
-    getItem("Vouchers", "/vouchers", <AlertOutlined />),
+    getItem("Vouchers", "/vouchers", <AlertOutlined />, [
+      getItem("List Voucher", "/vouchers"),
+      getItem("Create Voucher", "/voucher/create"),
+    ]),
 
     {
       type: "divider",
     },
     getItem("Orders", "/orders", <TagsOutlined />),
-    getItem("Catelogs", "/catelogs", <TagsOutlined />),
-    // getItem("Transactions", "/transactions", <TagsOutlined />),
-    // getItem("Contracts", "/contracts", <TagsOutlined />),
-    // getItem("Cash out", "/cash-request", <MoneyCollectOutlined />),
+    getItem("Catelogs", "/catelogs", <TagsOutlined />, [
+      getItem("List Catelogs", "/catelogs"),
+      getItem("Create Catelogs", "/catelog/create"),
+    ]),
     getItem("Reports", "/reports", <TagsOutlined />),
-    getItem("Categories", "/categories", <TagsOutlined />),
-
-
-
+    getItem("Categories", "/categories", <TagsOutlined />, [
+      getItem("List Category", "/categories"),
+      getItem("Create Category", "/category/create"),
+    ]),
   ];
 
   const itemsForPartner = [
@@ -48,19 +57,15 @@ export function useGetSiderItem() {
     getItem("Products", "/products", <ShopOutlined />),
   ];
 
-
-  const itemsForStaff = [
-    getItem("Partner", "/partners", <UserOutlined />),
-  ];
-
+  const itemsForStaff = [getItem("Partner", "/partners", <UserOutlined />)];
 
   const getItemByRole = {
     admin: itemsForAdmin,
     partner: itemsForPartner,
-    staff: itemsForStaff
-  }
+    staff: itemsForStaff,
+  };
 
   return {
-    getItemByRole
+    getItemByRole,
   };
 }
