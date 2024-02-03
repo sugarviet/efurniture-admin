@@ -10,7 +10,10 @@ const FormSelect = ({
   required,
   message,
   options,
-  defaultValue
+  defaultValue,
+  className,
+  mode,
+  allowClear
 }) => {
   return (
     <FormItem
@@ -21,9 +24,12 @@ const FormSelect = ({
       message={message}
     >
       <Select
-        defaultValue={defaultValue}
+        mode={mode}
+        allowClear={allowClear}
+        value={defaultValue}
         placeholder={placeholder}
         options={options}
+        className={className}
       />
     </FormItem>
   );
@@ -38,6 +44,9 @@ FormSelect.propTypes = {
   message: PropTypes.string,
   options: PropTypes.array,
   defaultValue: PropTypes.string,
+  className: PropTypes.string,
+  mode: PropTypes.string,
+  allowClear: PropTypes.bool,
 };
 
 FormSelect.defaultProps = {
@@ -45,7 +54,10 @@ FormSelect.defaultProps = {
   required: false,
   message: "Please fill in this field",
   type: "default",
-  options: []
+  options: [],
+  className: "",
+  mode: "",
+  allowClear: false,
 };
 
 export default FormSelect;
