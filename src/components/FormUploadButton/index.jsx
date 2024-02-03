@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Upload, Button } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import Proptypes from "prop-types";
@@ -43,7 +44,7 @@ const FormUploadButton = (props) => {
         className="w-full"
         customRequest={handleUploadImage}
       >
-        <Button type="dashed" className="h-[10rem] w-full xl:w-[56rem] lg:w-[42rem]">
+        <Button type="dashed" className={`${"h-[10rem] w-full xl:w-[56rem] lg:w-[42rem]"} ${props.className}`}>
           <div className="flex flex-col gap-2">
           <span>Drag your photo here or browse from device</span>
           <span className="text-4xl"><UploadOutlined /></span>
