@@ -13,19 +13,23 @@ const CreatingVoucer = () => {
 
   return (
     <main className="space-y-8">
-      <section className="space-y-2">
-        <div>
-          <h2 className="text-3xl font-bold">Voucher Management</h2>
-          <p className="text-zinc-500 dark:text-zinc-400">
-            Enter the details of the voucher to be created.
-          </p>
-        </div>
-        <div>
-          
-        </div>
-      </section>
-      <section>
-        <Form layout="vertical" onFinish={onFinish}>
+      <Form layout="vertical" onFinish={onFinish}>
+        <section className="space-y-2 flex justify-between my-3">
+          <div>
+            <h2 className="text-3xl font-bold">Voucher Management</h2>
+            <p className="text-zinc-500 dark:text-zinc-400">
+              Enter the details of the voucher to be created.
+            </p>
+          </div>
+          <div className="flex gap-3">
+            <Button>Discard</Button>
+            <Button>Save draft</Button>
+            <Button type="primary" className="primary" htmlType="submit">
+              Publish
+            </Button>
+          </div>
+        </section>
+        <section>
           <div className="grid grid-cols-2 gap-4">
             <FormInput
               label="Voucher code"
@@ -82,15 +86,8 @@ const CreatingVoucer = () => {
               className="h-10"
             />
           </div>
-          <Button
-            htmlType="submit"
-            type="primary"
-            className="primary flex justify-center mx-auto px-6 h-10 py-2"
-          >
-            Submit
-          </Button>
-        </Form>
-      </section>
+        </section>
+      </Form>
     </main>
   );
 };
