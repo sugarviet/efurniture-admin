@@ -10,6 +10,7 @@ const FormInputNumber = ({
   required,
   message,
   className,
+  ...others
 }) => {
   return (
     <FormItem
@@ -19,7 +20,7 @@ const FormInputNumber = ({
       required={required}
       message={message}
     >
-      <InputNumber placeholder={placeholder} className={className} type="number"/>
+      <InputNumber placeholder={placeholder} className={className} type="number" {...others}/>
     </FormItem>
   );
 };

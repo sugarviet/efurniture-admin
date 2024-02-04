@@ -1,9 +1,8 @@
 import { Form, Button } from "antd";
-import FormInput from "@components/FormInput";
 import FormInputNumber from "@components/FormInputNumber";
-import FormDatePicker from "@components/FormDatePicker";
+import FormTextArea from "@components/FormTextArea";
 import FormSelect from "@components/FormSelect";
-import FormUploadButton from '@components/FormUploadButton'
+import FormUploadButton from "@components/FormUploadButton";
 
 const CreatingCatalog = () => {
   const onFinish = (values) => {
@@ -28,44 +27,59 @@ const CreatingCatalog = () => {
           </div>
         </section>
         <section>
+          <FormSelect
+            label="Room"
+            name="rooms"
+            defaultValue="living room"
+            placeholder="Living room"
+            options={[
+              {
+                value: "living room",
+                label: "Living room",
+              },
+              {
+                value: "kitchen",
+                label: "Kitchen",
+              },
+            ]}
+            className="h-10"
+          />
+          <FormTextArea
+              label="Description"
+              name="description"
+              required
+              message="Please enter the discount of ammount"
+              placeholder="Enter discount ammount"
+              className="w-full"
+            />
+
           <div className="grid grid-cols-2 gap-4">
-            <FormInput
-              label="Voucher code"
-              name="name"
-              required
-              message="Please enter the code of message"
-              placeholder="Enter vocher code"
-              className="h-10"
-            />
-            <FormDatePicker
-              label="Expiration date"
-              name="expireDate"
-              required
-              message="Please enter the expiration date"
-              placeholder="Enter vocher code"
-              className="w-full h-10"
-            />
             <FormInputNumber
-              label="Discount amount"
-              name="discountAmount"
+              label="Regular Price"
+              name="regularPrice"
               required
               message="Please enter the discount of ammount"
               placeholder="Enter discount ammount"
               className="h-10 w-full"
+              min="0"
             />
             <FormInputNumber
-              label="Number of voucher"
-              name="numberOfVoucher"
+              label="Discount Price"
+              name="discountPrice"
               required
               message="Please enter the number of voucher"
               placeholder="Enter the number of voucher"
               className="h-10 w-full"
             />
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <FormUploadButton label="Catalog cover" name="image" className="xl:w-[40rem]"/>
             <FormSelect
               allowClear
               mode="multiple"
               label="Apply to product"
               name="products"
+              placeholder="Product A"
               defaultValue="productA"
               options={[
                 {
@@ -84,7 +98,6 @@ const CreatingCatalog = () => {
               className="h-10"
             />
           </div>
-          <FormUploadButton label="Catalog cover" name="image"/>
         </section>
       </Form>
     </main>
