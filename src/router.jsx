@@ -44,6 +44,7 @@ const OrderDetail = lazy(() => import("./pages/OrderDetail"));
 // HOCs
 import withAuth from "./hocs/withAuth";
 import withVerifyAdmin from "./hocs/withVerifyAdmin";
+import Todo from "./pages/Todo";
 
 const WrappedComponentWithAuth = withAuth(RootLayout);
 const UserPageWithVerifyAdmin = withVerifyAdmin(Users);
@@ -201,6 +202,10 @@ const routesForAdmin = {
     {
       path: pathSystem.categoryDetail,
       element: <CategoryDetail />,
+    },
+    {
+      path: '/todos',
+      element: <Todo />,
     },
     {
       path: "*",

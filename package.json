@@ -20,6 +20,7 @@
     "axios": "^1.6.2",
     "dayjs": "^1.11.10",
     "husky": "^8.0.3",
+    "js-cookie": "^3.0.5",
     "json-server": "^1.0.0-alpha.14",
     "lint-staged": "^15.2.0",
     "mapbox-gl": "^3.1.2",
