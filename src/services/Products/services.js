@@ -5,11 +5,13 @@ import {
   disableProduct,
   getAllProduct,
   getProductDetail,
-  updateProduct
+  updateProduct,
+  getAllPublishedProduct
 } from "./callers";
 
 const API_KEY = {
   GET_ALL_PRODUCTS: 'products',
+  GET_ALL_PRODUCTS_PUBLISHED: 'product-published',
   GET_PRODUCT_DETAIL: 'product'
 }
 
@@ -17,6 +19,13 @@ export const useGetAllProducts = () => {
   return useQuery({
     queryKey: [API_KEY.GET_ALL_PRODUCTS],
     queryFn: getAllProduct,
+  });
+};
+
+export const useGetAllPublishedProducts = () => {
+  return useQuery({
+    queryKey: [API_KEY.GET_ALL_PRODUCTS_PUBLISHED],
+    queryFn: getAllPublishedProduct,
   });
 };
 

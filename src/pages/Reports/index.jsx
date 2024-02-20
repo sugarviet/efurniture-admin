@@ -3,26 +3,28 @@ import { Table, Button, Space } from "antd";
 import AppModal from "@components/AppModal";
 import AppSuspense from "@components/AppSuspense";
 import PageTitle from "../../components/PageTitle";
+import{ get_data } from "../../services/test";
+import {useQuery } from "@tanstack/react-query";
 
-const data = [
-  {
-    key: "1",
-    name: "John Doe",
-    product: 'Product 1',
-    image: 'https://dummyimage.com/600x400/000/fff',
-    reason: 'lorem ipsum dolor sit amet, consectetur',
-    type: 'Refund',
-  },
-  {
-    key: "2",
-    name: "Jane Doe",
-    product: 'Product 2',
-    image: 'https://dummyimage.com/600x400/000/fff',
-    reason: 'lorem ipsum dolor sit amet, consectetur',
-    type: 'Refund',
+// const data = [
+//   {
+//     key: "1",
+//     name: "John Doe",
+//     product: 'Product 1',
+//     image: 'https://dummyimage.com/600x400/000/fff',
+//     reason: 'lorem ipsum dolor sit amet, consectetur',
+//     type: 'Refund',
+//   },
+//   {
+//     key: "2",
+//     name: "Jane Doe",
+//     product: 'Product 2',
+//     image: 'https://dummyimage.com/600x400/000/fff',
+//     reason: 'lorem ipsum dolor sit amet, consectetur',
+//     type: 'Refund',
 
-  },
-];
+//   },
+// ];
 
 
 const ReportDetails = lazy(() => import('./components/ReportDetail'))
@@ -30,6 +32,11 @@ const ReportDetails = lazy(() => import('./components/ReportDetail'))
 
 const Reports = () => {
     const [isModalDetailOpen, setIsModalDetailOpen] = useState(false);
+    const {data} = useQuery({
+      queryKey: 'product',
+      queryFn:  () =>  get_data()
+    })
+
 
     const toggleModalDetail = () => {
         setIsModalDetailOpen(!isModalDetailOpen)

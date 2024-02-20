@@ -7,6 +7,12 @@ export const getAllProduct = async () => {
   return res.data;
 };
 
+export const getAllPublishedProduct = async () => {
+  const res = await request.get("/product");
+
+  return res.data;
+};
+
 export const getProductDetail = async (id) => {
   const res = await request.get(urlcat("/products/:id", { id }));
 

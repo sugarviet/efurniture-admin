@@ -1,26 +1,15 @@
-import { Table, Button , Space, Tag} from "antd"
-import { Link } from "react-router-dom"
-import { status } from "@constants/status";
+import { Table, Button, Space } from "antd";
+import { Link } from "react-router-dom";
 import PageTitle from "@components/PageTitle";
+import Loading from "@components/Loading";
+import { useGetAllTypes } from "../../services/Types/services";
+import CreatingCategory from "./components/CreatingCategory";
 
-const data = [
-  {
-    id: 1,
-    key: 1,
-    name: 'sofa',
-    status: 'active'
-  },
-  {
-    id: 2,
-    key: 2,
-    name: 'chair',
-    status: 'active'
-  }
-]
 
 const Categories = () => {
+  const { data, isLoading } = useGetAllTypes();
 
-
+  if (isLoading) return <Loading />;
 
   const columns = [
     {
@@ -29,20 +18,12 @@ const Categories = () => {
       key: "name",
     },
     {
-      title: "Status",
-      dataIndex: "status",
-      key: "status",
-      render: (item) => (
-        <Tag color={status[item].color}>{status[item].title}</Tag>
-      )
-    },
-    {
       title: "Action",
       key: "action",
       width: "30%",
       render: (item) => (
         <Space className="flex gap-4">
-          <Link to={`/category/${item.id}`}>
+          <Link to={`/category/${item._id}`}>
             <Button className="primary" type="primary">
               Detail
             </Button>
@@ -50,7 +31,6 @@ const Categories = () => {
               Disable
             </Button>
           </Link>
-      
         </Space>
       ),
     },
@@ -59,12 +39,16 @@ const Categories = () => {
   return (
     <div>
       <div className="flex justify-between px-3 my-3">
-       <PageTitle title="Category management"/>
-        <Button type="primary" className="primary">Create new category</Button>
+        <PageTitle title="Category management" />
+        <Button type="primary" className="primary">
+          Create new category
+        </Button>
       </div>
-      <Table dataSource={data} columns={columns}/>
-    </div>
-  )
-}
+      <Table dataSource={data.metaData} columns={columns} />
 
-export default Categories
+      <CreatingCategory />
+    </div>
+  );
+};
+
+export default Categories;

@@ -30,7 +30,7 @@ export function useGetSiderItem() {
     ]),
     getItem("Account", "/account", <UserOutlined />, [
       getItem("User", "/users"),
-      getItem("Partner", "/partners"),
+      getItem("Staffs", "/staffs"),
     ]),
     getItem("Vouchers", "/vouchers", <AlertOutlined />, [
       getItem("List Voucher", "/vouchers"),

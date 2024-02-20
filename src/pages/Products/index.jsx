@@ -3,17 +3,22 @@ import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
 import { Link } from "react-router-dom";
 import ExcelButton from "@components/ExcelButton";
 import Loading from "@components/Loading";
-import useProducts from "./hooks/useProducts";
+// import useProducts from "./hooks/useProducts";
 import PageTitle from "@components/PageTitle";
 
 import { pathSystem } from "../../router";
 import urlcat from "urlcat";
+import { useGetAllPublishedProducts } from "../../services/Products/services";
 
 const Products = () => {
-  const { products, isLoading } = useProducts();
+  // const { products, isLoading } = useProducts();
   const { getColumnSearchProps } = useSearchTableColumn();
 
+  const {data, isLoading} = useGetAllPublishedProducts();
+  console.log(data?.metaData);
+
   if (isLoading) return <Loading />;
+  const products = [];
 
 
   const columns = [
@@ -24,16 +29,16 @@ const Products = () => {
       ...getColumnSearchProps("name"),
       render: (text, record) => (
         <Link to={urlcat(pathSystem.productDetail, {
-          id: record.id
+          id: record._id
         })} className="link">{text}</Link>
       ),
     },
     {
       title: "Image",
-      dataIndex: "image",
-      key: "image",
+      dataIndex: "thumb",
+      key: "thumb",
       render: (text, record) => (
-        <img src={record.image} alt={record.name} width="100" />
+        <img src={record.thumb} alt={record.name} width="100" />
       ),
     },
     {
@@ -77,7 +82,7 @@ const Products = () => {
       <div className="float-right">
         <ExcelButton data={products} />
       </div>
-      <Table rowKey="id" dataSource={products} columns={columns} pagination={{
+      <Table rowKey="_id" dataSource={data?.metaData} columns={columns} pagination={{
         pageSize: 10,
         hideOnSinglePage: true
       }}/>

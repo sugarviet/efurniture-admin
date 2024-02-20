@@ -13,7 +13,7 @@ import RootLayout from "@layouts/RootLayout";
 import Home from "@pages/Home";
 
 const Users = lazy(() => import("./pages/Users"));
-const Partners = lazy(() => import("./pages/Partners"));
+const Staffs = lazy(() => import("./pages/Staffs"));
 const UserDetail = lazy(() => import("./pages/UserDetail"));
 const Products = lazy(() => import("./pages/Products"));
 const CreatingProduct = lazy(() => import("./pages/CreatingProduct"));
@@ -31,6 +31,8 @@ const Categories = lazy(() => import("./pages/Categories"));
 const Vouchers = lazy(() => import("./pages/Vouchers"));
 const CreateVoucher = lazy(() => import("./pages/CreatingVoucher"));
 const Events = lazy(() => import("./pages/Events"));
+const CreateEvents = lazy(() => import("./pages/CreatingEvents"));
+
 const PartnerDetail = lazy(() => import("./pages/PartnerDetail"));
 const CategoryDetail = lazy(() => import("./pages/CategoryDetail"));
 const PartnerDashboard = lazy(() => import("./pages/PartnerDashboard"));
@@ -52,8 +54,9 @@ export const pathSystem = {
   createProduct: "/product/create",
   productDetail: "/products/:id",
   events: "/events",
+  eventCreate: "/event/create",
   users: "/users",
-  partners: "/partners",
+  staffs: "/staffs",
   contracts: "/contracts",
   transactions: "/transactions",
   userDetail: "/user/:id",
@@ -85,8 +88,8 @@ const routesForSuperAdmin = {
       element: <UserDetail />,
     },
     {
-      path: pathSystem.partners,
-      element: <Partners />,
+      path: pathSystem.staffs,
+      element: <Staffs />,
     },
     {
       path: pathSystem.partnerDetail,
@@ -140,8 +143,8 @@ const routesForAdmin = {
       element: <UserDetail />,
     },
     {
-      path: pathSystem.partners,
-      element: <Partners />,
+      path: pathSystem.staffs,
+      element: <Staffs />,
     },
     {
       path: pathSystem.partnerDetail,
@@ -170,6 +173,10 @@ const routesForAdmin = {
     {
       path: pathSystem.events,
       element: <Events />,
+    },
+    {
+      path: pathSystem.eventCreate,
+      element: <CreateEvents />
     },
     {
       path: pathSystem.orders,
@@ -219,8 +226,8 @@ const routesForStaff = {
       element: <UserDetail />,
     },
     {
-      path: pathSystem.partners,
-      element: <Partners />,
+      path: pathSystem.staffs,
+      element: <Staffs />,
     },
     {
       path: pathSystem.partnerDetail,

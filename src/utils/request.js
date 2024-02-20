@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const API_URL_DEVELOPMENT = "https://jsonplaceholder.typicode.com";
+const API_URL_DEVELOPMENT = "http://34.126.181.161:4646/api/v1";
 const API_URL_PRODUCTION = "http://localhost:3000";
-console.log(API_URL_DEVELOPMENT);
+console.log(API_URL_PRODUCTION);
 
-const BASE_URL = API_URL_PRODUCTION;
+const BASE_URL = API_URL_DEVELOPMENT;
 
 export const request = axios.create({
     baseURL: BASE_URL,
