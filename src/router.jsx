@@ -94,10 +94,6 @@ const routesForSuperAdmin = {
       element: <Staffs />,
     },
     {
-      path: pathSystem.partnerDetail,
-      element: <PartnerDetail />,
-    },
-    {
       path: "*",
       element: <NotFound />,
     },
