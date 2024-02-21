@@ -3,6 +3,8 @@ import { login } from "./callers";
 import { notification } from "antd";
 import { useNavigate } from "react-router-dom";
 
+import { jwtDecode } from "jwt-decode";
+
 export const useLoginIn = () => {
   const navigate = useNavigate();
 
@@ -11,8 +13,11 @@ export const useLoginIn = () => {
       notification.success({
         message: "Login successful",
       });
-      localStorage.setItem("token", data);
-      navigate("/dashboard");
+      console.log(data);
+      const decode = jwtDecode(data.metaData.access_token);
+      console.log(decode);
+      localStorage.setItem("token", decode.role);
+      navigate("/");
     },
     onError: () => {
       notification.error({

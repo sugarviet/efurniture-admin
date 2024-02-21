@@ -1,15 +1,17 @@
 import { Form, Input, Button, Card, Divider } from "antd";
 import styles from "./Login.module.css";
-import { useLogin } from "./hooks/useLogin";
+// import { useLogin } from "./hooks/useLogin";
+import { useLoginIn } from "../../services/Auth/services";
 
 const { Meta } = Card;
 
 const Login = () => {
-  const {handleLogin} = useLogin();
-  
-    const onFinish = (values) => {
-      handleLogin(values)
-      };
+  // const {handleLogin} = useLogin();
+  const { mutate } = useLoginIn();
+
+  const onFinish = (values) => {
+    mutate(values);
+  };
 
   return (
     <div className={styles.container}>
@@ -45,7 +47,7 @@ const Login = () => {
         </Form>
       </Card>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

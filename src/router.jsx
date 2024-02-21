@@ -45,6 +45,7 @@ const OrderDetail = lazy(() => import("./pages/OrderDetail"));
 import withAuth from "./hocs/withAuth";
 import withVerifyAdmin from "./hocs/withVerifyAdmin";
 import Todo from "./pages/Todo";
+import { getCurrentUserRole } from "./hooks/useGetCurrentUserRole";
 
 const WrappedComponentWithAuth = withAuth(RootLayout);
 const UserPageWithVerifyAdmin = withVerifyAdmin(Users);
@@ -82,7 +83,7 @@ const routesForSuperAdmin = {
   children: [
     {
       path: pathSystem.users,
-      element: <UserPageWithVerifyAdmin />,
+      element: <Users />,
     },
     {
       path: pathSystem.userDetail,
@@ -246,9 +247,28 @@ const routesForStaff = {
 };
 
 const getRoutesBasedOnRole = () => {
-  const userRole = localStorage.getItem("token") || "admin";
 
-  console.log(userRole);
+  const role = {
+    "31,400": 'staff',
+    "481,7680": 'admin',
+    "122881,1966080": 'superAdmin',
+  };
+  const token = parseInt(localStorage.getItem("token")) || 0;
+  let userRole = "admin";
+
+for (const rangeStr in role) {
+  const [min, max] = rangeStr.split(',').map(Number);
+  if (token >= min && token <= max) {
+    userRole = role[rangeStr];
+    break;
+  }
+}
+
+console.log('user role: ' + userRole);
+
+const testRole = getCurrentUserRole();
+
+  // const userRole = localStorage.getItem("token") || "admin";
 
   const routesForCharacter = {
     admin: routesForAdmin,
@@ -256,7 +276,7 @@ const getRoutesBasedOnRole = () => {
     superAdmin: routesForSuperAdmin,
   };
 
-  return routesForCharacter[userRole];
+  return routesForCharacter[testRole];
 };
 
 const selectedRoutes = getRoutesBasedOnRole();

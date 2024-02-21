@@ -51,6 +51,39 @@ export function useGetSiderItem() {
       getItem("Create Category", "/category/create"),
     ]),
   ];
+  const itemsForSuperAdmin = [
+    getItem("Dashboard", "/", <DashboardOutlined />),
+    getItem("Products", "/products", <ShopOutlined />, [
+      getItem("List Product", "/products"),
+      getItem("Create Product", "/product/create"),
+    ]),
+    getItem("Events", "/events", <ScheduleOutlined />, [
+      getItem("List Events", "/events"),
+      getItem("Create Events", "/event/create"),
+    ]),
+    getItem("Account", "/account", <UserOutlined />, [
+      getItem("User", "/users"),
+      getItem("Staffs", "/staffs"),
+    ]),
+    getItem("Vouchers", "/vouchers", <AlertOutlined />, [
+      getItem("List Voucher", "/vouchers"),
+      getItem("Create Voucher", "/voucher/create"),
+    ]),
+
+    {
+      type: "divider",
+    },
+    getItem("Orders", "/orders", <TagsOutlined />),
+    getItem("Catelogs", "/catelogs", <TagsOutlined />, [
+      getItem("List Catelogs", "/catelogs"),
+      getItem("Create Catelogs", "/catelog/create"),
+    ]),
+    getItem("Reports", "/reports", <TagsOutlined />),
+    getItem("Categories", "/categories", <TagsOutlined />, [
+      getItem("List Category", "/categories"),
+      getItem("Create Category", "/category/create"),
+    ]),
+  ];
 
   const itemsForPartner = [
     getItem("Dashboard", "/", <DashboardOutlined />),
@@ -60,6 +93,7 @@ export function useGetSiderItem() {
   const itemsForStaff = [getItem("Partner", "/partners", <UserOutlined />)];
 
   const getItemByRole = {
+    superAdmin: itemsForSuperAdmin,
     admin: itemsForAdmin,
     partner: itemsForPartner,
     staff: itemsForStaff,
