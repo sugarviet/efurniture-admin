@@ -26,14 +26,31 @@ export const request = axios.create({
     }
   )
   
-  // request.interceptors.response.use(
-  //   (response) => {
-  //       return response
-  //   },
-  //   (error) => {
-  //     if (error.response && error.response.status === 401) {
-  //       localStorage.removeItem("token");
-  //     }
-  //     return Promise.reject(error);
-  //   }
-  // );
+  request.interceptors.response.use(
+    (response) => {
+        return response
+    },
+    async(error) => {
+      // if (error.response && error.response.status === 401) {
+      //   localStorage.removeItem("token");
+      // }
+      const originalRequest = error.config;
+      if (error.response && error.response.status === 401 && !originalRequest._retry) {
+        try {
+          const refreshResponse = await axios.post(`${BASE_URL}/refresh`);
+          const accessToken = refreshResponse.data.accessToken;
+          // originalRequest.headers['Authorization'] = `Bearer ${accessToken}`;
+          originalRequest.headers["x-client-accesstoken"] = Cookies.set("accress_token", accessToken);
+          originalRequest.headers["x-client-refreshtoken"] = Cookies.set("refresh_token", accessToken);
+          
+          originalRequest.headers["x-client-id"] = Cookies.get("account_id");
+          
+          return axios(originalRequest);
+        } catch (error) {
+          return Promise.reject(error);
+        }
+      }
+      console.log(originalRequest)
+      return Promise.reject(error);
+    }
+  );
