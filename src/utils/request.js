@@ -39,7 +39,6 @@ export const request = axios.create({
         try {
           const refreshResponse = await axios.post(`${BASE_URL}/refresh`);
           const accessToken = refreshResponse.data.accessToken;
-          // originalRequest.headers['Authorization'] = `Bearer ${accessToken}`;
           originalRequest.headers["x-client-accesstoken"] = Cookies.set("accress_token", accessToken);
           originalRequest.headers["x-client-refreshtoken"] = Cookies.set("refresh_token", accessToken);
           

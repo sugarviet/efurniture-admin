@@ -1,10 +1,12 @@
 export function getCurrentUserRole(access_token){
     const role = {
-        "31,400": 'staff',
+        "31,480": 'staff',
         "481,7680": 'admin',
         "122881,1966080": 'superAdmin',
       };
       const token = access_token || 0;
+
+      console.log('token ne', token);
       let userRole = "admin";
     
     for (const rangeStr in role) {

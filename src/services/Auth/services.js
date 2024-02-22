@@ -29,9 +29,11 @@ export const useLoginIn = () => {
       const role = getCurrentUserRole(decode.role);
       setLocalStorage('token', decode.role)
 
+      console.log("role", role)
 
 
-      Cookies.set('accress_token', data.metaData.access_token)
+
+      Cookies.set('access_token', data.metaData.access_token)
       Cookies.set('refresh_token', data.metaData.refresh_token)
       Cookies.set('account_id', decode.account_id)
 

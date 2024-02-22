@@ -1,13 +1,13 @@
 import { Menu } from "antd";
 import { useNavigate } from "react-router-dom";
-import { useGetCurrentUserRole } from "@hooks/useGetCurrentUserRole";
+import { getCurrentUserRole } from "@utils/getCurrentUserRole";
 import { useGetSiderItem } from "./hooks/useGetSiderItem";
 
 const activeTab = window.location.pathname; 
 
 const AppSider = () => {
   const { getItemByRole } = useGetSiderItem();
-  const currentUserRole = useGetCurrentUserRole();
+  const role = getCurrentUserRole(+localStorage.getItem('token'))
   const navigate = useNavigate();
   const onClick = (e) => {
     navigate(e.key);
@@ -23,7 +23,7 @@ const AppSider = () => {
         }}
         defaultSelectedKeys={[activeTab]}
         mode="inline"
-        items={getItemByRole[currentUserRole]}
+        items={getItemByRole[role]}
       />
     </div>
   );

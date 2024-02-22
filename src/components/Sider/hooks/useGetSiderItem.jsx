@@ -57,7 +57,35 @@ export function useGetSiderItem() {
       getItem("Staffs", "/staffs"),
     ]),
   ];
-  const itemsForStaff = [getItem("Partner", "/partners", <UserOutlined />)];
+  const itemsForStaff = [
+    getItem("Products", "/products", <ShopOutlined />, [
+      getItem("List Product", "/products"),
+      getItem("Create Product", "/product/create"),
+    ]),
+    getItem("Events", "/events", <ScheduleOutlined />, [
+      getItem("List Events", "/events"),
+      getItem("Create Events", "/event/create"),
+    ]),
+    getItem("Vouchers", "/vouchers", <AlertOutlined />, [
+      getItem("List Voucher", "/vouchers"),
+      getItem("Create Voucher", "/voucher/create"),
+    ]),
+    getItem("Warehouse", "/warehouse", <TagsOutlined />),
+  
+
+    {
+      type: "divider",
+    },
+    getItem("Catelogs", "/catelogs", <TagsOutlined />, [
+      getItem("List Catelogs", "/catelogs"),
+      getItem("Create Catelogs", "/catelog/create"),
+    ]),
+    getItem("Reports", "/reports", <TagsOutlined />),
+    getItem("Categories", "/categories", <TagsOutlined />, [
+      getItem("List Category", "/categories"),
+      getItem("Create Category", "/category/create"),
+    ]),
+  ];
 
   const getItemByRole = {
     superAdmin: itemsForSuperAdmin,

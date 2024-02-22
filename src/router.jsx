@@ -20,7 +20,7 @@ const CreatingProduct = lazy(() => import("./pages/CreatingProduct"));
 const Orders = lazy(() => import("./pages/Orders"));
 const Catalogs = lazy(() => import("./pages/Catalogs"));
 const CreatingCatalog = lazy(() => import("./pages/CreatingCatalog"));
-
+const Warehouse = lazy(() => import("./pages/Warehouse"));
 const CatalogDetail = lazy(() => import("./pages/CatalogDetail"));
 const Transactions = lazy(() => import("./pages/Transactions"));
 const Contracts = lazy(() => import("./pages/Contracts"));
@@ -45,7 +45,8 @@ const OrderDetail = lazy(() => import("./pages/OrderDetail"));
 import withAuth from "./hocs/withAuth";
 import withVerifyAdmin from "./hocs/withVerifyAdmin";
 import Todo from "./pages/Todo";
-import { getCurrentUserRole } from "./hooks/useGetCurrentUserRole";
+// import { getCurrentUserRole } from "./hooks/useGetCurrentUserRole";
+import { getCurrentUserRole } from "@utils/getCurrentUserRole";
 
 const WrappedComponentWithAuth = withAuth(RootLayout);
 const UserPageWithVerifyAdmin = withVerifyAdmin(Users);
@@ -75,6 +76,7 @@ export const pathSystem = {
   catalogCreate: "/catelog/create",
   categories: "/categories",
   categoryDetail: "/category/:id",
+  warehouse: '/warehouse'
 };
 
 const routesForSuperAdmin = {
@@ -236,6 +238,10 @@ const routesForStaff = {
       element: <PartnerDetail />,
     },
     {
+      path: pathSystem.warehouse,
+      element: <Warehouse />,
+    },
+    {
       path: "*",
       element: <NotFound />,
     },
@@ -244,27 +250,8 @@ const routesForStaff = {
 
 const getRoutesBasedOnRole = () => {
 
-  const role = {
-    "31,400": 'staff',
-    "481,7680": 'admin',
-    "122881,1966080": 'superAdmin',
-  };
-  const token = parseInt(localStorage.getItem("token")) || 0;
-  let userRole = "admin";
+const role = getCurrentUserRole(+localStorage.getItem('token'));
 
-for (const rangeStr in role) {
-  const [min, max] = rangeStr.split(',').map(Number);
-  if (token >= min && token <= max) {
-    userRole = role[rangeStr];
-    break;
-  }
-}
-
-console.log('user role: ' + userRole);
-
-const testRole = getCurrentUserRole();
-
-  // const userRole = localStorage.getItem("token") || "admin";
 
   const routesForCharacter = {
     admin: routesForAdmin,
@@ -272,7 +259,7 @@ const testRole = getCurrentUserRole();
     superAdmin: routesForSuperAdmin,
   };
 
-  return routesForCharacter[testRole];
+  return routesForCharacter[role];
 };
 
 const selectedRoutes = getRoutesBasedOnRole();
