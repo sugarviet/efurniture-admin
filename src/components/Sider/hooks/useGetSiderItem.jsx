@@ -41,9 +41,9 @@ export function useGetSiderItem() {
       type: "divider",
     },
     getItem("Orders", "/orders", <TagsOutlined />),
-    getItem("Catelogs", "/catelogs", <TagsOutlined />, [
-      getItem("List Catelogs", "/catelogs"),
-      getItem("Create Catelogs", "/catelog/create"),
+    getItem("Rooms", "/rooms", <TagsOutlined />, [
+      getItem("List rooms", "/rooms"),
+      getItem("Create Rooms", "/room/create"),
     ]),
     getItem("Reports", "/reports", <TagsOutlined />),
     getItem("Categories", "/categories", <TagsOutlined />, [
@@ -76,9 +76,9 @@ export function useGetSiderItem() {
     {
       type: "divider",
     },
-    getItem("Catelogs", "/catelogs", <TagsOutlined />, [
-      getItem("List Catelogs", "/catelogs"),
-      getItem("Create Catelogs", "/catelog/create"),
+    getItem("Rooms", "/rooms", <TagsOutlined />, [
+      getItem("List rooms", "/rooms"),
+      getItem("Create Rooms", "/room/create"),
     ]),
     getItem("Reports", "/reports", <TagsOutlined />),
     getItem("Categories", "/categories", <TagsOutlined />, [

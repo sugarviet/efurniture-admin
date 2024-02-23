@@ -26,7 +26,7 @@ const Transactions = lazy(() => import("./pages/Transactions"));
 const Contracts = lazy(() => import("./pages/Contracts"));
 const Reports = lazy(() => import("./pages/Reports"));
 const ReportDetail = lazy(() => import("./pages/ReportDetail"));
-
+const Rooms = lazy(() => import("./pages/Rooms"));
 const Categories = lazy(() => import("./pages/Categories"));
 const Vouchers = lazy(() => import("./pages/Vouchers"));
 const CreateVoucher = lazy(() => import("./pages/CreatingVoucher"));
@@ -76,7 +76,8 @@ export const pathSystem = {
   catalogCreate: "/catelog/create",
   categories: "/categories",
   categoryDetail: "/category/:id",
-  warehouse: '/warehouse'
+  warehouse: '/warehouse',
+  rooms: '/rooms'
 };
 
 const routesForSuperAdmin = {
@@ -207,6 +208,10 @@ const routesForAdmin = {
       element: <Todo />,
     },
     {
+      path: pathSystem.rooms,
+      element: <Rooms />,
+    },
+    {
       path: "*",
       element: <NotFound />,
     },
@@ -224,6 +229,14 @@ const routesForStaff = {
     {
       path: pathSystem.users,
       element: <UserPageWithVerifyAdmin />,
+    },
+    {
+      path: pathSystem.products,
+      element: <Products />,
+    },
+    {
+      path: pathSystem.createProduct,
+      element: <CreatingProduct />,
     },
     {
       path: pathSystem.userDetail,

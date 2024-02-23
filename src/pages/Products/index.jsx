@@ -48,11 +48,6 @@ const Products = () => {
       sorter: (a, b) => a.price - b.price,
     },
     {
-      title: "Quantity",
-      dataIndex: "quantity",
-      key: "quantity",
-    },
-    {
       title: "Action",
       key: "action",
       width: "30%",

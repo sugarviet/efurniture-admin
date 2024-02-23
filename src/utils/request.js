@@ -1,5 +1,6 @@
 import axios from "axios";
 import Cookies from 'js-cookie';
+import { refreshPage } from "@utils/refreshPage";
 
 const API_URL_DEVELOPMENT = "http://34.126.181.161:4646/api/v1";
 const API_URL_PRODUCTION = "http://localhost:3000";
@@ -14,7 +15,16 @@ export const request = axios.create({
 
   request.interceptors.request.use(
     (config) => {
-      config.headers["x-client-accesstoken"] = Cookies.get("accress_token");
+      const accessToken = Cookies.get("access_token");
+
+      if (!config.url.includes('/login') && !accessToken) {
+        localStorage.removeItem('token');
+        refreshPage()
+
+        return Promise.reject("Access token is missing");
+      }
+
+      config.headers["x-client-accesstoken"] = accessToken;
       config.headers["x-client-refreshtoken"] = Cookies.get("refresh_token");
       
       config.headers["x-client-id"] = Cookies.get("account_id");
@@ -39,7 +49,7 @@ export const request = axios.create({
         try {
           const refreshResponse = await axios.post(`${BASE_URL}/refresh`);
           const accessToken = refreshResponse.data.accessToken;
-          originalRequest.headers["x-client-accesstoken"] = Cookies.set("accress_token", accessToken);
+          originalRequest.headers["x-client-accesstoken"] = Cookies.set("access_token", accessToken);
           originalRequest.headers["x-client-refreshtoken"] = Cookies.set("refresh_token", accessToken);
           
           originalRequest.headers["x-client-id"] = Cookies.get("account_id");
@@ -49,7 +59,7 @@ export const request = axios.create({
           return Promise.reject(error);
         }
       }
-      console.log(originalRequest)
+      
       return Promise.reject(error);
     }
   );
