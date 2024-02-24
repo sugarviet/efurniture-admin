@@ -1,12 +1,30 @@
 import axios from "axios";
 import Cookies from 'js-cookie';
-import { refreshPage } from "@utils/refreshPage";
 
 const API_URL_DEVELOPMENT = "http://34.126.181.161:4646/api/v1";
 const API_URL_PRODUCTION = "http://localhost:3000";
 console.log(API_URL_PRODUCTION);
 
 const BASE_URL = API_URL_DEVELOPMENT;
+
+const accessToken = Cookies.get("access_token");
+const refreshToken = Cookies.get("refresh_token");
+const accountId = Cookies.get("account_id");
+
+const cookies = {
+  accessToken: {
+    key: "x-client-accesstoken",
+    value: accessToken
+  },
+  refreshToken: {
+    key: "x-client-refreshtoken",
+    value: refreshToken
+  },
+  accountId: {
+    key: "x-client-id",
+    value: accountId
+  },
+}
 
 export const request = axios.create({
     baseURL: BASE_URL,
@@ -15,19 +33,9 @@ export const request = axios.create({
 
   request.interceptors.request.use(
     (config) => {
-      const accessToken = Cookies.get("access_token");
-
-      if (!config.url.includes('/login') && !accessToken) {
-        localStorage.removeItem('token');
-        refreshPage()
-
-        return Promise.reject("Access token is missing");
-      }
-
-      config.headers["x-client-accesstoken"] = accessToken;
-      config.headers["x-client-refreshtoken"] = Cookies.get("refresh_token");
-      
-      config.headers["x-client-id"] = Cookies.get("account_id");
+      config.headers[cookies['accessToken'].key] = cookies['accessToken'].value;
+      config.headers[cookies['refreshToken'].key] = cookies['refreshToken'].value;
+      config.headers[cookies['accountId'].key] = cookies['accountId'].value;
 
       return config;
     },
@@ -48,11 +56,12 @@ export const request = axios.create({
       if (error.response && error.response.status === 401 && !originalRequest._retry) {
         try {
           const refreshResponse = await axios.post(`${BASE_URL}/refresh`);
-          const accessToken = refreshResponse.data.accessToken;
-          originalRequest.headers["x-client-accesstoken"] = Cookies.set("access_token", accessToken);
-          originalRequest.headers["x-client-refreshtoken"] = Cookies.set("refresh_token", accessToken);
-          
-          originalRequest.headers["x-client-id"] = Cookies.get("account_id");
+          const accessTokenRes = refreshResponse.data.accessToken;
+          const refreshTokenRes = refreshResponse.data.refreshToken;
+
+          originalRequest.headers[cookies['accessToken'].key] = Cookies.set("access_token", accessTokenRes);
+          originalRequest.headers[cookies['refreshToken'].key] = Cookies.set("refresh_token", refreshTokenRes);
+          originalRequest.headers[cookies['accountId'].key] = accountId;
           
           return axios(originalRequest);
         } catch (error) {

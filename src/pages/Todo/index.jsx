@@ -1,60 +1,142 @@
-import { useQueryClient } from "@tanstack/react-query";
-import { useFetch, useDelete, usePost } from "./reactQuery";
-import { Card } from "antd";
-import { useState } from "react";
+import { Form, Input, InputNumber, Select, Button } from 'antd';
 
-const api = "http://localhost:3000/todos";
+const { Option } = Select;
 
-const TodoList = () => {
-  const [text, setText] = useState("");
-  const queryClient = useQueryClient();
-  const { data: todos, isLoading, isError } = useFetch(api);
-
-  const deleteTodo = useDelete(api, undefined, () => {
-    alert("ahihi"), () => alert("ahuhu");
-  });
-  const addTodo = usePost(api, undefined, () => {
-    alert("Create thanh cong"), () => alert("failed");
-  });
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    addTodo.mutate({ text });
-    queryClient.invalidateQueries(api);
-    setText("");
+const MyForm = () => {
+  const onFinish = (values) => {
+    console.log('Received values:', values);
   };
-
-  const handleDelete = async (id) => {
-    deleteTodo.mutate(id);
-    queryClient.invalidateQueries(api);
-  };
-
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error fetching todos</div>;
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold">Todo List</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
-        <button type="submit">Add</button>
-      </form>
-      <ul>
-        {todos.map((todo) => (
-          <li key={todo.id} className="flex gap-3">
-            <Card className="">
-              <p>{todo.text}</p>
-              <button onClick={() => handleDelete(todo.id)}>Delete</button>
-            </Card>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <Form
+      name="create_data_form"
+      onFinish={onFinish}
+      initialValues={{
+        type: 'sofa',
+      }}
+    >
+      <Form.Item
+        label="Name"
+        name="name"
+        rules={[
+          {
+            required: true,
+            message: 'Please input the name!',
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+
+      <Form.Item
+        label="Thumbnail URL"
+        name="thumb"
+        rules={[
+          {
+            required: true,
+            message: 'Please input the thumbnail URL!',
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+
+      <Form.Item
+        label="Price"
+        name="price"
+        rules={[
+          {
+            required: true,
+            message: 'Please input the price!',
+          },
+        ]}
+      >
+        <InputNumber min={0} />
+      </Form.Item>
+
+      <Form.Item
+        label="Type"
+        name="type"
+        rules={[
+          {
+            required: true,
+            message: 'Please select the type!',
+          },
+        ]}
+      >
+        <Select>
+          <Option value="sofa">Sofa</Option>
+          <Option value="chair">Chair</Option>
+          <Option value="table">Table</Option>
+        </Select>
+      </Form.Item>
+
+      <Form.Item
+        label="Material"
+        name={['variation', 0, 'material']}
+        rules={[
+          {
+            required: true,
+            message: 'Please input the material!',
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+
+      <Form.Item
+        label="Sub Price"
+        name={['variation', 0, 'subPrice']}
+        rules={[
+          {
+            required: true,
+            message: 'Please input the sub price!',
+          },
+        ]}
+      >
+        <InputNumber min={0} />
+      </Form.Item>
+
+      <Form.Item
+        label="attribute types"
+        name={['attributes', 'type']}
+        rules={[
+          {
+            required: true,
+            message: 'Please select the type!',
+          },
+        ]}
+      >
+        <Select>
+          <Option value="sofa">Sofa</Option>
+          <Option value="chair">Chair</Option>
+          <Option value="table">Table</Option>
+        </Select>
+      </Form.Item>
+
+      <Form.Item
+        label="Width"
+        name={['attributes', 'attributeType', 'Width']}
+      >
+        <Input />
+      </Form.Item>
+
+      <Form.Item
+        label="Height"
+        name={['attributes', 'attributeType', 'Height']}
+      >
+        <Input />
+      </Form.Item>
+
+      {/* Add more attributes as needed */}
+
+      <Form.Item>
+        <Button type="primary" htmlType="submit">
+          Submit
+        </Button>
+      </Form.Item>
+    </Form>
   );
 };
 
-export default TodoList;
+export default MyForm;

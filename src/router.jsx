@@ -280,7 +280,7 @@ const selectedRoutes = getRoutesBasedOnRole();
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path={selectedRoutes.path} element={selectedRoutes.layout}>
+      <Route path={selectedRoutes?.path} element={selectedRoutes.layout}>
         {selectedRoutes.children.map((item) => (
           <Route key={item.path} path={item.path} element={item.element} />
         ))}

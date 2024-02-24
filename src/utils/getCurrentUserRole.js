@@ -6,7 +6,6 @@ export function getCurrentUserRole(access_token){
       };
       const token = access_token || 0;
 
-      console.log('token ne', token);
       let userRole = "admin";
     
     for (const rangeStr in role) {
