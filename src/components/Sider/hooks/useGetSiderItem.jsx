@@ -28,10 +28,6 @@ export function useGetSiderItem() {
       getItem("List Events", "/events"),
       getItem("Create Events", "/event/create"),
     ]),
-    getItem("Account", "/account", <UserOutlined />, [
-      getItem("User", "/users"),
-      getItem("Staffs", "/staffs"),
-    ]),
     getItem("Vouchers", "/vouchers", <AlertOutlined />, [
       getItem("List Voucher", "/vouchers"),
       getItem("Create Voucher", "/voucher/create"),
@@ -71,7 +67,6 @@ export function useGetSiderItem() {
       getItem("Create Voucher", "/voucher/create"),
     ]),
     getItem("Warehouse", "/warehouse", <TagsOutlined />),
-  
 
     {
       type: "divider",

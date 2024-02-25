@@ -6,16 +6,26 @@ import FormInputNumber from "../../components/FormInputNumber";
 
 import FormTextArea from "../../components/FormTextArea";
 import FormSelect from "../../components/FormSelect";
+import { isAdmin } from "../../utils/getCurrentUserRole";
 
 const { TabPane } = Tabs;
 
 const CreatingProduct = () => {
   const [form] = Form.useForm();
+  
+  const admin = isAdmin();
+
+  console.log(admin);
+
   const onFinish = (values) => {
     console.log("Success:", values);
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
+  };
+
+  const handleDiscard = () => {
+    form.resetFields();
   };
   return (
     <main className="px-4">
@@ -38,11 +48,13 @@ const CreatingProduct = () => {
             <p className="text-gray-500">Orders placed across your store</p>
           </div>
           <div className="flex gap-2">
-            <Button>Discard</Button>
-            <Button>Save draft</Button>
-            <Button type="primary" className="primary" htmlType="submit">
-              Publish
-            </Button>
+            <Button onClick={handleDiscard}>Discard</Button>
+            <Button htmlType="submit">Save draft</Button>
+            {admin ? (
+              <Button type="primary" className="primary" htmlType="submit">
+                Publish
+              </Button>
+            ) : null}
           </div>
         </section>
 
@@ -123,35 +135,49 @@ const CreatingProduct = () => {
               <TabPane tab="Attributes" key="attributes">
                 <p>Attributes</p>
                 <FormSelect
-                label="Category"
-                name="category"
-                defaultValue="lucy"
-                options={[
-                  {
-                    value: "jack",
-                    label: "Jack",
-                  },
-                  {
-                    value: "lucy",
-                    label: "Lucy",
-                  },
-                  {
-                    value: "Yiminghe",
-                    label: "yiminghe",
-                  },
-                ]}
-              />
+                  label="Type"
+                  // name="category"
+                  name={["attributes", "type"]}
+                  defaultValue="lucy"
+                  options={[
+                    {
+                      value: "jack",
+                      label: "Jack",
+                    },
+                    {
+                      value: "lucy",
+                      label: "Lucy",
+                    },
+                    {
+                      value: "Yiminghe",
+                      label: "yiminghe",
+                    },
+                  ]}
+                />
+                <FormInput
+                  label="height"
+                  name={["attributes", "attributeType", "height"]}
+                />
+                <FormInput
+                  label="width"
+                  name={["attributes", "attributeType", "width"]}
+                />
               </TabPane>
             </Tabs>
 
             <div className="mt-8">
-            <p className="text-3xl font-bold mb-2">Create 3D model</p>
-            <FormInput
-              label="3D model's id"
-              name="model3D"
-              placeholder="Write title here..."
-            />
-            <iframe src="https://admin.roomle.com/login" title="W3Schools Free Online Web Tutorials" height={600} width={900}></iframe>
+              <p className="text-3xl font-bold mb-2">Create 3D model</p>
+              <FormInput
+                label="3D model's id"
+                name="model3D"
+                placeholder="Write title here..."
+              />
+              <iframe
+                src="https://admin.roomle.com/login"
+                title="W3Schools Free Online Web Tutorials"
+                height={600}
+                width={900}
+              ></iframe>
             </div>
           </div>
 
@@ -296,7 +322,12 @@ const CreatingProduct = () => {
                         },
                       ]}
                     />
-                    <FormInputNumber label="Sub price" name={[name, "subPrice"]} className="w-full" placeholder="$$$"/>
+                    <FormInputNumber
+                      label="Sub price"
+                      name={[name, "subPrice"]}
+                      className="w-full"
+                      placeholder="$$$"
+                    />
 
                     <Divider dashed />
                   </div>

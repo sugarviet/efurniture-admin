@@ -18,3 +18,9 @@ export function getCurrentUserRole(access_token){
 
     return userRole;
 }
+
+export function isAdmin(){
+  const admin = "admin" === getCurrentUserRole(+localStorage.getItem("token"));
+
+  return admin
+}

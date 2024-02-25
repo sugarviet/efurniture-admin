@@ -8,6 +8,8 @@ const withAuth = (WrappedComponent) => {
     // const [loggedIn] = useState(!!localStorage.getItem('token'));
     const [loggedIn] = useState(!!Cookies.get("access_token"));
 
+    console.log(loggedIn);
+
     if (!loggedIn){
       localStorage.removeItem('token')
       return <Login />;

@@ -6,12 +6,16 @@ import {
   getAllProduct,
   getProductDetail,
   updateProduct,
-  getAllPublishedProduct
+  getAllPublishedProduct,
+  getAllDraftProduct,
+  createDraftedProduct,
+  updateDraftedProduct
 } from "./callers";
 
 const API_KEY = {
   GET_ALL_PRODUCTS: 'products',
   GET_ALL_PRODUCTS_PUBLISHED: 'product-published',
+  GET_ALL_PRODUCTS_DRAFTED: 'product-drafted',
   GET_PRODUCT_DETAIL: 'product'
 }
 
@@ -26,6 +30,14 @@ export const useGetAllPublishedProducts = () => {
   return useQuery({
     queryKey: [API_KEY.GET_ALL_PRODUCTS_PUBLISHED],
     queryFn: getAllPublishedProduct,
+  });
+};
+
+export const useGetAllDraftedProducts = (enabled) => {
+  return useQuery({
+    queryKey: [API_KEY.GET_ALL_PRODUCTS_DRAFTED],
+    queryFn: getAllDraftProduct,
+    enabled: enabled
   });
 };
 
@@ -57,6 +69,25 @@ export const useCreateProduct = () => {
   });
 };
 
+export const useCreateDraftedProduct = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation(createDraftedProduct, {
+    onSuccess: () => {
+      notification.success({
+        message: "Create product successfully",
+      });
+      queryClient.invalidateQueries(API_KEY.GET_ALL_PRODUCTS_DRAFTED);
+
+    },
+    onError: () => {
+      notification.error({
+        message: "Create product failed",
+      });
+    },
+  });
+};
+
 export const useUpdateProduct = () => {
   const queryClient = useQueryClient();
 
@@ -66,6 +97,25 @@ export const useUpdateProduct = () => {
         message: "Update product successfully",
       });
       queryClient.invalidateQueries(API_KEY.GET_ALL_PRODUCTS);
+
+    },
+    onError: () => {
+      notification.error({
+        message: "Update product failed",
+      });
+    },
+  });
+};
+
+export const useUpdateDraftedProduct = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation(updateDraftedProduct, {
+    onSuccess: () => {
+      notification.success({
+        message: "Update product successfully",
+      });
+      queryClient.invalidateQueries(API_KEY.GET_ALL_PRODUCTS_DRAFTED);
 
     },
     onError: () => {

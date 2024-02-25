@@ -13,6 +13,13 @@ export const getAllPublishedProduct = async () => {
   return res.data;
 };
 
+
+export const getAllDraftProduct = async () => {
+  const res = await request.get("/product/admin/draft");
+
+  return res.data;
+};
+
 export const getProductDetail = async (id) => {
   const res = await request.get(urlcat("/products/:id", { id }));
 
@@ -25,6 +32,12 @@ export const createProduct = async(data) => {
   return res.data
 }
 
+export const createDraftedProduct = async(data) => {
+  const res = await request.post('/products', data);
+
+  return res.data
+}
+
 export const updateProduct = async(data) => {
   const [id, ...rest] = data;
   const res = await request.put(urlcat('/products/:id', id), rest);
@@ -32,7 +45,21 @@ export const updateProduct = async(data) => {
   return res.data
 }
 
+export const updateDraftedProduct = async(data) => {
+  const [id, ...rest] = data;
+  const res = await request.put(urlcat('/products/:id', id), rest);
+
+  return res.data
+}
+
 export const disableProduct = async(data) => {
+  const [id, ...rest] = data;
+  const res = await request.delete(urlcat('/products/:id', id), rest);
+
+  return res.data
+}
+
+export const disableDraftedProduct = async(data) => {
   const [id, ...rest] = data;
   const res = await request.delete(urlcat('/products/:id', id), rest);
 
