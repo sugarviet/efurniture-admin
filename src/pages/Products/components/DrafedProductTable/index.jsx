@@ -1,7 +1,7 @@
 import { Space, Button, Table } from "antd";
 import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
 import { Link } from "react-router-dom";
-import Loading from "@components/Loading";
+// import Loading from "@components/Loading";
 
 import { pathSystem } from "../../../../router";
 
@@ -10,7 +10,7 @@ import { useGetAllDraftedProducts } from "@services/Products/services";
 import { isAdmin } from "../../../../utils/getCurrentUserRole";
 const DrafedProductTable = () => {
   const { getColumnSearchProps } = useSearchTableColumn();
-  const { data, isLoading } = useGetAllDraftedProducts(false);
+  const { data } = useGetAllDraftedProducts(false);
   const admin = isAdmin();
   // if (isLoading) return <Loading />;
   const columns = [

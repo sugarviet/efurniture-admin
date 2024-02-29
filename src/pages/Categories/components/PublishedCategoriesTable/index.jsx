@@ -1,9 +1,9 @@
-import Loading from "@components/Loading";
-import { useGetAllTypes } from "@services/Types/services";
 import { Table, Button, Space } from "antd";
 import { Link } from "react-router-dom";
 import { withFetchData } from "@hocs/withFetchData";
 import { get_published_category } from "../../../../api/categoryApi";
+import Proptypes from "prop-types";
+
 
 const PublishedCategoriesTable = ({data}) => {
   const columns = [
@@ -35,5 +35,10 @@ const PublishedCategoriesTable = ({data}) => {
     </div>
   );
 };
+
+PublishedCategoriesTable.propTypes = {
+  data: Proptypes.object,
+};
+
 
 export default withFetchData(PublishedCategoriesTable,get_published_category);

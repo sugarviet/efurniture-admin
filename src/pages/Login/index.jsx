@@ -1,12 +1,9 @@
 import { Form, Input, Button, Card, Divider } from "antd";
 import styles from "./Login.module.css";
-import { useLoginIn } from "../../services/Auth/services";
 import { usePost } from "../../hooks/api-hooks";
 import { get_login } from "../../api/authApi";
 import { jwtDecode } from "jwt-decode";
 import { getCurrentUserRole } from "@utils/getCurrentUserRole";
-import { setLocalStorage } from "@utils/setLocalStorage";
-import Cookies from 'js-cookie';
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../stores/useAuth";
 

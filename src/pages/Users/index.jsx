@@ -14,6 +14,7 @@ import urlcat from "urlcat";
 
 import { withFetchData } from "@hocs/withFetchData";
 import { get_all_user } from "../../api/userApi";
+import Proptypes from "prop-types";
 
 const AccountCreateForm = lazy(() => import("./components/AccountCreateForm"));
 const AccountUpdateForm = lazy(() => import("./components/AccountUpdateForm"));
@@ -134,4 +135,9 @@ const Users = ({data}) => {
     </div>
   );
 };
+
+Users.propTypes = {
+  data: Proptypes.object,
+};
+
 export default withFetchData(Users,get_all_user);

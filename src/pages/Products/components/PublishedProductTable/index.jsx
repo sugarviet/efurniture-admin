@@ -2,6 +2,7 @@
 import { Space, Button, Table } from "antd";
 import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
 import { Link } from "react-router-dom";
+import Proptypes from "prop-types";
 
 import { withFetchData } from "@hocs/withFetchData";
 
@@ -70,5 +71,10 @@ const PublishedProductTable = ({data}) => {
     </div>
   )
 }
+
+PublishedProductTable.propTypes = {
+  data: Proptypes.object,
+};
+
 
 export default withFetchData(PublishedProductTable, get_published_product)

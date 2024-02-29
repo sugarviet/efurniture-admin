@@ -2,6 +2,8 @@
 import { Table, Button, Space } from "antd";
 import { withFetchData } from "@hocs/withFetchData";
 import { get_draft_category } from "@api/categoryApi";
+import Proptypes from "prop-types";
+
 const DraftedCategoriesTable = ({data}) => {
   const columns = [
     {
@@ -31,6 +33,9 @@ const DraftedCategoriesTable = ({data}) => {
       <Table dataSource={data} columns={columns} />
     </div>
   );
+};
+DraftedCategoriesTable.propTypes = {
+  data: Proptypes.object,
 };
 
 export default withFetchData(DraftedCategoriesTable, get_draft_category);

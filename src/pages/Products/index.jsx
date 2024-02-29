@@ -1,7 +1,7 @@
 import ExcelButton from "@components/ExcelButton";
 import PageTitle from "@components/PageTitle";
 import PublishedProductTable from "./components/PublishedProductTable";
-import DrafedProductTable from "./components/DrafedProductTable";
+// import DrafedProductTable from "./components/DrafedProductTable";
 
 const Products = () => {
   const products = [];
