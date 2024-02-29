@@ -4,7 +4,6 @@ import PublishedProductTable from "./components/PublishedProductTable";
 import DrafedProductTable from "./components/DrafedProductTable";
 
 const Products = () => {
-
   const products = [];
 
   
@@ -23,7 +22,7 @@ const Products = () => {
 
 
       <PublishedProductTable />
-      <DrafedProductTable />
+      {/* <DrafedProductTable /> */}
     </main>
   );
 };

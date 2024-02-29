@@ -10,9 +10,9 @@ import { useGetAllDraftedProducts } from "@services/Products/services";
 import { isAdmin } from "../../../../utils/getCurrentUserRole";
 const DrafedProductTable = () => {
   const { getColumnSearchProps } = useSearchTableColumn();
-  const { data, isLoading } = useGetAllDraftedProducts(true);
+  const { data, isLoading } = useGetAllDraftedProducts(false);
   const admin = isAdmin();
-  if (isLoading) return <Loading />;
+  // if (isLoading) return <Loading />;
   const columns = [
     {
       title: "Product Name",

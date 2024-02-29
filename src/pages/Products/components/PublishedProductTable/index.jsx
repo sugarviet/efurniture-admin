@@ -2,17 +2,15 @@
 import { Space, Button, Table } from "antd";
 import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
 import { Link } from "react-router-dom";
-import Loading from "@components/Loading";
-// import useProducts from "./hooks/useProducts";
+
+import { withFetchData } from "@hocs/withFetchData";
 
 import { pathSystem } from "../../../../router";
 import urlcat from "urlcat";
-import { useGetAllPublishedProducts } from "@services/Products/services";
+import { get_published_product } from "../../../../api/productApi";
 
-const PublishedProductTable = () => {
+const PublishedProductTable = ({data}) => {
   const { getColumnSearchProps } = useSearchTableColumn();
-  const { data, isLoading } = useGetAllPublishedProducts();
-  if (isLoading) return <Loading />;
 
     const columns = [
         {
@@ -62,7 +60,7 @@ const PublishedProductTable = () => {
       <p className="text-xl font-bold">Published Product</p>
       <Table
         rowKey="_id"
-        dataSource={data?.metaData}
+        dataSource={data}
         columns={columns}
         pagination={{
           pageSize: 10,
@@ -73,4 +71,4 @@ const PublishedProductTable = () => {
   )
 }
 
-export default PublishedProductTable
+export default withFetchData(PublishedProductTable, get_published_product)

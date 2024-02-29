@@ -47,6 +47,7 @@ import withVerifyAdmin from "./hocs/withVerifyAdmin";
 import Todo from "./pages/Todo";
 // import { getCurrentUserRole } from "./hooks/useGetCurrentUserRole";
 import { getCurrentUserRole } from "@utils/getCurrentUserRole";
+import Cookies from "js-cookie";
 
 const WrappedComponentWithAuth = withAuth(RootLayout);
 const UserPageWithVerifyAdmin = withVerifyAdmin(Users);
@@ -263,7 +264,8 @@ const routesForStaff = {
 
 const getRoutesBasedOnRole = () => {
 
-const role = getCurrentUserRole(+localStorage.getItem('token'));
+// const role = getCurrentUserRole(+localStorage.getItem('token'));
+const role = getCurrentUserRole(+Cookies.get('token'));
 
 
   const routesForCharacter = {

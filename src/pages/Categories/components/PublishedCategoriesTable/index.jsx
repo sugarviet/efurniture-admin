@@ -2,10 +2,10 @@ import Loading from "@components/Loading";
 import { useGetAllTypes } from "@services/Types/services";
 import { Table, Button, Space } from "antd";
 import { Link } from "react-router-dom";
+import { withFetchData } from "@hocs/withFetchData";
+import { get_published_category } from "../../../../api/categoryApi";
 
-const PublishedCategoriesTable = () => {
-  const { data, isLoading } = useGetAllTypes();
-  if (isLoading) return <Loading />;
+const PublishedCategoriesTable = ({data}) => {
   const columns = [
     {
       title: "Category Name",
@@ -31,9 +31,9 @@ const PublishedCategoriesTable = () => {
   return (
     <div>
       <p className="text-xl font-bold">Published Type</p>
-      <Table dataSource={data.metaData} columns={columns} />
+      <Table dataSource={data} columns={columns} />
     </div>
   );
 };
 
-export default PublishedCategoriesTable;
+export default withFetchData(PublishedCategoriesTable,get_published_category);

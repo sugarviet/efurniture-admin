@@ -1,10 +1,8 @@
-import Loading from "@components/Loading";
-import { useGetAllDraftedTypes } from "@services/Types/services";
-import { Table, Button, Space } from "antd";
 
-const DraftedCategoriesTable = () => {
-  const { data, isLoading } = useGetAllDraftedTypes(true);
-  if (isLoading) return <Loading />;
+import { Table, Button, Space } from "antd";
+import { withFetchData } from "@hocs/withFetchData";
+import { get_draft_category } from "@api/categoryApi";
+const DraftedCategoriesTable = ({data}) => {
   const columns = [
     {
       title: "Category Name",
@@ -30,9 +28,9 @@ const DraftedCategoriesTable = () => {
   return (
     <div>
       <p className="text-xl font-bold">DraftedS Type</p>
-      <Table dataSource={data.metaData} columns={columns} />
+      <Table dataSource={data} columns={columns} />
     </div>
   );
 };
 
-export default DraftedCategoriesTable;
+export default withFetchData(DraftedCategoriesTable, get_draft_category);

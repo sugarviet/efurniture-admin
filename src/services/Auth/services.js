@@ -25,6 +25,7 @@ export const useLoginIn = () => {
       notification.success({
         message: "Login successful",
       });
+      
       const decode = jwtDecode(data.metaData.access_token);
       const role = getCurrentUserRole(decode.role);
       setLocalStorage('token', decode.role)

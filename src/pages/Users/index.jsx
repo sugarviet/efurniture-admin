@@ -4,8 +4,6 @@ import { useState, lazy } from "react";
 import AppModal from "@components/AppModal";
 import AppSuspense from "@components/AppSuspense";
 
-import { useUser } from "./hooks/useUser";
-import Loading from "@components/Loading";
 import { Link } from "react-router-dom";
 import ExcelButton from "@components/ExcelButton";
 import PageTitle from "@components/PageTitle";
@@ -14,13 +12,15 @@ import { getCurrentUserRole } from "@utils/getCurrentUserRole";
 import { pathSystem } from "../../router";
 import urlcat from "urlcat";
 
+import { withFetchData } from "@hocs/withFetchData";
+import { get_all_user } from "../../api/userApi";
+
 const AccountCreateForm = lazy(() => import("./components/AccountCreateForm"));
 const AccountUpdateForm = lazy(() => import("./components/AccountUpdateForm"));
 
 
-const Users = () => {
-  const { userData, isLoading } = useUser();
- console.log(userData);
+const Users = ({data}) => {
+
   const { getColumnSearchProps } = useSearchTableColumn();
   const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
   const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
@@ -107,9 +107,6 @@ const Users = () => {
     },
   ];
 
-  if (isLoading) {
-    return <Loading />;
-  }
 
   return (
     <div>
@@ -120,7 +117,7 @@ const Users = () => {
       <div className="float-right">
         <ExcelButton data={[]} />
       </div>
-      <Table rowKey="_id" columns={columns} dataSource={userData} />
+      <Table rowKey="_id" columns={columns} dataSource={data} />
 
       {/* Modals */}
       <AppModal isOpen={isModalCreateOpen} setIsOpen={setIsModalCreateOpen}>
@@ -137,4 +134,4 @@ const Users = () => {
     </div>
   );
 };
-export default Users;
+export default withFetchData(Users,get_all_user);

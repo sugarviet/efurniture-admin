@@ -1,13 +1,13 @@
 import { Menu } from "antd";
 import { useNavigate } from "react-router-dom";
-import { getCurrentUserRole } from "@utils/getCurrentUserRole";
 import { useGetSiderItem } from "./hooks/useGetSiderItem";
+import useAuth from "../../stores/useAuth";
 
-const activeTab = window.location.pathname; 
+const activeTab = window.location.pathname;
 
 const AppSider = () => {
   const { getItemByRole } = useGetSiderItem();
-  const role = getCurrentUserRole(+localStorage.getItem('token'))
+  const { role } = useAuth();
   const navigate = useNavigate();
   const onClick = (e) => {
     navigate(e.key);
