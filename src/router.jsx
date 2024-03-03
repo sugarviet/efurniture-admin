@@ -40,11 +40,9 @@ const OrderDetail = lazy(() => import("./pages/OrderDetail"));
 
 // HOCs
 import withAuth from "./hocs/withAuth";
-import withVerifyAdmin from "./hocs/withVerifyAdmin";
 import Cookies from "js-cookie";
 
 const WrappedComponentWithAuth = withAuth(RootLayout);
-const UserPageWithVerifyAdmin = withVerifyAdmin(Users);
 
 export const pathSystem = {
   base: "/",
@@ -125,14 +123,6 @@ const routesForAdmin = {
       element: <CashRequest />,
     },
     {
-      path: pathSystem.users,
-      element: <UserPageWithVerifyAdmin />,
-    },
-    {
-      path: pathSystem.userDetail,
-      element: <UserDetail />,
-    },
-    {
       path: pathSystem.staffs,
       element: <Staffs />,
     },
@@ -204,10 +194,6 @@ const routesForStaff = {
   path: pathSystem.base,
   children: [
     {
-      path: pathSystem.users,
-      element: <UserPageWithVerifyAdmin />,
-    },
-    {
       path: pathSystem.products,
       element: <Products />,
     },
@@ -232,14 +218,6 @@ const routesForStaff = {
       element: <CreateVoucher />,
     },
     {
-      path: pathSystem.userDetail,
-      element: <UserDetail />,
-    },
-    {
-      path: pathSystem.staffs,
-      element: <Staffs />,
-    },
-    {
       path: pathSystem.warehouse,
       element: <Warehouse />,
     },
@@ -252,7 +230,7 @@ const routesForStaff = {
 
 const getRoutesBasedOnRole = () => {
 
-const role = Cookies.get('role');
+const role = Cookies.get('role') || 'admin';
 
   const routesForCharacter = {
     admin: routesForAdmin,
