@@ -1,30 +1,25 @@
-import { Table } from 'antd';
-import { useGetWarehouse } from '../../services/Warehouse/services';
-import Loading from '@components/Loading';
+import { Table } from "antd";
+import { withFetchData } from "@hocs/withFetchData";
+import { get_all_warehouse } from "../../api/warehouseApi";
+import PropTypes from "prop-types";
 
-const Warehouse = () => {
-  const {data, isLoading} = useGetWarehouse();
-
-  if(isLoading){
-    return <Loading />
-  }
-
+const Warehouse = ({ data }) => {
   const columns = [
     {
-      title: 'Location',
-      dataIndex: 'location',
-      key: 'location',
+      title: "Location",
+      dataIndex: "location",
+      key: "location",
     },
     {
-      title: 'Stock',
-      dataIndex: 'stock',
-      key: 'stock',
+      title: "Stock",
+      dataIndex: "stock",
+      key: "stock",
     },
     {
-      title: 'Created At',
-      dataIndex: 'createdAt',
-      key: 'createdAt',
-    }
+      title: "Created At",
+      dataIndex: "createdAt",
+      key: "createdAt",
+    },
   ];
 
   return (
@@ -35,4 +30,8 @@ const Warehouse = () => {
   );
 };
 
-export default Warehouse;
+Warehouse.propTypes = {
+  data: PropTypes.array,
+};
+
+export default withFetchData(Warehouse, get_all_warehouse);

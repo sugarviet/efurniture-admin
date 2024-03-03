@@ -23,7 +23,6 @@ const CreatingCatalog = lazy(() => import("./pages/CreatingCatalog"));
 const Warehouse = lazy(() => import("./pages/Warehouse"));
 const CatalogDetail = lazy(() => import("./pages/CatalogDetail"));
 const Transactions = lazy(() => import("./pages/Transactions"));
-const Contracts = lazy(() => import("./pages/Contracts"));
 const Reports = lazy(() => import("./pages/Reports"));
 const ReportDetail = lazy(() => import("./pages/ReportDetail"));
 const Rooms = lazy(() => import("./pages/Rooms"));
@@ -33,9 +32,7 @@ const CreateVoucher = lazy(() => import("./pages/CreatingVoucher"));
 const Events = lazy(() => import("./pages/Events"));
 const CreateEvents = lazy(() => import("./pages/CreatingEvents"));
 
-const PartnerDetail = lazy(() => import("./pages/PartnerDetail"));
 const CategoryDetail = lazy(() => import("./pages/CategoryDetail"));
-const PartnerDashboard = lazy(() => import("./pages/PartnerDashboard"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const ProductDetail = lazy(() => import("./pages/ProductDetail"));
 const CashRequest = lazy(() => import("./pages/CashRequest"));
@@ -44,9 +41,6 @@ const OrderDetail = lazy(() => import("./pages/OrderDetail"));
 // HOCs
 import withAuth from "./hocs/withAuth";
 import withVerifyAdmin from "./hocs/withVerifyAdmin";
-import Todo from "./pages/Todo";
-// import { getCurrentUserRole } from "./hooks/useGetCurrentUserRole";
-import { getCurrentUserRole } from "@utils/getCurrentUserRole";
 import Cookies from "js-cookie";
 
 const WrappedComponentWithAuth = withAuth(RootLayout);
@@ -61,10 +55,8 @@ export const pathSystem = {
   eventCreate: "/event/create",
   users: "/users",
   staffs: "/staffs",
-  contracts: "/contracts",
   transactions: "/transactions",
   userDetail: "/user/:id",
-  partnerDetail: "/partner/:id",
   vouchers: "/vouchers",
   createVoucher: "/voucher/create",
   orders: "/orders",
@@ -129,10 +121,6 @@ const routesForAdmin = {
       element: <Transactions />,
     },
     {
-      path: pathSystem.contracts,
-      element: <Contracts />,
-    },
-    {
       path: pathSystem.cashRequest,
       element: <CashRequest />,
     },
@@ -147,10 +135,6 @@ const routesForAdmin = {
     {
       path: pathSystem.staffs,
       element: <Staffs />,
-    },
-    {
-      path: pathSystem.partnerDetail,
-      element: <PartnerDetail />,
     },
     {
       path: pathSystem.vouchers,
@@ -205,10 +189,6 @@ const routesForAdmin = {
       element: <CategoryDetail />,
     },
     {
-      path: '/todos',
-      element: <Todo />,
-    },
-    {
       path: pathSystem.rooms,
       element: <Rooms />,
     },
@@ -224,10 +204,6 @@ const routesForStaff = {
   path: pathSystem.base,
   children: [
     {
-      path: pathSystem.base,
-      element: <PartnerDashboard />,
-    },
-    {
       path: pathSystem.users,
       element: <UserPageWithVerifyAdmin />,
     },
@@ -240,16 +216,28 @@ const routesForStaff = {
       element: <CreatingProduct />,
     },
     {
+      path: pathSystem.events,
+      element: <Events />,
+    },
+    {
+      path: pathSystem.eventCreate,
+      element: <CreateEvents />
+    },
+    {
+      path: pathSystem.vouchers,
+      element: <Vouchers />,
+    },
+    {
+      path: pathSystem.createVoucher,
+      element: <CreateVoucher />,
+    },
+    {
       path: pathSystem.userDetail,
       element: <UserDetail />,
     },
     {
       path: pathSystem.staffs,
       element: <Staffs />,
-    },
-    {
-      path: pathSystem.partnerDetail,
-      element: <PartnerDetail />,
     },
     {
       path: pathSystem.warehouse,
@@ -264,9 +252,7 @@ const routesForStaff = {
 
 const getRoutesBasedOnRole = () => {
 
-// const role = getCurrentUserRole(+localStorage.getItem('token'));
-const role = getCurrentUserRole(+Cookies.get('token'));
-
+const role = Cookies.get('role');
 
   const routesForCharacter = {
     admin: routesForAdmin,

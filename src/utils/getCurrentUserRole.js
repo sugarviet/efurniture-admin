@@ -1,4 +1,7 @@
+import Cookies from "js-cookie";
+
 export function getCurrentUserRole(access_token){
+  console.log(access_token);
     const role = {
         "31,480": 'staff',
         "481,7680": 'admin',
@@ -20,7 +23,7 @@ export function getCurrentUserRole(access_token){
 }
 
 export function isAdmin(){
-  const admin = "admin" === getCurrentUserRole(+localStorage.getItem("token"));
+  const admin = "admin" === getCurrentUserRole(+Cookies.get('token'));
 
   return admin
 }

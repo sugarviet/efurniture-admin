@@ -15,7 +15,7 @@ export const useFetch = (url, params) => {
 };
 
 
-const useGenericMutation = (func, url, params, onSuccessAPI, onErrorAPI) => {
+const useGenericMutation = (func, key, params, onSuccessAPI, onErrorAPI) => {
   const queryClient = useQueryClient();
   return useMutation(func, {
     onSuccess: (data) => {
@@ -25,15 +25,15 @@ const useGenericMutation = (func, url, params, onSuccessAPI, onErrorAPI) => {
       onErrorAPI(error);
     },
     onSettled: () => {
-      queryClient.invalidateQueries([url, params]);
+      queryClient.invalidateQueries([key, params]);
     },
   });
 };
 
-export const useDelete = (url, params, onSuccessAPI, onErrorAPI) => {
+export const useDelete = (url, params, onSuccessAPI, onErrorAPI, key) => {
   return useGenericMutation(
-    (id) => request.delete(`${url}/${id}`),
-    url,
+    (data) => request.delete(url, data),
+    key,
     params,
     onSuccessAPI,
     onErrorAPI
@@ -41,20 +41,20 @@ export const useDelete = (url, params, onSuccessAPI, onErrorAPI) => {
 };
 
 
-export const usePost = (url, params, onSuccessAPI, onErrorAPI) => {
+export const usePost = (url, params, onSuccessAPI, onErrorAPI, key) => {
   return useGenericMutation(
     (data) => request.post(url, data),
-    url,
+    key,
     params,
     onSuccessAPI,
     onErrorAPI
   );
 };
 
-export const useUpdate = (url, params, onSuccessAPI, onErrorAPI) => {
+export const useUpdate = (url, params, onSuccessAPI, onErrorAPI, key) => {
   return useGenericMutation(
     (data) => request.put(url, data),
-    url,
+    key,
     params,
     onSuccessAPI,
     onErrorAPI
