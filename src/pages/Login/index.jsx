@@ -6,6 +6,7 @@ import { jwtDecode } from "jwt-decode";
 import { getCurrentUserRole } from "@utils/getCurrentUserRole";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../stores/useAuth";
+import { refreshPage } from "../../utils/refreshPage";
 
 const { Meta } = Card;
 const init_route = {
@@ -28,6 +29,7 @@ const Login = () => {
 
       setTokens(access_token, refresh_token, decode.account_id ,role)
       navigate(init_route[role]);
+      refreshPage();
       alert('thanh cong')
     },
     () => {
