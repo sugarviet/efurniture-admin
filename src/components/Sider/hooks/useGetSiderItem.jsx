@@ -20,15 +20,15 @@ export function useGetSiderItem() {
 
   const itemsForAdmin = [
     getItem("Dashboard", "/", <DashboardOutlined />),
-    getItem("Products", "/products", <ShopOutlined />, [
+    getItem("Products", "/product", <ShopOutlined />, [
       getItem("List Product", "/products"),
       getItem("Create Product", "/product/create"),
     ]),
-    getItem("Events", "/events", <ScheduleOutlined />, [
+    getItem("Events", "/event", <ScheduleOutlined />, [
       getItem("List Events", "/events"),
       getItem("Create Events", "/event/create"),
     ]),
-    getItem("Vouchers", "/vouchers", <AlertOutlined />, [
+    getItem("Vouchers", "/voucher", <AlertOutlined />, [
       getItem("List Voucher", "/vouchers"),
       getItem("Create Voucher", "/voucher/create"),
     ]),
@@ -37,12 +37,12 @@ export function useGetSiderItem() {
       type: "divider",
     },
     getItem("Orders", "/orders", <TagsOutlined />),
-    getItem("Rooms", "/rooms", <TagsOutlined />, [
+    getItem("Rooms", "/room", <TagsOutlined />, [
       getItem("List rooms", "/rooms"),
       getItem("Create Rooms", "/room/create"),
     ]),
     getItem("Reports", "/reports", <TagsOutlined />),
-    getItem("Categories", "/categories", <TagsOutlined />, [
+    getItem("Categories", "/category", <TagsOutlined />, [
       getItem("List Category", "/categories"),
       getItem("Create Category", "/category/create"),
     ]),
@@ -54,15 +54,15 @@ export function useGetSiderItem() {
     ]),
   ];
   const itemsForStaff = [
-    getItem("Products", "/products", <ShopOutlined />, [
+    getItem("Products", "/product", <ShopOutlined />, [
       getItem("List Product", "/products"),
       getItem("Create Product", "/product/create"),
     ]),
-    getItem("Events", "/events", <ScheduleOutlined />, [
+    getItem("Events", "/event", <ScheduleOutlined />, [
       getItem("List Events", "/events"),
       getItem("Create Events", "/event/create"),
     ]),
-    getItem("Vouchers", "/vouchers", <AlertOutlined />, [
+    getItem("Vouchers", "/voucher", <AlertOutlined />, [
       getItem("List Voucher", "/vouchers"),
       getItem("Create Voucher", "/voucher/create"),
     ]),
@@ -71,12 +71,12 @@ export function useGetSiderItem() {
     {
       type: "divider",
     },
-    getItem("Rooms", "/rooms", <TagsOutlined />, [
+    getItem("Rooms", "/room", <TagsOutlined />, [
       getItem("List rooms", "/rooms"),
       getItem("Create Rooms", "/room/create"),
     ]),
-    getItem("Reports", "/reports", <TagsOutlined />),
-    getItem("Categories", "/categories", <TagsOutlined />, [
+    getItem("Reports", "/report", <TagsOutlined />),
+    getItem("Categories", "/category", <TagsOutlined />, [
       getItem("List Category", "/categories"),
       getItem("Create Category", "/category/create"),
     ]),
