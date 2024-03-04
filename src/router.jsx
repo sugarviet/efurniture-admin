@@ -1,8 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import {
   createBrowserRouter,
-  Route,
-  createRoutesFromElements,
 } from "react-router-dom";
 
 import { lazy } from "react";
@@ -42,6 +40,7 @@ const OrderDetail = lazy(() => import("./pages/OrderDetail"));
 import withAuth from "./hocs/withAuth";
 import Cookies from "js-cookie";
 
+import Login from "@pages/Login";
 const WrappedComponentWithAuth = withAuth(RootLayout);
 
 export const pathSystem = {
@@ -71,186 +70,167 @@ export const pathSystem = {
   rooms: '/rooms'
 };
 
-const routesForSuperAdmin = {
-  layout: <WrappedComponentWithAuth />,
-  path: pathSystem.base,
-  children: [
-    {
-      path: pathSystem.users,
-      element: <Users />,
-    },
-    {
-      path: pathSystem.userDetail,
-      element: <UserDetail />,
-    },
-    {
-      path: pathSystem.staffs,
-      element: <Staffs />,
-    },
-    {
-      path: "*",
-      element: <NotFound />,
-    },
-  ],
-};
+const adminMasterRoutes = [
+  {
+    path: pathSystem.users,
+    element: <Users />,
+  },
+  {
+    path: pathSystem.userDetail,
+    element: <UserDetail />,
+  },
+  {
+    path: pathSystem.staffs,
+    element: <Staffs />,
+  },
+];
 
-const routesForAdmin = {
-  layout: <WrappedComponentWithAuth />,
-  path: pathSystem.base,
-  children: [
-    {
-      path: pathSystem.base,
-      element: <Home />,
-    },
-    {
-      path: pathSystem.products,
-      element: <Products />,
-    },
-    {
-      path: pathSystem.createProduct,
-      element: <CreatingProduct />,
-    },
-    {
-      path: pathSystem.productDetail,
-      element: <ProductDetail />,
-    },
-    {
-      path: pathSystem.transactions,
-      element: <Transactions />,
-    },
-    {
-      path: pathSystem.cashRequest,
-      element: <CashRequest />,
-    },
-    {
-      path: pathSystem.staffs,
-      element: <Staffs />,
-    },
-    {
-      path: pathSystem.vouchers,
-      element: <Vouchers />,
-    },
-    {
-      path: pathSystem.createVoucher,
-      element: <CreateVoucher />,
-    },
-    {
-      path: pathSystem.catelogs,
-      element: <Catalogs />,
-    },
-    {
-      path: pathSystem.catelogDetail,
-      element: <CatalogDetail />,
-    },
-    {
-      path: pathSystem.catalogCreate,
-      element: <CreatingCatalog />,
-    },
-    {
-      path: pathSystem.events,
-      element: <Events />,
-    },
-    {
-      path: pathSystem.eventCreate,
-      element: <CreateEvents />
-    },
-    {
-      path: pathSystem.orders,
-      element: <Orders />,
-    },
-    {
-      path: pathSystem.orderDetail,
-      element: <OrderDetail />,
-    },
-    {
-      path: pathSystem.categories,
-      element: <Categories />,
-    },
-    {
-      path: pathSystem.reports,
-      element: <Reports />,
-    },
-    {
-      path: pathSystem.reportDetail,
-      element: <ReportDetail />,
-    },
-    {
-      path: pathSystem.categoryDetail,
-      element: <CategoryDetail />,
-    },
-    {
-      path: pathSystem.rooms,
-      element: <Rooms />,
-    },
-    {
-      path: "*",
-      element: <NotFound />,
-    },
-  ],
-};
+const adminRoutes = [
+  {
+    path: pathSystem.base,
+    element: <Home />,
+  },
+  {
+    path: pathSystem.products,
+    element: <Products />,
+  },
+  {
+    path: pathSystem.createProduct,
+    element: <CreatingProduct />,
+  },
+  {
+    path: pathSystem.productDetail,
+    element: <ProductDetail />,
+  },
+  {
+    path: pathSystem.transactions,
+    element: <Transactions />,
+  },
+  {
+    path: pathSystem.cashRequest,
+    element: <CashRequest />,
+  },
+  {
+    path: pathSystem.staffs,
+    element: <Staffs />,
+  },
+  {
+    path: pathSystem.vouchers,
+    element: <Vouchers />,
+  },
+  {
+    path: pathSystem.createVoucher,
+    element: <CreateVoucher />,
+  },
+  {
+    path: pathSystem.catelogs,
+    element: <Catalogs />,
+  },
+  {
+    path: pathSystem.catelogDetail,
+    element: <CatalogDetail />,
+  },
+  {
+    path: pathSystem.catalogCreate,
+    element: <CreatingCatalog />,
+  },
+  {
+    path: pathSystem.events,
+    element: <Events />,
+  },
+  {
+    path: pathSystem.eventCreate,
+    element: <CreateEvents />
+  },
+  {
+    path: pathSystem.orders,
+    element: <Orders />,
+  },
+  {
+    path: pathSystem.orderDetail,
+    element: <OrderDetail />,
+  },
+  {
+    path: pathSystem.categories,
+    element: <Categories />,
+  },
+  {
+    path: pathSystem.reports,
+    element: <Reports />,
+  },
+  {
+    path: pathSystem.reportDetail,
+    element: <ReportDetail />,
+  },
+  {
+    path: pathSystem.categoryDetail,
+    element: <CategoryDetail />,
+  },
+  {
+    path: pathSystem.rooms,
+    element: <Rooms />,
+  },
+];
 
-const routesForStaff = {
-  layout: <WrappedComponentWithAuth />,
-  path: pathSystem.base,
-  children: [
-    {
-      path: pathSystem.products,
-      element: <Products />,
-    },
-    {
-      path: pathSystem.createProduct,
-      element: <CreatingProduct />,
-    },
-    {
-      path: pathSystem.events,
-      element: <Events />,
-    },
-    {
-      path: pathSystem.eventCreate,
-      element: <CreateEvents />
-    },
-    {
-      path: pathSystem.vouchers,
-      element: <Vouchers />,
-    },
-    {
-      path: pathSystem.createVoucher,
-      element: <CreateVoucher />,
-    },
-    {
-      path: pathSystem.warehouse,
-      element: <Warehouse />,
-    },
-    {
-      path: "*",
-      element: <NotFound />,
-    },
-  ],
-};
+const staffRoutes = [
+  {
+    path: pathSystem.products,
+    element: <Products />,
+  },
+  {
+    path: pathSystem.createProduct,
+    element: <CreatingProduct />,
+  },
+  {
+    path: pathSystem.events,
+    element: <Events />,
+  },
+  {
+    path: pathSystem.eventCreate,
+    element: <CreateEvents />
+  },
+  {
+    path: pathSystem.vouchers,
+    element: <Vouchers />,
+  },
+  {
+    path: pathSystem.createVoucher,
+    element: <CreateVoucher />,
+  },
+  {
+    path: pathSystem.warehouse,
+    element: <Warehouse />,
+  },
+];
 
 const getRoutesBasedOnRole = () => {
-
-const role = Cookies.get('role') || 'admin';
-
-  const routesForCharacter = {
-    admin: routesForAdmin,
-    staff: routesForStaff,
-    superAdmin: routesForSuperAdmin,
+  
+  const role = Cookies.get('role');
+  
+    const routesForCharacter = {
+      admin: adminRoutes,
+      staff: staffRoutes,
+      superAdmin: adminMasterRoutes
+    };
+  
+    return routesForCharacter[role] || [];
   };
 
-  return routesForCharacter[role];
-};
-
-const selectedRoutes = getRoutesBasedOnRole();
-
-export const router = createBrowserRouter(
-  createRoutesFromElements(
-    <>
-      <Route path={selectedRoutes?.path} element={selectedRoutes.layout}>
-        {selectedRoutes.children.map((item) => (
-          <Route key={item.path} path={item.path} element={item.element} />
-        ))}
-      </Route>
-    </>
-  )
-);
+export const router = createBrowserRouter([
+  {
+    path: pathSystem.base,
+    element: <WrappedComponentWithAuth />,
+    children: [
+      ...getRoutesBasedOnRole(),
+      {
+        path: "*",
+        element: <NotFound />,
+      },
+    ],
+  },
+  {
+      path: '/login',
+      element: <Login />,
+      
+    },
+]);

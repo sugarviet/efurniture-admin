@@ -26,7 +26,6 @@ const cookies = () => ({
 
 export const request = axios.create({
     baseURL: BASE_URL,
-    // withCredentials: true,
   });
 
   request.interceptors.request.use(

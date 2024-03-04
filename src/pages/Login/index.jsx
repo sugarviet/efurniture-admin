@@ -31,6 +31,7 @@ const Login = () => {
       navigate(init_route[role]);
       refreshPage();
       alert('thanh cong')
+      refreshPage();
     },
     () => {
       console.log("sd");
