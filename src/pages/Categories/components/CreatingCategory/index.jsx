@@ -6,15 +6,20 @@ const CreatingCategory = () => {
   const onFinish = (values) => {
     console.log(values);
   };
-  return <div>
-    <Form form={form} layout="vertical" onFinish={onFinish}>
-        <Form.Item
-          name="name"
-          label="Category Name"
-          rules={[{ required: true, message: "Please enter the Category name!" }]}
-        >
-          <Input placeholder="Category name"/>
-        </Form.Item>
+  return (
+    <div>
+      <Form form={form} layout="vertical" onFinish={onFinish}>
+      
+          <Form.Item
+            name="name"
+            label="Category Name"
+            rules={[
+              { required: true, message: "Please enter the Category name!" },
+            ]}
+          >
+            <Input placeholder="Category name" />
+          </Form.Item>
+       
         <Form.Item
           name="products"
           label="Products"
@@ -40,7 +45,8 @@ const CreatingCategory = () => {
           </Button>
         </Form.Item>
       </Form>
-  </div>;
+    </div>
+  );
 };
 
 export default CreatingCategory;

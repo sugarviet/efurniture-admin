@@ -1,4 +1,18 @@
 {
+  "todos": [
+    {
+      "id": "1",
+      "text": "Viet"
+    },
+    {
+      "id": "ee7e",
+      "text": "asddsa"
+    },
+    {
+      "id": "203b",
+      "text": "test"
+    }
+  ],
   "users": [
     {
       "id": 1,

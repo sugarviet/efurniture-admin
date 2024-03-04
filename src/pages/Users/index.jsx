@@ -4,22 +4,24 @@ import { useState, lazy } from "react";
 import AppModal from "@components/AppModal";
 import AppSuspense from "@components/AppSuspense";
 
-import { useUser } from "./hooks/useUser";
-import Loading from "@components/Loading";
 import { Link } from "react-router-dom";
 import ExcelButton from "@components/ExcelButton";
 import PageTitle from "@components/PageTitle";
+import { getCurrentUserRole } from "@utils/getCurrentUserRole";
 
 import { pathSystem } from "../../router";
 import urlcat from "urlcat";
+
+import { withFetchData } from "@hocs/withFetchData";
+import { get_all_user } from "../../api/userApi";
+import Proptypes from "prop-types";
 
 const AccountCreateForm = lazy(() => import("./components/AccountCreateForm"));
 const AccountUpdateForm = lazy(() => import("./components/AccountUpdateForm"));
 
 
-const Users = () => {
-  const { userData, isLoading } = useUser();
- 
+const Users = ({data}) => {
+
   const { getColumnSearchProps } = useSearchTableColumn();
   const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
   const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
@@ -50,32 +52,41 @@ const Users = () => {
 
   const columns = [
     {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
+      title: "Username",
+      dataIndex: "username",
+      key: "username",
       width: "30%",
-      ...getSorter("name"),
-      ...getColumnSearchProps("name"),
+      ...getSorter("username"),
+      ...getColumnSearchProps("username"),
       render: (text, record) => (
         <Link to={urlcat(pathSystem.userDetail, {
-          id: record.id
+          id: record._id
         })} className="link">{text}</Link>
       ),
     },
     {
-      title: "Age",
-      dataIndex: "age",
-      key: "age",
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
       width: "20%",
       ...getColumnSearchProps("age"),
     },
+    // {
+    //   title: "Address",
+    //   dataIndex: "address",
+    //   key: "address",
+    //   ...getColumnSearchProps("address"),
+    //   sorter: (a, b) => a.address.length - b.address.length,
+    //   sortDirections: ["descend", "ascend"],
+    // },
     {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
-      ...getColumnSearchProps("address"),
-      sorter: (a, b) => a.address.length - b.address.length,
-      sortDirections: ["descend", "ascend"],
+      title: "Role",
+      dataIndex: "role",
+      key: "role",
+      width: "20%",
+      render:(text) => (
+        <p>{getCurrentUserRole(text)}</p>
+      )
     },
     {
       title: "Actions",
@@ -97,9 +108,6 @@ const Users = () => {
     },
   ];
 
-  if (isLoading) {
-    return <Loading />;
-  }
 
   return (
     <div>
@@ -108,9 +116,9 @@ const Users = () => {
         <Button className="primary" type="primary" onClick={handleToggleModalCreateUser}>Create new account</Button>
       </div>
       <div className="float-right">
-        <ExcelButton data={userData} />
+        <ExcelButton data={[]} />
       </div>
-      <Table columns={columns} dataSource={userData} />
+      <Table rowKey="_id" columns={columns} dataSource={data} />
 
       {/* Modals */}
       <AppModal isOpen={isModalCreateOpen} setIsOpen={setIsModalCreateOpen}>
@@ -127,4 +135,9 @@ const Users = () => {
     </div>
   );
 };
-export default Users;
+
+Users.propTypes = {
+  data: Proptypes.object,
+};
+
+export default withFetchData(Users,get_all_user);

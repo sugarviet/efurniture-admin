@@ -2,9 +2,9 @@ import { request } from "@utils/request";
 import urlcat from "urlcat";
 
 export const getAllUser = async () => {
-  const res = await request.get("/users");
+  const res = await request.get("/account/adminMaster?page=1&limit=12");
 
-  return res.data;
+  return res.data.metaData;
 };
 
 export const getUserDetail = async (id) => {

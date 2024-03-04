@@ -1,14 +1,13 @@
 /* eslint-disable react/display-name */
-import { useState } from "react";
 import Login from "@pages/Login";
+import useAuth from "@stores/useAuth";
 
 const withAuth = (WrappedComponent) => {
   return () => {
-    const [loggedIn] = useState(!!localStorage.getItem('token'));
+    const { accessToken } = useAuth();
 
-    if (!loggedIn) return <Login />;
 
-    return <WrappedComponent />;
+    return accessToken ? <WrappedComponent /> : <Login />;
   };
 };
 

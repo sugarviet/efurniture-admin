@@ -2,18 +2,30 @@ import { Form, Button, Card, Divider, Tabs } from "antd";
 import FormUploadButton from "@components/FormUploadButton";
 import FormList from "@components/FormList";
 import FormInput from "../../components/FormInput";
+import FormInputNumber from "../../components/FormInputNumber";
+
 import FormTextArea from "../../components/FormTextArea";
 import FormSelect from "../../components/FormSelect";
+import { isAdmin } from "../../utils/getCurrentUserRole";
 
 const { TabPane } = Tabs;
 
 const CreatingProduct = () => {
   const [form] = Form.useForm();
+  
+  const admin = isAdmin();
+
+  console.log(admin);
+
   const onFinish = (values) => {
     console.log("Success:", values);
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
+  };
+
+  const handleDiscard = () => {
+    form.resetFields();
   };
   return (
     <main className="px-4">
@@ -23,9 +35,7 @@ const CreatingProduct = () => {
         initialValues={{
           label: "Viet Dang",
           description: "Viet Dang",
-          variants: [
-            { size: "lucy", color: "lucy" },
-          ],
+          variants: [{ size: "lucy", color: "lucy" }],
           regularPrice: 100,
         }}
         onFinish={onFinish}
@@ -38,11 +48,13 @@ const CreatingProduct = () => {
             <p className="text-gray-500">Orders placed across your store</p>
           </div>
           <div className="flex gap-2">
-            <Button>Discard</Button>
-            <Button>Save draft</Button>
-            <Button type="primary" className="primary" htmlType="submit">
-              Publish
-            </Button>
+            <Button onClick={handleDiscard}>Discard</Button>
+            <Button htmlType="submit">Save draft</Button>
+            {admin ? (
+              <Button type="primary" className="primary" htmlType="submit">
+                Publish
+              </Button>
+            ) : null}
           </div>
         </section>
 
@@ -54,6 +66,20 @@ const CreatingProduct = () => {
               name="label"
               placeholder="Write title here..."
             />
+            <div className="flex gap-5">
+              <FormInputNumber
+                label="Width"
+                name="width"
+                className="w-full"
+                placeholder="Input width"
+              />
+              <FormInputNumber
+                label="Height"
+                name="height"
+                className="w-full"
+                placeholder="Input height"
+              />
+            </div>
             <FormTextArea
               label="Product Description"
               name="description"
@@ -80,13 +106,12 @@ const CreatingProduct = () => {
                 </div>
               </TabPane>
               <TabPane tab="Restock" key="restock">
-                
                 <FormInput
-                    label="Add to stock"
-                    name="quantity"
-                    placeholder="Quantity"
-                    inputType="number"
-                  />
+                  label="Add to stock"
+                  name="quantity"
+                  placeholder="Quantity"
+                  inputType="number"
+                />
 
                 <div className="w-64 mt-11">
                   <div className="flex justify-between">
@@ -109,8 +134,51 @@ const CreatingProduct = () => {
               </TabPane>
               <TabPane tab="Attributes" key="attributes">
                 <p>Attributes</p>
+                <FormSelect
+                  label="Type"
+                  // name="category"
+                  name={["attributes", "type"]}
+                  defaultValue="lucy"
+                  options={[
+                    {
+                      value: "jack",
+                      label: "Jack",
+                    },
+                    {
+                      value: "lucy",
+                      label: "Lucy",
+                    },
+                    {
+                      value: "Yiminghe",
+                      label: "yiminghe",
+                    },
+                  ]}
+                />
+                <FormInput
+                  label="height"
+                  name={["attributes", "attributeType", "height"]}
+                />
+                <FormInput
+                  label="width"
+                  name={["attributes", "attributeType", "width"]}
+                />
               </TabPane>
             </Tabs>
+
+            <div className="mt-8">
+              <p className="text-3xl font-bold mb-2">Create 3D model</p>
+              <FormInput
+                label="3D model's id"
+                name="model3D"
+                placeholder="Write title here..."
+              />
+              <iframe
+                src="https://admin.roomle.com/login"
+                title="W3Schools Free Online Web Tutorials"
+                height={600}
+                width={900}
+              ></iframe>
+            </div>
           </div>
 
           {/* Right */}
@@ -177,21 +245,21 @@ const CreatingProduct = () => {
                 ]}
               />
               <FormSelect
-                label="Collection"
-                name="collection"
-                defaultValue="lucy"
+                label="Rooms"
+                name="room"
+                defaultValue="living room"
                 options={[
                   {
-                    value: "jack",
-                    label: "Jack",
+                    value: "living room",
+                    label: "Living Room",
                   },
                   {
-                    value: "lucy",
-                    label: "Lucy",
+                    value: "kitchen",
+                    label: "Kitchen",
                   },
                   {
-                    value: "Yiminghe",
-                    label: "yiminghe",
+                    value: "bedroom",
+                    label: "Bedroom",
                   },
                 ]}
               />
@@ -234,11 +302,11 @@ const CreatingProduct = () => {
                       </p>
                     </div>
                     <FormSelect
-                     name={[name, "size"]}
-                     className="w-full"
-                     label="Collection"
-                     defaultValue="lucy"
-                     {...restField}
+                      name={[name, "material"]}
+                      className="w-full"
+                      label="Material"
+                      defaultValue="lucy"
+                      {...restField}
                       options={[
                         {
                           value: "jack",
@@ -253,6 +321,12 @@ const CreatingProduct = () => {
                           label: "yiminghe",
                         },
                       ]}
+                    />
+                    <FormInputNumber
+                      label="Sub price"
+                      name={[name, "subPrice"]}
+                      className="w-full"
+                      placeholder="$$$"
                     />
 
                     <Divider dashed />

@@ -1,5 +1,5 @@
 import Proptypes from "prop-types";
-import HorizontalList from "@components/HorizontalList";
+import HorizontalList from "@components/layouts/HorizontalList";
 import ProductCard from "@components/ProductCard";
 
 const data = [

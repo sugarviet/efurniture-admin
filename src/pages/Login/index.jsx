@@ -1,15 +1,43 @@
 import { Form, Input, Button, Card, Divider } from "antd";
 import styles from "./Login.module.css";
-import { useLogin } from "./hooks/useLogin";
+import { usePost } from "../../hooks/api-hooks";
+import { get_login } from "../../api/authApi";
+import { jwtDecode } from "jwt-decode";
+import { getCurrentUserRole } from "@utils/getCurrentUserRole";
+import { useNavigate } from "react-router-dom";
+import useAuth from "../../stores/useAuth";
 
 const { Meta } = Card;
+const init_route = {
+  superAdmin: "/users",
+  admin: "/",
+  staff: "/products",
+};
 
 const Login = () => {
-  const {handleLogin} = useLogin();
-  
-    const onFinish = (values) => {
-      handleLogin(values)
-      };
+  const {setTokens} = useAuth();
+  const navigate = useNavigate();
+  const { mutate } = usePost(
+    get_login(),
+    undefined,
+    (data) => {
+
+      const {access_token, refresh_token} = data.data.metaData;
+      const decode = jwtDecode(data.data.metaData.access_token);
+      const role = getCurrentUserRole(decode.role);
+
+      setTokens(access_token, refresh_token, decode.account_id ,role)
+      navigate(init_route[role]);
+      alert('thanh cong')
+    },
+    () => {
+      console.log("sd");
+    }
+  );
+
+  const onFinish = (values) => {
+    mutate(values);
+  };
 
   return (
     <div className={styles.container}>
@@ -45,7 +73,7 @@ const Login = () => {
         </Form>
       </Card>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
