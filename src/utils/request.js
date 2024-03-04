@@ -1,5 +1,6 @@
 import axios from "axios";
 import Cookies from 'js-cookie';
+import { ACCESS_TOKEN, ACCOUNT_ID, REFRESH_TOKEN } from "../constants/token";
 
 const API_URL_DEVELOPMENT = "http://34.126.181.161:4646/api/v1";
 const API_URL_PRODUCTION = "http://localhost:3000";
@@ -7,24 +8,21 @@ console.log(API_URL_PRODUCTION);
 
 const BASE_URL = API_URL_DEVELOPMENT;
 
-const accessToken = Cookies.get("access_token");
-const refreshToken = Cookies.get("refresh_token");
-const accountId = Cookies.get("account_id");
 
-const cookies = {
+const cookies = () => ({
   accessToken: {
     key: "x-client-accesstoken",
-    value: accessToken
+    value: Cookies.get(ACCESS_TOKEN)
   },
   refreshToken: {
     key: "x-client-refreshtoken",
-    value: refreshToken
+    value: Cookies.get(REFRESH_TOKEN)
   },
   accountId: {
     key: "x-client-id",
-    value: accountId
+    value: Cookies.get(ACCOUNT_ID)
   },
-}
+})
 
 export const request = axios.create({
     baseURL: BASE_URL,
@@ -33,9 +31,9 @@ export const request = axios.create({
 
   request.interceptors.request.use(
     (config) => {
-      config.headers[cookies['accessToken'].key] = cookies['accessToken'].value;
-      config.headers[cookies['refreshToken'].key] = cookies['refreshToken'].value;
-      config.headers[cookies['accountId'].key] = cookies['accountId'].value;
+      config.headers[cookies()['accessToken'].key] = cookies()['accessToken'].value;
+      config.headers[cookies()['refreshToken'].key] = cookies()['refreshToken'].value;
+      config.headers[cookies()['accountId'].key] = cookies()['accountId'].value;
 
       return config;
     },

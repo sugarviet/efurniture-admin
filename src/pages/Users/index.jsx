@@ -71,14 +71,6 @@ const Users = ({data}) => {
       width: "20%",
       ...getColumnSearchProps("age"),
     },
-    // {
-    //   title: "Address",
-    //   dataIndex: "address",
-    //   key: "address",
-    //   ...getColumnSearchProps("address"),
-    //   sorter: (a, b) => a.address.length - b.address.length,
-    //   sortDirections: ["descend", "ascend"],
-    // },
     {
       title: "Role",
       dataIndex: "role",
@@ -137,7 +129,7 @@ const Users = ({data}) => {
 };
 
 Users.propTypes = {
-  data: Proptypes.object,
+  data: Proptypes.array,
 };
 
 export default withFetchData(Users,get_all_user);

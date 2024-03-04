@@ -1,7 +1,14 @@
 import { Avatar, Dropdown } from "antd";
-import { logout } from "@utils/logout";
+import useAuth from "../../stores/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+const {clearTokens} = useAuth();
+const navigate = useNavigate();
+  const handleLogout = () => {
+    clearTokens();
+    navigate('/')
+  }
   const items = [
     {
       label: <a href="#">Home</a>,
@@ -19,7 +26,7 @@ const Navbar = () => {
       type: "divider",
     },
     {
-      label: <p onClick={logout}>Logout</p>,
+      label: <p onClick={handleLogout}>Logout</p>,
       key: "4",
     },
   ];
