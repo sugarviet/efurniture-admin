@@ -231,7 +231,6 @@ const routesForStaff = {
 const getRoutesBasedOnRole = () => {
 
 const role = Cookies.get('role') || 'admin';
-console.log(role)
 
   const routesForCharacter = {
     admin: routesForAdmin,
