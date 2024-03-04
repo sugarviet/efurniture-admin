@@ -1,7 +1,6 @@
 import Cookies from "js-cookie";
 
 export function getCurrentUserRole(access_token){
-  console.log(access_token);
     const role = {
         "31,480": 'staff',
         "481,7680": 'admin',

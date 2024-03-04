@@ -29,6 +29,7 @@ const Login = () => {
 
       setTokens(access_token, refresh_token, decode.account_id ,role)
       navigate(init_route[role]);
+      refreshPage();
       alert('thanh cong')
       refreshPage();
     },
