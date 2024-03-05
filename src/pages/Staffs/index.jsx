@@ -1,26 +1,23 @@
 import { useState } from "react";
 import { Button, Table, Tag } from "antd";
 import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
-import Loading from "@components/Loading";
 import AppModal from "@components/AppModal";
-import usePartners from "./hooks/usePartners";
 import ExcelButton from "@components/ExcelButton";
 import CreatingStaffForm from "./components/CreatingStaffForm";
 import EdittingStaffForm from "./components/EdittingStaffForm";
 
-const Staffs = () => {
+import { withFetchData } from "@hocs/withFetchData";
+import { get_all_user } from "../../api/userApi";
+import Proptypes from "prop-types";
+
+const Staffs = ({data}) => {
   const [openCreateStaffModal, setOpenCreateStaffModal] = useState(false);
   const [openEditStaffModal, setOpenEditStaffModal] = useState(false);
-  const { partnerData, isLoading } = usePartners();
   const { getColumnSearchProps } = useSearchTableColumn();
 
   const handleOpenCreateStaffModal = () => {
     setOpenCreateStaffModal(!openCreateStaffModal);
   };
-
-  if (isLoading) {
-    return <Loading />;
-  }
 
   const columns = [
     {
@@ -74,12 +71,12 @@ const Staffs = () => {
       </div>
 
       <div className="float-right">
-        <ExcelButton data={partnerData} />
+        <ExcelButton data={data} />
       </div>
 
       <Table
         columns={columns}
-        dataSource={partnerData}
+        dataSource={data}
         pagination={{
           pageSize: 10,
           hideOnSinglePage: true,
@@ -99,4 +96,8 @@ const Staffs = () => {
     </main>
   );
 };
-export default Staffs;
+Staffs.propTypes = {
+  data: Proptypes.array,
+};
+
+export default withFetchData(Staffs,get_all_user);

@@ -52,6 +52,8 @@ export function useGetSiderItem() {
       getItem("User", "/users"),
       getItem("Staffs", "/staffs"),
     ]),
+    getItem("Roles", "/roles", <TagsOutlined />),
+
   ];
   const itemsForStaff = [
     getItem("Products", "/product", <ShopOutlined />, [

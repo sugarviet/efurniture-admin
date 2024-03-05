@@ -16,26 +16,27 @@ import { withFetchData } from "@hocs/withFetchData";
 import { get_all_user } from "../../api/userApi";
 import Proptypes from "prop-types";
 
+import useParamQuery from "../../hooks/useParamQuery";
+
 const AccountCreateForm = lazy(() => import("./components/AccountCreateForm"));
 const AccountUpdateForm = lazy(() => import("./components/AccountUpdateForm"));
 
-
-const Users = ({data}) => {
-
+const Users = ({ data }) => {
+  console.log(data);
   const { getColumnSearchProps } = useSearchTableColumn();
   const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
   const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
+  const { params, handleSetParams } = useParamQuery();
 
   const handleToggleModalCreateUser = () => {
     setIsModalCreateOpen(!isModalCreateOpen);
   };
 
   const handleToggleModalEditUser = (id) => {
-    setSelectedUserId(id)
+    setSelectedUserId(id);
     setIsModalUpdateOpen(!isModalUpdateOpen);
   };
-
 
   const getSorter = (dataIndex, customSorter) => {
     return {
@@ -59,9 +60,14 @@ const Users = ({data}) => {
       ...getSorter("username"),
       ...getColumnSearchProps("username"),
       render: (text, record) => (
-        <Link to={urlcat(pathSystem.userDetail, {
-          id: record._id
-        })} className="link">{text}</Link>
+        <Link
+          to={urlcat(pathSystem.userDetail, {
+            id: record._id,
+          })}
+          className="link"
+        >
+          {text}
+        </Link>
       ),
     },
     {
@@ -76,9 +82,7 @@ const Users = ({data}) => {
       dataIndex: "role",
       key: "role",
       width: "20%",
-      render:(text) => (
-        <p>{getCurrentUserRole(text)}</p>
-      )
+      render: (text) => <p>{getCurrentUserRole(text)}</p>,
     },
     {
       title: "Actions",
@@ -86,8 +90,9 @@ const Users = ({data}) => {
       width: "20%",
       render: (text, record) => (
         <Space>
-         
-          <Button onClick={() => handleToggleModalEditUser(record.id)}>Edit</Button>
+          <Button onClick={() => handleToggleModalEditUser(record.id)}>
+            Edit
+          </Button>
           <Button
             danger
             type="primary"
@@ -100,17 +105,36 @@ const Users = ({data}) => {
     },
   ];
 
+  const handleTableChange = (pagination) => {
+    console.log(pagination);
+    handleSetParams({
+      page: pagination.current,
+      limit: pagination.pageSize,
+    });
+  };
 
   return (
     <div>
       <div className="flex justify-between px-3 pt-2 pb-4 items-center">
-        <PageTitle title="User management"/>
-        <Button className="primary" type="primary" onClick={handleToggleModalCreateUser}>Create new account</Button>
+        <PageTitle title="User management" />
+        <Button
+          className="primary"
+          type="primary"
+          onClick={handleToggleModalCreateUser}
+        >
+          Create new account
+        </Button>
       </div>
       <div className="float-right">
         <ExcelButton data={[]} />
       </div>
-      <Table rowKey="_id" columns={columns} dataSource={data} />
+      <Table
+        rowKey="_id"
+        columns={columns}
+        dataSource={data}
+        onChange={handleTableChange}
+        pagination={{ current: params.get("page"), pageSize: 10 ,total: 25  }}
+      />
 
       {/* Modals */}
       <AppModal isOpen={isModalCreateOpen} setIsOpen={setIsModalCreateOpen}>
@@ -121,7 +145,7 @@ const Users = ({data}) => {
 
       <AppModal isOpen={isModalUpdateOpen} setIsOpen={setIsModalUpdateOpen}>
         <AppSuspense>
-          <AccountUpdateForm id={selectedUserId}/>
+          <AccountUpdateForm id={selectedUserId} />
         </AppSuspense>
       </AppModal>
     </div>
@@ -132,4 +156,4 @@ Users.propTypes = {
   data: Proptypes.array,
 };
 
-export default withFetchData(Users,get_all_user);
+export default withFetchData(Users, get_all_user);

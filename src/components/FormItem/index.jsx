@@ -32,6 +32,11 @@ const FORM_TYPES = {
       validateConfirmPassword,
     ],
   },
+  email: {
+    rules: [
+      {type: 'email', required: true, message: "Please enter a valid email" },
+    ]
+  },
   default: {
     rules: [{ required: false, message: "" }],
   },
