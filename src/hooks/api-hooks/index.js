@@ -30,9 +30,9 @@ const useGenericMutation = (func, key, params, onSuccessAPI, onErrorAPI) => {
   });
 };
 
-export const useDelete = (url, params, onSuccessAPI, onErrorAPI, key) => {
+export const useDelete = (params, onSuccessAPI, onErrorAPI, key) => {
   return useGenericMutation(
-    (data) => request.delete(url, data),
+    (url, data) => request.delete(url, data),
     key,
     params,
     onSuccessAPI,

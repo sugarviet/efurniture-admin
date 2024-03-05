@@ -1,76 +1,58 @@
 import { Button, Form } from "antd";
 import FormInput from "@components/FormInput";
-import FormSelect from "@components/FormSelect";
+import FormSelectRole from "@components/FormSelectRole";
+import { useUpdate } from "../../../hooks/api-hooks";
+import { create_user, get_all_system_account, update_account } from "../../../api/userApi";
+import PropTypes from "prop-types";
 
-const EdittingStaffForm = () => {
+const EdittingStaffForm = ({data}) => {
+  console.log(data);
+  const selectOptions = data.role.map((item) => ({
+    label: `${item.role} ${item.action}`,
+    value: item._id,
+  }));
+  const [form] = Form.useForm();
+  const { mutate } = useUpdate(
+    update_account(data._id),
+    undefined,
+    () => {
+      alert("thanh cong");
+    },
+    () => {},
+    get_all_system_account()
+  );
   const onFinish = (values) => {
-    console.log(values);
+    // const dataForm = {
+    //   ...values,
+    //   status: 1,
+    // };
+    console.log(values.role);
+    
+    mutate(values.role);
   };
   return (
     <div>
-      <Form layout="vertical" onFinish={onFinish}>
-        <FormInput
-          label="Usename"
-          name="username"
-          placeholder="Enter the username of the staff"
-          className="h-10"
-        />
-        <FormInput
-          label="Password"
-          name="password"
-          placeholder="Enter the password of the staff"
-          className="h-10"
-        />
-        <FormSelect
-          name={"roleTitle"}
-          className="w-full"
-          label="Role Title"
-          defaultValue="staff"
-          placeholder="Staff"
-          value="staff"
-          mode="multiple"
-          allowClear
-          options={[
-            {
-              value: "admin",
-              label: "Admin",
-            },
-            {
-              value: "staff",
-              label: "Staff",
-            },
-          ]}
-        />
-        <FormSelect
-          name={"size"}
-          className="w-full"
-          label="Collection"
-          defaultValue="lucy"
-          value="lucy"
-          mode="multiple"
-          allowClear
-          options={[
-            {
-              value: "jack",
-              label: "Jack",
-            },
-            {
-              value: "lucy",
-              label: "Lucy",
-            },
-            {
-              value: "Yiminghe",
-              label: "yiminghe",
-            },
-          ]}
-        />
+      <Form form={form} layout="vertical" onFinish={onFinish} initialValues={{ ...data, role: selectOptions }}>
+        <div className="grid grid-cols-2 gap-4">
+          <FormInput name="first_name" label="First name" />
+          <FormInput name="last_name" label="Last name" />
+        </div>
+        <FormInput name="username" label="Username" />
 
-        <Button type="primary" className="flex justify-center mx-auto">
+
+        <FormInput name="email" label="Email" type="email" />
+        <FormSelectRole />
+
+        <Button type="primary" className="primary" htmlType="submit">
           Submit
         </Button>
       </Form>
     </div>
   );
+};
+
+EdittingStaffForm.propTypes = {
+  data: PropTypes.object,
 };
 
 export default EdittingStaffForm;

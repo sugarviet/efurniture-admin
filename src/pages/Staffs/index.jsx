@@ -7,11 +7,19 @@ import CreatingStaffForm from "./components/CreatingStaffForm";
 import EdittingStaffForm from "./components/EdittingStaffForm";
 
 import { withFetchData } from "@hocs/withFetchData";
-import { get_all_user } from "../../api/userApi";
+import {
+  disable_account,
+  enable_account,
+  get_all_system_account,
+} from "../../api/userApi";
 import Proptypes from "prop-types";
+import useParamQuery from "../../hooks/useParamQuery";
+import { useDelete } from "@hooks/api-hooks";
 
-const Staffs = ({data}) => {
+const Staffs = ({ data }) => {
+  const { params, handleSetParams } = useParamQuery();
   const [openCreateStaffModal, setOpenCreateStaffModal] = useState(false);
+  const [selectedUser, setSelecteUser] = useState(null);
   const [openEditStaffModal, setOpenEditStaffModal] = useState(false);
   const { getColumnSearchProps } = useSearchTableColumn();
 
@@ -19,28 +27,69 @@ const Staffs = ({data}) => {
     setOpenCreateStaffModal(!openCreateStaffModal);
   };
 
+  const handleOpenEditStaffModal = (record) => {
+    setSelecteUser(record)
+    setOpenEditStaffModal(!openEditStaffModal);
+  };
+
+  const { mutate: enableAccount } = useDelete(
+    undefined,
+    () => {
+      alert("thanh cong");
+    },
+    () => {
+      alert("fail");
+    },
+    get_all_system_account()
+  );
+
+  const { mutate: disableAccount } = useDelete(
+    undefined,
+    () => {
+      alert("thanh cong");
+    },
+    () => {
+      alert("fail");
+    },
+    get_all_system_account()
+  );
+
+  const handleEnableAccount = (id) => {
+    enableAccount(enable_account(id), {});
+  };
+
+  const handleDisableAccount = (id) => {
+    disableAccount(disable_account(id), {});
+  };
+
   const columns = [
     {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
+      title: "Username",
+      dataIndex: "username",
+      key: "username",
       width: "30%",
-      ...getColumnSearchProps("name"),
+      ...getColumnSearchProps("username"),
     },
     {
-      title: "Age",
-      dataIndex: "age",
-      key: "age",
+      title: "First Name",
+      dataIndex: "first_name",
+      key: "first_name",
       width: "20%",
-      ...getColumnSearchProps("age"),
+      ...getColumnSearchProps("first_name"),
     },
     {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
-      ...getColumnSearchProps("address"),
-      sorter: (a, b) => a.address.length - b.address.length,
-      sortDirections: ["descend", "ascend"],
+      title: "Last Name",
+      dataIndex: "last_name",
+      key: "last_name",
+      width: "20%",
+      ...getColumnSearchProps("first_name"),
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
+      width: "20%",
+      ...getColumnSearchProps("email"),
     },
     {
       title: "Status",
@@ -52,14 +101,29 @@ const Staffs = ({data}) => {
       title: "Actions",
       key: "actions",
       width: "20%",
-      render: () => (
+      render: (text, record) => (
         <div className="flex gap-2">
-          <Button>Edit</Button>
-          <Button danger>Disable</Button>
+          <Button onClick={() => handleOpenEditStaffModal(record)}>Edit</Button>
+          {record.status === 1 ? (
+            <Button danger onClick={() => handleDisableAccount(record._id)}>
+              Disable
+            </Button>
+          ) : (
+            <Button onClick={() => handleEnableAccount(record._id)}>
+              Enable
+            </Button>
+          )}
         </div>
       ),
     },
   ];
+
+  const handleTableChange = (pagination) => {
+    handleSetParams({
+      page: pagination.current,
+      limit: pagination.pageSize,
+    });
+  };
 
   return (
     <main>
@@ -71,14 +135,18 @@ const Staffs = ({data}) => {
       </div>
 
       <div className="float-right">
-        <ExcelButton data={data} />
+        <ExcelButton data={[]} />
       </div>
 
       <Table
+        rowKey="_id"
         columns={columns}
-        dataSource={data}
+        dataSource={data.data}
+        onChange={handleTableChange}
         pagination={{
+          current: params.get("page") || 1,
           pageSize: 10,
+          total: data.size,
           hideOnSinglePage: true,
         }}
       />
@@ -91,13 +159,13 @@ const Staffs = ({data}) => {
       </AppModal>
 
       <AppModal isOpen={openEditStaffModal} setIsOpen={setOpenEditStaffModal}>
-        <EdittingStaffForm />
+        <EdittingStaffForm data={selectedUser}/>
       </AppModal>
     </main>
   );
 };
 Staffs.propTypes = {
-  data: Proptypes.array,
+  data: Proptypes.object,
 };
 
-export default withFetchData(Staffs,get_all_user);
+export default withFetchData(Staffs, get_all_system_account);

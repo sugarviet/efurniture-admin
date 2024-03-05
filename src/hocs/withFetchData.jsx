@@ -13,6 +13,7 @@ const handleGetAllSearchParams = (searchParams) => {
     return search;
 }
 
+
 export const withFetchData = (WrappedComponent, getApi) => {
   return (props) => {
     const { slug } = props;
@@ -20,7 +21,6 @@ export const withFetchData = (WrappedComponent, getApi) => {
     const {params: searchParams} = useParamQuery();
 
     const search = handleGetAllSearchParams(searchParams);
-
     const { data, isLoading } = useFetch(getApi({search, slug ,params}));
 
     if (isLoading) return;

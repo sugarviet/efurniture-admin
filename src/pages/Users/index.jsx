@@ -131,9 +131,9 @@ const Users = ({ data }) => {
       <Table
         rowKey="_id"
         columns={columns}
-        dataSource={data}
+        dataSource={data.data}
         onChange={handleTableChange}
-        pagination={{ current: params.get("page"), pageSize: 10 ,total: 25  }}
+        pagination={{ current: params.get("page") || 1, pageSize: 10 ,total: data.size  }}
       />
 
       {/* Modals */}
@@ -153,7 +153,7 @@ const Users = ({ data }) => {
 };
 
 Users.propTypes = {
-  data: Proptypes.array,
+  data: Proptypes.object,
 };
 
 export default withFetchData(Users, get_all_user);
