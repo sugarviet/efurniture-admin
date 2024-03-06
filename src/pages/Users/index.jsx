@@ -4,19 +4,14 @@ import { useState, lazy } from "react";
 import AppModal from "@components/AppModal";
 import AppSuspense from "@components/AppSuspense";
 
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import ExcelButton from "@components/ExcelButton";
 import PageTitle from "@components/PageTitle";
 import { pathSystem } from "../../router";
 import urlcat from "urlcat";
-
 import { withFetchData } from "@hocs/withFetchData";
 import { get_all_user } from "../../api/userApi";
 import Proptypes from "prop-types";
-
-import useParamQuery from "../../hooks/useParamQuery";
-
-
 const AccountUpdateForm = lazy(() => import("./components/AccountUpdateForm"));
 
 const Users = ({ data }) => {
@@ -24,7 +19,7 @@ const Users = ({ data }) => {
 
   const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
-  const { params, handleSetParams } = useParamQuery();
+  const [searchParams, setSearchParams] = useSearchParams();
 
 
   const handleToggleModalEditUser = (id) => {
@@ -41,9 +36,6 @@ const Users = ({ data }) => {
     };
   };
 
-  const handleDisableUser = (id) => {
-    console.log(id);
-  };
 
   const columns = [
     {
@@ -82,8 +74,7 @@ const Users = ({ data }) => {
           </Button>
           <Button
             danger
-            type="primary"
-            onClick={() => handleDisableUser(record.id)}
+          
           >
             Disable
           </Button>
@@ -93,8 +84,7 @@ const Users = ({ data }) => {
   ];
 
   const handleTableChange = (pagination) => {
-    console.log(pagination);
-    handleSetParams({
+    setSearchParams({
       page: pagination.current,
       limit: pagination.pageSize,
     });
@@ -114,7 +104,7 @@ const Users = ({ data }) => {
         columns={columns}
         dataSource={data.data}
         onChange={handleTableChange}
-        pagination={{ current: params.get("page") || 1, pageSize: 10 ,total: data.size  }}
+        pagination={{ current: searchParams.get("page") || 1, pageSize: 10 ,total: data.size  }}
       />
 
       {/* Modals */}
