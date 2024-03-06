@@ -2,7 +2,7 @@ import { Button, Form } from "antd";
 import FormInput from "@components/FormInput";
 import FormSelectRole from "@components/FormSelectRole";
 import { useUpdate } from "../../../hooks/api-hooks";
-import { create_user, get_all_system_account, update_account } from "../../../api/userApi";
+import { get_all_system_account, update_account } from "@api/userApi";
 import PropTypes from "prop-types";
 
 const EdittingStaffForm = ({data}) => {
@@ -13,7 +13,6 @@ const EdittingStaffForm = ({data}) => {
   }));
   const [form] = Form.useForm();
   const { mutate } = useUpdate(
-    update_account(data._id),
     undefined,
     () => {
       alert("thanh cong");
@@ -28,7 +27,7 @@ const EdittingStaffForm = ({data}) => {
     // };
     console.log(values.role);
     
-    mutate(values.role);
+    mutate({url:update_account(data._id), data:values.role});
   };
   return (
     <div>

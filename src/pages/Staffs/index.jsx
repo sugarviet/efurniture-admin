@@ -5,6 +5,7 @@ import AppModal from "@components/AppModal";
 import ExcelButton from "@components/ExcelButton";
 import CreatingStaffForm from "./components/CreatingStaffForm";
 import EdittingStaffForm from "./components/EdittingStaffForm";
+import { useSearchParams } from "react-router-dom";
 
 import { withFetchData } from "@hocs/withFetchData";
 import {
@@ -13,11 +14,11 @@ import {
   get_all_system_account,
 } from "../../api/userApi";
 import Proptypes from "prop-types";
-import useParamQuery from "../../hooks/useParamQuery";
 import { useDelete } from "@hooks/api-hooks";
 
 const Staffs = ({ data }) => {
-  const { params, handleSetParams } = useParamQuery();
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const [openCreateStaffModal, setOpenCreateStaffModal] = useState(false);
   const [selectedUser, setSelecteUser] = useState(null);
   const [openEditStaffModal, setOpenEditStaffModal] = useState(false);
@@ -119,7 +120,7 @@ const Staffs = ({ data }) => {
   ];
 
   const handleTableChange = (pagination) => {
-    handleSetParams({
+    setSearchParams({
       page: pagination.current,
       limit: pagination.pageSize,
     });
@@ -144,7 +145,7 @@ const Staffs = ({ data }) => {
         dataSource={data.data}
         onChange={handleTableChange}
         pagination={{
-          current: params.get("page") || 1,
+          current: searchParams.get("page") || 1,
           pageSize: 10,
           total: data.size,
           hideOnSinglePage: true,

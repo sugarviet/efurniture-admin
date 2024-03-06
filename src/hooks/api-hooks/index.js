@@ -51,9 +51,9 @@ export const usePost = (url, params, onSuccessAPI, onErrorAPI, key) => {
   );
 };
 
-export const useUpdate = (url, params, onSuccessAPI, onErrorAPI, key) => {
+export const useUpdate = (params, onSuccessAPI, onErrorAPI, key) => {
   return useGenericMutation(
-    (data) => request.put(url, data),
+    (url, data) => request.put(url, data),
     key,
     params,
     onSuccessAPI,
