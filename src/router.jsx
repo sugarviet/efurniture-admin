@@ -25,7 +25,7 @@ const Transactions = lazy(() => import("./pages/Transactions"));
 const Reports = lazy(() => import("./pages/Reports"));
 const ReportDetail = lazy(() => import("./pages/ReportDetail"));
 const Rooms = lazy(() => import("./pages/Rooms"));
-const Categories = lazy(() => import("./pages/Categories"));
+const Types = lazy(() => import("./pages/Types"));
 const Vouchers = lazy(() => import("./pages/Vouchers"));
 const CreateVoucher = lazy(() => import("./pages/CreatingVoucher"));
 const Events = lazy(() => import("./pages/Events"));
@@ -65,7 +65,7 @@ export const pathSystem = {
   reportDetail: "/report/:id",
   catelogDetail: "/catelog/:id",
   catalogCreate: "/catelog/create",
-  categories: "/categories",
+  types: "/types",
   categoryDetail: "/category/:id",
   warehouse: '/warehouse',
   rooms: '/rooms',
@@ -156,8 +156,8 @@ const adminRoutes = [
     element: <OrderDetail />,
   },
   {
-    path: pathSystem.categories,
-    element: <Categories />,
+    path: pathSystem.types,
+    element: <Types />,
   },
   {
     path: pathSystem.reports,
@@ -205,6 +205,10 @@ const staffRoutes = [
   {
     path: pathSystem.warehouse,
     element: <Warehouse />,
+  },
+  {
+    path: pathSystem.types,
+    element: <Types />,
   },
 ];
 
