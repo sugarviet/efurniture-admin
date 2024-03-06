@@ -61,7 +61,7 @@ const PublishedProductTable = ({data}) => {
       <p className="text-xl font-bold">Published Product</p>
       <Table
         rowKey="_id"
-        dataSource={data}
+        dataSource={data.data}
         columns={columns}
         pagination={{
           pageSize: 10,

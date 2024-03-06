@@ -15,8 +15,6 @@ const CreatingProduct = () => {
   
   const admin = isAdmin();
 
-  console.log(admin);
-
   const onFinish = (values) => {
     console.log("Success:", values);
   };

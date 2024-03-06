@@ -1,6 +1,7 @@
 import { Avatar, Dropdown } from "antd";
 import useAuth from "../../stores/useAuth";
 import { useNavigate } from "react-router-dom";
+import {refreshPage} from '@utils/refreshPage';
 
 const Navbar = () => {
 const {clearTokens} = useAuth();
@@ -8,6 +9,7 @@ const navigate = useNavigate();
   const handleLogout = () => {
     clearTokens();
     navigate('/')
+    refreshPage();
   }
   const items = [
     {
