@@ -15,6 +15,20 @@ const type = {
       delete: 'Failed deleted delete',
       set_default: 'Failed set default address',
     }
+  },
+  staffs: {
+    success: {
+      add: 'Successfully added staff',
+      edit: 'Successfully edited staff',
+      disable: 'Successfully disable staff',
+      enable: 'Successfully enable staff',
+    },
+    fail:{
+      add: 'Failed added staff',
+      edit: 'Failed edited staff',
+      disable: 'Failed disable staff',
+      enable: 'Failed enable staff',
+    }
   }
 }
 

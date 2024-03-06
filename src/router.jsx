@@ -4,8 +4,6 @@ import {
   Navigate
 } from "react-router-dom";
 
-
-
 import { lazy } from "react";
 // Layouts
 import RootLayout from "@layouts/RootLayout";
@@ -32,7 +30,6 @@ const Vouchers = lazy(() => import("./pages/Vouchers"));
 const CreateVoucher = lazy(() => import("./pages/CreatingVoucher"));
 const Events = lazy(() => import("./pages/Events"));
 const CreateEvents = lazy(() => import("./pages/CreatingEvents"));
-const Role = lazy(() => import("./pages/Role"));
 
 const CategoryDetail = lazy(() => import("./pages/CategoryDetail"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -72,7 +69,6 @@ export const pathSystem = {
   categoryDetail: "/category/:id",
   warehouse: '/warehouse',
   rooms: '/rooms',
-  roles: '/roles',
 };
 
 const adminMasterRoutes = [
@@ -91,10 +87,6 @@ const adminMasterRoutes = [
   {
     path: pathSystem.staffs,
     element: <Staffs />,
-  },
-  {
-    path: pathSystem.roles,
-    element: <Role />,
   },
 ];
 

@@ -10,10 +10,13 @@ const FormSelectRole = ({ data }) => {
   }));
   return (
     <FormSelect
-      label="role"
+      label="Role"
       name="role"
       mode="multiple"
       options={selectOptions}
+      placeholder="Select Role"
+      required
+      
     />
   );
 };

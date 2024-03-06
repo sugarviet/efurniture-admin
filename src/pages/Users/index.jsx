@@ -7,8 +7,6 @@ import AppSuspense from "@components/AppSuspense";
 import { Link } from "react-router-dom";
 import ExcelButton from "@components/ExcelButton";
 import PageTitle from "@components/PageTitle";
-import { getCurrentUserRole } from "@utils/getCurrentUserRole";
-
 import { pathSystem } from "../../router";
 import urlcat from "urlcat";
 
@@ -18,20 +16,16 @@ import Proptypes from "prop-types";
 
 import useParamQuery from "../../hooks/useParamQuery";
 
-const AccountCreateForm = lazy(() => import("./components/AccountCreateForm"));
+
 const AccountUpdateForm = lazy(() => import("./components/AccountUpdateForm"));
 
 const Users = ({ data }) => {
-  console.log(data);
   const { getColumnSearchProps } = useSearchTableColumn();
-  const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
+
   const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
   const { params, handleSetParams } = useParamQuery();
 
-  const handleToggleModalCreateUser = () => {
-    setIsModalCreateOpen(!isModalCreateOpen);
-  };
 
   const handleToggleModalEditUser = (id) => {
     setSelectedUserId(id);
@@ -78,13 +72,6 @@ const Users = ({ data }) => {
       ...getColumnSearchProps("age"),
     },
     {
-      title: "Role",
-      dataIndex: "role",
-      key: "role",
-      width: "20%",
-      render: (text) => <p>{getCurrentUserRole(text)}</p>,
-    },
-    {
       title: "Actions",
       key: "actions",
       width: "20%",
@@ -117,13 +104,7 @@ const Users = ({ data }) => {
     <div>
       <div className="flex justify-between px-3 pt-2 pb-4 items-center">
         <PageTitle title="User management" />
-        <Button
-          className="primary"
-          type="primary"
-          onClick={handleToggleModalCreateUser}
-        >
-          Create new account
-        </Button>
+    
       </div>
       <div className="float-right">
         <ExcelButton data={[]} />
@@ -137,12 +118,6 @@ const Users = ({ data }) => {
       />
 
       {/* Modals */}
-      <AppModal isOpen={isModalCreateOpen} setIsOpen={setIsModalCreateOpen}>
-        <AppSuspense>
-          <AccountCreateForm />
-        </AppSuspense>
-      </AppModal>
-
       <AppModal isOpen={isModalUpdateOpen} setIsOpen={setIsModalUpdateOpen}>
         <AppSuspense>
           <AccountUpdateForm id={selectedUserId} />

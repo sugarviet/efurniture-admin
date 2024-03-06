@@ -48,11 +48,10 @@ export function useGetSiderItem() {
     ]),
   ];
   const itemsForSuperAdmin = [
-    getItem("Account", "/account", <UserOutlined />, [
-      getItem("User", "/users"),
-      getItem("Staffs", "/staffs"),
-    ]),
-    getItem("Roles", "/roles", <TagsOutlined />),
+ 
+    getItem("User", "/users", <UserOutlined />),
+    getItem("Staffs", "/staffs", <TagsOutlined />)
+
 
   ];
   const itemsForStaff = [

@@ -30,9 +30,9 @@ const useGenericMutation = (func, key, params, onSuccessAPI, onErrorAPI) => {
   });
 };
 
-export const useDelete = (params, onSuccessAPI, onErrorAPI, key) => {
+export const useDelete = (url, params, onSuccessAPI, onErrorAPI, key) => {
   return useGenericMutation(
-    (url, data) => request.delete(url, data),
+    (id) => request.delete(`${url}/${id}`),
     key,
     params,
     onSuccessAPI,
@@ -51,9 +51,23 @@ export const usePost = (url, params, onSuccessAPI, onErrorAPI, key) => {
   );
 };
 
-export const useUpdate = (params, onSuccessAPI, onErrorAPI, key) => {
+export const useUpdate = (url, params, onSuccessAPI, onErrorAPI, key) => {
   return useGenericMutation(
-    (url, data) => request.put(url, data),
+    (data) => request.put(url, data),
+    key,
+    params,
+    onSuccessAPI,
+    onErrorAPI
+  );
+};
+
+
+export const useUpdateWithURl = (params, onSuccessAPI, onErrorAPI, key) => {
+  return useGenericMutation(
+    (data) =>{
+      console.log(data)
+      return  request.put('/')
+    },
     key,
     params,
     onSuccessAPI,

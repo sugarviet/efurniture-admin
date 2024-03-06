@@ -6,18 +6,17 @@ import ExcelButton from "@components/ExcelButton";
 import CreatingStaffForm from "./components/CreatingStaffForm";
 import EdittingStaffForm from "./components/EdittingStaffForm";
 import { useSearchParams } from "react-router-dom";
-
 import { withFetchData } from "@hocs/withFetchData";
 import {
-  disable_account,
-  enable_account,
   get_all_system_account,
-} from "../../api/userApi";
+} from "@api/userApi";
 import Proptypes from "prop-types";
-import { useDelete } from "@hooks/api-hooks";
+import useAccountManagement from "./hooks/useAccountManagement";
 
 const Staffs = ({ data }) => {
+
   const [searchParams, setSearchParams] = useSearchParams();
+  const {enableAccount, disableAccount} = useAccountManagement();
 
   const [openCreateStaffModal, setOpenCreateStaffModal] = useState(false);
   const [selectedUser, setSelecteUser] = useState(null);
@@ -31,36 +30,6 @@ const Staffs = ({ data }) => {
   const handleOpenEditStaffModal = (record) => {
     setSelecteUser(record)
     setOpenEditStaffModal(!openEditStaffModal);
-  };
-
-  const { mutate: enableAccount } = useDelete(
-    undefined,
-    () => {
-      alert("thanh cong");
-    },
-    () => {
-      alert("fail");
-    },
-    get_all_system_account()
-  );
-
-  const { mutate: disableAccount } = useDelete(
-    undefined,
-    () => {
-      alert("thanh cong");
-    },
-    () => {
-      alert("fail");
-    },
-    get_all_system_account()
-  );
-
-  const handleEnableAccount = (id) => {
-    enableAccount(enable_account(id), {});
-  };
-
-  const handleDisableAccount = (id) => {
-    disableAccount(disable_account(id), {});
   };
 
   const columns = [
@@ -106,11 +75,11 @@ const Staffs = ({ data }) => {
         <div className="flex gap-2">
           <Button onClick={() => handleOpenEditStaffModal(record)}>Edit</Button>
           {record.status === 1 ? (
-            <Button danger onClick={() => handleDisableAccount(record._id)}>
+            <Button danger onClick={() => disableAccount(record._id)}>
               Disable
             </Button>
           ) : (
-            <Button onClick={() => handleEnableAccount(record._id)}>
+            <Button onClick={() => enableAccount(record._id)}>
               Enable
             </Button>
           )}
