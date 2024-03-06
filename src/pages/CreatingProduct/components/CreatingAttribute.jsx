@@ -11,7 +11,7 @@ const CreatingAttribute = () => {
   return (
     <div>
       <Form form={form} layout="vertical" onFinish={onFinish}>
-        <div className="grid grid-cols-2 gap-4">
+       
           <FormInput
             name="name"
             label="Attribute Name"
@@ -33,9 +33,9 @@ const CreatingAttribute = () => {
                 label: "number",
               },
             ]}
-            className="h-10"
+           
           />
-        </div>
+  
 
         <Button
           type="primary"

@@ -9,9 +9,14 @@ import FormSelect from "../../components/FormSelect";
 import { isAdmin } from "../../utils/getCurrentUserRole";
 import { useState } from "react";
 import AppModal from '@components/AppModal'
+import CreatingAttribute from "./components/CreatingAttribute";
+import {useFetch} from '@hooks/api-hooks'
+import { get_attribute } from "../../api/attributeApi";
 const { TabPane } = Tabs;
 
 const CreatingProduct = () => {
+  const {data} = useFetch(get_attribute())
+  console.log(data);
   const [openCreateAttribute, setOpenCreateAttribute] = useState(false);
   const [form] = Form.useForm();
   
@@ -135,7 +140,7 @@ const CreatingProduct = () => {
               <TabPane tab="Attributes" key="attributes">
                 <p>Attributes</p>
 
-                <Button>Create attributes</Button>
+                <Button onClick={() => setOpenCreateAttribute(true)}>Create attributes</Button>
                 <FormSelect
                   label="Type"
                   // name="category"
@@ -342,7 +347,7 @@ const CreatingProduct = () => {
 
 
       <AppModal isOpen={openCreateAttribute} setIsOpen={setOpenCreateAttribute}>
-        
+        <CreatingAttribute />
       </AppModal>
     </main>
   );
