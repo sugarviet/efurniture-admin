@@ -1,31 +1,19 @@
 import { Button, Form } from "antd";
 import FormInput from "@components/FormInput";
 import FormSelectRole from "@components/FormSelectRole";
-import { usePost } from "../../../hooks/api-hooks";
-import { create_user, get_all_system_account } from "@api/userApi";
-import useNotification from "@hooks/useNotification";
+import useAccountManagement from "../hooks/useAccountManagement";
 
 const CreatingStaffForm = () => {
-  const { success_message, error_message } = useNotification();
+  const { addAccount } = useAccountManagement();
   const [form] = Form.useForm();
-  const { mutate } = usePost(
-    create_user(),
-    undefined,
-    () => {
-      success_message("staffs", "add");
-    },
-    () => {
-      error_message("staffs", "add");
-    },
-    get_all_system_account()
-  );
+
   const onFinish = (values) => {
     const data = {
       ...values,
       status: 1,
     };
     console.log(values);
-    mutate(data);
+    addAccount(data);
   };
   return (
     <div className="p-2">

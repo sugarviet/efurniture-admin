@@ -1,30 +1,18 @@
 import { Button, Form } from "antd";
 import FormInput from "@components/FormInput";
 import FormSelectRole from "@components/FormSelectRole";
-import { useUpdate } from "@hooks/api-hooks";
-import { get_all_system_account, update_account } from "@api/userApi";
-import useNotification from "@hooks/useNotification";
 import PropTypes from "prop-types";
-
+import useAccountManagement from "../hooks/useAccountManagement";
 const EdittingStaffForm = ({ data }) => {
-  const { success_message, error_message } = useNotification();
+  const { updateRole } = useAccountManagement(data._id);
+
 
   const selectOptions = data.role.map((item) => ({
     label: `${item.role} ${item.action}`,
     value: item._id,
   }));
   const [form] = Form.useForm();
-  const { mutate: updateRole } = useUpdate(
-    update_account(data._id),
-    undefined,
-    () => {
-      success_message("staffs", "edit");
-    },
-    () => {
-      error_message("staffs", "edit");
-    },
-    get_all_system_account()
-  );
+
   const onFinish = (values) => {
     updateRole({ role: values.role });
   };
