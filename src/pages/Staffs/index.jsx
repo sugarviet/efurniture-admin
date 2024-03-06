@@ -1,49 +1,65 @@
 import { useState } from "react";
 import { Button, Table, Tag } from "antd";
 import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
-import Loading from "@components/Loading";
 import AppModal from "@components/AppModal";
-import usePartners from "./hooks/usePartners";
 import ExcelButton from "@components/ExcelButton";
 import CreatingStaffForm from "./components/CreatingStaffForm";
 import EdittingStaffForm from "./components/EdittingStaffForm";
+import { useSearchParams } from "react-router-dom";
+import { withFetchData } from "@hocs/withFetchData";
+import {
+  get_all_system_account,
+} from "@api/userApi";
+import Proptypes from "prop-types";
+import useAccountManagement from "./hooks/useAccountManagement";
 
-const Staffs = () => {
+const Staffs = ({ data }) => {
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const {enableAccount, disableAccount} = useAccountManagement();
+
   const [openCreateStaffModal, setOpenCreateStaffModal] = useState(false);
+  const [selectedUser, setSelecteUser] = useState(null);
   const [openEditStaffModal, setOpenEditStaffModal] = useState(false);
-  const { partnerData, isLoading } = usePartners();
   const { getColumnSearchProps } = useSearchTableColumn();
 
   const handleOpenCreateStaffModal = () => {
     setOpenCreateStaffModal(!openCreateStaffModal);
   };
 
-  if (isLoading) {
-    return <Loading />;
-  }
+  const handleOpenEditStaffModal = (record) => {
+    setSelecteUser(record)
+    setOpenEditStaffModal(!openEditStaffModal);
+  };
 
   const columns = [
     {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
+      title: "Username",
+      dataIndex: "username",
+      key: "username",
       width: "30%",
-      ...getColumnSearchProps("name"),
+      ...getColumnSearchProps("username"),
     },
     {
-      title: "Age",
-      dataIndex: "age",
-      key: "age",
+      title: "First Name",
+      dataIndex: "first_name",
+      key: "first_name",
       width: "20%",
-      ...getColumnSearchProps("age"),
+      ...getColumnSearchProps("first_name"),
     },
     {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
-      ...getColumnSearchProps("address"),
-      sorter: (a, b) => a.address.length - b.address.length,
-      sortDirections: ["descend", "ascend"],
+      title: "Last Name",
+      dataIndex: "last_name",
+      key: "last_name",
+      width: "20%",
+      ...getColumnSearchProps("first_name"),
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
+      width: "20%",
+      ...getColumnSearchProps("email"),
     },
     {
       title: "Status",
@@ -55,14 +71,29 @@ const Staffs = () => {
       title: "Actions",
       key: "actions",
       width: "20%",
-      render: () => (
+      render: (text, record) => (
         <div className="flex gap-2">
-          <Button>Edit</Button>
-          <Button danger>Disable</Button>
+          <Button onClick={() => handleOpenEditStaffModal(record)}>Edit</Button>
+          {record.status === 1 ? (
+            <Button danger onClick={() => disableAccount(record._id)}>
+              Disable
+            </Button>
+          ) : (
+            <Button onClick={() => enableAccount(record._id)}>
+              Enable
+            </Button>
+          )}
         </div>
       ),
     },
   ];
+
+  const handleTableChange = (pagination) => {
+    setSearchParams({
+      page: pagination.current,
+      limit: pagination.pageSize,
+    });
+  };
 
   return (
     <main>
@@ -74,14 +105,18 @@ const Staffs = () => {
       </div>
 
       <div className="float-right">
-        <ExcelButton data={partnerData} />
+        <ExcelButton data={[]} />
       </div>
 
       <Table
+        rowKey="_id"
         columns={columns}
-        dataSource={partnerData}
+        dataSource={data.data}
+        onChange={handleTableChange}
         pagination={{
+          current: searchParams.get("page") || 1,
           pageSize: 10,
+          total: data.size,
           hideOnSinglePage: true,
         }}
       />
@@ -94,9 +129,13 @@ const Staffs = () => {
       </AppModal>
 
       <AppModal isOpen={openEditStaffModal} setIsOpen={setOpenEditStaffModal}>
-        <EdittingStaffForm />
+        <EdittingStaffForm data={selectedUser}/>
       </AppModal>
     </main>
   );
 };
-export default Staffs;
+Staffs.propTypes = {
+  data: Proptypes.object,
+};
+
+export default withFetchData(Staffs, get_all_system_account);

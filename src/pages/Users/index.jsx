@@ -4,38 +4,28 @@ import { useState, lazy } from "react";
 import AppModal from "@components/AppModal";
 import AppSuspense from "@components/AppSuspense";
 
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import ExcelButton from "@components/ExcelButton";
 import PageTitle from "@components/PageTitle";
-import { getCurrentUserRole } from "@utils/getCurrentUserRole";
-
 import { pathSystem } from "../../router";
 import urlcat from "urlcat";
-
 import { withFetchData } from "@hocs/withFetchData";
 import { get_all_user } from "../../api/userApi";
 import Proptypes from "prop-types";
-
-const AccountCreateForm = lazy(() => import("./components/AccountCreateForm"));
 const AccountUpdateForm = lazy(() => import("./components/AccountUpdateForm"));
 
-
-const Users = ({data}) => {
-
+const Users = ({ data }) => {
   const { getColumnSearchProps } = useSearchTableColumn();
-  const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
+
   const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const handleToggleModalCreateUser = () => {
-    setIsModalCreateOpen(!isModalCreateOpen);
-  };
 
   const handleToggleModalEditUser = (id) => {
-    setSelectedUserId(id)
+    setSelectedUserId(id);
     setIsModalUpdateOpen(!isModalUpdateOpen);
   };
-
 
   const getSorter = (dataIndex, customSorter) => {
     return {
@@ -46,9 +36,6 @@ const Users = ({data}) => {
     };
   };
 
-  const handleDisableUser = (id) => {
-    console.log(id);
-  };
 
   const columns = [
     {
@@ -59,9 +46,14 @@ const Users = ({data}) => {
       ...getSorter("username"),
       ...getColumnSearchProps("username"),
       render: (text, record) => (
-        <Link to={urlcat(pathSystem.userDetail, {
-          id: record._id
-        })} className="link">{text}</Link>
+        <Link
+          to={urlcat(pathSystem.userDetail, {
+            id: record._id,
+          })}
+          className="link"
+        >
+          {text}
+        </Link>
       ),
     },
     {
@@ -72,26 +64,17 @@ const Users = ({data}) => {
       ...getColumnSearchProps("age"),
     },
     {
-      title: "Role",
-      dataIndex: "role",
-      key: "role",
-      width: "20%",
-      render:(text) => (
-        <p>{getCurrentUserRole(text)}</p>
-      )
-    },
-    {
       title: "Actions",
       key: "actions",
       width: "20%",
       render: (text, record) => (
         <Space>
-         
-          <Button onClick={() => handleToggleModalEditUser(record.id)}>Edit</Button>
+          <Button onClick={() => handleToggleModalEditUser(record.id)}>
+            Edit
+          </Button>
           <Button
             danger
-            type="primary"
-            onClick={() => handleDisableUser(record.id)}
+          
           >
             Disable
           </Button>
@@ -100,28 +83,34 @@ const Users = ({data}) => {
     },
   ];
 
+  const handleTableChange = (pagination) => {
+    setSearchParams({
+      page: pagination.current,
+      limit: pagination.pageSize,
+    });
+  };
 
   return (
     <div>
       <div className="flex justify-between px-3 pt-2 pb-4 items-center">
-        <PageTitle title="User management"/>
-        <Button className="primary" type="primary" onClick={handleToggleModalCreateUser}>Create new account</Button>
+        <PageTitle title="User management" />
+    
       </div>
       <div className="float-right">
         <ExcelButton data={[]} />
       </div>
-      <Table rowKey="_id" columns={columns} dataSource={data} />
+      <Table
+        rowKey="_id"
+        columns={columns}
+        dataSource={data.data}
+        onChange={handleTableChange}
+        pagination={{ current: searchParams.get("page") || 1, pageSize: 10 ,total: data.size  }}
+      />
 
       {/* Modals */}
-      <AppModal isOpen={isModalCreateOpen} setIsOpen={setIsModalCreateOpen}>
-        <AppSuspense>
-          <AccountCreateForm />
-        </AppSuspense>
-      </AppModal>
-
       <AppModal isOpen={isModalUpdateOpen} setIsOpen={setIsModalUpdateOpen}>
         <AppSuspense>
-          <AccountUpdateForm id={selectedUserId}/>
+          <AccountUpdateForm id={selectedUserId} />
         </AppSuspense>
       </AppModal>
     </div>
@@ -129,7 +118,7 @@ const Users = ({data}) => {
 };
 
 Users.propTypes = {
-  data: Proptypes.array,
+  data: Proptypes.object,
 };
 
-export default withFetchData(Users,get_all_user);
+export default withFetchData(Users, get_all_user);

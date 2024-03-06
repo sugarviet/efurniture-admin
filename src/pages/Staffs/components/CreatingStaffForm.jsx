@@ -1,71 +1,66 @@
 import { Button, Form } from "antd";
 import FormInput from "@components/FormInput";
-import FormSelect from "@components/FormSelect";
+import FormSelectRole from "@components/FormSelectRole";
+import useAccountManagement from "../hooks/useAccountManagement";
 
 const CreatingStaffForm = () => {
+  const { addAccount } = useAccountManagement();
+  const [form] = Form.useForm();
+
   const onFinish = (values) => {
+    const data = {
+      ...values,
+      status: 1,
+    };
     console.log(values);
+    addAccount(data);
   };
   return (
-    <div>
-      <Form layout="vertical" onFinish={onFinish}>
+    <div className="p-2">
+      <p className="font-semibold text-3xl mb-4">
+        eFurniture creating staff form
+      </p>
+      <Form form={form} layout="vertical" onFinish={onFinish}>
+        <div className="grid grid-cols-2 gap-4">
+          <FormInput
+            name="first_name"
+            label="First name"
+            required
+            placeholder="Enter first name"
+          />
+          <FormInput
+            name="last_name"
+            label="Last name"
+            required
+            placeholder="Enter last name"
+          />
+        </div>
         <FormInput
-          label="Usename"
           name="username"
-          placeholder="Enter the username of the staff"
-          className="h-10"
+          label="Username"
+          required
+          placeholder="Enter username"
         />
         <FormInput
-          label="Password"
           name="password"
-          placeholder="Enter the password of the staff"
-          className="h-10"
+          label="Password"
+          inputType="password"
+          type="password"
+          placeholder="Enter password"
         />
-        <FormSelect
-          name={"roleTitle"}
-          className="w-full"
-          label="Role Title"
-          defaultValue="staff"
-          placeholder="Staff"
-          value="staff"
-          mode="multiple"
-          allowClear
-          options={[
-            {
-              value: "admin",
-              label: "Admin",
-            },
-            {
-              value: "staff",
-              label: "Staff",
-            },
-          ]}
+        <FormInput
+          name="email"
+          label="Email"
+          type="email"
+          placeholder="Enter email"
         />
-        <FormSelect
-          name={"size"}
-          className="w-full"
-          label="Collection"
-          defaultValue="lucy"
-          value="lucy"
-          mode="multiple"
-          allowClear
-          options={[
-            {
-              value: "jack",
-              label: "Jack",
-            },
-            {
-              value: "lucy",
-              label: "Lucy",
-            },
-            {
-              value: "Yiminghe",
-              label: "yiminghe",
-            },
-          ]}
-        />
+        <FormSelectRole />
 
-        <Button type="primary" className="flex justify-center mx-auto">
+        <Button
+          type="primary"
+          className="primary py-5 px-10 text-center flex justify-center items-center font-bold"
+          htmlType="submit"
+        >
           Submit
         </Button>
       </Form>

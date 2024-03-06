@@ -1,6 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import {
   createBrowserRouter,
+  Navigate
 } from "react-router-dom";
 
 import { lazy } from "react";
@@ -67,10 +68,14 @@ export const pathSystem = {
   categories: "/categories",
   categoryDetail: "/category/:id",
   warehouse: '/warehouse',
-  rooms: '/rooms'
+  rooms: '/rooms',
 };
 
 const adminMasterRoutes = [
+  {
+    path: pathSystem.base,
+    element: <Navigate to={pathSystem.users} />,
+  },
   {
     path: pathSystem.users,
     element: <Users />,
