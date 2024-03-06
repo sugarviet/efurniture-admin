@@ -7,10 +7,12 @@ import FormInputNumber from "../../components/FormInputNumber";
 import FormTextArea from "../../components/FormTextArea";
 import FormSelect from "../../components/FormSelect";
 import { isAdmin } from "../../utils/getCurrentUserRole";
-
+import { useState } from "react";
+import AppModal from '@components/AppModal'
 const { TabPane } = Tabs;
 
 const CreatingProduct = () => {
+  const [openCreateAttribute, setOpenCreateAttribute] = useState(false);
   const [form] = Form.useForm();
   
   const admin = isAdmin();
@@ -132,6 +134,8 @@ const CreatingProduct = () => {
               </TabPane>
               <TabPane tab="Attributes" key="attributes">
                 <p>Attributes</p>
+
+                <Button>Create attributes</Button>
                 <FormSelect
                   label="Type"
                   // name="category"
@@ -335,6 +339,11 @@ const CreatingProduct = () => {
           </div>
         </section>
       </Form>
+
+
+      <AppModal isOpen={openCreateAttribute} setIsOpen={setOpenCreateAttribute}>
+        
+      </AppModal>
     </main>
   );
 };
