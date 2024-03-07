@@ -14,29 +14,37 @@ import FormSelectType from "./FormSelectType";
 import { useCreatingProductValues } from "../CreatingProductContext";
 import FormSelectSubTypes from "./FormSelectSubTypes";
 import { usePost } from "../../../hooks/api-hooks";
-import { create_attribute, get_attribute_by_list_subtype } from "../../../api/attributeApi";
+import {
+  create_attribute,
+  get_attribute_by_list_subtype,
+} from "../../../api/attributeApi";
+import CreatingType from "../../Types/components/CreatingType";
+import CreatingSubTypesForm from "./CreatingSubTypesForm";
 
 const { TabPane } = Tabs;
 
 const CreatingProductForm = () => {
+  const [openModalCreate, setOpenModalCreate] = useState(false);
+  const [openModalSubtypeCreate, setOpenModalSubtypeCreate] = useState(false);
   const [openCreateAttribute, setOpenCreateAttribute] = useState(false);
   const [form] = Form.useForm();
   const { productType, productSubType } = useCreatingProductValues();
-  const { mutate:get_product_by_subtype,data: listData } = usePost(
+  const { mutate: get_product_by_subtype, data: listAttribute } = usePost(
     get_attribute_by_list_subtype(),
     undefined,
     () => {},
     () => {}
   );
 
-  console.log(listData);
-
+  console.log(listAttribute);
   useEffect(() => {
     if (productType && productSubType) {
-      get_product_by_subtype({ type: productType, listAttribute: productSubType });
+      get_product_by_subtype({
+        type: productType,
+        listAttribute: productSubType,
+      });
     }
   }, [productType, productSubType, get_product_by_subtype]);
-
 
   const admin = isAdmin();
 
@@ -116,9 +124,37 @@ const CreatingProductForm = () => {
               </TabPane>
 
               <TabPane tab="Attributes" key="attributes">
-                <FormSelectType />
-                <FormSelectSubTypes />
-                <div className="grid grid-cols-2 ite">
+                <div className="grid grid-cols-2 items-center gap-52">
+                  <FormSelectType />
+                  <Button
+                    className="w-40"
+                    onClick={() => setOpenModalCreate(true)}
+                  >
+                    Create new type
+                  </Button>
+                  <AppModal
+                    isOpen={openModalCreate}
+                    setIsOpen={setOpenModalCreate}
+                  >
+                    {openModalCreate ? <CreatingType /> : null}
+                  </AppModal>
+                </div>
+                <div className="grid grid-cols-2 items-center gap-52">
+                  <FormSelectSubTypes />
+                  <Button
+                    className="w-40"
+                    onClick={() => setOpenModalSubtypeCreate(true)}
+                  >
+                    Create new subtype
+                  </Button>
+                  <AppModal
+                    isOpen={openModalSubtypeCreate}
+                    setIsOpen={setOpenModalSubtypeCreate}
+                  >
+                    <CreatingSubTypesForm />
+                  </AppModal>
+                </div>
+                <div className="grid grid-cols-2 items-center">
                   <FormSelect
                     label="Attributes"
                     name="attributes"
@@ -150,9 +186,10 @@ const CreatingProductForm = () => {
                       },
                     ]}
                   />
-                  <Button onClick={() => setOpenCreateAttribute(true)}>
-                    Create attributes
-                  </Button>
+                
+                </div>
+                <div>
+                  {listAttribute?.map(attribute => <FormInput key={attribute._id} name={attribute.name} label={attribute.name}/>)}
                 </div>
               </TabPane>
             </Tabs>

@@ -7,3 +7,7 @@ export const create_subtype = () => {
     return '/subType/staff'
 }
 
+
+export const get_sub_type_by_type = (type) => {
+    return `type/share/${type}`;
+}
