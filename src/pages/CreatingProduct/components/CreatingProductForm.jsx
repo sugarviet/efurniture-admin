@@ -7,22 +7,37 @@ import FormInputNumber from "@components/FormInputNumber";
 import FormTextArea from "@components/FormTextArea";
 import FormSelect from "@components/FormSelect";
 import { isAdmin } from "@utils/getCurrentUserRole";
-import { useState } from "react";
-import AppModal from '@components/AppModal'
-import CreatingAttribute from './CreatingAttribute'
+import { useState, useEffect } from "react";
+import AppModal from "@components/AppModal";
+import CreatingAttribute from "./CreatingAttribute";
 import FormSelectType from "./FormSelectType";
 import { useCreatingProductValues } from "../CreatingProductContext";
 import FormSelectSubTypes from "./FormSelectSubTypes";
+import { usePost } from "../../../hooks/api-hooks";
+import { create_attribute } from "../../../api/attributeApi";
 
 const { TabPane } = Tabs;
 
 const CreatingProductForm = () => {
   const [openCreateAttribute, setOpenCreateAttribute] = useState(false);
   const [form] = Form.useForm();
-  const {productType} = useCreatingProductValues() 
+  const { productType, productSubType } = useCreatingProductValues();
+  const { mutate:get_product_by_subtype,data: listData } = usePost(
+    create_attribute(),
+    undefined,
+    () => {},
+    () => {}
+  );
 
-  console.log(productType)
-  
+  console.log(listData);
+
+  useEffect(() => {
+    if (productType && productSubType) {
+      get_product_by_subtype({ type: productType, listAttribute: productSubType });
+    }
+  }, [productType, productSubType, get_product_by_subtype]);
+
+
   const admin = isAdmin();
 
   const onFinish = (values) => {
@@ -35,7 +50,6 @@ const CreatingProductForm = () => {
   const handleDiscard = () => {
     form.resetFields();
   };
-
 
   return (
     <main className="px-4">
@@ -77,8 +91,6 @@ const CreatingProductForm = () => {
               placeholder="Write title here..."
             />
 
-           
-          
             <FormTextArea
               label="Product Description"
               name="description"
@@ -104,14 +116,12 @@ const CreatingProductForm = () => {
               </TabPane>
 
               <TabPane tab="Attributes" key="attributes">
-               
                 <FormSelectType />
                 <FormSelectSubTypes />
                 <div className="grid grid-cols-2 ite">
                   <FormSelect
                     label="Attributes"
                     name="attributes"
-                   
                     className="w-[22rem]"
                   />
                   <Button onClick={() => setOpenCreateAttribute(true)}>
@@ -120,7 +130,7 @@ const CreatingProductForm = () => {
                 </div>
                 <div className="grid">
                   <FormSelect
-                  className="w-60"
+                    className="w-60"
                     label="Type"
                     // name="category"
                     name={["attributes", "type"]}

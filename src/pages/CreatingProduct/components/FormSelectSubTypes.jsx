@@ -7,12 +7,13 @@ import FormSelect from "@components/FormSelect";
 import { useCreatingProductValues } from "../CreatingProductContext";
 import FormTextArea from "@components/FormTextArea";
 
-import { useFetch } from "../../../hooks/api-hooks";
-import { get_all_types } from "../../../api/typesApi";
+import { useFetch } from "@hooks/api-hooks";
+import { get_all_types } from "@api/typesApi";
 import { withFetchData } from "@hocs/withFetchData";
-import { get_all_subType } from "../../../api/subtypeApi";
+import { get_all_subType } from "@api/subtypeApi";
 import PropTypes from "prop-types";
-import { get_attribute } from "../../../api/attributeApi";
+import { get_attribute } from "@api/attributeApi";
+import { get_sub_type_group } from "@api/subTypeGroup";
 
 const transferSelectOption = (data, label, value) => {
   return data?.map((item) => ({
@@ -26,7 +27,8 @@ const FormSelectSubTypes = ({ data }) => {
   const { handleSelectSubType } = useCreatingProductValues();
   const { data: allTypes } = useFetch(get_all_types());
   const { data: allAtrributes } = useFetch(get_attribute());
-
+  // const { data: allSubtypesGroup } = useFetch(get_sub_type_group());
+  // console.log('allSubtypesGroup', allSubtypesGroup);
 
   const subTypesSelectOptions = transferSelectOption(data, "slug", "slug");
   const typesSelectOptions = transferSelectOption(allTypes, "name", "_id");
@@ -45,6 +47,7 @@ const FormSelectSubTypes = ({ data }) => {
           name="subtype"
           className="col-span-1"
           options={subTypesSelectOptions}
+          mode="multiple"
           onChange={handleSelectSubType}
         />
         <Button className="w-40" onClick={() => setOpenModalCreate(true)}>
@@ -71,6 +74,12 @@ const FormSelectSubTypes = ({ data }) => {
             name="attributes"
             options={typesAttributeOptions}
             mode="multiple"
+            required
+          />
+          <FormSelect
+            label="Type"
+            name="type_id"
+            options={typesSelectOptions}
             required
           />
           <FormUploadSingleButton

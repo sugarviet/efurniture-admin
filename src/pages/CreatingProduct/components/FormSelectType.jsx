@@ -13,8 +13,10 @@ function FormSelectType({ data }) {
   const { handleSelectType } = useCreatingProductValues();
   const typesSelectOptions = data.map((item) => ({
     label: item.name,
-    value: item._id,
+    value: item.slug,
   }));
+
+  console.log('data', data)
 
   return (
     <div>
