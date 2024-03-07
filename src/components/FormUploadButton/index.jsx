@@ -56,7 +56,7 @@ const FormUploadButton = (props) => {
 };
 
 FormUploadButton.propTypes = {
-  callback: Proptypes.func.isRequired,
+  callback: Proptypes.func,
 };
 
 export default FormUploadButton;

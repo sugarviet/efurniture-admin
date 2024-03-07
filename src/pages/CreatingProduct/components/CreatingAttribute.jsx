@@ -1,9 +1,14 @@
 import { Button, Form } from "antd";
 import FormInput from "@components/FormInput";
 import FormSelect from "@components/FormSelect";
+import {useFetch} from '@hooks/api-hooks'
+import { get_all_subType } from "../../../api/subtypeApi";
 
 const CreatingAttribute = () => {
   const [form] = Form.useForm();
+  const {data} = useFetch(get_all_subType())
+
+  console.log(data);
 
   const onFinish = (values) => {
     console.log(values);

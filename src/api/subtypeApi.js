@@ -1,12 +1,5 @@
-const ATTRIBUTE_URL = '/attribute/staff'
-export const create_subType = () => {
-    return ATTRIBUTE_URL
+const SUBTYPE_URL = '/subtype'
+export const get_all_subType = () => {
+    return  '/subtype/share'
 }
 
-export const get_attribute = () => {
-    return ATTRIBUTE_URL
-}
-
-export const get_attribute_by_list_subtype = () => {
-    return `/subtype${ATTRIBUTE_URL}`
-}

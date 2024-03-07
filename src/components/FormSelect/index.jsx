@@ -13,7 +13,9 @@ const FormSelect = ({
   defaultValue,
   className,
   mode,
-  allowClear
+  allowClear,
+  onChange
+  
 }) => {
   return (
     <FormItem
@@ -30,6 +32,7 @@ const FormSelect = ({
         placeholder={placeholder}
         options={options}
         className={className}
+        onChange={onChange}
       />
     </FormItem>
   );
@@ -47,6 +50,7 @@ FormSelect.propTypes = {
   className: PropTypes.string,
   mode: PropTypes.string,
   allowClear: PropTypes.bool,
+  onChange: PropTypes.func
 };
 
 FormSelect.defaultProps = {

@@ -31,14 +31,14 @@ const CreatingType = () => {
         <FormUploadSingleButton
           label="Type thumb"
           name="thumb"
-          className="xl:w-[28rem] lg:w-[20rem]"
+          className="xl:w-[19rem] lg:w-[10rem]"
           required
         />
 
         <div className="flex gap-2">
         
           <Button type="primary" className="primary" htmlType="submit">
-            Create draft types
+            Create types
           </Button>
         </div>
       </Form>
