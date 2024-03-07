@@ -8,5 +8,5 @@ export const get_attribute = () => {
 }
 
 export const get_attribute_by_list_subtype = () => {
-    return `/subtype${ATTRIBUTE_URL}`
+    return `/subtype/staff/attribute`
 }

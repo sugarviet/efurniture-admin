@@ -14,6 +14,8 @@ import { get_all_subType } from "@api/subtypeApi";
 import PropTypes from "prop-types";
 import { get_attribute } from "@api/attributeApi";
 import { get_sub_type_group } from "@api/subTypeGroup";
+import { usePost } from "../../../hooks/api-hooks";
+import { create_subtype } from "../../../api/subtypeApi";
 
 const transferSelectOption = (data, label, value) => {
   return data?.map((item) => ({
@@ -27,8 +29,14 @@ const FormSelectSubTypes = ({ data }) => {
   const { handleSelectSubType } = useCreatingProductValues();
   const { data: allTypes } = useFetch(get_all_types());
   const { data: allAtrributes } = useFetch(get_attribute());
-  // const { data: allSubtypesGroup } = useFetch(get_sub_type_group());
-  // console.log('allSubtypesGroup', allSubtypesGroup);
+  const { data: allSubtypesGroup } = useFetch(get_sub_type_group());
+  const { mutate: createSubtype } = usePost(
+    create_subtype(),
+    undefined,
+    () => {},
+    () => {},
+    get_all_subType()
+  );
 
   const subTypesSelectOptions = transferSelectOption(data, "slug", "slug");
   const typesSelectOptions = transferSelectOption(allTypes, "name", "_id");
@@ -37,7 +45,20 @@ const FormSelectSubTypes = ({ data }) => {
     "name",
     "_id"
   );
-  const onFinish = (values) => {};
+  const allSubtypesGroupOptions = transferSelectOption(
+    allSubtypesGroup,
+    "label",
+    "_id"
+  );
+
+  const onFinish = (values) => {
+    const data = {
+      ...values,
+      thumb: values.thumb.file.url,
+    };
+    console.log(data);
+    createSubtype(data);
+  };
 
   return (
     <div>
@@ -77,24 +98,24 @@ const FormSelectSubTypes = ({ data }) => {
             required
           />
           <FormSelect
-            label="Type"
-            name="type_id"
-            options={typesSelectOptions}
+            label="Group attributes"
+            name="group"
+            options={allSubtypesGroupOptions}
             required
           />
           <FormUploadSingleButton
             label="Subtype thumb"
             name="thumb"
-            className="xl:w-[19rem] lg:w-[10rem]"
+            className="xl:w-[18.5rem] lg:w-[10rem]"
             required
           />
-           <FormTextArea
-              label="Description"
-              name="description"
-              required
-              placeholder="Enter description"
-              className="w-full"
-            />
+          <FormTextArea
+            label="Description"
+            name="description"
+            required
+            placeholder="Enter description"
+            className="w-full"
+          />
           <Button type="primary" className="primary" htmlType="submit">
             Create types
           </Button>

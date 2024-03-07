@@ -14,7 +14,7 @@ import FormSelectType from "./FormSelectType";
 import { useCreatingProductValues } from "../CreatingProductContext";
 import FormSelectSubTypes from "./FormSelectSubTypes";
 import { usePost } from "../../../hooks/api-hooks";
-import { create_attribute } from "../../../api/attributeApi";
+import { create_attribute, get_attribute_by_list_subtype } from "../../../api/attributeApi";
 
 const { TabPane } = Tabs;
 
@@ -23,7 +23,7 @@ const CreatingProductForm = () => {
   const [form] = Form.useForm();
   const { productType, productSubType } = useCreatingProductValues();
   const { mutate:get_product_by_subtype,data: listData } = usePost(
-    create_attribute(),
+    get_attribute_by_list_subtype(),
     undefined,
     () => {},
     () => {}
