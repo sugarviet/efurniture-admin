@@ -3,16 +3,14 @@ import FormUploadButton from "@components/FormUploadButton";
 import FormInput from "@components/FormInput";
 import FormTextArea from "@components/FormTextArea";
 import { isAdmin } from "@utils/getCurrentUserRole";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import AppModal from "@components/AppModal";
 import CreatingAttribute from "./CreatingAttribute";
 import FormSelectType from "./FormSelectType";
-import { useCreatingProductValues } from "../CreatingProductContext";
 import FormSelectSubTypes from "./FormSelectSubTypes";
-import { usePost } from "../../../hooks/api-hooks";
-import { get_attribute_by_list_subtype } from "../../../api/attributeApi";
 import CreatingType from "../../Types/components/CreatingType";
 import CreatingSubTypesForm from "./CreatingSubTypesForm";
+import useCreatingProductManagement from "../hooks/useCreatingProductManagement";
 
 const { TabPane } = Tabs;
 
@@ -20,21 +18,7 @@ const CreatingProductForm = () => {
   const [openModalCreate, setOpenModalCreate] = useState(false);
   const [openModalSubtypeCreate, setOpenModalSubtypeCreate] = useState(false);
   const [form] = Form.useForm();
-  const { productType, productSubType } = useCreatingProductValues();
-  const { mutate: get_product_by_subtype, data: listAttribute } = usePost(
-    get_attribute_by_list_subtype(),
-    undefined,
-    () => {},
-    () => {}
-  );
-  useEffect(() => {
-    if (productType && productSubType) {
-      get_product_by_subtype({
-        type: productType,
-        listAttribute: productSubType,
-      });
-    }
-  }, [productType, productSubType, get_product_by_subtype]);
+  const {listAttribute} = useCreatingProductManagement();
 
   const admin = isAdmin();
 

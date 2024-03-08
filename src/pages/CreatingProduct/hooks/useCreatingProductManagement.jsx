@@ -1,16 +1,22 @@
+import { useEffect } from "react";
+
 import { usePost } from "../../../hooks/api-hooks";
-import useNotification from "@hooks/useNotification";
 import { get_attribute_by_list_subtype } from "../../../api/attributeApi";
+import { useCreatingProductValues } from "../CreatingProductContext";
 
 function useCreatingProductManagement() {
-  const { success_message, error_message } = useNotification();
-
+  const { productType, productSubType } = useCreatingProductValues();
     const { mutate: get_product_by_subtype, data: listAttribute } = usePost(
         get_attribute_by_list_subtype(),
-        undefined,
-        () => {},
-        () => {}
       );
+      useEffect(() => {
+        if (productType && productSubType) {
+          get_product_by_subtype({
+            type: productType,
+            listAttribute: productSubType,
+          });
+        }
+      }, [productType, productSubType, get_product_by_subtype]);
     return {
         get_product_by_subtype,
         listAttribute
