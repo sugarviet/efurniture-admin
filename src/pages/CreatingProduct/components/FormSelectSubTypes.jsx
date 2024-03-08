@@ -18,7 +18,9 @@ const FormSelectSubTypes = () => {
   return (
     <FormSelect
       label="SubType"
-      name="subtype"
+      // name="subtype"
+      name={["attributes", "type"]}
+    
       options={subTypesSelectOptions}
       mode="multiple"
       onChange={handleSelectSubType}

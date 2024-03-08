@@ -14,12 +14,10 @@ import FormSelectType from "./FormSelectType";
 import { useCreatingProductValues } from "../CreatingProductContext";
 import FormSelectSubTypes from "./FormSelectSubTypes";
 import { usePost } from "../../../hooks/api-hooks";
-import {
-  create_attribute,
-  get_attribute_by_list_subtype,
-} from "../../../api/attributeApi";
+import { get_attribute_by_list_subtype } from "../../../api/attributeApi";
 import CreatingType from "../../Types/components/CreatingType";
 import CreatingSubTypesForm from "./CreatingSubTypesForm";
+import FormInputMeasurement from "../../../components/FormInputMeasurement";
 
 const { TabPane } = Tabs;
 
@@ -77,6 +75,7 @@ const CreatingProductForm = () => {
         <section className="flex justify-between items-end mb-6">
           <div>
             <h1 className="text-3xl font-bold">Add Product</h1>
+            <FormInputMeasurement />
             <p className="text-gray-500">Orders placed across your store</p>
           </div>
           <div className="flex gap-2">
@@ -186,10 +185,17 @@ const CreatingProductForm = () => {
                       },
                     ]}
                   />
-                
                 </div>
                 <div>
-                  {listAttribute?.map(attribute => <FormInput key={attribute._id} name={attribute.name} label={attribute.name}/>)}
+                  {listAttribute?.map((attribute) => (
+                    <FormInput
+                      key={attribute._id}
+                    name={["attributes", "attributeType", attribute.name]}
+
+                      // name={attribute.name}
+                      label={attribute.name}
+                    />
+                  ))}
                 </div>
               </TabPane>
             </Tabs>

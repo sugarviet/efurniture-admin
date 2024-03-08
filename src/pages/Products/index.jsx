@@ -1,6 +1,7 @@
 import ExcelButton from "@components/ExcelButton";
 import PageTitle from "@components/PageTitle";
 import PublishedProductTable from "./components/PublishedProductTable";
+import FormMesurement from "../../components/FormMesurement";
 // import DrafedProductTable from "./components/DrafedProductTable";
 
 const Products = () => {
@@ -10,6 +11,7 @@ const Products = () => {
   return (
     <main>
       <div className="flex px-2 justify-between items-center my-4">
+        <FormMesurement />
         <PageTitle title="Product management" />
         {/* <Button className="primary" type="primary">
           Create product
