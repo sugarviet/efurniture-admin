@@ -24,8 +24,8 @@ body {
 }
 
 .link {
-  color: var(--primary-blue-color);
-  @apply hover:underline;
+  color: var(--primary-color);
+  @apply underline text-xs tracking-wider;
 }
 
 :where(.css-dev-only-do-not-override-1ns55bg).ant-btn-primary {
