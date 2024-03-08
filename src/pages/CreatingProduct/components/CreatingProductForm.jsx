@@ -1,11 +1,7 @@
-import { Form, Button, Card, Divider, Tabs } from "antd";
+import { Form, Button, Card, Tabs } from "antd";
 import FormUploadButton from "@components/FormUploadButton";
-import FormList from "@components/FormList";
 import FormInput from "@components/FormInput";
-import FormInputNumber from "@components/FormInputNumber";
-
 import FormTextArea from "@components/FormTextArea";
-import FormSelect from "@components/FormSelect";
 import { isAdmin } from "@utils/getCurrentUserRole";
 import { useState, useEffect } from "react";
 import AppModal from "@components/AppModal";
@@ -17,14 +13,12 @@ import { usePost } from "../../../hooks/api-hooks";
 import { get_attribute_by_list_subtype } from "../../../api/attributeApi";
 import CreatingType from "../../Types/components/CreatingType";
 import CreatingSubTypesForm from "./CreatingSubTypesForm";
-import FormInputMeasurement from "../../../components/FormInputMeasurement";
 
 const { TabPane } = Tabs;
 
 const CreatingProductForm = () => {
   const [openModalCreate, setOpenModalCreate] = useState(false);
   const [openModalSubtypeCreate, setOpenModalSubtypeCreate] = useState(false);
-  const [openCreateAttribute, setOpenCreateAttribute] = useState(false);
   const [form] = Form.useForm();
   const { productType, productSubType } = useCreatingProductValues();
   const { mutate: get_product_by_subtype, data: listAttribute } = usePost(
@@ -33,8 +27,6 @@ const CreatingProductForm = () => {
     () => {},
     () => {}
   );
-
-  console.log(listAttribute);
   useEffect(() => {
     if (productType && productSubType) {
       get_product_by_subtype({
@@ -49,13 +41,7 @@ const CreatingProductForm = () => {
   const onFinish = (values) => {
     console.log("Success:", values);
   };
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
 
-  const handleDiscard = () => {
-    form.resetFields();
-  };
 
   return (
     <main className="px-4">
@@ -69,17 +55,15 @@ const CreatingProductForm = () => {
           regularPrice: 100,
         }}
         onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
         <section className="flex justify-between items-end mb-6">
           <div>
             <h1 className="text-3xl font-bold">Add Product</h1>
-            <FormInputMeasurement />
             <p className="text-gray-500">Orders placed across your store</p>
           </div>
           <div className="flex gap-2">
-            <Button onClick={handleDiscard}>Discard</Button>
+            <Button onClick={() => {form.resetFields()}}>Discard</Button>
             <Button htmlType="submit">Save draft</Button>
             {admin ? (
               <Button type="primary" className="primary" htmlType="submit">
@@ -153,46 +137,13 @@ const CreatingProductForm = () => {
                     <CreatingSubTypesForm />
                   </AppModal>
                 </div>
-                <div className="grid grid-cols-2 items-center">
-                  <FormSelect
-                    label="Attributes"
-                    name="attributes"
-                    className="w-[22rem]"
-                  />
-                  <Button onClick={() => setOpenCreateAttribute(true)}>
-                    Create attributes
-                  </Button>
-                </div>
-                <div className="grid">
-                  <FormSelect
-                    className="w-60"
-                    label="Type"
-                    // name="category"
-                    name={["attributes", "type"]}
-                    defaultValue="lucy"
-                    options={[
-                      {
-                        value: "jack",
-                        label: "Jack",
-                      },
-                      {
-                        value: "lucy",
-                        label: "Lucy",
-                      },
-                      {
-                        value: "Yiminghe",
-                        label: "yiminghe",
-                      },
-                    ]}
-                  />
-                </div>
+
                 <div>
                   {listAttribute?.map((attribute) => (
                     <FormInput
                       key={attribute._id}
-                    name={["attributes", "attributeType", attribute.name]}
-
-                      // name={attribute.name}
+                      name={["attributes", "attributeType", attribute.name]}
+                      placeholder={`Enter ${attribute.name}`}
                       label={attribute.name}
                     />
                   ))}
@@ -218,66 +169,15 @@ const CreatingProductForm = () => {
           </div>
 
           {/* Right */}
-          {/* <div className="flex-1 flex flex-col gap-4">
-           
 
+          <div className="flex-1 flex flex-col gap-4">
             <Card>
-              <p className="text-2xl font-bold mb-4">Variants</p>
-              <FormList
-                name="variants"
-                initialValues={[{ size: "lucy", name: "lucy" }]}
-              >
-                {({ name, restField, remove }, index) => (
-                  <div className="w-full">
-                    <div className="flex justify-between my-2">
-                      <p className="text-base">Option {index + 1}</p>
-                      <p
-                        onClick={() => remove(name)}
-                        className="cursor-pointer"
-                      >
-                        Remove
-                      </p>
-                    </div>
-                    <FormSelect
-                      name={[name, "material"]}
-                      className="w-full"
-                      label="Material"
-                      defaultValue="lucy"
-                      {...restField}
-                      options={[
-                        {
-                          value: "jack",
-                          label: "Jack",
-                        },
-                        {
-                          value: "lucy",
-                          label: "Lucy",
-                        },
-                        {
-                          value: "Yiminghe",
-                          label: "yiminghe",
-                        },
-                      ]}
-                    />
-                    <FormInputNumber
-                      label="Sub price"
-                      name={[name, "subPrice"]}
-                      className="w-full"
-                      placeholder="$$$"
-                    />
-
-                    <Divider dashed />
-                  </div>
-                )}
-              </FormList>
+              <p className="text-2xl font-bold mb-4">Create attributes</p>
+              <CreatingAttribute />
             </Card>
-          </div> */}
+          </div>
         </section>
       </Form>
-
-      <AppModal isOpen={openCreateAttribute} setIsOpen={setOpenCreateAttribute}>
-        <CreatingAttribute />
-      </AppModal>
     </main>
   );
 };

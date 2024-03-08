@@ -30,6 +30,20 @@ const type = {
       enable: 'Failed enable staff',
     }
   },
+  attribute: {
+    success: {
+      add: 'Successfully added attribute',
+      edit: 'Successfully edited attribute',
+      disable: 'Successfully disable attribute',
+      enable: 'Successfully enable attribute',
+    },
+    fail:{
+      add: 'Failed added attribute',
+      edit: 'Failed edited attribute',
+      disable: 'Failed disable attribute',
+      enable: 'Failed enable attribute',
+    }
+  },
   types: {
     success: {
       add_draft: 'Successfully add draft types',
