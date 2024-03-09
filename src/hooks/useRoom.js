@@ -14,8 +14,6 @@ function useRoom() {
             "products": products
         }
 
-        console.log(body);
-
         createRoomMutation(body);
     }
 
