@@ -1,6 +1,6 @@
 import { Button, Form } from "antd";
 import FormInput from "../../../../components/FormInput";
-import FormUploadSingleButton from "@components/FormUploadSingleButton";
+import FormUploadButton from "../../../../components/FormUploadButton";
 import useTypeManagement from "../../hooks/useTypeManagement";
 
 const CreatingType = () => {
@@ -12,7 +12,7 @@ const CreatingType = () => {
       ...values,
       thumb: values.thumb.file.url
     }
-    console.log(values);
+
     createDraftType(data)
    
 
@@ -28,7 +28,7 @@ const CreatingType = () => {
           required
         />
 
-        <FormUploadSingleButton
+        <FormUploadButton
           label="Type thumb"
           name="thumb"
           className="xl:w-[19rem] lg:w-[10rem]"

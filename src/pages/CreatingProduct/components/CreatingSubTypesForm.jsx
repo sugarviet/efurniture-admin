@@ -1,6 +1,6 @@
 import { Form, Button } from "antd";
 import FormInput from "@components/FormInput";
-import FormUploadSingleButton from "@components/FormUploadSingleButton";
+import FormUploadButton from "@components/FormUploadButton";
 import FormSelect from "@components/FormSelect";
 import FormTextArea from "@components/FormTextArea";
 
@@ -64,7 +64,7 @@ const CreatingSubTypesForm = () => {
         options={allSubtypesGroupOptions}
         required
       />
-      <FormUploadSingleButton
+      <FormUploadButton
         label="Subtype thumb"
         name="thumb"
         className="xl:w-96 lg:w-96 md:w-[8rem]"
