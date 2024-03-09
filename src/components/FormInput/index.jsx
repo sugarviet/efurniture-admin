@@ -1,6 +1,7 @@
 import { Input } from "antd";
 import FormItem from "../FormItem";
 import PropTypes from "prop-types";
+import { classNames } from "../../utils/classNames";
 
 const FormInput = ({
   label,
@@ -20,7 +21,11 @@ const FormInput = ({
       required={required}
       message={message}
     >
-      <Input placeholder={placeholder} type={inputType} className={className} />
+      <Input
+        placeholder={placeholder}
+        type={inputType}
+        className={classNames("rounded-none border border-black", className)}
+      />
     </FormItem>
   );
 };

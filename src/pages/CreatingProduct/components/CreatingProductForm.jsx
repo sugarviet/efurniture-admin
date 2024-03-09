@@ -24,7 +24,14 @@ const CreatingProductForm = () => {
   const admin = isAdmin();
 
   const onFinish = (values) => {
-    console.log("Success:", values);
+    const listImages = values.thumb.fileList.map((image) => image.url);
+
+    const data = {
+      ...values,
+      thumbs: listImages
+    }
+
+    console.log("Success:", data);
   };
 
   return (
@@ -142,7 +149,7 @@ const CreatingProductForm = () => {
             </Card>
 
             <Card className="mt-4">
-              <FormUploadButton label="Display images" name="image" />
+              <FormUploadButton label="Display images" name="thumbs" />
             </Card>
             <Card className="mt-8">
               <p className="text-3xl font-bold mb-2">Create 3D model</p>
