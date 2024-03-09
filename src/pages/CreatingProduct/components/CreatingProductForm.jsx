@@ -11,6 +11,7 @@ import FormSelectSubTypes from "./FormSelectSubTypes";
 import CreatingType from "../../Types/components/CreatingType";
 import CreatingSubTypesForm from "./CreatingSubTypesForm";
 import useCreatingProductManagement from "../hooks/useCreatingProductManagement";
+import FormMeasurementInput from "../../../components/FormMeasurementInput";
 
 const { TabPane } = Tabs;
 
@@ -18,14 +19,13 @@ const CreatingProductForm = () => {
   const [openModalCreate, setOpenModalCreate] = useState(false);
   const [openModalSubtypeCreate, setOpenModalSubtypeCreate] = useState(false);
   const [form] = Form.useForm();
-  const {listAttribute} = useCreatingProductManagement();
+  const { listAttribute } = useCreatingProductManagement();
 
   const admin = isAdmin();
 
   const onFinish = (values) => {
     console.log("Success:", values);
   };
-
 
   return (
     <main className="px-4">
@@ -35,7 +35,6 @@ const CreatingProductForm = () => {
         initialValues={{
           label: "Viet Dang",
           description: "Viet Dang",
-          variants: [{ size: "lucy", color: "lucy" }],
           regularPrice: 100,
         }}
         onFinish={onFinish}
@@ -47,7 +46,13 @@ const CreatingProductForm = () => {
             <p className="text-gray-500">Orders placed across your store</p>
           </div>
           <div className="flex gap-2">
-            <Button onClick={() => {form.resetFields()}}>Discard</Button>
+            <Button
+              onClick={() => {
+                form.resetFields();
+              }}
+            >
+              Discard
+            </Button>
             <Button htmlType="submit">Save draft</Button>
             {admin ? (
               <Button type="primary" className="primary" htmlType="submit">
@@ -72,71 +77,74 @@ const CreatingProductForm = () => {
               placeholder="Write description here..."
             />
 
-            <Tabs tabPosition="left" className="mb-4">
-              <TabPane tab="Pricing" key="pricing">
-                <div className="flex gap-10">
-                  <FormInput
-                    label="Regular Pricing"
-                    name="regularPrice"
-                    placeholder="$$$"
-                    inputType="number"
-                  />
-                  <FormInput
-                    label="Sale Pricing"
-                    name="salePrice"
-                    placeholder="$$$"
-                    inputType="number"
-                  />
-                </div>
-              </TabPane>
-
-              <TabPane tab="Attributes" key="attributes">
-                <div className="grid grid-cols-2 items-center gap-52">
-                  <FormSelectType />
-                  <Button
-                    className="w-40"
-                    onClick={() => setOpenModalCreate(true)}
-                  >
-                    Create new type
-                  </Button>
-                  <AppModal
-                    isOpen={openModalCreate}
-                    setIsOpen={setOpenModalCreate}
-                  >
-                    {openModalCreate ? <CreatingType /> : null}
-                  </AppModal>
-                </div>
-                <div className="grid grid-cols-2 items-center gap-52">
-                  <FormSelectSubTypes />
-                  <Button
-                    className="w-40"
-                    onClick={() => setOpenModalSubtypeCreate(true)}
-                  >
-                    Create new subtype
-                  </Button>
-                  <AppModal
-                    isOpen={openModalSubtypeCreate}
-                    setIsOpen={setOpenModalSubtypeCreate}
-                  >
-                    <CreatingSubTypesForm />
-                  </AppModal>
-                </div>
-
-                <div>
-                  {listAttribute?.map((attribute) => (
+            <Card>
+              <Tabs tabPosition="left" className="mb-4">
+                <TabPane tab="Pricing" key="pricing">
+                  <div className="flex gap-10">
                     <FormInput
-                      key={attribute._id}
-                      name={["attributes", "attributeType", attribute.name]}
-                      placeholder={`Enter ${attribute.name}`}
-                      label={attribute.name}
+                      label="Regular Pricing"
+                      name="regularPrice"
+                      placeholder="$$$"
+                      inputType="number"
                     />
-                  ))}
-                </div>
-              </TabPane>
-            </Tabs>
+                    <FormInput
+                      label="Sale Pricing"
+                      name="salePrice"
+                      placeholder="$$$"
+                      inputType="number"
+                    />
+                  </div>
+                </TabPane>
 
-            <FormUploadButton label="Display images" name="image" />
-            <div className="mt-8">
+                <TabPane tab="Attributes" key="attributes">
+                  <div className="grid grid-cols-2 items-center gap-52">
+                    <FormSelectType />
+                    <Button
+                      className="w-40"
+                      onClick={() => setOpenModalCreate(true)}
+                    >
+                      Create new type
+                    </Button>
+                    <AppModal
+                      isOpen={openModalCreate}
+                      setIsOpen={setOpenModalCreate}
+                    >
+                      {openModalCreate ? <CreatingType /> : null}
+                    </AppModal>
+                  </div>
+                  <div className="grid grid-cols-2 items-center gap-52">
+                    <FormSelectSubTypes />
+                    <Button
+                      className="w-40"
+                      onClick={() => setOpenModalSubtypeCreate(true)}
+                    >
+                      Create new subtype
+                    </Button>
+                    <AppModal
+                      isOpen={openModalSubtypeCreate}
+                      setIsOpen={setOpenModalSubtypeCreate}
+                    >
+                      <CreatingSubTypesForm />
+                    </AppModal>
+                  </div>
+
+                  <div>
+                    {listAttribute?.map((attribute) => (
+                      <FormMeasurementInput
+                        label={attribute.name}
+                        name={["attributes", "attributeType", attribute.name]}
+                        key={attribute._id}
+                      />
+                    ))}
+                  </div>
+                </TabPane>
+              </Tabs>
+            </Card>
+
+            <Card className="mt-4">
+              <FormUploadButton label="Display images" name="image" />
+            </Card>
+            <Card className="mt-8">
               <p className="text-3xl font-bold mb-2">Create 3D model</p>
               <FormInput
                 label="3D model's id"
@@ -149,7 +157,7 @@ const CreatingProductForm = () => {
                 height={600}
                 width={900}
               ></iframe>
-            </div>
+            </Card>
           </div>
 
           {/* Right */}

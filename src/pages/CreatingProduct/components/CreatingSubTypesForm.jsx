@@ -2,7 +2,6 @@ import { Form, Button } from "antd";
 import FormInput from "@components/FormInput";
 import FormUploadSingleButton from "@components/FormUploadSingleButton";
 import FormSelect from "@components/FormSelect";
-import { useCreatingProductValues } from "../CreatingProductContext";
 import FormTextArea from "@components/FormTextArea";
 
 import { useFetch } from "@hooks/api-hooks";
@@ -15,8 +14,6 @@ import FormSelectType from "./FormSelectType";
 import { transferSelectOption } from "@utils/transferSelectOption";
 
 const CreatingSubTypesForm = () => {
-  const { productType } = useCreatingProductValues();
-
   const { data: allAtrributes } = useFetch(get_attribute());
   const { data: allSubtypesGroup } = useFetch(get_sub_type_group());
   const { mutate: createSubtype } = usePost(
@@ -26,7 +23,6 @@ const CreatingSubTypesForm = () => {
     () => {},
     get_all_subType()
   );
-
   
   const typesAttributeOptions = transferSelectOption(
     allAtrributes,
@@ -43,8 +39,7 @@ const CreatingSubTypesForm = () => {
       ...values,
       thumb: values.thumb.file.url,
     };
-    console.log(data);
-    // createSubtype(data);
+    createSubtype(data);
   };
   return (
     <Form layout="vertical" onFinish={onFinish}>
@@ -72,7 +67,7 @@ const CreatingSubTypesForm = () => {
       <FormUploadSingleButton
         label="Subtype thumb"
         name="thumb"
-        className="xl:w-[18.5rem] lg:w-[10rem]"
+        className="xl:w-96 lg:w-96 md:w-[8rem]"
         required
       />
       <FormTextArea
