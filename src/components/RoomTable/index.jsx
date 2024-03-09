@@ -4,6 +4,8 @@ import EditButton from "../EditButton";
 import { formatCurrency } from "../../utils/formatCurrency";
 
 function RoomTable({ data, onEdit }) {
+  console.log(data);
+
   const columns = [
     {
       title: "Room",

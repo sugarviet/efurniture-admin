@@ -30,14 +30,11 @@ const DATA = [
   },
 ];
 
-function FurnitureSelection({ onChange, className }) {
+function FurnitureSelection({ onChange, className, value }) {
   const [modalOpen, setModalOpen] = useState(false);
-  const [selectedFurniture, setSelectedFurniture] = useState(undefined);
 
   const handleSelect = (furniture) => {
-    const { _id } = furniture;
-    onChange(_id);
-    setSelectedFurniture(furniture);
+    onChange(furniture);
     setModalOpen(false);
   };
 
@@ -51,11 +48,11 @@ function FurnitureSelection({ onChange, className }) {
           className
         )}
       >
-        {selectedFurniture ? (
+        {value ? (
           <BriefInfo
             info={{
-              thumb: selectedFurniture.thumbs[0],
-              name: selectedFurniture.name,
+              thumb: value.thumbs[0],
+              name: value.name,
             }}
             img_class="h-6"
           />
