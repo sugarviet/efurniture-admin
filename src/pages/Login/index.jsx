@@ -22,9 +22,8 @@ const Login = () => {
     get_login(),
     undefined,
     (data) => {
-
-      const {access_token, refresh_token} = data.data.metaData;
-      const decode = jwtDecode(data.data.metaData.access_token);
+      const {access_token, refresh_token} = data;
+      const decode = jwtDecode(data.access_token);
       const role = getCurrentUserRole(decode.role);
 
       setTokens(access_token, refresh_token, decode.account_id ,role)

@@ -22,6 +22,7 @@ const RoomForm = () => {
       form={form}
       layout="vertical"
       onFinish={handleSubmit}
+      requiredMark={'optional'}
       autoComplete="off"
     >
       <div className="grid grid-cols-4 gap-4">
@@ -54,6 +55,9 @@ const RoomForm = () => {
                     <FormInputNumber
                       className="h-12"
                       name={[name, "quantity"]}
+                      defaultValue={1}
+                      min={0}
+                      max={2}
                     />
                     <DeleteOutlined
                       onClick={() => remove(name)}
