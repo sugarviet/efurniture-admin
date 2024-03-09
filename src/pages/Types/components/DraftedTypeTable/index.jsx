@@ -1,13 +1,25 @@
 
 import { Table, Button, Space } from "antd";
 import { withFetchData } from "@hocs/withFetchData";
-import { get_draft_category } from "@api/categoryApi";
+import { get_draft_type } from "@api/typesApi";
 import Proptypes from "prop-types";
 
-const DraftedCategoriesTable = ({data}) => {
+const DraftedTypeTable = ({data}) => {
   const columns = [
     {
-      title: "Category Name",
+      title: "Thumb",
+      dataIndex: "thumb",
+      key: "thumb",
+      render: (text, record) => (
+        <img
+          src={record.thumb}
+          alt={record.name}
+          style={{ width: 100, height: 100 }}
+        />
+      ),
+    },
+    {
+      title: "Type Name",
       dataIndex: "name",
       key: "name",
     },
@@ -29,13 +41,13 @@ const DraftedCategoriesTable = ({data}) => {
   ];
   return (
     <div>
-      <p className="text-xl font-bold">DraftedS Type</p>
+      <p className="text-xl font-bold">Drafted Type</p>
       <Table dataSource={data} columns={columns} />
     </div>
   );
 };
-DraftedCategoriesTable.propTypes = {
+DraftedTypeTable.propTypes = {
   data: Proptypes.object,
 };
 
-export default withFetchData(DraftedCategoriesTable, get_draft_category);
+export default withFetchData(DraftedTypeTable, get_draft_type);

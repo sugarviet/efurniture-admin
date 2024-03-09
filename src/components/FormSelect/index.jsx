@@ -13,7 +13,9 @@ const FormSelect = ({
   defaultValue,
   className,
   mode,
-  allowClear
+  allowClear,
+  style,
+  onChange,
 }) => {
   return (
     <FormItem
@@ -22,6 +24,7 @@ const FormSelect = ({
       type={type}
       required={required}
       message={message}
+      style={style}
     >
       <Select
         mode={mode}
@@ -30,6 +33,7 @@ const FormSelect = ({
         placeholder={placeholder}
         options={options}
         className={className}
+        onChange={onChange}
       />
     </FormItem>
   );
@@ -47,6 +51,8 @@ FormSelect.propTypes = {
   className: PropTypes.string,
   mode: PropTypes.string,
   allowClear: PropTypes.bool,
+  onChange: PropTypes.func,
+  style: PropTypes.object,
 };
 
 FormSelect.defaultProps = {

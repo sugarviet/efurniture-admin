@@ -11,6 +11,7 @@ const FormInputNumber = ({
   required,
   message,
   className,
+  style,
   ...others
 }) => {
   return (
@@ -20,6 +21,7 @@ const FormInputNumber = ({
       type={type}
       required={required}
       message={message}
+      style={style}
     >
       <InputNumber
         placeholder={placeholder}
@@ -42,6 +44,7 @@ FormInputNumber.propTypes = {
   required: PropTypes.bool,
   message: PropTypes.string,
   className: PropTypes.string,
+  style: PropTypes.object,
 };
 
 FormInputNumber.defaultProps = {

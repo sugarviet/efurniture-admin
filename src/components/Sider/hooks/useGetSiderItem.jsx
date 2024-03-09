@@ -42,9 +42,9 @@ export function useGetSiderItem() {
       getItem("Create Rooms", "/room/create"),
     ]),
     getItem("Reports", "/reports", <TagsOutlined />),
-    getItem("Categories", "/category", <TagsOutlined />, [
-      getItem("List Category", "/categories"),
-      getItem("Create Category", "/category/create"),
+    getItem("Types", "/type", <TagsOutlined />, [
+      getItem("List Types", "/types"),
+      getItem("Create types", "/type/create"),
     ]),
   ];
   const itemsForSuperAdmin = [
@@ -77,9 +77,9 @@ export function useGetSiderItem() {
       getItem("Create Rooms", "/room/create"),
     ]),
     getItem("Reports", "/report", <TagsOutlined />),
-    getItem("Categories", "/category", <TagsOutlined />, [
-      getItem("List Category", "/categories"),
-      getItem("Create Category", "/category/create"),
+    getItem("Types", "/type", <TagsOutlined />, [
+      getItem("List Types", "/types"),
+      getItem("Create types", "/type/create"),
     ]),
   ];
 

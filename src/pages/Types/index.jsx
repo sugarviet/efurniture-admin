@@ -1,12 +1,12 @@
 import { Button } from "antd";
 import PageTitle from "@components/PageTitle";
-import CreatingCategory from "./components/CreatingCategory";
+import CreatingType from "./components/CreatingType";
 import AppModal from "@components/AppModal";
 import { useState } from "react";
-import PublishedCategoriesTable from "./components/PublishedCategoriesTable";
-import DraftedCategoriesTable from "./components/DraftedCategoriesTable";
+import PublishedTypeTable from "./components/PublishedTypeTable";
+import DraftedTypeTable from "./components/DraftedTypeTable";
 
-const Categories = () => {
+const Types = () => {
   const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
 
   const handleOpenModalCreate = () => {
@@ -16,24 +16,24 @@ const Categories = () => {
   return (
     <div>
       <div className="flex justify-between px-3 my-3">
-        <PageTitle title="Category management" />
+        <PageTitle title="Type management" />
         <Button
           type="primary"
           className="primary"
           onClick={handleOpenModalCreate}
         >
-          Create new category
+          Create new type
         </Button>
       </div>
 
-      <PublishedCategoriesTable />
-      <DraftedCategoriesTable />
+      <PublishedTypeTable />
+      <DraftedTypeTable />
 
       <AppModal isOpen={isModalCreateOpen} setIsOpen={setIsModalCreateOpen}>
-        <CreatingCategory />
+        <CreatingType />
       </AppModal>
     </div>
   );
 };
 
-export default Categories;
+export default Types;

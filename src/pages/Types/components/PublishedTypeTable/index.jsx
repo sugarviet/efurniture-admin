@@ -1,14 +1,25 @@
 import { Table, Button, Space } from "antd";
 import { Link } from "react-router-dom";
 import { withFetchData } from "@hocs/withFetchData";
-import { get_published_category } from "../../../../api/categoryApi";
+import { get_published_type } from "../../../../api/typesApi";
 import Proptypes from "prop-types";
 
-
-const PublishedCategoriesTable = ({data}) => {
+const PublishedTypeTable = ({ data }) => {
   const columns = [
     {
-      title: "Category Name",
+      title: "Thumb",
+      dataIndex: "thumb",
+      key: "thumb",
+      render: (text, record) => (
+        <img
+          src={record.thumb}
+          alt={record.name}
+          style={{ width: 100, height: 100 }}
+        />
+      ),
+    },
+    {
+      title: "Type Name",
       dataIndex: "name",
       key: "name",
     },
@@ -19,10 +30,7 @@ const PublishedCategoriesTable = ({data}) => {
       render: (item) => (
         <Space className="flex gap-4">
           <Link to={`/category/${item._id}`}>
-           
-            <Button danger>
-              Disable
-            </Button>
+            <Button danger>Disable</Button>
           </Link>
         </Space>
       ),
@@ -36,9 +44,8 @@ const PublishedCategoriesTable = ({data}) => {
   );
 };
 
-PublishedCategoriesTable.propTypes = {
+PublishedTypeTable.propTypes = {
   data: Proptypes.object,
 };
 
-
-export default withFetchData(PublishedCategoriesTable,get_published_category);
+export default withFetchData(PublishedTypeTable, get_published_type);
