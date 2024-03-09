@@ -11,7 +11,7 @@ function useRoom() {
             "name": name,
             "description": description,
             "thumb": thumb.file.url,
-            "products": products
+            "products": products.map(item => ({ product: item.product._id, quantity: item.quantity }))
         }
 
         createRoomMutation(body);

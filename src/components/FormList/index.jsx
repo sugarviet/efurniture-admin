@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
-import { Form, Button } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
-import FormItem from '../FormItem';
+import { Form, Button, message } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
+import FormItem from "../FormItem";
 
-const FormList = ({children, name, initialValues, ...others}) => {
+const FormList = ({ children, name, initialValues, ...others }) => {
   return (
     <Form.List name={name} {...others} initialValue={initialValues}>
       {(fields, { add, remove }) => (
@@ -21,7 +21,7 @@ const FormList = ({children, name, initialValues, ...others}) => {
         </>
       )}
     </Form.List>
-  )
-}
+  );
+};
 
-export default FormList
+export default FormList;

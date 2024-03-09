@@ -9,7 +9,7 @@ import FormItem from "../FormItem";
 import { classNames } from "../../utils/classNames";
 
 const FormUploadButton = (props) => {
-  const { className, name, label } = props;
+  const { className, name, label, required } = props;
 
   const handleUploadImage = async ({ file, onSuccess, onError }) => {
     const formData = new FormData();
@@ -39,7 +39,7 @@ const FormUploadButton = (props) => {
   };
 
   return (
-    <FormItem label={label} name={name}>
+    <FormItem label={label} name={name} required>
       <Upload
         className="h-full"
         multiple

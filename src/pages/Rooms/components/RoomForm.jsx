@@ -7,7 +7,7 @@ import FormInputNumber from "../../../components/FormInputNumber";
 import FurnitureSelection from "../../../components/FurnitureSelection";
 import FormList from "../../../components/FormList";
 import useRoom from "../../../hooks/useRoom";
-import { CloseCircleFilled, DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined } from "@ant-design/icons";
 
 const RoomForm = () => {
   const { createRoom } = useRoom();
@@ -21,6 +21,7 @@ const RoomForm = () => {
     <Form
       form={form}
       layout="vertical"
+      requiredMark="optional"
       onFinish={handleSubmit}
       autoComplete="off"
     >
@@ -29,6 +30,7 @@ const RoomForm = () => {
           <FormInput
             label="Name"
             name="name"
+            required
             placeholder="Write room name here..."
             message="Please enter the name of the room"
           />
@@ -36,6 +38,7 @@ const RoomForm = () => {
           <FormTextArea
             label="Description"
             name="description"
+            required
             placeholder="Write description here..."
             message="Please enter the description of the room"
           />
@@ -47,13 +50,39 @@ const RoomForm = () => {
             {({ name, remove }) => {
               return (
                 <div className="grid grid-cols-6 gap-4 items-center">
-                  <FormItem className="col-span-5" name={[name, "product"]}>
+                  <Form.Item
+                    required
+                    rules={[
+                      ({ getFieldValue }) => ({
+                        validator(rule, value) {
+                          const products =
+                            [...getFieldValue(["products"])] || [];
+
+                          const isDuplicate =
+                            products.filter(
+                              (item) => item.product._id === value._id
+                            ).length >= 2;
+
+                          if (isDuplicate) {
+                            return Promise.reject([
+                              "Furniture has been already exists",
+                            ]);
+                          }
+                          return Promise.resolve();
+                        },
+                      }),
+                    ]}
+                    className="col-span-5"
+                    name={[name, "product"]}
+                  >
                     <FurnitureSelection className="h-12" />
-                  </FormItem>
+                  </Form.Item>
                   <div className="flex gap-4">
                     <FormInputNumber
+                      min={1}
                       className="h-12"
                       name={[name, "quantity"]}
+                      defaultValue={1}
                     />
                     <DeleteOutlined
                       onClick={() => remove(name)}
@@ -65,7 +94,12 @@ const RoomForm = () => {
             }}
           </FormList>
         </div>
-        <FormUploadButton className="h-96" label="Image" name="thumb" />
+        <FormUploadButton
+          required
+          className="h-96"
+          label="Image"
+          name="thumb"
+        />
       </div>
 
       <Button type="primary" className="primary" htmlType="submit">
