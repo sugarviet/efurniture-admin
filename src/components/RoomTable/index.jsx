@@ -4,11 +4,12 @@ import EditButton from "../EditButton";
 import { formatCurrency } from "../../utils/formatCurrency";
 
 function RoomTable({ data, onEdit }) {
-  console.log(data);
   const columns = [
     {
       title: "Room",
-      render: (_, record) => <BriefInfo col img_class={"h-20"} info={record} />,
+      render: (_, record) => (
+        <BriefInfo col img_class="h-20 w-16" info={record} />
+      ),
     },
     {
       title: "Description",
