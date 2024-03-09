@@ -1,11 +1,10 @@
 import { Table } from "antd";
-import { withFetchData } from "@hocs/withFetchData";
-import { get_all_rooms_api } from "../../api/roomApi";
 import BriefInfo from "../BriefInfo";
 import EditButton from "../EditButton";
 import { formatCurrency } from "../../utils/formatCurrency";
 
-function RoomTable({ data }) {
+function RoomTable({ data, onEdit }) {
+  console.log(data);
   const columns = [
     {
       title: "Room",
@@ -31,7 +30,7 @@ function RoomTable({ data }) {
     },
     {
       title: "Actions",
-      render: (_, record) => <EditButton />,
+      render: (_, record) => <EditButton onClick={() => onEdit(data)} />,
     },
   ];
 
@@ -48,4 +47,4 @@ function RoomTable({ data }) {
   );
 }
 
-export default withFetchData(RoomTable, get_all_rooms_api);
+export default RoomTable;

@@ -19,7 +19,12 @@ const FormTextArea = ({
       required={required}
       message={message}
     >
-      <TextArea placeholder={placeholder} allowClear size="large" />
+      <TextArea
+        className="border-black rounded-none"
+        placeholder={placeholder}
+        allowClear
+        size="large"
+      />
     </FormItem>
   );
 };

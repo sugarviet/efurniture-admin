@@ -9,7 +9,7 @@ const validateWhitespace = () => ({
       callback();
     }
   },
-})
+});
 
 const validateConfirmPassword = ({ getFieldValue }) => ({
   validator(_, value) {
@@ -24,7 +24,10 @@ const validateConfirmPassword = ({ getFieldValue }) => ({
 
 const FORM_TYPES = {
   password: {
-    rules: [{ required: true, message: "Please input your password!" }, validateWhitespace],
+    rules: [
+      { required: true, message: "Please input your password!" },
+      validateWhitespace,
+    ],
   },
   confirmPassword: {
     rules: [
@@ -34,21 +37,33 @@ const FORM_TYPES = {
   },
   email: {
     rules: [
-      {type: 'email', required: true, message: "Please enter a valid email" },
-    ]
+      { type: "email", required: true, message: "Please enter a valid email" },
+    ],
   },
   default: {
     rules: [{ required: false, message: "" }],
   },
 };
 
-const FormItem = ({ children, label, name, type, message, required, ...others }) => {
-  const customRules = [
-    { required: true, message },
-  ];
+const FormItem = ({
+  children,
+  label,
+  name,
+  type,
+  message,
+  required,
+  ...others
+}) => {
+  const customRules = [{ required: true, message }];
   return (
     <Form.Item
-      label={label ? <span className="text-lg text-gray-800 font-semibold">{label}</span> : label}
+      label={
+        label ? (
+          <span className="text-sm text-gray-800 font-semibold">{label}</span>
+        ) : (
+          label
+        )
+      }
       name={name}
       rules={required ? customRules : FORM_TYPES[type].rules}
       {...others}

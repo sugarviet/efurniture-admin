@@ -39,6 +39,7 @@ import withAuth from "./hocs/withAuth";
 import Cookies from "js-cookie";
 
 import Login from "@pages/Login";
+import CreateRoom from "./pages/CreateRoom";
 const WrappedComponentWithAuth = withAuth(RootLayout);
 
 export const pathSystem = {
@@ -66,6 +67,7 @@ export const pathSystem = {
   categoryDetail: "/category/:id",
   warehouse: "/warehouse",
   rooms: "/rooms",
+  createRoom: "/room/create",
 };
 
 const adminMasterRoutes = [
@@ -206,6 +208,10 @@ const staffRoutes = [
   {
     path: pathSystem.rooms,
     element: <Rooms />,
+  },
+  {
+    path: pathSystem.createRoom,
+    element: <CreateRoom />,
   },
 ];
 
