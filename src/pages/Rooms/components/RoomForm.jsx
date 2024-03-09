@@ -7,6 +7,7 @@ import FormInputNumber from "../../../components/FormInputNumber";
 import FurnitureSelection from "../../../components/FurnitureSelection";
 import FormList from "../../../components/FormList";
 import useRoom from "../../../hooks/useRoom";
+import { CloseCircleFilled, DeleteOutlined } from "@ant-design/icons";
 
 const RoomForm = () => {
   const { createRoom } = useRoom();
@@ -49,7 +50,16 @@ const RoomForm = () => {
                   <FormItem className="col-span-5" name={[name, "product"]}>
                     <FurnitureSelection className="h-12" />
                   </FormItem>
-                  <FormInputNumber className="h-12" name={[name, "quantity"]} />
+                  <div className="flex gap-4">
+                    <FormInputNumber
+                      className="h-12"
+                      name={[name, "quantity"]}
+                    />
+                    <DeleteOutlined
+                      onClick={() => remove(name)}
+                      className="h-12 text-xl mx-auto text-rose-500"
+                    />
+                  </div>
                 </div>
               );
             }}
