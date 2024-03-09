@@ -1,13 +1,16 @@
 /* eslint-disable react/prop-types */
-import { Upload, Button } from "antd";
+import { Upload } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-import Proptypes from "prop-types";
+import PropTypes from "prop-types";
 import { API_KEY, UPLOAD_IMG_URL } from "@config/uploadImage";
 import { message } from "antd";
 import axios from "axios";
 import FormItem from "../FormItem";
+import { classNames } from "../../utils/classNames";
 
 const FormUploadButton = (props) => {
+  const { className, name, label } = props;
+
   const handleUploadImage = async ({ file, onSuccess, onError }) => {
     const formData = new FormData();
     formData.set("key", API_KEY);
@@ -34,29 +37,28 @@ const FormUploadButton = (props) => {
       message.error(`Failed to upload ${file.name}`);
     }
   };
-  
+
   return (
-    <FormItem {...props}>
+    <FormItem label={label} name={name}>
       <Upload
-        {...props}
+        className="h-full"
         multiple
         showUploadList
-        className="w-full"
         customRequest={handleUploadImage}
       >
-        <Button type="dashed" className={`${"h-[10rem] w-full xl:w-[56rem] lg:w-[42rem]"} ${props.className}`}>
-          <div className="flex flex-col gap-2">
+        <button
+          type="button"
+          className={classNames(
+            "border-black p-4 flex flex-col items-center justify-center border-dashed border-[1px] rounded-xl",
+            className
+          )}
+        >
           <span>Drag your photo here or browse from device</span>
-          <span className="text-4xl"><UploadOutlined /></span>
-          </div>
-        </Button>
+          <UploadOutlined className="text-4xl" />
+        </button>
       </Upload>
     </FormItem>
   );
-};
-
-FormUploadButton.propTypes = {
-  callback: Proptypes.func.isRequired,
 };
 
 export default FormUploadButton;

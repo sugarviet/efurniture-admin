@@ -1,6 +1,7 @@
 import { InputNumber } from "antd";
 import FormItem from "../FormItem";
 import PropTypes from "prop-types";
+import { classNames } from "../../utils/classNames";
 
 const FormInputNumber = ({
   label,
@@ -20,7 +21,15 @@ const FormInputNumber = ({
       required={required}
       message={message}
     >
-      <InputNumber placeholder={placeholder} className={className} type="number" {...others}/>
+      <InputNumber
+        placeholder={placeholder}
+        className={classNames(
+          "border-black rounded-none w-full flex items-center",
+          className
+        )}
+        type="number"
+        {...others}
+      />
     </FormItem>
   );
 };

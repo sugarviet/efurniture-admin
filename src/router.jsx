@@ -1,8 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import {
-  createBrowserRouter,
-  Navigate
-} from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 
 import { lazy } from "react";
 // Layouts
@@ -42,6 +39,7 @@ import withAuth from "./hocs/withAuth";
 import Cookies from "js-cookie";
 
 import Login from "@pages/Login";
+import CreateRoom from "./pages/CreateRoom";
 const WrappedComponentWithAuth = withAuth(RootLayout);
 
 export const pathSystem = {
@@ -67,8 +65,9 @@ export const pathSystem = {
   catalogCreate: "/catelog/create",
   categories: "/categories",
   categoryDetail: "/category/:id",
-  warehouse: '/warehouse',
-  rooms: '/rooms',
+  warehouse: "/warehouse",
+  rooms: "/rooms",
+  createRoom: "/room/create",
 };
 
 const adminMasterRoutes = [
@@ -145,7 +144,7 @@ const adminRoutes = [
   },
   {
     path: pathSystem.eventCreate,
-    element: <CreateEvents />
+    element: <CreateEvents />,
   },
   {
     path: pathSystem.orders,
@@ -192,7 +191,7 @@ const staffRoutes = [
   },
   {
     path: pathSystem.eventCreate,
-    element: <CreateEvents />
+    element: <CreateEvents />,
   },
   {
     path: pathSystem.vouchers,
@@ -206,20 +205,27 @@ const staffRoutes = [
     path: pathSystem.warehouse,
     element: <Warehouse />,
   },
+  {
+    path: pathSystem.rooms,
+    element: <Rooms />,
+  },
+  {
+    path: pathSystem.createRoom,
+    element: <CreateRoom />,
+  },
 ];
 
 const getRoutesBasedOnRole = () => {
-  
-  const role = Cookies.get('role');
-  
-    const routesForCharacter = {
-      admin: adminRoutes,
-      staff: staffRoutes,
-      superAdmin: adminMasterRoutes
-    };
-  
-    return routesForCharacter[role] || [];
+  const role = Cookies.get("role");
+
+  const routesForCharacter = {
+    admin: adminRoutes,
+    staff: staffRoutes,
+    superAdmin: adminMasterRoutes,
   };
+
+  return routesForCharacter[role] || [];
+};
 
 export const router = createBrowserRouter([
   {
@@ -234,8 +240,7 @@ export const router = createBrowserRouter([
     ],
   },
   {
-      path: '/login',
-      element: <Login />,
-      
-    },
+    path: "/login",
+    element: <Login />,
+  },
 ]);
