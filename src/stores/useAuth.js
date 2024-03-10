@@ -15,7 +15,7 @@ const useAuth = create((set) => ({
     Cookies.set('role', role);
 
   },
-  
+
   clearTokens: () => {
     set({ accessToken: null, refreshToken: null, accountId: null, role: null });
     Cookies.remove('access_token');
