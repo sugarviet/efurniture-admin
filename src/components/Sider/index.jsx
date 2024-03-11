@@ -2,6 +2,7 @@ import { Menu } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useGetSiderItem } from "./hooks/useGetSiderItem";
 import useAuth from "../../stores/useAuth";
+import { classNames } from "../../utils/classNames";
 
 const activeTab = window.location.pathname;
 
@@ -14,18 +15,14 @@ const AppSider = () => {
   };
 
   return (
-    <div>
-      <Menu
-        theme="light"
-        onClick={onClick}
-        style={{
-          height: "100%",
-        }}
-        defaultSelectedKeys={[activeTab]}
-        mode="inline"
-        items={getItemByRole[role]}
-      />
-    </div>
+    <Menu
+      theme="light"
+      onClick={onClick}
+      defaultSelectedKeys={[activeTab]}
+      mode="inline"
+      className={classNames("text-lg tracking-wide")}
+      items={getItemByRole[role]}
+    />
   );
 };
 

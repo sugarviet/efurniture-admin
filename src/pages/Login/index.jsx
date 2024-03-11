@@ -16,20 +16,20 @@ const init_route = {
 };
 
 const Login = () => {
-  const {setTokens} = useAuth();
+  const { setTokens } = useAuth();
   const navigate = useNavigate();
   const { mutate } = usePost(
     get_login(),
     undefined,
     (data) => {
-      const {access_token, refresh_token} = data;
+      const { access_token, refresh_token } = data;
       const decode = jwtDecode(data.access_token);
       const role = getCurrentUserRole(decode.role);
 
-      setTokens(access_token, refresh_token, decode.account_id ,role)
+      setTokens(access_token, refresh_token, decode.account_id, role);
       navigate(init_route[role]);
       refreshPage();
-      alert('thanh cong')
+      alert("thanh cong");
       refreshPage();
     },
     () => {
