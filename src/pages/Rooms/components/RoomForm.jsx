@@ -101,9 +101,7 @@ const RoomForm = () => {
         />
       </div>
 
-      <Button type="primary" className="primary" htmlType="submit">
-        Submit
-      </Button>
+      <button className="furniture-button">create</button>
     </Form>
   );
 };

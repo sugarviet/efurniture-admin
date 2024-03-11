@@ -109,7 +109,7 @@ function VoucherForm() {
         <FurnitureSelection multiple className="h-12" />
       </FormItem>
 
-      <button onClick={onFinish} className="furniture-button px-4 py-2">
+      <button onClick={onFinish} className="furniture-button">
         Create
       </button>
     </Form>

@@ -29,7 +29,7 @@ body {
 }
 
 .furniture-button {
-  @apply uppercase tracking-[0.125rem] bg-black text-center text-white border-[1px] border-black hover:bg-white hover:text-black hover:border-[1px] hover:border-black duration-300 cursor-pointer
+  @apply  px-4 py-2 uppercase tracking-[0.125rem] bg-black text-center text-white border-[1px] border-black hover:bg-white hover:text-black hover:border-[1px] hover:border-black duration-300 cursor-pointer
 }
 
 :where(.css-dev-only-do-not-override-1ns55bg).ant-btn-primary {
