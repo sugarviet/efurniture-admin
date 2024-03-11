@@ -23,7 +23,7 @@ export function getCurrentUserRole(access_token){
 }
 
 export function isAdmin(){
-  const admin = "admin" === +Cookies.get('role');
+  const admin = "admin" === Cookies.get('role');
 
   return admin
 }

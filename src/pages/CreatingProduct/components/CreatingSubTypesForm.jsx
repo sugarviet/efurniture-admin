@@ -42,7 +42,7 @@ const CreatingSubTypesForm = () => {
     createSubtype(data);
   };
   return (
-    <Form layout="vertical" onFinish={onFinish}>
+    <Form layout="vertical" onFinish={onFinish} requiredMark='optional'>
       <FormInput
         name="subType"
         label="Sub Type"

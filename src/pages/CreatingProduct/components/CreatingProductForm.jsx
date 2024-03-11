@@ -12,26 +12,28 @@ import CreatingType from "../../Types/components/CreatingType";
 import CreatingSubTypesForm from "./CreatingSubTypesForm";
 import useCreatingProductManagement from "../hooks/useCreatingProductManagement";
 import FormMeasurementInput from "../../../components/FormMeasurementInput";
+import FormInputNumber from "../../../components/FormInputNumber";
 
 const { TabPane } = Tabs;
 
 const CreatingProductForm = () => {
   const [openModalCreate, setOpenModalCreate] = useState(false);
   const [openModalSubtypeCreate, setOpenModalSubtypeCreate] = useState(false);
-  const [form] = Form.useForm();
-  const { listAttribute } = useCreatingProductManagement();
+  const { listAttribute, form, create_draft_product } = useCreatingProductManagement();
 
   const admin = isAdmin();
 
   const onFinish = (values) => {
-    const listImages = values.thumb.fileList.map((image) => image.url);
+    const listImages = values.thumbs.fileList.map((image) => image.url);
 
     const data = {
       ...values,
       thumbs: listImages
     }
+    // console.log("Success:", data);
 
-    console.log("Success:", data);
+    create_draft_product(data);
+
   };
 
   return (
@@ -39,10 +41,11 @@ const CreatingProductForm = () => {
       <Form
         form={form}
         layout="vertical"
+        requiredMark='optional'
         initialValues={{
-          label: "Viet Dang",
-          description: "Viet Dang",
-          regularPrice: 100,
+          regular_price: 100,
+          sale_price: 0,
+          model3D: ""
         }}
         onFinish={onFinish}
         autoComplete="off"
@@ -73,12 +76,15 @@ const CreatingProductForm = () => {
           {/* Left */}
           <div className="flex-1">
             <FormInput
+            required
               label="Product Title"
-              name="label"
+              name="name"
               placeholder="Write title here..."
             />
 
             <FormTextArea
+            required
+
               label="Product Description"
               name="description"
               placeholder="Write description here..."
@@ -88,18 +94,18 @@ const CreatingProductForm = () => {
               <Tabs tabPosition="left" className="mb-4">
                 <TabPane tab="Pricing" key="pricing">
                   <div className="flex gap-10">
-                    <FormInput
-                      label="Regular Pricing"
-                      name="regularPrice"
-                      placeholder="$$$"
-                      inputType="number"
-                    />
-                    <FormInput
-                      label="Sale Pricing"
-                      name="salePrice"
-                      placeholder="$$$"
-                      inputType="number"
-                    />
+               
+                    <FormInputNumber label="Regular Pricing"
+            required
+
+                      name="regular_price"
+                      placeholder="$$$" />
+                       <FormInputNumber   label="Sale Pricing"
+            required
+
+                      name="sale_price"
+                      placeholder="$$$"  />
+                  
                   </div>
                 </TabPane>
 
@@ -138,6 +144,7 @@ const CreatingProductForm = () => {
                   <div>
                     {listAttribute?.map((attribute) => (
                       <FormMeasurementInput
+                        required
                         label={attribute.name}
                         name={["attributes", "attributeType", attribute.name]}
                         key={attribute._id}
@@ -156,6 +163,7 @@ const CreatingProductForm = () => {
               <FormInput
                 label="3D model's id"
                 name="model3D"
+                value=""
                 placeholder="Write title here..."
               />
               <iframe

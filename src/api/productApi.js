@@ -13,7 +13,7 @@ export const get_product_detail = (id) => {
     return `/products/${id}`;
 }
 
-export const create_product = () => {
+export const create_product_staff = () => {
 
-    return "/products";
+    return "/product/staff";
 }
