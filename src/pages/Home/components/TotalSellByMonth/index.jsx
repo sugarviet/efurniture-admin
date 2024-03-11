@@ -7,18 +7,21 @@ import {
   Tooltip,
   XAxis,
   YAxis,
-  ResponsiveContainer
+  ResponsiveContainer,
 } from "recharts";
+import { useEffect } from "react";
 import { usePost } from "@hooks/api-hooks";
 import { get_revenue_by_range_date } from "@api/revenueApi";
 
 const formatData = (data) => {
-  return data.map(item => ({
-    date: new Date(item.date).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit' }),
-    profit: item.profit
+  return data?.map((item) => ({
+    date: new Date(item.date).toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "2-digit",
+    }),
+    profit: item.profit,
   }));
 };
-
 
 const generateDateRange = () => {
   const options = [];
@@ -27,10 +30,11 @@ const generateDateRange = () => {
   for (let i = 0; i < 12; i++) {
     const startDate = today.clone().startOf("month").subtract(i, "month");
     const endDate = today.clone().endOf("month").subtract(i, "month");
-    const label = startDate.format("MMM DD") + " - " + endDate.format("DD, YYYY");
+    const label =
+      startDate.format("MMM DD") + " - " + endDate.format("DD, YYYY");
     const value = {
       start: startDate.format("YYYY-MM-DD"),
-      end: endDate.format("YYYY-MM-DD")
+      end: endDate.format("YYYY-MM-DD"),
     };
     options.push({ label, value });
   }
@@ -38,42 +42,56 @@ const generateDateRange = () => {
   return options;
 };
 
+const getStartDateEndDate = (values) => {
+  const getDate = values.split(",");
+
+  return {
+    startDay: getDate[0],
+    endDay: getDate[1],
+  };
+};
+
 const TotalSellByMonth = () => {
   const fakeData = [
-    {date: '2024-03-06T00:00:00.000Z', profit: 10},
-    {date: '2024-03-07T00:00:00.000Z', profit: 550},
-    {date: '2024-03-08T00:00:00.000Z', profit: 450},
-    {date: '2024-03-09T00:00:00.000Z', profit: 450},
-    {date: '2024-03-10T00:00:00.000Z', profit: 540},
-    {date: '2024-03-11T00:00:00.000Z', profit: 450},
-    {date: '2024-03-12T00:00:00.000Z', profit: 940},
-    {date: '2024-03-13T00:00:00.000Z', profit: 210},
-    {date: '2024-03-14T00:00:00.000Z', profit: 110},
-    {date: '2024-03-15T00:00:00.000Z', profit: 130},
+    { date: "2024-03-06T00:00:00.000Z", profit: 10 },
+    { date: "2024-03-07T00:00:00.000Z", profit: 550 },
+    { date: "2024-03-08T00:00:00.000Z", profit: 450 },
+    { date: "2024-03-09T00:00:00.000Z", profit: 450 },
+    { date: "2024-03-10T00:00:00.000Z", profit: 540 },
+    { date: "2024-03-11T00:00:00.000Z", profit: 450 },
+    { date: "2024-03-12T00:00:00.000Z", profit: 940 },
+    { date: "2024-03-13T00:00:00.000Z", profit: 210 },
+    { date: "2024-03-14T00:00:00.000Z", profit: 110 },
+    { date: "2024-03-15T00:00:00.000Z", profit: 130 },
+  ];
 
-  ]
-  
   const options = generateDateRange();
-  const {mutate: getRevenue, data: listRevenue} = usePost(get_revenue_by_range_date())
-  
-  console.log(listRevenue)
-  const formattedFakeData = formatData(fakeData);
-  console.log(formattedFakeData);
+  const { mutate: getRevenue, data: listRevenue } = usePost(
+    get_revenue_by_range_date()
+  );
 
-  const selectDateRange = options.map(option => ({
+  const formattedRevenueData = formatData(listRevenue?.data);
+
+  const selectDateRange = options.map((option) => ({
     label: option.label,
-    value: `${option.value.start},${option.value.end}`
-  }))
+    value: `${option.value.start},${option.value.end}`,
+  }));
 
   const handleChangeRangeDate = (values) => {
-    console.log(values);
-    const getDate = values.split(',')
+    const { startDay, endDay } = getStartDateEndDate(values);
     getRevenue({
-      startDay: getDate[0],
-      endDay: getDate[1]
-    })
+      startDay,
+      endDay,
+    });
+  };
 
-  }
+  useEffect(() => {
+    const { startDay, endDay } = getStartDateEndDate(selectDateRange[0].value);
+    getRevenue({
+      startDay,
+      endDay,
+    });
+  }, []);
 
   return (
     <section className="w-full">
@@ -88,7 +106,7 @@ const TotalSellByMonth = () => {
             style={{
               width: 250,
             }}
-            value={selectDateRange[0].value}
+            defaultValue={selectDateRange[0].value}
             options={selectDateRange}
             onChange={handleChangeRangeDate}
           />
@@ -97,7 +115,7 @@ const TotalSellByMonth = () => {
 
       <ResponsiveContainer width={"100%"} height={300}>
         <LineChart
-          data={formattedFakeData}
+          data={formattedRevenueData}
           margin={{
             top: 5,
             right: 30,
