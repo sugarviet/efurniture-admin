@@ -2,7 +2,6 @@ import { Form, Button } from "antd";
 import FormInput from "@components/FormInput";
 import FormUploadButton from "@components/FormUploadButton";
 import FormTextArea from "@components/FormTextArea";
-import FormItem from "../../../components/FormItem";
 import FormInputNumber from "../../../components/FormInputNumber";
 import FurnitureSelection from "../../../components/FurnitureSelection";
 import FormList from "../../../components/FormList";
@@ -102,9 +101,7 @@ const RoomForm = () => {
         />
       </div>
 
-      <Button type="primary" className="primary" htmlType="submit">
-        Submit
-      </Button>
+      <button className="furniture-button">create</button>
     </Form>
   );
 };
