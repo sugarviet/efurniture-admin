@@ -1,6 +1,7 @@
 import FormItem from "@components/FormItem";
 import { DatePicker } from "antd";
 import PropTypes from "prop-types";
+import { classNames } from "../../utils/classNames";
 
 const FormDatePicker = ({
   label,
@@ -21,9 +22,12 @@ const FormDatePicker = ({
       message={message}
     >
       <DatePicker
+        className={classNames(
+          "border-black border-[1px] rounded-none",
+          className
+        )}
         placeholder={placeholder}
         picker={picker}
-        className={className}
       />
     </FormItem>
   );
