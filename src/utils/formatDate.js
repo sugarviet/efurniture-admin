@@ -1,5 +1,9 @@
 import moment from "moment";
 
-export function formatDate(isoDate) {
-    return moment(isoDate).format('DD/MM/YYYY HH:mm:ss');
+function formatDate(isoDate, formatString) {
+    return moment(isoDate).format(formatString);
+}
+
+export function formatDateByDateAndTime(iosDate) {
+    return formatDate(iosDate, "DD/MM/YYYY HH:mm:ss")
 }

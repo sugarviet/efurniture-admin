@@ -1,5 +1,5 @@
 import { Table, Tag } from "antd";
-import { formatDate } from "../../utils/formatDate";
+import { formatDateByDateAndTime } from "../../utils/formatDate";
 import { formatCurrency } from "../../utils/formatCurrency";
 import EditButton from "../EditButton";
 
@@ -65,13 +65,17 @@ function VoucherTable({ data }) {
     {
       title: "Start date",
       render: (_, record) => (
-        <span className="text-xs">{formatDate(record.start_date)}</span>
+        <span className="text-xs">
+          {formatDateByDateAndTime(record.start_date)}
+        </span>
       ),
     },
     {
       title: "End date",
       render: (_, record) => (
-        <span className="text-xs">{formatDate(record.end_date)}</span>
+        <span className="text-xs">
+          {formatDateByDateAndTime(record.end_date)}
+        </span>
       ),
     },
     {

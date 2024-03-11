@@ -1,4 +1,4 @@
-import { ArrowDownOutlined } from "@ant-design/icons";
+import { ArrowDownOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import AppModal from "@components/AppModal";
 import { useState } from "react";
 import { classNames } from "../../utils/classNames";
@@ -30,12 +30,29 @@ const DATA = [
   },
 ];
 
-function FurnitureSelection({ onChange, className, value }) {
+function FurnitureSelection({ onChange, className, value, multiple }) {
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleSelect = (furniture) => {
-    onChange(furniture);
+    const currentValue = !value ? (multiple ? [] : value) : value;
+    const newValue = multiple ? [...currentValue, furniture] : furniture;
+
+    onChange(newValue);
     setModalOpen(false);
+  };
+
+  const remove = (id) => {
+    const valueClone = [...value];
+
+    const filteredValue = valueClone.filter((value) => value._id !== id);
+
+    onChange(filteredValue);
+  };
+
+  const handleDuplicate = (id) => {
+    const isExist = (value || []).some((item) => item._id === id);
+
+    if (isExist) remove(id);
   };
 
   return (
@@ -48,7 +65,7 @@ function FurnitureSelection({ onChange, className, value }) {
           className
         )}
       >
-        {value ? (
+        {value && !multiple && (
           <BriefInfo
             info={{
               thumb: value.thumbs[0],
@@ -56,13 +73,42 @@ function FurnitureSelection({ onChange, className, value }) {
             }}
             img_class="h-6"
           />
-        ) : (
-          <span>Select furniture</span>
         )}
+
+        {value && multiple && (
+          <ul className="flex gap-4">
+            {value.map((item) => {
+              const { _id, thumbs, name } = item;
+
+              return (
+                <li key={_id} className="flex items-center">
+                  <BriefInfo
+                    info={{
+                      thumb: thumbs[0],
+                      name: name,
+                    }}
+                    img_class="h-6"
+                  />
+                  <CloseCircleOutlined
+                    onClick={() => remove(_id)}
+                    className="ml-2"
+                  />
+                </li>
+              );
+            })}
+          </ul>
+        )}
+
+        {!value && <span>Select furniture</span>}
         <ArrowDownOutlined className="w-6 h-6 ml-4" />
       </button>
       <AppModal className="h-96" isOpen={modalOpen} setIsOpen={setModalOpen}>
-        <FurnitureOption onSelect={handleSelect} />
+        <FurnitureOption
+          onSelect={(furniture) => {
+            handleSelect(furniture);
+            if (multiple) handleDuplicate(furniture._id);
+          }}
+        />
       </AppModal>
     </section>
   );

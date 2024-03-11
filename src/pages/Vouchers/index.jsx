@@ -84,40 +84,6 @@ const Vouchers = () => {
       <TableCard label="Published voucher">
         <PublishedVoucher />
       </TableCard>
-      {/* <div className="flex px-3 justify-between items-center mt-2 mb-4">
-        <PageTitle title="Voucher management" />
-        <Button
-          className="primary"
-          type="primary"
-          onClick={handleToggleModalCreateVoucher}
-        >
-          Create vouchers
-        </Button>
-      </div>
-      <div className="float-right my-2">
-        <ExcelButton data={vouchers} />
-      </div>
-      <Table
-        rowKey={"id"}
-        dataSource={vouchers}
-        columns={columns}
-        pagination={{
-          pageSize: 10,
-          hideOnSinglePage: true,
-        }}
-      />
-
-      <AppModal isOpen={isModalCreateOpen} setIsOpen={setIsModalCreateOpen}>
-        <AppSuspense>
-          <VoucherCreateForm />
-        </AppSuspense>
-      </AppModal>
-      <AppModal isOpen={isModalUpdateOpen} setIsOpen={setIsModalUpdateOpen}>
-        <AppSuspense>
-          <VoucherUpdateForm id={selectedVoucherId} />
-        </AppSuspense>
-      </AppModal>{" "}
-      */}
     </section>
   );
 };
