@@ -15,7 +15,7 @@ const withAuth = (WrappedComponent) => {
     }, [accessToken])
 
 
-    return <WrappedComponent />;
+    return accessToken ? <WrappedComponent /> : null;
   };
 };
 

@@ -1,8 +1,5 @@
 import FormSelect from "@components/FormSelect";
 import { useCreatingProductValues } from "../CreatingProductContext";
-import { withFetchData } from "@hocs/withFetchData";
-import { get_all_subType } from "@api/subtypeApi";
-import PropTypes from "prop-types";
 import { transferSelectOption } from "@utils/transferSelectOption";
 import { useFetch } from "@hooks/api-hooks";
 import { get_sub_type_by_type } from "@api/subtypeApi";
@@ -18,9 +15,8 @@ const FormSelectSubTypes = () => {
   return (
     <FormSelect
       label="SubType"
-      // name="subtype"
       name={["attributes", "type"]}
-    
+      required
       options={subTypesSelectOptions}
       mode="multiple"
       onChange={handleSelectSubType}

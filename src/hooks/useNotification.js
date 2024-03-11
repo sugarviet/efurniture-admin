@@ -57,7 +57,22 @@ const type = {
       disable: 'Failed disable types',
       enable: 'Failed enable types',
     }
+  },
+  products: {
+    success: {
+      add_draft: 'Successfully add draft product',
+      edit: 'Successfully edited product',
+      disable: 'Successfully disable product',
+      enable: 'Successfully enable product',
+    },
+    fail:{
+      add_draft: 'Failed added draft product',
+      edit: 'Failed edited product',
+      disable: 'Failed disable product',
+      enable: 'Failed enable product',
+    }
   }
+
 }
 
 function useNotification() {
