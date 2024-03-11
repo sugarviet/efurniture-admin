@@ -1,6 +1,7 @@
 import { Select } from "antd";
 import FormItem from "../FormItem";
 import PropTypes from "prop-types";
+import { classNames } from "../../utils/classNames";
 
 const FormSelect = ({
   label,
@@ -32,7 +33,8 @@ const FormSelect = ({
         value={defaultValue}
         placeholder={placeholder}
         options={options}
-        className={className}
+        bordered={false}
+        className={classNames("border-black border-[1px]", className)}
         onChange={onChange}
       />
     </FormItem>
