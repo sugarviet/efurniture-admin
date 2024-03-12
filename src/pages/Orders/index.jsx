@@ -1,12 +1,8 @@
 import { useState } from "react";
 import { Table, Button, Space } from "antd";
 import AppModal from "@components/AppModal";
-import Loading from "@components/Loading";
-
 import OrderDetail from "./components/OrderDetail";
-import useGetOrderStatus from "./hooks/useGetOrderStatus";
 
-import useGetOrders from "./hooks/useGetOrders";
 import PageTitle from "../../components/PageTitle";
 import { Link } from "react-router-dom";
 import urlcat from "urlcat";
@@ -14,14 +10,8 @@ import { pathSystem } from "../../router";
 
 const Orders = () => {
   const [isModalDetailOpen, setIsModalDetailOpen] = useState(false);
-  const { handleGetOrderStatus } = useGetOrderStatus();
   const [selectedOrderId, setSelectedOrderId] = useState(null);
 
-  const { orders, isLoading } = useGetOrders();
-
-  if (isLoading) {
-    return <Loading />;
-  }
   const handleToggleDetailModal = (id) => {
     setIsModalDetailOpen(!isModalDetailOpen);
     setSelectedOrderId(id);
@@ -59,7 +49,6 @@ const Orders = () => {
       title: "Status",
       dataIndex: "status",
       key: "status",
-      render: (text) => handleGetOrderStatus(text),
       filters: [
         {
           text: "Pending",
@@ -98,7 +87,7 @@ const Orders = () => {
     <main>
       <PageTitle title="Orders managment" />
       <Table
-        dataSource={orders}
+        dataSource={[]}
         columns={columns}
         pagination={{
           pageSize: 10,
