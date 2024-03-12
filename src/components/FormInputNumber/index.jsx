@@ -11,6 +11,7 @@ const FormInputNumber = ({
   required,
   message,
   className,
+  prefix,
   style,
   ...others
 }) => {
@@ -24,6 +25,7 @@ const FormInputNumber = ({
       style={style}
     >
       <InputNumber
+      prefix={prefix}
         placeholder={placeholder}
         className={classNames(
           "border-black rounded-none w-full flex items-center",
@@ -45,6 +47,7 @@ FormInputNumber.propTypes = {
   message: PropTypes.string,
   className: PropTypes.string,
   style: PropTypes.object,
+  prefix: PropTypes.string,
 };
 
 FormInputNumber.defaultProps = {
@@ -53,6 +56,7 @@ FormInputNumber.defaultProps = {
   message: "Please fill in this field",
   type: "default",
   className: "",
+  prefix: ""
 };
 
 export default FormInputNumber;

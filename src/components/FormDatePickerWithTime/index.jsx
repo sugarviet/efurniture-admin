@@ -2,17 +2,15 @@ import FormItem from "@components/FormItem";
 import { DatePicker } from "antd";
 import PropTypes from "prop-types";
 import { classNames } from "../../utils/classNames";
-
-const FormDatePicker = ({
+export default function FormDatePickerWithTime({
   label,
   name,
   placeholder,
   type,
   required,
   message,
-  picker,
   className,
-}) => {
+}) {
   return (
     <FormItem
       label={label}
@@ -27,14 +25,14 @@ const FormDatePicker = ({
           className
         )}
         placeholder={placeholder}
-        picker={picker}
-
+        showTime
+        format="YYYY-MM-DD HH:mm"
       />
     </FormItem>
   );
-};
+}
 
-FormDatePicker.propTypes = {
+FormDatePickerWithTime.propTypes = {
   placeholder: PropTypes.string,
   label: PropTypes.string,
   name: PropTypes.any,
@@ -45,7 +43,7 @@ FormDatePicker.propTypes = {
   className: PropTypes.string,
 };
 
-FormDatePicker.defaultProps = {
+FormDatePickerWithTime.defaultProps = {
   label: null,
   picker: "",
   required: false,
@@ -53,4 +51,3 @@ FormDatePicker.defaultProps = {
   type: "default",
   className: "",
 };
-export default FormDatePicker;

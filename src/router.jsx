@@ -27,7 +27,8 @@ const Vouchers = lazy(() => import("./pages/Vouchers"));
 const CreateVoucher = lazy(() => import("./pages/CreatingVoucher"));
 const Events = lazy(() => import("./pages/Events"));
 const CreateEvents = lazy(() => import("./pages/CreatingEvents"));
-
+const FlashSale = lazy(() => import("./pages/FlashSale"));
+const CreatingFlashSale = lazy(() => import("./pages/CreatingFlashSale"));
 const CategoryDetail = lazy(() => import("./pages/CategoryDetail"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const ProductDetail = lazy(() => import("./pages/ProductDetail"));
@@ -68,6 +69,10 @@ export const pathSystem = {
   warehouse: "/warehouse",
   rooms: "/rooms",
   createRoom: "/room/create",
+  flashsale: "/flashsales",
+  creatingFlashSale: "/flashsale/create",
+
+
 };
 
 const adminMasterRoutes = [
@@ -127,24 +132,12 @@ const adminRoutes = [
     element: <CreateVoucher />,
   },
   {
-    path: pathSystem.catelogs,
-    element: <Catalogs />,
+    path: pathSystem.flashsale,
+    element: <FlashSale />,
   },
   {
-    path: pathSystem.catelogDetail,
-    element: <CatalogDetail />,
-  },
-  {
-    path: pathSystem.catalogCreate,
-    element: <CreatingCatalog />,
-  },
-  {
-    path: pathSystem.events,
-    element: <Events />,
-  },
-  {
-    path: pathSystem.eventCreate,
-    element: <CreateEvents />,
+    path: pathSystem.creatingFlashSale,
+    element: <CreatingFlashSale />,
   },
   {
     path: pathSystem.orders,
