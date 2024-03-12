@@ -1,28 +1,41 @@
 import { refreshPage } from "@utils/refreshPage";
-
-const listAcc = [{ username: 'admin', password: '123' }, { username: 'partner', password: '123' }, { username: 'staff', password: '123' }]
+import { useNavigate } from "react-router-dom";
+import { usePost } from "../../../hooks/api-hooks";
+import useAuth from "../../../stores/useAuth";
+import { get_login } from "../../../api/authApi";
+import { jwtDecode } from "jwt-decode";
+import { getCurrentUserRole } from "@utils/getCurrentUserRole";
+import useNotification from "../../../hooks/useNotification";
+const init_route = {
+    superAdmin: "/users",
+    admin: "/",
+    staff: "/products",
+};
 
 export function useLogin() {
-    function handleSettingRole(account) {
-        localStorage.setItem('token', account.username);
-        refreshPage()
-    }
+    const {success_message, error_message} = useNotification();
+    const { setTokens } = useAuth()
 
-    function handleLogin(loginInfo) {
-        console.log(loginInfo)
+    const navigate = useNavigate();
+    const { mutate: login } = usePost(
+        get_login(),
+        undefined,
+        (data) => {
+            const { access_token, refresh_token } = data;
+            const decode = jwtDecode(data.access_token);
+            const role = getCurrentUserRole(decode.role);
 
-        const matchedAccount = listAcc.find(
-            (acc) =>
-                acc.username === loginInfo.username && acc.password === loginInfo.password
-        );
-
-        if (!matchedAccount) return alert("Login failed");
-
-        return handleSettingRole(matchedAccount)
-
-    }
+            setTokens(access_token, refresh_token, decode.account_id, role);
+            success_message('login', 'login')
+            navigate(init_route[role]);
+            refreshPage();
+        },
+        () => {
+            error_message('login', 'login');
+        }
+    );
 
     return {
-        handleLogin
+        login
     }
 }

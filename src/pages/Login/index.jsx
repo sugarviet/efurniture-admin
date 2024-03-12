@@ -1,44 +1,15 @@
 import { Form, Input, Button, Card, Divider } from "antd";
 import styles from "./Login.module.css";
-import { usePost } from "../../hooks/api-hooks";
-import { get_login } from "../../api/authApi";
-import { jwtDecode } from "jwt-decode";
-import { getCurrentUserRole } from "@utils/getCurrentUserRole";
-import { useNavigate } from "react-router-dom";
-import useAuth from "../../stores/useAuth";
-import { refreshPage } from "../../utils/refreshPage";
+import { useLogin } from "./hooks/useLogin";
 
 const { Meta } = Card;
-const init_route = {
-  superAdmin: "/users",
-  admin: "/",
-  staff: "/products",
-};
+
 
 const Login = () => {
-  const { setTokens } = useAuth();
-  const navigate = useNavigate();
-  const { mutate } = usePost(
-    get_login(),
-    undefined,
-    (data) => {
-      const { access_token, refresh_token } = data;
-      const decode = jwtDecode(data.access_token);
-      const role = getCurrentUserRole(decode.role);
-
-      setTokens(access_token, refresh_token, decode.account_id, role);
-      navigate(init_route[role]);
-      refreshPage();
-      alert("thanh cong");
-      refreshPage();
-    },
-    () => {
-      console.log("sd");
-    }
-  );
+  const { login } = useLogin();
 
   const onFinish = (values) => {
-    mutate(values);
+    login(values);
   };
 
   return (
@@ -46,7 +17,7 @@ const Login = () => {
       <Card style={{ width: 400, height: 300 }}>
         <Meta title="Login" />
         <Divider />
-        <Form onFinish={onFinish}>
+        <Form onFinish={onFinish} requiredMark="optional">
           <Form.Item
             name="username"
             label="Username"

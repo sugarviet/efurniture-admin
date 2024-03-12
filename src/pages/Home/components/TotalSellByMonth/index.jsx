@@ -52,27 +52,13 @@ const getStartDateEndDate = (values) => {
 };
 
 const TotalSellByMonth = () => {
-  const fakeData = [
-    { date: "2024-03-06T00:00:00.000Z", profit: 10 },
-    { date: "2024-03-07T00:00:00.000Z", profit: 550 },
-    { date: "2024-03-08T00:00:00.000Z", profit: 450 },
-    { date: "2024-03-09T00:00:00.000Z", profit: 450 },
-    { date: "2024-03-10T00:00:00.000Z", profit: 540 },
-    { date: "2024-03-11T00:00:00.000Z", profit: 450 },
-    { date: "2024-03-12T00:00:00.000Z", profit: 940 },
-    { date: "2024-03-13T00:00:00.000Z", profit: 210 },
-    { date: "2024-03-14T00:00:00.000Z", profit: 110 },
-    { date: "2024-03-15T00:00:00.000Z", profit: 130 },
-  ];
-
   const options = generateDateRange();
   const { mutate: getRevenue, data: listRevenue } = usePost(
     get_revenue_by_range_date()
   );
-
   const formattedRevenueData = formatData(listRevenue?.data);
 
-  const selectDateRange = options.map((option) => ({
+  const selectOptionsDateRange = options.map((option) => ({
     label: option.label,
     value: `${option.value.start},${option.value.end}`,
   }));
@@ -86,7 +72,7 @@ const TotalSellByMonth = () => {
   };
 
   useEffect(() => {
-    const { startDay, endDay } = getStartDateEndDate(selectDateRange[0].value);
+    const { startDay, endDay } = getStartDateEndDate(selectOptionsDateRange[0].value);
     getRevenue({
       startDay,
       endDay,
@@ -106,8 +92,8 @@ const TotalSellByMonth = () => {
             style={{
               width: 250,
             }}
-            defaultValue={selectDateRange[0].value}
-            options={selectDateRange}
+            defaultValue={selectOptionsDateRange[0].value}
+            options={selectOptionsDateRange}
             onChange={handleChangeRangeDate}
           />
         </div>
