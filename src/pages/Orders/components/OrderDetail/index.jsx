@@ -2,7 +2,7 @@ import Proptypes from "prop-types";
 import useGetOrderStatus from "../../hooks/useGetOrderStatus";
 import { useOrderDetail } from "../../hooks/useOrderDetail";
 
-import Loading from '@components/loading';
+import Loading from '@components/Loading';
 
 const OrderDetail = ({ id }) => {
   const {order, isLoading} = useOrderDetail(id);

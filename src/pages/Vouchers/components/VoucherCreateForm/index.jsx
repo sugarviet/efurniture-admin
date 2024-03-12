@@ -1,6 +1,5 @@
 import { Button, Form, Input, DatePicker, Select } from "antd";
 
-import { formateDateByDMY } from "@utils/formateDateByDMY";
 import { useCreateVoucher } from "@services/Vouchers/services";
 
 const { Option } = Select;
@@ -10,8 +9,7 @@ const VoucherCreateForm = () => {
   const onFinish = (values) => {
     const data = {
       ...values,
-      startDate: formateDateByDMY(values.startDate),
-      endDate: formateDateByDMY(values.endDate),
+     
     }
     createVoucher(data);
 

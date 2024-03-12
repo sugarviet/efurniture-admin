@@ -1,9 +1,8 @@
 import { Button, Form, Input, DatePicker, Select } from "antd";
-import Loading from "@components/loading";
-import { formateDate } from "@utils/formateDate";
+import Loading from "@components/Loading";
+import { formatDateByDateAndMinute } from "../../../../utils/formatDate";
 import Proptypes from "prop-types";
 import useVoucherDetail from "../../hooks/useVoucherDetail";
-import { formateDateByDMY } from "@utils/formateDateByDMY";
 import { useUpdateVoucher } from "@services/Vouchers/services";
 
 const { Option } = Select;
@@ -17,16 +16,14 @@ const VoucherUpdateForm = ({ id }) => {
 
   const initialValue = {
     ...voucher,
-    startDate: formateDate(voucher.startDate),
-    endDate: formateDate(voucher.endDate),
+    startDate: formatDateByDateAndMinute(voucher.startDate),
+    endDate: formatDateByDateAndMinute(voucher.endDate),
   };
 
   const onFinish = (values) => {
     const data = {
       ...values,
       id: id,
-      startDate: formateDateByDMY(values.startDate),
-      endDate: formateDateByDMY(values.endDate),
     };
     mutate(data);
   };

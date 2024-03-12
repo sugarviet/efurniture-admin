@@ -1,5 +1,5 @@
 import { get_today_revenue } from "../../api/revenueApi";
-import ECommerceStatusCard from "../../components/EcommerceStatusCard";
+import ECommerceStatusCard from "../../components/ECommerceStatusCard";
 import LocationMapBox from "../../components/MostPucharsedLocation";
 import StatisticCard from "../../components/StatisticCard";
 import TotalSellByMonth from "./components/TotalSellByMonth";

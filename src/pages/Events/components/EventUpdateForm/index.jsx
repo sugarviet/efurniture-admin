@@ -2,7 +2,7 @@ import { UploadOutlined } from "@ant-design/icons";
 import { Button, Form, Input, DatePicker, Select, Upload } from "antd";
 
 import dayjs from "dayjs";
-import { formateDate } from "@utils/formateDate";
+import { formatDateByDateAndMinute } from "../../../../utils/formatDate";
 
 import Proptypes from "prop-types";
 
@@ -13,8 +13,8 @@ const EventUpdateForm = ({ id }) => {
   const initialValue = {
     name: "Viet",
     products: ["Product A", "Product B", "Product C"],
-    startDate: formateDate("20/11/2023"),
-    endDate: formateDate("20/11/2023"),
+    startDate: formatDateByDateAndMinute("20/11/2023"),
+    endDate: formatDateByDateAndMinute("20/11/2023"),
     image: [
       {
         uid: "-1",
@@ -36,7 +36,7 @@ const EventUpdateForm = ({ id }) => {
     const final = {
       ...values,
       startDate: dayjs(values.startDate).format("DD/MM/YYYY"),
-      endDate: formateDate(values.endDate),
+      endDate: formatDateByDateAndMinute(values.endDate),
     };
     console.log(final);
   };
