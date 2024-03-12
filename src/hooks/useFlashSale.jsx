@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 import { create_flash_sale, get_all_flash_sale } from "../api/flashsaleApi";
 import useNotification from "./useNotification";
 import { useNavigate } from "react-router-dom";
+import { formatDateByDateAndMinute } from "../utils/formatDate";
 export default function useFlashSale() {
   const { error_message, success_message } = useNotification();
 
@@ -27,17 +28,15 @@ export default function useFlashSale() {
 
   const handleCreateFlashsale = (data) => {
     const {name, endDay, startDay, products} = data;
-    const formatStartDate = dayjs(startDay).format("YYYY-MM-DD:HH:mm");
-    const formatEndDate = dayjs(endDay).format("YYYY-MM-DD:HH:mm");
+
     const body = {
         name,
-        endDay: formatEndDate,
-        startDay: formatStartDate,
+        endDay: formatDateByDateAndMinute(endDay),
+        startDay: formatDateByDateAndMinute(startDay),
         products: products.map(item => ({ productId: item.product._id, count: item.count, salePrice: item.salePrice}))
     }
 
-    console.log(body);
-    // createFlashsale(body)
+    createFlashsale(body)
   }
   return {
     handleCreateFlashsale,

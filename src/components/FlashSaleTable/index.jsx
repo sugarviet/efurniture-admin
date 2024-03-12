@@ -1,10 +1,8 @@
-import { Space, Button, Table } from "antd";
+import { Space, Table } from "antd";
 import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
 import EditButton from "../EditButton";
 import PropTypes from "prop-types";
-import { formatCurrency } from "../../utils/formatCurrency";
-import LinkItem from "../LinkItem";
-const FlashSaleTable = ({ data }) => {
+const FlashSaleTable = ({ data, onEdit }) => {
     console.log(data);
   const { getColumnSearchProps } = useSearchTableColumn();
   const columns = [
@@ -36,7 +34,7 @@ const FlashSaleTable = ({ data }) => {
       width: "30%",
       render: () => (
         <Space className="flex gap-4">
-          <Button danger>Disable</Button>
+          <EditButton onClick={() => onEdit(data)} />
         </Space>
       ),
     },
@@ -58,6 +56,7 @@ const FlashSaleTable = ({ data }) => {
 
 FlashSaleTable.propTypes = {
   data: PropTypes.object,
+  onEdit: PropTypes.func
 };
 
 export default FlashSaleTable;

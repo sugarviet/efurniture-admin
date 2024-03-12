@@ -56,10 +56,6 @@ export function useGetSiderItem() {
       getItem("List Product", "/products"),
       getItem("Create Product", "/product/create"),
     ]),
-    getItem("Flashsale", "/flashsale", <ScheduleOutlined />, [
-      getItem("List Flashsale", "/flashsales"),
-      getItem("Create Flashsale", "/flashsale/create"),
-    ]),
     getItem("Vouchers", "/voucher", <AlertOutlined />, [
       getItem("List Voucher", "/vouchers"),
       getItem("Create Voucher", "/voucher/create"),
