@@ -24,9 +24,9 @@ export function useGetSiderItem() {
       getItem("List Product", "/products"),
       getItem("Create Product", "/product/create"),
     ]),
-    getItem("Events", "/event", <ScheduleOutlined />, [
-      getItem("List Events", "/events"),
-      getItem("Create Events", "/event/create"),
+    getItem("Flashsale", "/flashsale", <ScheduleOutlined />, [
+      getItem("List Flashsale", "/flashsales"),
+      getItem("Create Flashsale", "/flashsale/create"),
     ]),
     getItem("Vouchers", "/voucher", <AlertOutlined />, [
       getItem("List Voucher", "/vouchers"),
@@ -48,20 +48,13 @@ export function useGetSiderItem() {
     ]),
   ];
   const itemsForSuperAdmin = [
- 
     getItem("User", "/users", <UserOutlined />),
-    getItem("Staffs", "/staffs", <TagsOutlined />)
-
-
+    getItem("Staffs", "/staffs", <TagsOutlined />),
   ];
   const itemsForStaff = [
     getItem("Products", "/product", <ShopOutlined />, [
       getItem("List Product", "/products"),
       getItem("Create Product", "/product/create"),
-    ]),
-    getItem("Events", "/event", <ScheduleOutlined />, [
-      getItem("List Events", "/events"),
-      getItem("Create Events", "/event/create"),
     ]),
     getItem("Vouchers", "/voucher", <AlertOutlined />, [
       getItem("List Voucher", "/vouchers"),

@@ -1,9 +1,13 @@
-import moment from "moment";
+import dayjs from 'dayjs';
 
 function formatDate(isoDate, formatString) {
-    return moment(isoDate).format(formatString);
+    return dayjs(isoDate).format(formatString);
 }
 
-export function formatDateByDateAndTime(iosDate) {
-    return formatDate(iosDate, "DD/MM/YYYY HH:mm:ss")
+export function formatDateByDateAndTime(isoDate) {
+    return formatDate(isoDate, 'DD/MM/YYYY HH:mm:ss');
+}
+
+export function formatDateByDateAndMinute(isoDate) {
+    return formatDate(isoDate, 'DD/MM/YYYY:HH:mm');
 }
