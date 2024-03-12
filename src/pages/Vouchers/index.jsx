@@ -7,7 +7,6 @@ import Loading from "@components/Loading";
 
 import ExcelButton from "@components/ExcelButton";
 import AppModal from "@components/AppModal";
-import { useGetVouchers } from "./hooks/useGetVouchers";
 import PageTitle from "../../components/PageTitle";
 import { withFetchData } from "../../hocs/withFetchData";
 import { get_voucher_api } from "../../api/voucherApi";
