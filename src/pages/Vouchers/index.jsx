@@ -13,8 +13,7 @@ import { get_voucher_api } from "../../api/voucherApi";
 import VoucherTable from "../../components/VoucherTable";
 import TableCard from "../../components/TableCard";
 
-const VoucherCreateForm = lazy(() => import("./components/VoucherCreateForm"));
-const VoucherUpdateForm = lazy(() => import("./components/VoucherUpdateForm"));
+
 
 const PublishedVoucher = withFetchData(VoucherTable, get_voucher_api);
 
