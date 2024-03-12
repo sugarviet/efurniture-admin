@@ -1,64 +1,32 @@
-import { Button, Form, Input, Select } from "antd";
-const { Option } = Select;
-import Proptypes from "prop-types";
+import { Button, Form} from "antd";
+import FormInput from "../../../../components/FormInput";
 
-const AccountUpdateForm = ({ id }) => {
-  console.log(id);
-
+const AccountCreateForm = () => {
   const [form] = Form.useForm();
   const onFinish = () => {};
   return (
     <div>
       <Form form={form} layout="vertical" onFinish={onFinish}>
-        <Form.Item
-          name="username"
-          label="Username"
-          rules={[{ required: true, message: "Please enter the event name!" }]}
-        >
-          <Input />
-        </Form.Item>
-
-        <Form.Item
+        <div className="grid grid-cols-2 gap-4">
+          <FormInput name="first_name" label="First name" />
+          <FormInput name="last_name" label="Last name" />
+        </div>
+        <FormInput name="username" label="Username" />
+        <FormInput
           name="password"
           label="Password"
-          rules={[
-            { required: true, message: "Please enter the user password!" },
-          ]}
-        >
-          <Input />
-        </Form.Item>
+          inputType="password"
+          type="password"
+        />
 
-        <Form.Item
-          name="role"
-          label="Role"
-          rules={[
-            { required: true, message: "Please select at least one product!" },
-          ]}
-        >
-          <Select placeholder="Select role">
-            {/* Add product options as needed */}
-            <Option value="staff">Staff</Option>
-            <Option value="partner">Partner</Option>
-            <Option value="admin">Admin</Option>
-          </Select>
-        </Form.Item>
+        <FormInput name="email" label="Email" type="email"/>
 
-        <Form.Item
-          wrapperCol={{
-            offset: 8,
-            span: 16,
-          }}
-        >
-          <Button type="primary" className="primary" htmlType="submit">
-            Submit
-          </Button>
-        </Form.Item>
+        <Button type="primary" className="primary" htmlType="submit">
+          Submit
+        </Button>
       </Form>
     </div>
   );
 };
-AccountUpdateForm.propTypes = {
-  id: Proptypes.number,
-};
 
-export default AccountUpdateForm;
+export default AccountCreateForm;

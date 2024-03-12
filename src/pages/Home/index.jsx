@@ -1,29 +1,29 @@
-import ReportList from "./components/ReportList";
-import SaleChart from "./components/SaleChart";
-import { DatePicker } from "antd";
-import { useState } from "react";
+import { get_today_revenue } from "../../api/revenueApi";
+import ECommerceStatusCard from "../../components/EcommerceStatusCard";
+import LocationMapBox from "../../components/MostPucharsedLocation";
+import StatisticCard from "../../components/StatisticCard";
+import TotalSellByMonth from "./components/TotalSellByMonth";
 
-import dayjs from "dayjs";
 
-const { RangePicker } = DatePicker;
+const E_COMMERCE_STATUS_KEYS = ["new orders", "on hold", "out of stock"];
 
 const Home = () => {
-  const [startDate] = useState(dayjs().weekday(-7).format("DD/MM/YYYY"));
-  const [endDate] = useState(dayjs().format("DD/MM/YYYY"));
-
-  console.log(startDate, endDate);
-
-  const onRangeChange = (e) => {
-    console.log(e[0].format("DD/MM/YYYY"));
-  };
 
   return (
-    <div>
-      <RangePicker onChange={onRangeChange} format={"DD/MM/YYYY"}/>
+    <main>
+    
+      <div className="flex gap-4">
+        {E_COMMERCE_STATUS_KEYS.map((key) => (
+          <ECommerceStatusCard key={key} type={key} />
+        ))}
+      </div>
 
-      <ReportList />
-      <SaleChart />
-    </div>
+      <TotalSellByMonth />
+      <div className="grid grid-cols-2 gap-4">
+        <StatisticCard label={"Total orders"} description={"Last 7 days"} />
+      </div>
+      <LocationMapBox />
+    </main>
   );
 };
 

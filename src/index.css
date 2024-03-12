@@ -22,3 +22,24 @@ body {
   background-color: var(--primary-blue-color);
   color: var(--primary-white-color);
 }
+
+.link {
+  color: var(--primary-color);
+  @apply underline text-xs tracking-wider;
+}
+
+.furniture-button {
+  @apply  px-4 py-2 uppercase tracking-[0.125rem] bg-black text-center text-white border-[1px] border-black hover:bg-white hover:text-black hover:border-[1px] hover:border-black duration-300 cursor-pointer
+}
+
+:where(.css-dev-only-do-not-override-1ns55bg).ant-btn-primary {
+  color: #fff;
+  background: #1677ff !important;
+  box-shadow: 0 2px 0 rgba(5, 145, 255, 0.1);
+}
+
+.ant-layout-sider {
+  position: fixed;
+  overflow-y: hidden;
+  z-index: 1; /* Ensure the Sider is above other elements */
+}

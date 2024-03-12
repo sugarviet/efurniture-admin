@@ -14,6 +14,9 @@ export default defineConfig({
       '@constants': '/src/constants',
       '@config': '/src/config',
       '@services': '/src/services',
+      '@stores': '/src/stores',
+      '@hocs': '/src/hocs',
+      '@api': '/src/api',
     },
   },
 })

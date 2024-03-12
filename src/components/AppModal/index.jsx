@@ -1,16 +1,15 @@
-import ReactDom from 'react-dom';
+import ReactDom from "react-dom";
 import { Modal } from "antd";
 import PropTypes from "prop-types";
+import { classNames } from "../../utils/classNames";
 
-const AppModal = ({ children, isOpen, setIsOpen }) => {
-
+const AppModal = ({ children, isOpen, setIsOpen, className }) => {
   const handleOk = () => {
     setIsOpen(false);
   };
   const handleCancel = () => {
     setIsOpen(false);
   };
-
 
   return ReactDom.createPortal(
     <>
@@ -20,9 +19,7 @@ const AppModal = ({ children, isOpen, setIsOpen }) => {
         open={isOpen}
         footer={null}
       >
-        <div className='p-2'>
-          {children}
-        </div>
+        <div className={classNames("pt-6", className)}>{children}</div>
       </Modal>
     </>,
     document.getElementById("portal")
@@ -30,7 +27,6 @@ const AppModal = ({ children, isOpen, setIsOpen }) => {
 };
 
 export default AppModal;
-
 
 AppModal.propTypes = {
   children: PropTypes.node,

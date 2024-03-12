@@ -20,47 +20,69 @@ export function useGetSiderItem() {
 
   const itemsForAdmin = [
     getItem("Dashboard", "/", <DashboardOutlined />),
-    getItem("Products", "/products", <ShopOutlined />),
-    getItem("Events", "/events", <ScheduleOutlined />),
-    getItem("Account", "/account", <UserOutlined />, [
-      getItem("User", "/users"),
-      getItem("Partner", "/partners"),
+    getItem("Products", "/product", <ShopOutlined />, [
+      getItem("List Product", "/products"),
+      getItem("Create Product", "/product/create"),
     ]),
-    getItem("Vouchers", "/vouchers", <AlertOutlined />),
+    getItem("Flashsale", "/flashsale", <ScheduleOutlined />, [
+      getItem("List Flashsale", "/flashsales"),
+      getItem("Create Flashsale", "/flashsale/create"),
+    ]),
+    getItem("Vouchers", "/voucher", <AlertOutlined />, [
+      getItem("List Voucher", "/vouchers"),
+      getItem("Create Voucher", "/voucher/create"),
+    ]),
 
     {
       type: "divider",
     },
     getItem("Orders", "/orders", <TagsOutlined />),
-    getItem("Catelogs", "/catelogs", <TagsOutlined />),
-    // getItem("Transactions", "/transactions", <TagsOutlined />),
-    // getItem("Contracts", "/contracts", <TagsOutlined />),
-    // getItem("Cash out", "/cash-request", <MoneyCollectOutlined />),
+    getItem("Rooms", "/room", <TagsOutlined />, [
+      getItem("List rooms", "/rooms"),
+      getItem("Create Rooms", "/room/create"),
+    ]),
     getItem("Reports", "/reports", <TagsOutlined />),
-    getItem("Categories", "/categories", <TagsOutlined />),
-
-
-
+    getItem("Types", "/type", <TagsOutlined />, [
+      getItem("List Types", "/types"),
+      getItem("Create types", "/type/create"),
+    ]),
   ];
-
-  const itemsForPartner = [
-    getItem("Dashboard", "/", <DashboardOutlined />),
-    getItem("Products", "/products", <ShopOutlined />),
+  const itemsForSuperAdmin = [
+    getItem("User", "/users", <UserOutlined />),
+    getItem("Staffs", "/staffs", <TagsOutlined />),
   ];
-
-
   const itemsForStaff = [
-    getItem("Partner", "/partners", <UserOutlined />),
-  ];
+    getItem("Products", "/product", <ShopOutlined />, [
+      getItem("List Product", "/products"),
+      getItem("Create Product", "/product/create"),
+    ]),
+    getItem("Vouchers", "/voucher", <AlertOutlined />, [
+      getItem("List Voucher", "/vouchers"),
+      getItem("Create Voucher", "/voucher/create"),
+    ]),
+    getItem("Warehouse", "/warehouse", <TagsOutlined />),
 
+    {
+      type: "divider",
+    },
+    getItem("Rooms", "/room", <TagsOutlined />, [
+      getItem("List rooms", "/rooms"),
+      getItem("Create Rooms", "/room/create"),
+    ]),
+    getItem("Reports", "/report", <TagsOutlined />),
+    getItem("Types", "/type", <TagsOutlined />, [
+      getItem("List Types", "/types"),
+      getItem("Create types", "/type/create"),
+    ]),
+  ];
 
   const getItemByRole = {
+    superAdmin: itemsForSuperAdmin,
     admin: itemsForAdmin,
-    partner: itemsForPartner,
-    staff: itemsForStaff
-  }
+    staff: itemsForStaff,
+  };
 
   return {
-    getItemByRole
+    getItemByRole,
   };
 }

@@ -1,19 +1,15 @@
 import { useState } from "react";
 import { Table, Button, Space, Popconfirm } from "antd";
 import AppModal from "@components/AppModal";
-import Loading from "@components/Loading";
 import EventCreateForm from "./components/EventCreateForm";
 import EventUpdateForm from "./components/EventUpdateForm";
 import ExcelButton from "@components/ExcelButton";
-import { useEvents } from "./hooks/useEvents";
 import PageTitle from "../../components/PageTitle";
 
 const Events = () => {
   const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
   const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
-  const { events, isLoading } = useEvents();
 
-  if (isLoading) return <Loading />;
 
   const handleToggleModalCreateModal = () => {
     setIsModalCreateOpen(!isModalCreateOpen);
@@ -82,11 +78,11 @@ const Events = () => {
         </Button>
       </div>
       <div className="float-right">
-        <ExcelButton data={events} />
+        <ExcelButton data={[]} />
       </div>
       <Table
         rowKey="id"
-        dataSource={events}
+        dataSource={[]}
         columns={columns}
         pagination={{
           pageSize: 10,

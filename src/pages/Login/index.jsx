@@ -1,22 +1,23 @@
 import { Form, Input, Button, Card, Divider } from "antd";
 import styles from "./Login.module.css";
-import { useLogin } from "./hooks/useLogin";
+import { useAuthentication } from "../../hooks/useAuthentication";
 
 const { Meta } = Card;
 
+
 const Login = () => {
-  const {handleLogin} = useLogin();
-  
-    const onFinish = (values) => {
-      handleLogin(values)
-      };
+  const { login } = useAuthentication();
+
+  const onFinish = (values) => {
+    login(values);
+  };
 
   return (
     <div className={styles.container}>
       <Card style={{ width: 400, height: 300 }}>
         <Meta title="Login" />
         <Divider />
-        <Form onFinish={onFinish}>
+        <Form onFinish={onFinish} requiredMark="optional">
           <Form.Item
             name="username"
             label="Username"
@@ -45,7 +46,7 @@ const Login = () => {
         </Form>
       </Card>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
