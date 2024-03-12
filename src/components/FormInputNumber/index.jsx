@@ -23,6 +23,7 @@ const FormInputNumber = ({
       required={required}
       message={message}
       style={style}
+
     >
       <InputNumber
       prefix={prefix}

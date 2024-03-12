@@ -9,28 +9,26 @@ const FlashSaleTable = ({ data }) => {
   const { getColumnSearchProps } = useSearchTableColumn();
   const columns = [
     {
-      title: "Product Name",
+      title: "Name",
       dataIndex: "name",
       key: "name",
       ...getColumnSearchProps("name"),
-      render: (text) => <LinkItem to="/">{text}</LinkItem>,
     },
     {
-      title: "Image",
-      dataIndex: "thumbs",
-      key: "thumbs",
-      render: (text, record) => (
-        <img src={record.thumbs[0]} alt={record.name} width="100" />
-      ),
-    },
-    {
-      title: "Price",
-      dataIndex: "regular_price",
-      key: "regular_price",
+      title: "Furniture",
       render: (text) => (
-        <span className="text-xs font-semibold">{formatCurrency(text)}</span>
+        <span className="text-xs">Chair x 3, Sofa x 1</span>
       ),
-      sorter: (a, b) => a.price - b.price,
+    },
+    {
+      title: "Start Date",
+      dataIndex: "startDay",
+      key: "startDay",
+    },
+    {
+      title: "End Date",
+      dataIndex: "endDay",
+      key: "endDay",
     },
     {
       title: "Action",
@@ -47,7 +45,7 @@ const FlashSaleTable = ({ data }) => {
     <div>
       <Table
         rowKey="_id"
-        dataSource={data.data}
+        dataSource={data}
         columns={columns}
         pagination={{
           pageSize: 10,

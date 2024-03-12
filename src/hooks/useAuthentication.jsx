@@ -1,11 +1,11 @@
 import { refreshPage } from "@utils/refreshPage";
 import { useNavigate } from "react-router-dom";
-import { usePost } from "../../../hooks/api-hooks";
-import useAuth from "../../../stores/useAuth";
-import { get_login } from "../../../api/authApi";
+import { usePost } from "@hooks/api-hooks";
+import useAuth from "@stores/useAuth";
+import { get_login } from "../api/authApi";
 import { jwtDecode } from "jwt-decode";
 import { getCurrentUserRole } from "@utils/getCurrentUserRole";
-import useNotification from "../../../hooks/useNotification";
+import useNotification from "@hooks/useNotification";
 const init_route = {
   superAdmin: "/users",
   admin: "/",
@@ -35,9 +35,15 @@ export function useAuthentication() {
     }
   );
 
+  const logout = () => {
+    clearTokens();
+    navigate("/");
+  }
+
   
 
   return {
     login,
+    logout
   };
 }

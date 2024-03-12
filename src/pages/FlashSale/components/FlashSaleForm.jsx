@@ -1,30 +1,18 @@
-import { Form, Button, DatePicker } from "antd";
+import { Form } from "antd";
 import FormInput from "@components/FormInput";
-import FormUploadButton from "@components/FormUploadButton";
-import FormTextArea from "@components/FormTextArea";
 import FormInputNumber from "../../../components/FormInputNumber";
 import FurnitureSelection from "../../../components/FurnitureSelection";
 import FormList from "../../../components/FormList";
 import { DeleteOutlined } from "@ant-design/icons";
 import FormDatePickerWithTime from "../../../components/FormDatePickerWithTime";
-import dayjs from "dayjs";
+import useFlashSale from "../../../hooks/useFlashSale";
 const FlashSaleForm = () => {
-  const [form] = Form.useForm();
+  const { form, handleCreateFlashsale } = useFlashSale();
 
   const handleSubmit = async (values) => {
-    const startDay = dayjs(values.startDay).format("YYYY-MM-DD:HH:mm");
-    const endDay = dayjs(values.endDay).format("YYYY-MM-DD:HH:mm");
-    const data = {
-      ...values,
-      startDay,
-      endDay,
-    };
-    console.log(data);
+    handleCreateFlashsale(values);
   };
 
-  const handleSelect = (value) => {
-    console.log(value);
-  }
   return (
     <Form
       form={form}
@@ -62,13 +50,14 @@ const FlashSaleForm = () => {
           </div>
 
           <FormList
-        
+            initialValues={[{ product: undefined, salePrice: 10000, count: 1 }]}
             name="products"
           >
-            {({ name, remove }) => {
+            {({ name, remove, restField }) => {
               return (
                 <div className="grid grid-cols-6 items-center gap-4">
                   <Form.Item
+                    {...restField}
                     required
                     rules={[
                       ({ getFieldValue }) => ({
@@ -93,21 +82,19 @@ const FlashSaleForm = () => {
                     className="col-span-4"
                     name={[name, "product"]}
                   >
-                    <FurnitureSelection className="h-12" onChange={handleSelect} />
+                    <FurnitureSelection className="h-12" />
                   </Form.Item>
                   <div className="flex gap-4 col-span-2">
                     <FormInputNumber
                       min={1}
                       className="h-12"
                       name={[name, "count"]}
-                      defaultValue={1}
                     />
                     <FormInputNumber
-                    prefix="VND"
+                      prefix="VND"
                       min={1}
                       className="h-12"
                       name={[name, "salePrice"]}
-                      defaultValue={100}
                       placeholder="Sale price"
                     />
                     <DeleteOutlined

@@ -1,12 +1,12 @@
 import { Form, Input, Button, Card, Divider } from "antd";
 import styles from "./Login.module.css";
-import { useLogin } from "./hooks/useLogin";
+import { useAuthentication } from "../../hooks/useAuthentication";
 
 const { Meta } = Card;
 
 
 const Login = () => {
-  const { login } = useLogin();
+  const { login } = useAuthentication();
 
   const onFinish = (values) => {
     login(values);

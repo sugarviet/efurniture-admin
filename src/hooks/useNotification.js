@@ -9,7 +9,7 @@ const type = {
       delete: 'Successfully deleted delete',
       set_default: 'Successfully set default address',
     },
-    fail:{
+    fail: {
       add: 'Failed added address',
       edit: 'Failed edited address',
       delete: 'Failed deleted delete',
@@ -23,7 +23,7 @@ const type = {
       disable: 'Successfully disable staff',
       enable: 'Successfully enable staff',
     },
-    fail:{
+    fail: {
       add: 'Failed added staff',
       edit: 'Failed edited staff',
       disable: 'Failed disable staff',
@@ -37,7 +37,7 @@ const type = {
       disable: 'Successfully disable attribute',
       enable: 'Successfully enable attribute',
     },
-    fail:{
+    fail: {
       add: 'Failed added attribute',
       edit: 'Failed edited attribute',
       disable: 'Failed disable attribute',
@@ -51,7 +51,7 @@ const type = {
       disable: 'Successfully disable types',
       enable: 'Successfully enable types',
     },
-    fail:{
+    fail: {
       add_draft: 'Failed added draft types',
       edit: 'Failed edited types',
       disable: 'Failed disable types',
@@ -65,18 +65,32 @@ const type = {
       disable: 'Successfully disable product',
       enable: 'Successfully enable product',
     },
-    fail:{
+    fail: {
       add_draft: 'Failed added draft product',
       edit: 'Failed edited product',
       disable: 'Failed disable product',
       enable: 'Failed enable product',
     }
   },
-  login:{
-    success:{
+  flashsale: {
+    success: {
+      add: 'Successfully add flash sale',
+      edit: 'Successfully edited flash sale',
+      disable: 'Successfully disable flash sale',
+      enable: 'Successfully enable flash sale',
+    },
+    fail: {
+      add: 'Failed added flash sale',
+      edit: 'Failed edited flash sale',
+      disable: 'Failed disable flash sale',
+      enable: 'Failed enable flash sale',
+    }
+  },
+  login: {
+    success: {
       login: 'Successfully logged in'
     },
-    fail:{
+    fail: {
       login: 'Failed to login in'
     }
   }
@@ -85,11 +99,10 @@ const type = {
 
 function useNotification() {
   const success_message = (msg, action, custom) => {
-    console.log( type[msg].success[action]);
-    message.success(custom ? custom: type[msg].success[action]);
+    message.success(custom ? custom : type[msg].success[action]);
   };
   const error_message = (msg, action, custom) => {
-    message.success(custom ? custom : type[msg].fail[action]);
+    message.error(custom ? custom : type[msg].fail[action]);
 
   };
   return {
