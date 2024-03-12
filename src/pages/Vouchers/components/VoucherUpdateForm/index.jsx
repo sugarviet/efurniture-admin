@@ -1,5 +1,5 @@
 import { Button, Form, Input, DatePicker, Select } from "antd";
-import Loading from "@components/loading";
+import Loading from "@components/Loading";
 import { formatDateByDateAndMinute } from "../../../../utils/formatDate";
 import Proptypes from "prop-types";
 import useVoucherDetail from "../../hooks/useVoucherDetail";
