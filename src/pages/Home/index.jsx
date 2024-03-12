@@ -2,15 +2,12 @@ import { get_today_revenue } from "../../api/revenueApi";
 import ECommerceStatusCard from "../../components/EcommerceStatusCard";
 import LocationMapBox from "../../components/MostPucharsedLocation";
 import StatisticCard from "../../components/StatisticCard";
-import { useFetch } from "../../hooks/api-hooks";
 import TotalSellByMonth from "./components/TotalSellByMonth";
 
 
 const E_COMMERCE_STATUS_KEYS = ["new orders", "on hold", "out of stock"];
 
 const Home = () => {
-  const {data} = useFetch(get_today_revenue())
-  console.log(data);
 
   return (
     <main>
