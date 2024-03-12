@@ -14,10 +14,7 @@ const UserDetail = lazy(() => import("./pages/UserDetail"));
 const Products = lazy(() => import("./pages/Products"));
 const CreatingProduct = lazy(() => import("./pages/CreatingProduct"));
 const Orders = lazy(() => import("./pages/Orders"));
-const Catalogs = lazy(() => import("./pages/Catalogs"));
-const CreatingCatalog = lazy(() => import("./pages/CreatingCatalog"));
 const Warehouse = lazy(() => import("./pages/Warehouse"));
-const CatalogDetail = lazy(() => import("./pages/CatalogDetail"));
 const Transactions = lazy(() => import("./pages/Transactions"));
 const Reports = lazy(() => import("./pages/Reports"));
 const ReportDetail = lazy(() => import("./pages/ReportDetail"));
@@ -25,8 +22,6 @@ const Rooms = lazy(() => import("./pages/Rooms"));
 const Types = lazy(() => import("./pages/Types"));
 const Vouchers = lazy(() => import("./pages/Vouchers"));
 const CreateVoucher = lazy(() => import("./pages/CreatingVoucher"));
-const Events = lazy(() => import("./pages/Events"));
-const CreateEvents = lazy(() => import("./pages/CreatingEvents"));
 const FlashSale = lazy(() => import("./pages/FlashSale"));
 const CreatingFlashSale = lazy(() => import("./pages/CreatingFlashSale"));
 const CategoryDetail = lazy(() => import("./pages/CategoryDetail"));
@@ -177,14 +172,6 @@ const staffRoutes = [
   {
     path: pathSystem.createProduct,
     element: <CreatingProduct />,
-  },
-  {
-    path: pathSystem.events,
-    element: <Events />,
-  },
-  {
-    path: pathSystem.eventCreate,
-    element: <CreateEvents />,
   },
   {
     path: pathSystem.vouchers,
