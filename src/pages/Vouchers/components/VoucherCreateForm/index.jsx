@@ -1,17 +1,15 @@
 import { Button, Form, Input, DatePicker, Select } from "antd";
 
-import { useCreateVoucher } from "@services/Vouchers/services";
 
 const { Option } = Select;
 const VoucherCreateForm = () => {
-  const {mutate:createVoucher} = useCreateVoucher();
   const [form] = Form.useForm();
   const onFinish = (values) => {
     const data = {
       ...values,
      
     }
-    createVoucher(data);
+   
 
     console.log(data);
   };
