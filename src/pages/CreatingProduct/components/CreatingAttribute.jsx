@@ -30,7 +30,7 @@ const CreatingAttribute = () => {
   };
   return (
     <div>
-      <Form form={form} layout="vertical" onFinish={onFinish}>
+      <Form form={form} requiredMark="optional" layout="vertical" onFinish={onFinish}>
         <FormInput
           name="name"
           label="Attribute Name"

@@ -71,6 +71,14 @@ const type = {
       disable: 'Failed disable product',
       enable: 'Failed enable product',
     }
+  },
+  login:{
+    success:{
+      login: 'Successfully logged in'
+    },
+    fail:{
+      login: 'Failed to login in'
+    }
   }
 
 }
