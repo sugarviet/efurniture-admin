@@ -1,31 +1,17 @@
 import { Button, Form, Input, DatePicker, Select } from "antd";
-import Loading from "@components/Loading";
-import { formatDateByDateAndMinute } from "../../../../utils/formatDate";
 import Proptypes from "prop-types";
-import useVoucherDetail from "../../hooks/useVoucherDetail";
-import { useUpdateVoucher } from "@services/Vouchers/services";
 
 const { Option } = Select;
 const VoucherUpdateForm = ({ id }) => {
-  const { voucher, isLoading } = useVoucherDetail(id);
   const [form] = Form.useForm();
-  const { mutate } = useUpdateVoucher();
-  console.log(voucher);
 
-  if (isLoading) return <Loading />;
-
-  const initialValue = {
-    ...voucher,
-    startDate: formatDateByDateAndMinute(voucher.startDate),
-    endDate: formatDateByDateAndMinute(voucher.endDate),
-  };
+  const initialValue = {};
 
   const onFinish = (values) => {
     const data = {
       ...values,
       id: id,
     };
-    mutate(data);
   };
 
   return (
