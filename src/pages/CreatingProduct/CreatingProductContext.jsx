@@ -20,7 +20,8 @@ function CreatingProductProvider(props) {
     handleSelectSubType,
     productType,
     setProductType,
-    handleSelectType
+    handleSelectType,
+    setProductSubType
   };
   return (
     <CreatingProductContext.Provider value={value}>

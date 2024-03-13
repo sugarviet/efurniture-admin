@@ -21,3 +21,7 @@ export const create_product_staff = () => {
 export const publish_product_admin = (type, slug) => {
     return `/product/admin/publish/${type}/${slug}`;   
 }
+
+export const draft_product_admin = (type, slug) => {
+    return `/product/admin/publish/${type}/${slug}`;   
+}

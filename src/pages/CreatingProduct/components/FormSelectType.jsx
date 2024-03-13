@@ -1,7 +1,7 @@
 import FormSelect from "@components/FormSelect";
 import PropTypes from "prop-types";
 import { withFetchData } from "@hocs/withFetchData";
-import { get_all_types } from "../../../api/typesApi";
+import { get_all_types, get_published_type } from "../../../api/typesApi";
 import { useCreatingProductValues } from "../CreatingProductContext";
 import { transferSelectOption } from "@utils/transferSelectOption";
 function FormSelectType({ data, label = "Type", name = "type" }) {
@@ -25,4 +25,4 @@ FormSelectType.propTypes = {
   name: PropTypes.string,
 };
 
-export default withFetchData(FormSelectType, get_all_types);
+export default withFetchData(FormSelectType, get_published_type);

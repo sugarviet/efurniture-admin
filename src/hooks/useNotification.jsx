@@ -62,6 +62,8 @@ const type = {
     success: {
       add_draft: 'Successfully add draft product',
       edit: 'Successfully edited product',
+      publish: 'Successfully publish product',
+      draft: 'Successfully draft product',
       disable: 'Successfully disable product',
       enable: 'Successfully enable product',
     },
@@ -69,6 +71,8 @@ const type = {
       add_draft: 'Failed added draft product',
       edit: 'Failed edited product',
       disable: 'Failed disable product',
+      publish: 'Failed publish product',
+      draft: 'Failed draft product',
       enable: 'Failed enable product',
     }
   },
