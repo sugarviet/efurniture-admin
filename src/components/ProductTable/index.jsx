@@ -4,8 +4,28 @@ import EditButton from "../EditButton";
 import PropTypes from "prop-types";
 import { formatCurrency } from "../../utils/formatCurrency";
 import LinkItem from "../LinkItem";
-const ProductTable = ({ data, onEdit }) => {
+import { isAdmin } from "@utils/getCurrentUserRole";
+import { usePost, useUpdate } from "../../hooks/api-hooks";
+import {
+  get_published_product,
+  publish_product_admin,
+} from "../../api/productApi";
+
+const ProductTable = ({ data, onEdit, published }) => {
   const { getColumnSearchProps } = useSearchTableColumn();
+  const { mutate: publishedProduct } = useUpdate(
+    publish_product_admin(),
+    undefined,
+    () => {},
+    () => {},
+    get_published_product()
+  );
+  const admin = isAdmin();
+
+  console.log(data);
+
+  const handlePublished = () => {};
+
   const columns = [
     {
       title: "Product Name",
@@ -35,9 +55,12 @@ const ProductTable = ({ data, onEdit }) => {
       title: "Action",
       key: "action",
       width: "30%",
-      render: () => (
+      render: (text, record) => (
         <Space className="flex gap-4">
           <EditButton onClick={() => onEdit(data)} />
+          {admin && !published ? (
+            <Button onClick={() => handlePublished(record)}>Published</Button>
+          ) : null}
           <Button danger>Disable</Button>
         </Space>
       ),
@@ -61,6 +84,7 @@ const ProductTable = ({ data, onEdit }) => {
 ProductTable.propTypes = {
   data: PropTypes.object,
   onEdit: PropTypes.func,
+  published: PropTypes.bool,
 };
 
 export default ProductTable;

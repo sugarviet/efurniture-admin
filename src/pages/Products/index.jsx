@@ -23,7 +23,7 @@ const Products = () => {
       </div>
 
       <TableCard label="Public Products">
-        <PublishedProductTable />
+        <PublishedProductTable published={true}/>
       </TableCard>
 
       {admin ? (
