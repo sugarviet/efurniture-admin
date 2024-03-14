@@ -29,6 +29,7 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 const ProductDetail = lazy(() => import("./pages/ProductDetail"));
 const CashRequest = lazy(() => import("./pages/CashRequest"));
 const OrderDetail = lazy(() => import("./pages/OrderDetail"));
+const SubTypes = lazy(() => import("./pages/SubTypes"));
 
 // HOCs
 import withAuth from "./hocs/withAuth";
@@ -66,6 +67,7 @@ export const pathSystem = {
   createRoom: "/room/create",
   flashsale: "/flashsales",
   creatingFlashSale: "/flashsale/create",
+  subtypes: '/subtypes'
 
 
 };
@@ -145,6 +147,10 @@ const adminRoutes = [
   {
     path: pathSystem.types,
     element: <Types />,
+  },
+  {
+    path: pathSystem.subtypes,
+    element: <SubTypes />,
   },
   {
     path: pathSystem.reports,
