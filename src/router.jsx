@@ -37,6 +37,7 @@ import Cookies from "js-cookie";
 
 import Login from "@pages/Login";
 import CreateRoom from "./pages/CreateRoom";
+import WarehouseDetail from "./pages/WarehouseDetail";
 const WrappedComponentWithAuth = withAuth(RootLayout);
 
 export const pathSystem = {
@@ -62,7 +63,8 @@ export const pathSystem = {
   catalogCreate: "/catelog/create",
   types: "/types",
   categoryDetail: "/category/:id",
-  warehouse: "/warehouse",
+  warehouse: "/warehouses",
+  warehouseDetail: "/warehouse/:id",
   rooms: "/rooms",
   createRoom: "/room/create",
   flashsale: "/flashsales",
@@ -202,6 +204,10 @@ const staffRoutes = [
   {
     path: pathSystem.types,
     element: <Types />,
+  },
+  {
+    path: pathSystem.warehouseDetail,
+    element: <WarehouseDetail />,
   },
 ];
 

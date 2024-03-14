@@ -33,6 +33,7 @@ const EditableInput = ({
   return (
     <Input
       type={type}
+      className="border-transparent hover:border-black border-[1px]"
       value={editedValue}
       onChange={(e) => setEditedValue(e.target.value)}
       onBlur={handleSave}

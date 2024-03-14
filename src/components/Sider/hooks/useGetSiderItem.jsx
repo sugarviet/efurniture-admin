@@ -60,7 +60,7 @@ export function useGetSiderItem() {
       getItem("List Voucher", "/vouchers"),
       getItem("Create Voucher", "/voucher/create"),
     ]),
-    getItem("Warehouse", "/warehouse", <TagsOutlined />),
+    getItem("Warehouse", "/warehouses", <TagsOutlined />),
 
     {
       type: "divider",
