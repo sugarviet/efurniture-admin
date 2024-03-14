@@ -4,10 +4,12 @@ import AppModal from "@components/AppModal";
 import OrderDetail from "./components/OrderDetail";
 
 import PageTitle from "../../components/PageTitle";
-import { Link } from "react-router-dom";
-import urlcat from "urlcat";
-import { pathSystem } from "../../router";
 import OrderTable from "../../components/OrderTable";
+import { withFetchData } from "../../hocs/withFetchData";
+import { get_order_by_type_api } from "../../api/orderApi";
+import TableCard from "../../components/TableCard";
+
+const AllOrderTable = withFetchData(OrderTable, get_order_by_type_api);
 
 const Orders = () => {
   const [isModalDetailOpen, setIsModalDetailOpen] = useState(false);
@@ -20,8 +22,9 @@ const Orders = () => {
 
   return (
     <main>
-      <PageTitle title="Orders managment" />
-      <OrderTable />
+      <TableCard label="Order Management">
+        <AllOrderTable onDetail={handleToggleDetailModal} />
+      </TableCard>
 
       <AppModal isOpen={isModalDetailOpen} setIsOpen={setIsModalDetailOpen}>
         <OrderDetail id={selectedOrderId} />
