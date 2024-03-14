@@ -1,20 +1,19 @@
-import { Button } from "antd";
 import PageTitle from "@components/PageTitle";
 import CreatingType from "./components/CreatingType";
 import AppModal from "@components/AppModal";
 import { useState } from "react";
-// import PublishedTypeTable from "./components/PublishedTypeTable";
-// import DraftedTypeTable from "./components/DraftedTypeTable";
 import { withFetchData } from "../../hocs/withFetchData";
 import TypeTable from "../../components/TypeTable";
 import { get_draft_type, get_published_type } from "../../api/typesApi";
 import TableCard from "../../components/TableCard";
+import { isAdmin } from "../../utils/getCurrentUserRole";
 
 const PublishedTypeTable = withFetchData(TypeTable, get_published_type);
 const DraftedTypeTable = withFetchData(TypeTable, get_draft_type);
 
 const Types = () => {
   const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
+  const admin = isAdmin();
 
   const handleOpenModalCreate = () => {
     setIsModalCreateOpen(true);
@@ -24,16 +23,16 @@ const Types = () => {
     <div>
       <div className="flex justify-between px-3 my-3">
         <PageTitle title="Type management" />
-      
       </div>
       <TableCard label="Public types">
-        <PublishedTypeTable published/>
+        <PublishedTypeTable published />
       </TableCard>
 
-      <TableCard label="Draft types">
-        <DraftedTypeTable />
-      </TableCard>
-
+      {admin ? (
+        <TableCard label="Draft types">
+          <DraftedTypeTable />
+        </TableCard>
+      ) : null}
       <AppModal isOpen={isModalCreateOpen} setIsOpen={setIsModalCreateOpen}>
         <CreatingType />
       </AppModal>

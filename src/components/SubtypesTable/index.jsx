@@ -1,51 +1,8 @@
-import { Button, Space, Table } from "antd";
+import { Space, Table } from "antd";
 import EditButton from "../EditButton";
 import { isAdmin } from "../../utils/getCurrentUserRole";
-import useNotification from "antd/es/notification/useNotification";
-import { useUpdate } from "../../hooks/api-hooks";
 import { draft_subtypes_admin, get_all_draft_subType, get_all_publish_subType, publish_subtypes_admin } from "../../api/subtypeApi";
-
-const PublishedButton = ({ type, slug }) => {
-    const { success_message, error_message } = useNotification();
-    const { mutate: publishedSubtypes } = useUpdate(
-        publish_subtypes_admin(type, slug),
-      undefined,
-      () => {
-        success_message("subtypes", "publish");
-      },
-      () => {
-        error_message("subtypes", "publish");
-      },
-      get_all_publish_subType()
-    );
-  
-    return (
-      <Button
-        onClick={() => {
-          publishedSubtypes({});
-        }}
-      >
-        Publish
-      </Button>
-    );
-  };
-  
-  const DraftedButton = ({ type, slug }) => {
-    const { success_message, error_message } = useNotification();
-    const { mutate: draftSubtypes } = useUpdate(
-        draft_subtypes_admin(type, slug),
-      undefined,
-      () => {
-        success_message("subtypes", "draft");
-      },
-      () => {
-        error_message("subtypes", "draft");
-      },
-      get_all_draft_subType()
-    );
-  
-    return <Button onClick={() => draftSubtypes({})}>Draft</Button>;
-  };
+import ChangeStatusButton from "../ChangeStatusButton";
 
 const SubtypesTable = ({ data, onEdit, published }) => {
     console.log(data);
@@ -81,11 +38,28 @@ const SubtypesTable = ({ data, onEdit, published }) => {
         <Space className="flex gap-4">
         <EditButton onClick={() => onEdit(record)} />
         {admin && !published ? (
-          <PublishedButton type={record.type} slug={record.slug} />
-        ) : null}
-        {published ? (
-          <DraftedButton type={record.type} slug={record.slug} />
-        ) : null}
+            <ChangeStatusButton
+              url={publish_subtypes_admin(record.type.name, record.slug)}
+              resetPublishkey={get_all_publish_subType()}
+              resetDraftKey={get_all_draft_subType()}
+              type="types"
+              action="publish"
+            >
+              Publish
+            </ChangeStatusButton>
+          ) : ( 
+
+            admin &&
+            <ChangeStatusButton
+              url={draft_subtypes_admin(record.type.name, record.slug)}
+              resetPublishkey={get_all_publish_subType()}
+              resetDraftKey={get_all_draft_subType()}
+              type="types"
+              action="draft"
+            >
+              Draft
+            </ChangeStatusButton>
+          )}
       </Space>
       ),
     },

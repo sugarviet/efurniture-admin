@@ -9,6 +9,7 @@ import {
   publish_types_admin,
 } from "../../api/typesApi";
 import { isAdmin } from "../../utils/getCurrentUserRole";
+import ChangeStatusButton from "../ChangeStatusButton";
 
 const PublishedButton = ({ type }) => {
   const { success_message, error_message } = useNotification();
@@ -53,7 +54,8 @@ const DraftedButton = ({ type }) => {
 };
 
 const TypeTable = ({ data, onEdit, published }) => {
-    const admin = isAdmin();
+  const admin = isAdmin();
+  console.log(data);
 
   const columns = [
     {
@@ -77,14 +79,31 @@ const TypeTable = ({ data, onEdit, published }) => {
       title: "Actions",
       render: (_, record) => (
         <Space className="flex gap-4">
-        <EditButton onClick={() => onEdit(record)} />
-        {admin && !published ? (
-          <PublishedButton type={record.slug}/>
-        ) : null}
-        {published ? (
-          <DraftedButton type={record.slug}  />
-        ) : null}
-      </Space>
+          <EditButton onClick={() => onEdit(record)} />
+          {admin && !published ? (
+            <ChangeStatusButton
+              url={publish_types_admin(record.slug)}
+              resetPublishkey={get_published_type()}
+              resetDraftKey={get_draft_type()}
+              type="types"
+              action="publish"
+            >
+              Publish
+            </ChangeStatusButton>
+          ) : ( 
+
+            admin &&
+            <ChangeStatusButton
+              url={draft_types_admin(record.slug)}
+              resetPublishkey={get_published_type()}
+              resetDraftKey={get_draft_type()}
+              type="types"
+              action="draft"
+            >
+              Draft
+            </ChangeStatusButton>
+          )}
+        </Space>
       ),
     },
   ];

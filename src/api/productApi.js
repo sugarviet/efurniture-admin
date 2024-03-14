@@ -18,11 +18,14 @@ export const create_product_staff = () => {
     return "/product/staff";
 }
 
-export const publish_product_admin = (params) => {
-    const {type, slug} = params;
+export const publish_product_admin = (type, slug) => {
     return `/product/admin/publish/${type}/${slug}`;   
 }
 
 export const draft_product_admin = (type, slug) => {
-    return `/product/admin/publish/${type}/${slug}`;   
+    return `/product/admin/draft/${type}/${slug}`;   
+}
+
+export const edit_product = (slug) => {
+    return `/product/staff/${slug}`;
 }
