@@ -25,7 +25,6 @@ const PublishedButton = ({ type, slug }) => {
     },
     get_published_product()
   );
-
   return (
     <Button
       onClick={() => {
