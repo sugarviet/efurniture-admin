@@ -1,10 +1,13 @@
 import {
-  DashboardOutlined,
-  ScheduleOutlined,
   ShopOutlined,
   UserOutlined,
   AlertOutlined,
   TagsOutlined,
+  FireOutlined,
+  AppstoreAddOutlined,
+  AreaChartOutlined,
+  ShoppingCartOutlined,
+  DropboxOutlined,
 } from "@ant-design/icons";
 
 export function useGetSiderItem() {
@@ -19,58 +22,44 @@ export function useGetSiderItem() {
   }
 
   const itemsForAdmin = [
-    getItem("Dashboard", "/", <DashboardOutlined />),
-    getItem("Products", "/product", <ShopOutlined />, [
-      getItem("List Product", "/products"),
-      getItem("Create Product", "/product/create"),
-    ]),
-    getItem("Flashsale", "/flashsale", <ScheduleOutlined />, [
+    getItem("Dashboard", "/", <AreaChartOutlined />),
+    getItem("Products", "/products", <DropboxOutlined />),
+    getItem("Flashsale", "/flashsale", <FireOutlined />, [
       getItem("List Flashsale", "/flashsales"),
       getItem("Create Flashsale", "/flashsale/create"),
     ]),
-    getItem("Vouchers", "/voucher", <AlertOutlined />, [
-      getItem("List Voucher", "/vouchers"),
-      getItem("Create Voucher", "/voucher/create"),
-    ]),
-
+    getItem("Vouchers", "/vouchers", <TagsOutlined />),
     {
       type: "divider",
     },
-    getItem("Orders", "/orders", <TagsOutlined />),
-    getItem("Rooms", "/room", <TagsOutlined />, [
-      getItem("List rooms", "/rooms"),
-      getItem("Create Rooms", "/room/create"),
-    ]),
-    getItem("Reports", "/reports", <TagsOutlined />),
-    getItem("Types", "/type", <TagsOutlined />, [
-      getItem("List Types", "/types"),
-      getItem("Create types", "/type/create"),
-    ]),
+    getItem("Orders", "/orders", <ShoppingCartOutlined />),
+    getItem("Rooms", "/rooms", <ShopOutlined />),
+    getItem("Reports", "/reports", <AlertOutlined />),
+    getItem("Types", "/types", <AppstoreAddOutlined />),
   ];
   const itemsForSuperAdmin = [
     getItem("User", "/users", <UserOutlined />),
     getItem("Staffs", "/staffs", <TagsOutlined />),
   ];
   const itemsForStaff = [
-    getItem("Products", "/product", <ShopOutlined />, [
+    getItem("Products", "/product", <DropboxOutlined />, [
       getItem("List Product", "/products"),
       getItem("Create Product", "/product/create"),
     ]),
-    getItem("Vouchers", "/voucher", <AlertOutlined />, [
+    getItem("Vouchers", "/voucher", <TagsOutlined />, [
       getItem("List Voucher", "/vouchers"),
       getItem("Create Voucher", "/voucher/create"),
     ]),
     getItem("Warehouse", "/warehouse", <TagsOutlined />),
-
     {
       type: "divider",
     },
-    getItem("Rooms", "/room", <TagsOutlined />, [
+    getItem("Rooms", "/room", <ShopOutlined />, [
       getItem("List rooms", "/rooms"),
       getItem("Create Rooms", "/room/create"),
     ]),
-    getItem("Reports", "/report", <TagsOutlined />),
-    getItem("Types", "/type", <TagsOutlined />, [
+    getItem("Reports", "/report", <AlertOutlined />),
+    getItem("Types", "/type", <AppstoreAddOutlined />, [
       getItem("List Types", "/types"),
       getItem("Create types", "/type/create"),
     ]),
