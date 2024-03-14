@@ -7,7 +7,7 @@ import { jwtDecode } from "jwt-decode";
 import { getCurrentUserRole } from "@utils/getCurrentUserRole";
 import useNotification from "@hooks/useNotification";
 const init_route = {
-  superAdmin: "/users",
+  superAdmin: "/",
   admin: "/",
   staff: "/products",
 };
@@ -38,12 +38,10 @@ export function useAuthentication() {
   const logout = () => {
     clearTokens();
     navigate("/");
-  }
-
-  
+  };
 
   return {
     login,
-    logout
+    logout,
   };
 }

@@ -1,12 +1,12 @@
 const USER_API = '/account/adminMaster';
 
 export const get_all_user = (params = {}, searchValues = {}) => {
-    const { page = 1, limit = 10 } = searchValues; 
+    const { page, limit } = searchValues;
     return `${USER_API}/user?page=${page}&limit=${limit}`;
 };
 
-export const get_all_system_account = (params = {}, searchValues = {}) => {   
-    const { page = 1, limit = 10 } = searchValues; 
+export const get_all_system_account = (params = {}, searchValues = {}) => {
+    const { page, limit } = searchValues;
     return `${USER_API}/system?page=${page}&limit=${limit}`;
 };
 

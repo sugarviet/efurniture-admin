@@ -1,24 +1,23 @@
 import { Menu } from "antd";
-import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useGetSiderItem } from "./hooks/useGetSiderItem";
 import useAuth from "../../stores/useAuth";
 import { classNames } from "../../utils/classNames";
 
-const activeTab = window.location.pathname;
-
 const AppSider = () => {
   const { getItemByRole } = useGetSiderItem();
   const { role } = useAuth();
-  const navigate = useNavigate();
   const onClick = (e) => {
-    navigate(e.key);
+    getItemByRole[role].find((item) => item.key === e.key)?.onClick();
   };
+
+  const location = useLocation();
 
   return (
     <Menu
       theme="light"
       onClick={onClick}
-      defaultSelectedKeys={[activeTab]}
+      selectedKeys={[location.pathname]}
       mode="inline"
       className={classNames("text-lg tracking-wide")}
       items={getItemByRole[role]}
