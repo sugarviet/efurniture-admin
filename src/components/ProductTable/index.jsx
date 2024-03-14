@@ -23,14 +23,9 @@ const ProductTable = ({ data, onEdit, published }) => {
   const isEditing = (record, columnName) =>
     record._id === editingKey && columnName === editingColumn;
 
-  const edit = (record, columnName) => {
+  const editColumn = (record, columnName) => {
     setEditingKey(record._id);
     setEditingColumn(columnName);
-  };
-
-  const cancelEdit = () => {
-    setEditingKey("");
-    setEditingColumn("");
   };
 
   return (
@@ -55,7 +50,7 @@ const ProductTable = ({ data, onEdit, published }) => {
                 url={edit_product(record.slug)}
                 record={record}
                 refreshKey={get_published_product}
-                onBlur={cancelEdit}
+              
               />
             ) : (
               <div
@@ -90,7 +85,7 @@ const ProductTable = ({ data, onEdit, published }) => {
                 record={record}
                 refreshKey={get_published_product}
                 type="number"
-                onBlur={cancelEdit}
+              
               />
             ) : (
               <div
