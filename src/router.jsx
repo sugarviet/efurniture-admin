@@ -69,15 +69,13 @@ export const pathSystem = {
   createRoom: "/room/create",
   flashsale: "/flashsales",
   creatingFlashSale: "/flashsale/create",
-  subtypes: '/subtypes'
-
-
+  subtypes: "/subtypes",
 };
 
 const adminMasterRoutes = [
   {
     path: pathSystem.base,
-    element: <Navigate to={pathSystem.users} />,
+    element: <Navigate to={`${pathSystem.users}?page=1&limit=10`} />,
   },
   {
     path: pathSystem.users,
@@ -103,10 +101,6 @@ const adminRoutes = [
     element: <Products />,
   },
   {
-    path: pathSystem.createProduct,
-    element: <CreatingProduct />,
-  },
-  {
     path: pathSystem.productDetail,
     element: <ProductDetail />,
   },
@@ -125,10 +119,6 @@ const adminRoutes = [
   {
     path: pathSystem.vouchers,
     element: <Vouchers />,
-  },
-  {
-    path: pathSystem.createVoucher,
-    element: <CreateVoucher />,
   },
   {
     path: pathSystem.flashsale,
