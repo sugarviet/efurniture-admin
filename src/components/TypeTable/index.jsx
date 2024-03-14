@@ -11,51 +11,8 @@ import {
 import { isAdmin } from "../../utils/getCurrentUserRole";
 import ChangeStatusButton from "../ChangeStatusButton";
 
-const PublishedButton = ({ type }) => {
-  const { success_message, error_message } = useNotification();
-  const { mutate: publishedTypes } = useUpdate(
-    publish_types_admin(type),
-    undefined,
-    () => {
-      success_message("types", "publish");
-    },
-    () => {
-      error_message("types", "publish");
-    },
-    get_published_type()
-  );
-
-  return (
-    <Button
-      onClick={() => {
-        publishedTypes({});
-      }}
-    >
-      Publish
-    </Button>
-  );
-};
-
-const DraftedButton = ({ type }) => {
-  const { success_message, error_message } = useNotification();
-  const { mutate: draftedTypes } = useUpdate(
-    draft_types_admin(type),
-    undefined,
-    () => {
-      success_message("types", "draft");
-    },
-    () => {
-      error_message("types", "draft");
-    },
-    get_draft_type()
-  );
-
-  return <Button onClick={() => draftedTypes({})}>Draft</Button>;
-};
-
 const TypeTable = ({ data, onEdit, published }) => {
   const admin = isAdmin();
-  console.log(data);
 
   const columns = [
     {
