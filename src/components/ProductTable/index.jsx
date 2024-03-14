@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Space, Table } from "antd";
 import EditButton from "../EditButton";
 import PropTypes from "prop-types";
@@ -17,16 +16,6 @@ const { Column } = Table;
 
 const ProductTable = ({ data, onEdit, published }) => {
   const admin = isAdmin();
-  const [editingKey, setEditingKey] = useState("");
-  const [editingColumn, setEditingColumn] = useState("");
-
-  const isEditing = (record, columnName) =>
-    record._id === editingKey && columnName === editingColumn;
-
-  const editColumn = (record, columnName) => {
-    setEditingKey(record._id);
-    setEditingColumn(columnName);
-  };
 
   return (
     <div>
@@ -42,8 +31,8 @@ const ProductTable = ({ data, onEdit, published }) => {
           key="name"
           render={(text, record) => {
             const columnName = "name";
-            const editable = isEditing(record, columnName);
-            return editable ? (
+
+            return (
               <EditableInput
                 defaultValue={text}
                 name={columnName}
@@ -51,13 +40,6 @@ const ProductTable = ({ data, onEdit, published }) => {
                 record={record}
                 refreshKey={get_published_product}
               />
-            ) : (
-              <div
-                onClick={() => editColumn(record, columnName)}
-                style={{ cursor: "pointer", textDecoration: "underline" }}
-              >
-                {text}
-              </div>
             );
           }}
         />
@@ -75,8 +57,7 @@ const ProductTable = ({ data, onEdit, published }) => {
           key="regular_price"
           render={(text, record) => {
             const columnName = "regular_price";
-            const editable = isEditing(record, columnName);
-            return editable ? (
+            return (
               <EditableInput
                 defaultValue={text}
                 name={columnName}
@@ -85,13 +66,6 @@ const ProductTable = ({ data, onEdit, published }) => {
                 refreshKey={get_published_product}
                 type="number"
               />
-            ) : (
-              <div
-                onClick={() => editColumn(record, columnName)}
-                style={{ cursor: "pointer", textDecoration: "underline" }}
-              >
-                {formatCurrency(text)}
-              </div>
             );
           }}
           sorter={(a, b) => a.price - b.price}
