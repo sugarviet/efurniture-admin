@@ -18,7 +18,8 @@ export const create_product_staff = () => {
     return "/product/staff";
 }
 
-export const publish_product_admin = (type, slug) => {
+export const publish_product_admin = (params) => {
+    const {type, slug} = params;
     return `/product/admin/publish/${type}/${slug}`;   
 }
 

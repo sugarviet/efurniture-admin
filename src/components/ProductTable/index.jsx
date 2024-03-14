@@ -55,6 +55,7 @@ const DraftedButton = ({ type, slug }) => {
 };
 
 const ProductTable = ({ data, onEdit, published }) => {
+  console.log(data);
   const { getColumnSearchProps } = useSearchTableColumn();
   const admin = isAdmin();
 
