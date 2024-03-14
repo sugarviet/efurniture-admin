@@ -1,59 +1,136 @@
-import { Space, Button, Table } from "antd";
-import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
+import { useState } from "react";
+import { Space, Table } from "antd";
 import EditButton from "../EditButton";
 import PropTypes from "prop-types";
 import { formatCurrency } from "../../utils/formatCurrency";
-import LinkItem from "../LinkItem";
-const ProductTable = ({ data, onEdit }) => {
-  const { getColumnSearchProps } = useSearchTableColumn();
-  const columns = [
-    {
-      title: "Product Name",
-      dataIndex: "name",
-      key: "name",
-      ...getColumnSearchProps("name"),
-      render: (text) => <LinkItem to="/">{text}</LinkItem>,
-    },
-    {
-      title: "Image",
-      dataIndex: "thumbs",
-      key: "thumbs",
-      render: (text, record) => (
-        <img src={record.thumbs[0]} alt={record.name} width="100" />
-      ),
-    },
-    {
-      title: "Price",
-      dataIndex: "regular_price",
-      key: "regular_price",
-      render: (text) => (
-        <span className="text-xs font-semibold">{formatCurrency(text)}</span>
-      ),
-      sorter: (a, b) => a.price - b.price,
-    },
-    {
-      title: "Action",
-      key: "action",
-      width: "30%",
-      render: () => (
-        <Space className="flex gap-4">
-          <EditButton onClick={() => onEdit(data)} />
-          <Button danger>Disable</Button>
-        </Space>
-      ),
-    },
-  ];
+import { isAdmin } from "../../utils/getCurrentUserRole";
+import {
+  get_published_product,
+  publish_product_admin,
+  draft_product_admin,
+  get_draft_product,
+  edit_product,
+} from "../../api/productApi";
+import ChangeStatusButton from "../ChangeStatusButton";
+import EditableInput from "../EditableInput";
+const { Column } = Table;
+
+const ProductTable = ({ data, onEdit, published }) => {
+  const admin = isAdmin();
+  const [editingKey, setEditingKey] = useState("");
+  const [editingColumn, setEditingColumn] = useState("");
+
+  const isEditing = (record, columnName) =>
+    record._id === editingKey && columnName === editingColumn;
+
+  const editColumn = (record, columnName) => {
+    setEditingKey(record._id);
+    setEditingColumn(columnName);
+  };
+
   return (
     <div>
       <Table
         rowKey="_id"
         dataSource={data.data}
-        columns={columns}
-        pagination={{
-          pageSize: 10,
-          hideOnSinglePage: true,
-        }}
-      />
+        pagination={{ pageSize: 10, hideOnSinglePage: true }}
+        bordered
+      >
+        <Column
+          title="Product Name"
+          dataIndex="name"
+          key="name"
+          render={(text, record) => {
+            const columnName = "name";
+            const editable = isEditing(record, columnName);
+            return editable ? (
+              <EditableInput
+                defaultValue={text}
+                name={columnName}
+                url={edit_product(record.slug)}
+                record={record}
+                refreshKey={get_published_product}
+              
+              />
+            ) : (
+              <div
+                onClick={() => editColumn(record, columnName)}
+                style={{ cursor: "pointer", textDecoration: "underline" }}
+              >
+                {text}
+              </div>
+            );
+          }}
+        />
+        <Column
+          title="Image"
+          dataIndex="thumbs"
+          key="thumbs"
+          render={(text, record) => (
+            <img src={record.thumbs[0]} alt={record.name} width="100" />
+          )}
+        />
+        <Column
+          title="Price"
+          dataIndex="regular_price"
+          key="regular_price"
+          render={(text, record) => {
+            const columnName = "regular_price";
+            const editable = isEditing(record, columnName);
+            return editable ? (
+              <EditableInput
+                defaultValue={text}
+                name={columnName}
+                url={edit_product(record.slug)}
+                record={record}
+                refreshKey={get_published_product}
+                type="number"
+              
+              />
+            ) : (
+              <div
+                onClick={() => editColumn(record, columnName)}
+                style={{ cursor: "pointer", textDecoration: "underline" }}
+              >
+                {formatCurrency(text)}
+              </div>
+            );
+          }}
+          sorter={(a, b) => a.price - b.price}
+        />
+        <Column
+          title="Action"
+          key="action"
+          width="30%"
+          render={(text, record) => (
+            <Space className="flex gap-4">
+              <EditButton onClick={() => onEdit(record)} />
+              {admin && !published ? (
+                <ChangeStatusButton
+                  url={publish_product_admin(record.type.slug, record.slug)}
+                  resetPublishkey={get_published_product()}
+                  resetDraftKey={get_draft_product()}
+                  type="products"
+                  action="publish"
+                >
+                  Publish
+                </ChangeStatusButton>
+              ) : (
+                admin &&
+                <ChangeStatusButton
+                  url={draft_product_admin(record.type.slug, record.slug)}
+                  resetPublishkey={get_published_product()}
+                  resetDraftKey={get_draft_product()}
+                  type="products"
+                  action="draft"
+                >
+                  Draft
+                </ChangeStatusButton>
+              )}
+            </Space>
+          )}
+        />
+      </Table>
     </div>
   );
 };
@@ -61,6 +138,7 @@ const ProductTable = ({ data, onEdit }) => {
 ProductTable.propTypes = {
   data: PropTypes.object,
   onEdit: PropTypes.func,
+  published: PropTypes.bool,
 };
 
 export default ProductTable;

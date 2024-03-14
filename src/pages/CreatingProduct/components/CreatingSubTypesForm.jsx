@@ -14,8 +14,8 @@ import FormSelectType from "./FormSelectType";
 import { transferSelectOption } from "@utils/transferSelectOption";
 
 const CreatingSubTypesForm = () => {
-  const { data: allAtrributes } = useFetch(get_attribute());
-  const { data: allSubtypesGroup } = useFetch(get_sub_type_group());
+  const { data: allAtrributes, isLoading:loadingAtrribute } = useFetch(get_attribute());
+  const { data: allSubtypesGroup, isLoading:loadingSubtypegroup } = useFetch(get_sub_type_group());
   const { mutate: createSubtype } = usePost(
     create_subtype(),
     undefined,
@@ -23,6 +23,10 @@ const CreatingSubTypesForm = () => {
     () => {},
     get_all_subType()
   );
+
+  if(loadingAtrribute) return;
+  if(loadingSubtypegroup) return;
+
   
   const typesAttributeOptions = transferSelectOption(
     allAtrributes,

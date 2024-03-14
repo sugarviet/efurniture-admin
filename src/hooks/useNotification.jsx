@@ -49,19 +49,43 @@ const type = {
       add_draft: 'Successfully add draft types',
       edit: 'Successfully edited types',
       disable: 'Successfully disable types',
+      publish: 'Successfully publish types',
+      draft: 'Successfully draft types',
       enable: 'Successfully enable types',
     },
     fail: {
       add_draft: 'Failed added draft types',
       edit: 'Failed edited types',
       disable: 'Failed disable types',
+      publish: 'Failed publish types',
+      draft: 'Failed draft types',
       enable: 'Failed enable types',
+    }
+  },
+  subtypes: {
+    success: {
+      add_draft: 'Successfully add draft subtypes',
+      edit: 'Successfully edited subtypes',
+      disable: 'Successfully disable subtypes',
+      publish: 'Successfully publish subtypes',
+      draft: 'Successfully draft subtypes',
+      enable: 'Successfully enable subtypes',
+    },
+    fail: {
+      add_draft: 'Failed added draft subtypes',
+      edit: 'Failed edited subtypes',
+      disable: 'Failed disable subtypes',
+      publish: 'Failed publish subtypes',
+      draft: 'Failed draft subtypes',
+      enable: 'Failed enable subtypes',
     }
   },
   products: {
     success: {
       add_draft: 'Successfully add draft product',
       edit: 'Successfully edited product',
+      publish: 'Successfully publish product',
+      draft: 'Successfully draft product',
       disable: 'Successfully disable product',
       enable: 'Successfully enable product',
     },
@@ -69,6 +93,8 @@ const type = {
       add_draft: 'Failed added draft product',
       edit: 'Failed edited product',
       disable: 'Failed disable product',
+      publish: 'Failed publish product',
+      draft: 'Failed draft product',
       enable: 'Failed enable product',
     }
   },
