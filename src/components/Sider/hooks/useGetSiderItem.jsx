@@ -9,15 +9,18 @@ import {
   ShoppingCartOutlined,
   DropboxOutlined,
 } from "@ant-design/icons";
+import useNavigation from "../../../hooks/useNavigation";
 
 export function useGetSiderItem() {
-  function getItem(label, key, icon, children, type) {
+  const { go_to_user, go_to_staff } = useNavigation();
+  function getItem(label, key, icon, children, type, onClick) {
     return {
       key,
       icon,
       children,
       label,
       type,
+      onClick,
     };
   }
 
@@ -38,8 +41,8 @@ export function useGetSiderItem() {
     getItem("Types", "/types", <AppstoreAddOutlined />),
   ];
   const itemsForSuperAdmin = [
-    getItem("User", "/users", <UserOutlined />),
-    getItem("Staffs", "/staffs", <TagsOutlined />),
+    getItem("User", "/users", <UserOutlined />, null, null, go_to_user),
+    getItem("Staffs", "/staffs", <TagsOutlined />, null, null, go_to_staff),
   ];
   const itemsForStaff = [
     getItem("Products", "/product", <DropboxOutlined />, [

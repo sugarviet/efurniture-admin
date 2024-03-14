@@ -73,7 +73,7 @@ export const pathSystem = {
 const adminMasterRoutes = [
   {
     path: pathSystem.base,
-    element: <Navigate to={pathSystem.users} />,
+    element: <Navigate to={`${pathSystem.users}?page=1&limit=10`} />,
   },
   {
     path: pathSystem.users,

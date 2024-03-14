@@ -50,7 +50,6 @@ const ProductTable = ({ data, onEdit, published }) => {
                 url={edit_product(record.slug)}
                 record={record}
                 refreshKey={get_published_product}
-              
               />
             ) : (
               <div
@@ -85,7 +84,6 @@ const ProductTable = ({ data, onEdit, published }) => {
                 record={record}
                 refreshKey={get_published_product}
                 type="number"
-              
               />
             ) : (
               <div
@@ -116,16 +114,17 @@ const ProductTable = ({ data, onEdit, published }) => {
                   Publish
                 </ChangeStatusButton>
               ) : (
-                admin &&
-                <ChangeStatusButton
-                  url={draft_product_admin(record.type.slug, record.slug)}
-                  resetPublishkey={get_published_product()}
-                  resetDraftKey={get_draft_product()}
-                  type="products"
-                  action="draft"
-                >
-                  Draft
-                </ChangeStatusButton>
+                admin && (
+                  <ChangeStatusButton
+                    url={draft_product_admin(record.type.slug, record.slug)}
+                    resetPublishkey={get_published_product()}
+                    resetDraftKey={get_draft_product()}
+                    type="products"
+                    action="draft"
+                  >
+                    Draft
+                  </ChangeStatusButton>
+                )
               )}
             </Space>
           )}
