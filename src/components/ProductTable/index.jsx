@@ -54,7 +54,7 @@ const ProductTable = ({ data, onEdit, published }) => {
               />
             ) : (
               <div
-                onClick={() => edit(record, columnName)}
+                onClick={() => editColumn(record, columnName)}
                 style={{ cursor: "pointer", textDecoration: "underline" }}
               >
                 {text}
@@ -89,7 +89,7 @@ const ProductTable = ({ data, onEdit, published }) => {
               />
             ) : (
               <div
-                onClick={() => edit(record, columnName)}
+                onClick={() => editColumn(record, columnName)}
                 style={{ cursor: "pointer", textDecoration: "underline" }}
               >
                 {formatCurrency(text)}
