@@ -1,10 +1,19 @@
 import { Table } from "antd";
 import BriefInfo from "../BriefInfo";
-import EditButton from "../EditButton";
 import { formatCurrency } from "../../utils/formatCurrency";
+import { isAdmin } from "../../utils/getCurrentUserRole";
+import ChangeStatusButton from "../ChangeStatusButton";
+import {
+  get_draft_rooms_api,
+  get_published_rooms_api,
+  get_to_draft_room_api,
+  get_to_publish_room_api,
+} from "../../api/roomApi";
 
-function RoomTable({ data, onEdit }) {
-  const columns = [
+function RoomTable({ data, published }) {
+  const admin = isAdmin();
+
+  const STAFF_COLUMNS = [
     {
       title: "Room",
       render: (_, record) => (
@@ -29,9 +38,35 @@ function RoomTable({ data, onEdit }) {
         <span className="text-xs font-semibold">{formatCurrency(1000000)}</span>
       ),
     },
+  ];
+
+  const ADMIN_COLUMNS = [
+    ...STAFF_COLUMNS,
     {
       title: "Actions",
-      render: (_, record) => <EditButton onClick={() => onEdit(data)} />,
+      render: (_, record) => {
+        return !published ? (
+          <ChangeStatusButton
+            url={get_to_publish_room_api(record._id)}
+            resetPublishkey={get_published_rooms_api()}
+            resetDraftKey={get_draft_rooms_api()}
+            type="rooms"
+            action="publish"
+          >
+            Publish
+          </ChangeStatusButton>
+        ) : (
+          <ChangeStatusButton
+            url={get_to_draft_room_api(record._id)}
+            resetPublishkey={get_published_rooms_api()}
+            resetDraftKey={get_draft_rooms_api()}
+            type="rooms"
+            action="draft"
+          >
+            Draft
+          </ChangeStatusButton>
+        );
+      },
     },
   ];
 
@@ -39,7 +74,7 @@ function RoomTable({ data, onEdit }) {
     <Table
       rowKey="_id"
       dataSource={data}
-      columns={columns}
+      columns={admin ? ADMIN_COLUMNS : STAFF_COLUMNS}
       pagination={{
         pageSize: 10,
         hideOnSinglePage: true,
