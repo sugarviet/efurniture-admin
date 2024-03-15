@@ -1,4 +1,3 @@
-import React from 'react'
 import CreatingWarehouseForm from '../../components/CreatingWarehouseForm'
 
 const CreatingWarehouse = () => {

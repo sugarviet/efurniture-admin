@@ -8,7 +8,9 @@ import {
 import { useFetchOutsideSystem } from "../../hooks/api-hooks";
 import { useState } from "react";
 import getCoordinates from "../../utils/getCoordinate";
+import useWarehouse from "../../hooks/useWarehouse";
 const CreatingWarehouseForm = () => {
+  const {createWarehouse} = useWarehouse();
   const [form] = Form.useForm();
   const [selectedDistrict, setSelectedDistrict] = useState({});
   const [selectedWard, setSelectedWard] = useState({});
@@ -46,6 +48,8 @@ const CreatingWarehouseForm = () => {
       longitude: coordinates[0],
       latitude: coordinates[1],
     }
+    createWarehouse(body);
+    form.resetFields();
     console.log(body);
 
   };

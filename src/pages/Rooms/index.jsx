@@ -10,8 +10,6 @@ import {
 } from "../../api/roomApi";
 import TableCard from "../../components/TableCard";
 
-const CreatingRooms = lazy(() => import("./components/RoomForm"));
-
 const PublicRoomTable = withFetchData(RoomTable, get_published_rooms_api);
 const DraftRoomTable = withFetchData(RoomTable, get_draft_rooms_api);
 
@@ -19,7 +17,7 @@ const Rooms = () => {
   return (
     <main>
       <TableCard label={"Public Rooms"}>
-        <PublicRoomTable />
+        <PublicRoomTable published />
       </TableCard>
 
       <TableCard label={"Draft Rooms"}>
