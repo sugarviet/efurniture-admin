@@ -31,7 +31,7 @@ export const edit_product = (slug) => {
 }
 
 export const add_more_stock_product = (id) => {
-    return `/warehouse/staff/${id}`
+    return `/warehouse/staff/stock/update/${id}`
 }
 
 export const add_product_to_warehouse = (id) => {

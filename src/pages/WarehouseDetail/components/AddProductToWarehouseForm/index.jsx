@@ -17,8 +17,7 @@ const AddProductToWarehouseForm = ({ id }) => {
         stock: item.stock,
       })),
     };
-    console.log(body);
-    addProductToWarehouse(body)
+    addProductToWarehouse([...body.products])
   };
   return (
     <Card>

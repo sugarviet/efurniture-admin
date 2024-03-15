@@ -10,9 +10,10 @@ function useNavigation() {
   const go_to_create_product = () => navigation("/product/create");
 
   const go_to_warehouses = () => navigation("/warehouses");
+  const go_to_create_warehouses = () => navigation("/warehouse/create");
 
 
-  return { go_to_user, go_to_staff, go_to_order, go_to_products, go_to_warehouses, go_to_create_product };
+  return { go_to_user, go_to_staff, go_to_order, go_to_products, go_to_warehouses, go_to_create_product,go_to_create_warehouses };
 }
 
 export default useNavigation;

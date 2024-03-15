@@ -12,7 +12,7 @@ import {
 import useNavigation from "../../../hooks/useNavigation";
 
 export function useGetSiderItem() {
-  const { go_to_user, go_to_staff, go_to_order, go_to_products,  go_to_warehouses, go_to_create_product} = useNavigation();
+  const { go_to_user, go_to_staff, go_to_order, go_to_products,  go_to_warehouses, go_to_create_product, go_to_create_warehouses} = useNavigation();
   function getItem(label, key, icon, children, type, onClick) {
     return {
       key,
@@ -30,6 +30,11 @@ export function useGetSiderItem() {
     getItem("Flashsale", "/flashsale", <FireOutlined />, [
       getItem("List Flashsale", "/flashsales"),
       getItem("Create Flashsale", "/flashsale/create"),
+    ]),
+    getItem("Warehouses", "/warehouse", <ShopOutlined />, [
+      getItem("Warehouse", "/warehouse", null, null, null, go_to_warehouses),
+      getItem("Create Warehouse", "/warehouse/create", null, null, null, go_to_create_warehouses),
+      
     ]),
     getItem("Vouchers", "/vouchers", <TagsOutlined />),
     {

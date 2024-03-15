@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useUpdate } from "../../hooks/api-hooks";
 import { Input } from "antd";
 import PropTypes from "prop-types";
@@ -10,6 +10,7 @@ const EditableInput = ({
   name,
   refreshKey,
   type = "text",
+  ...others
 }) => {
   const { mutate: edit } = useUpdate(
     url,
@@ -21,6 +22,10 @@ const EditableInput = ({
     refreshKey()
   );
   const [editedValue, setEditedValue] = useState(defaultValue);
+
+  useEffect(() => {
+    setEditedValue(defaultValue)
+  }, [defaultValue])
 
   const handleSave = (e) => {
     const data = {
@@ -34,6 +39,7 @@ const EditableInput = ({
     <Input
       className="border-transparent hover:border-black border-[1px] rounded-none"
       type={type}
+      {...others}
       value={editedValue}
       onChange={(e) => setEditedValue(e.target.value)}
       onBlur={handleSave}

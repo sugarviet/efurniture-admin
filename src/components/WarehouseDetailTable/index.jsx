@@ -9,12 +9,23 @@ import { useUpdate } from "../../hooks/api-hooks";
 import { useState } from "react";
 
 const WarehouseDetailTable = ({ data }) => {
-  const handleSave = (e) => {};
+  console.log(data);
   const columns = [
     {
       title: "Product name",
-      dataIndex: "name",
-      key: "name",
+      dataIndex: "product",
+      key: "product",
+      render: (text) => (
+       <span>{text.name}</span>
+      )
+    },
+    {
+      title: 'Thumb',
+      dataIndex: 'product',
+      key: 'thumb',
+      render: (text) => (
+        <img src={text.thumbs[0]} alt={text.name} width="100" />
+      )
     },
     {
       title: "Stock",
