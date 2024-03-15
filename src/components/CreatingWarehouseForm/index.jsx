@@ -1,10 +1,5 @@
 import { Form } from "antd";
 import FormInput from "@components/FormInput";
-import FormInputNumber from "@components/FormInputNumber";
-import FormDatePicker from "@components/FormDatePicker";
-import FurnitureSelection from "../FurnitureSelection";
-import FormTextArea from "@components/FormTextArea";
-import FormItem from "../FormItem";
 import FormSelect from "../FormSelect";
 import {
   get_district_in_saigon,
@@ -12,6 +7,7 @@ import {
 } from "../../api/addressApi";
 import { useFetchOutsideSystem } from "../../hooks/api-hooks";
 import { useState } from "react";
+import getCoordinates from "../../utils/getCoordinate";
 const CreatingWarehouseForm = () => {
   const [form] = Form.useForm();
   const [selectedDistrict, setSelectedDistrict] = useState({});
@@ -25,15 +21,12 @@ const CreatingWarehouseForm = () => {
     !!selectedDistrict
   );
 
-
-  const handleDistrictChange = (value , option) => {
-    console.log(value, option);
+  const handleDistrictChange = (value, option) => {
     setSelectedWard({ id: "0", name: "" });
     setSelectedDistrict({
       id: value,
       name: option,
     });
-   
   };
   const handleWardChange = (value, option) => {
     setSelectedWard({
@@ -41,40 +34,56 @@ const CreatingWarehouseForm = () => {
       name: option,
     });
   };
-  const onFinish = (value) => {};
+  const onFinish = async(value) => {
+    const coordinates = await getCoordinates(
+      `${value.street} ${selectedDistrict.name.label} ${selectedWard.name.label} ${value.province}`
+    );
+  
+    const body = {
+      ...value,
+      district: selectedDistrict.name.label,
+      ward: selectedWard.name.label,
+      longitude: coordinates[0],
+      latitude: coordinates[1],
+    }
+    console.log(body);
+
+  };
 
   return (
     <Form
       form={form}
       requiredMark="optional"
+      initialValues={{ 
+        province: 'TP HCM'
+       }}
       layout="vertical"
       onFinish={onFinish}
     >
-      <div className="grid grid-cols-2 gap-4">
-        <FormInput
-          label="Code"
-          name="code"
-          required
-          message="Please enter the code of message"
-          placeholder="Enter voucher code"
-          className="h-10"
-        />
-        <FormInput
-          label="Name"
-          name="name"
-          required
-          message="Please enter the code of message"
-          placeholder="Enter voucher name"
-          className="h-10"
-        />
-      </div>
-      <FormTextArea
-        label="Description"
-        name="description"
+      <FormInput
+        label="Location"
+        name="location"
         required
-        placeholder="Enter voucher description"
-        message="Please enter the description of the voucher"
+        placeholder="Enter location"
+        className="h-10"
       />
+      <FormInput
+      readOnly
+        label="Province"
+        name="province"
+        required
+        placeholder="Enter location"
+        className="h-10"
+      />
+      <FormInput
+        label="Street"
+        name="street"
+        required
+        message="Please enter the code of message"
+        placeholder="Enter street"
+        className="h-10"
+      />
+
       <FormSelect
         label="District"
         name="district"
@@ -98,7 +107,7 @@ const CreatingWarehouseForm = () => {
         }))}
       />
 
-      <button onClick={onFinish} className="furniture-button">
+      <button type="submit" className="furniture-button">
         Create
       </button>
     </Form>

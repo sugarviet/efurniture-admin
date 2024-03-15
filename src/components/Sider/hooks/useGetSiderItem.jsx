@@ -31,11 +31,7 @@ export function useGetSiderItem() {
       getItem("List Flashsale", "/flashsales"),
       getItem("Create Flashsale", "/flashsale/create"),
     ]),
-    getItem("Warehouses", "/warehouse", <ShopOutlined />, [
-      getItem("Warehouse", "/warehouse", null, null, null, go_to_warehouses),
-      getItem("Create Warehouse", "/warehouse/create", null, null, null, go_to_create_warehouses),
-      
-    ]),
+    getItem("Warehouse", "/warehouses", <TagsOutlined />, null, null, go_to_warehouses),
     getItem("Vouchers", "/vouchers", <TagsOutlined />),
     {
       type: "divider",
