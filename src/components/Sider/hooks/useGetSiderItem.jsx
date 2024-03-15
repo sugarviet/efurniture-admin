@@ -12,7 +12,7 @@ import {
 import useNavigation from "../../../hooks/useNavigation";
 
 export function useGetSiderItem() {
-  const { go_to_user, go_to_staff, go_to_order } = useNavigation();
+  const { go_to_user, go_to_staff, go_to_order, go_to_rooms } = useNavigation();
   function getItem(label, key, icon, children, type, onClick) {
     return {
       key,
@@ -43,7 +43,7 @@ export function useGetSiderItem() {
       null,
       go_to_order
     ),
-    getItem("Rooms", "/rooms", <ShopOutlined />),
+    getItem("Rooms", "/rooms", <ShopOutlined />, null, null, go_to_rooms),
     getItem("Reports", "/reports", <AlertOutlined />),
     getItem("Types", "/types", <AppstoreAddOutlined />),
   ];
