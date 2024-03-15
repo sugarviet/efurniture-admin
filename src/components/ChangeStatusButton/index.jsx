@@ -3,6 +3,7 @@ import { useUpdate } from "../../hooks/api-hooks";
 import useNotification from "../../hooks/useNotification";
 import { useQueryClient } from "@tanstack/react-query";
 import PropTypes from "prop-types";
+import { classNames } from "../../utils/classNames";
 
 const ChangeStatusButton = ({
   url,
@@ -11,6 +12,7 @@ const ChangeStatusButton = ({
   type,
   action,
   children,
+  published,
 }) => {
   const { success_message, error_message } = useNotification();
   const queryClient = useQueryClient();
@@ -29,6 +31,10 @@ const ChangeStatusButton = ({
   );
   return (
     <Button
+      className={classNames(
+        "border-none uppercase font-bold text-md",
+        published ? "text-rose-600" : "text-green-600"
+      )}
       onClick={() => {
         changeStatus({});
       }}

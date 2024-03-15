@@ -23,7 +23,9 @@ function RoomTable({ data, published }) {
     {
       title: "Description",
       render: (_, record) => (
-        <span className="text-[#959798] text-xs">{record.description}</span>
+        <span className="text-[#959798] text-xs line-clamp-6">
+          {record.description}
+        </span>
       ),
     },
     {
@@ -52,6 +54,7 @@ function RoomTable({ data, published }) {
             resetDraftKey={get_draft_rooms_api()}
             type="rooms"
             action="publish"
+            published={published}
           >
             Publish
           </ChangeStatusButton>
@@ -62,6 +65,7 @@ function RoomTable({ data, published }) {
             resetDraftKey={get_draft_rooms_api()}
             type="rooms"
             action="draft"
+            published={published}
           >
             Draft
           </ChangeStatusButton>
