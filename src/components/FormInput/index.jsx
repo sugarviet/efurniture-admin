@@ -12,6 +12,7 @@ const FormInput = ({
   message,
   inputType,
   className,
+  readOnly
 }) => {
   return (
     <FormItem
@@ -22,6 +23,7 @@ const FormInput = ({
       message={message}
     >
       <Input
+      readOnly={readOnly}
         placeholder={placeholder}
         type={inputType}
         className={classNames("rounded-none border border-black", className)}
@@ -39,6 +41,7 @@ FormInput.propTypes = {
   message: PropTypes.string,
   inputType: PropTypes.string,
   className: PropTypes.string,
+  readOnly: PropTypes.bool
 };
 
 FormInput.defaultProps = {

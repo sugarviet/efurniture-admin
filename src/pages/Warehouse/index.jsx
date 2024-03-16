@@ -1,37 +1,44 @@
-import { Table } from "antd";
 import { withFetchData } from "@hocs/withFetchData";
 import { get_all_warehouse } from "../../api/warehouseApi";
 import PropTypes from "prop-types";
+import WarehouseTable from "../../components/WarehouseTable";
+import TableCard from "../../components/TableCard";
+import AppModal from "../../components/AppModal";
 
-const Warehouse = ({ data }) => {
-  const columns = [
-    {
-      title: "Location",
-      dataIndex: "location",
-      key: "location",
-    },
-    {
-      title: "Stock",
-      dataIndex: "stock",
-      key: "stock",
-    },
-    {
-      title: "Created At",
-      dataIndex: "createdAt",
-      key: "createdAt",
-    },
-  ];
+import { useState } from "react";
+import CreatingWarehouseForm from "../../components/CreatingWarehouseForm";
+import { Button } from "antd";
+import { PlusCircleFilled } from "@ant-design/icons";
 
+const PublishedWarehouseTable = withFetchData(
+  WarehouseTable,
+  get_all_warehouse
+);
+
+const Warehouse = () => {
+  const [openCreateModal, setIsOpenCreateModal] = useState(false);
   return (
     <div>
-      <h2>Warehouse</h2>
-      <Table rowKey="_id" columns={columns} dataSource={data} />
+      <TableCard
+        label="Warehouse"
+        addMoreButton={
+          <Button
+            className="flex items-center px-4 py-4"
+            type="link"
+            onClick={() => setIsOpenCreateModal(true)}
+          >
+            Add Warehouse <PlusCircleFilled />
+          </Button>
+        }
+      >
+        <PublishedWarehouseTable />
+      </TableCard>
+
+      <AppModal isOpen={openCreateModal} setIsOpen={setIsOpenCreateModal}>
+        {openCreateModal ? <CreatingWarehouseForm /> : null}
+      </AppModal>
     </div>
   );
-};
-
-Warehouse.propTypes = {
-  data: PropTypes.array,
 };
 
 export default withFetchData(Warehouse, get_all_warehouse);

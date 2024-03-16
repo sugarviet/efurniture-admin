@@ -29,3 +29,12 @@ export const draft_product_admin = (type, slug) => {
 export const edit_product = (slug) => {
     return `/product/staff/${slug}`;
 }
+
+export const add_more_stock_product = (id) => {
+    return `/warehouse/staff/stock/update/${id}`
+}
+
+export const add_product_to_warehouse = (id) => {
+    return `/warehouse/staff/${id}`
+
+}
