@@ -22,7 +22,11 @@ export function useGetSiderItem() {
     go_to_rooms,
     go_to_flashsale,
     create_flashsale,
-    go_to_dashboard
+    go_to_dashboard,
+    go_to_types,
+    go_to_subtypes,
+    go_to_vouchers,
+    go_to_create_room,
   } = useNavigation();
 
   function getItem(label, key, icon, children, type, onClick) {
@@ -37,11 +41,39 @@ export function useGetSiderItem() {
   }
 
   const itemsForAdmin = [
-    getItem("Dashboard", "/", <AreaChartOutlined />, null, null, go_to_dashboard),
-    getItem("Products", "/products", <DropboxOutlined />, null, null, go_to_products),
+    getItem(
+      "Dashboard",
+      "/",
+      <AreaChartOutlined />,
+      null,
+      null,
+      go_to_dashboard
+    ),
+    getItem(
+      "Products",
+      "/products",
+      <DropboxOutlined />,
+      null,
+      null,
+      go_to_products
+    ),
     getItem("Flashsale", "/flashsale", <FireOutlined />, [
-      getItem("List Flashsale", "/flashsales", null, null, null, go_to_flashsale),
-      getItem("Create Flashsale", "/flashsale/create", null, null, null, create_flashsale),
+      getItem(
+        "List Flashsale",
+        "/flashsales",
+        null,
+        null,
+        null,
+        go_to_flashsale
+      ),
+      getItem(
+        "Create Flashsale",
+        "/flashsale/create",
+        null,
+        null,
+        null,
+        create_flashsale
+      ),
     ]),
     getItem(
       "Warehouse",
@@ -51,7 +83,14 @@ export function useGetSiderItem() {
       null,
       go_to_warehouses
     ),
-    getItem("Vouchers", "/vouchers", <TagsOutlined />),
+    getItem(
+      "Vouchers",
+      "/vouchers",
+      <TagsOutlined />,
+      null,
+      null,
+      go_to_vouchers
+    ),
     {
       type: "divider",
     },
@@ -65,7 +104,22 @@ export function useGetSiderItem() {
     ),
     getItem("Rooms", "/rooms", <ShopOutlined />, null, null, go_to_rooms),
     getItem("Reports", "/reports", <AlertOutlined />),
-    getItem("Types", "/types", <AppstoreAddOutlined />),
+    getItem(
+      "Types",
+      "/types",
+      <AppstoreAddOutlined />,
+      null,
+      null,
+      go_to_types
+    ),
+    getItem(
+      "Subtypes",
+      "/subtypes",
+      <AppstoreAddOutlined />,
+      null,
+      null,
+      go_to_subtypes
+    ),
   ];
   const itemsForSuperAdmin = [
     getItem("User", "/users", <UserOutlined />, null, null, go_to_user),
@@ -99,14 +153,33 @@ export function useGetSiderItem() {
       type: "divider",
     },
     getItem("Rooms", "/room", <ShopOutlined />, [
-      getItem("List rooms", "/rooms"),
-      getItem("Create Rooms", "/room/create"),
+      getItem("List rooms", "/rooms", null, null, null, go_to_rooms),
+      getItem(
+        "Create Rooms",
+        "/room/create",
+        null,
+        null,
+        null,
+        go_to_create_room
+      ),
     ]),
     getItem("Reports", "/report", <AlertOutlined />),
-    getItem("Types", "/type", <AppstoreAddOutlined />, [
-      getItem("List Types", "/types"),
-      getItem("Create types", "/type/create"),
-    ]),
+    getItem(
+      "Types",
+      "/types",
+      <AppstoreAddOutlined />,
+      null,
+      null,
+      go_to_types
+    ),
+    getItem(
+      "SubTypes",
+      "/subtypes",
+      <AppstoreAddOutlined />,
+      null,
+      null,
+      go_to_subtypes
+    ),
   ];
 
   const getItemByRole = {
