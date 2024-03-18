@@ -5,11 +5,8 @@ import EditableInput from "../EditableInput";
 import { add_more_stock_product } from "../../api/productApi";
 import { get_warehouse_detail } from "../../api/warehouseApi";
 import AddProductToWarehouseForm from "../../pages/WarehouseDetail/components/AddProductToWarehouseForm";
-import { useUpdate } from "../../hooks/api-hooks";
-import { useState } from "react";
 
 const WarehouseDetailTable = ({ data }) => {
-  console.log(data);
   const columns = [
     {
       title: "Product name",

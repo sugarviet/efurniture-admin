@@ -15,6 +15,11 @@ function useNavigation() {
   const create_flashsale = () => navigation("/flashsale/create");
 
   const go_to_rooms = () => navigation("/rooms");
+  const go_to_create_room = () => navigation("/room/create");
+
+  const go_to_types = () => navigation("/types");
+  const go_to_subtypes = () => navigation("/subtypes");
+  const go_to_vouchers = () => navigation("/vouchers");
 
   return {
     go_to_user,
@@ -27,7 +32,11 @@ function useNavigation() {
     go_to_rooms,
     go_to_flashsale,
     create_flashsale,
-    go_to_dashboard
+    go_to_dashboard,
+    go_to_types,
+    go_to_subtypes,
+    go_to_vouchers,
+    go_to_create_room
   };
 }
 

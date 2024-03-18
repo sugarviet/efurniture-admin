@@ -211,6 +211,10 @@ const staffRoutes = [
     element: <Types />,
   },
   {
+    path: pathSystem.subtypes,
+    element: <SubTypes />,
+  },
+  {
     path: pathSystem.warehouseDetail,
     element: <WarehouseDetail />,
   },
