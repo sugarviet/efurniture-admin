@@ -20,6 +20,8 @@ function useNavigation() {
   const go_to_types = () => navigation("/types");
   const go_to_subtypes = () => navigation("/subtypes");
   const go_to_vouchers = () => navigation("/vouchers");
+  const go_to_create_voucher = () => navigation("/voucher/create");
+
 
   return {
     go_to_user,
@@ -36,7 +38,8 @@ function useNavigation() {
     go_to_types,
     go_to_subtypes,
     go_to_vouchers,
-    go_to_create_room
+    go_to_create_room,
+    go_to_create_voucher
   };
 }
 
