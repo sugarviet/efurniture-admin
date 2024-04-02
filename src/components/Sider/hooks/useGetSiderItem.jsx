@@ -84,14 +84,6 @@ export function useGetSiderItem() {
       null,
       go_to_warehouses
     ),
-    getItem(
-      "Vouchers",
-      "/vouchers",
-      <TagsOutlined />,
-      null,
-      null,
-      go_to_vouchers
-    ),
     {
       type: "divider",
     },
