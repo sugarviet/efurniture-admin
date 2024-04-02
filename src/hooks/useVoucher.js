@@ -2,7 +2,9 @@ import { get_create_voucher_api, get_voucher_api } from "../api/voucherApi";
 import { usePost } from "./api-hooks";
 
 function useVoucher() {
-    const { mutate: createMutation } = usePost(get_create_voucher_api(), undefined, () => { }, () => { }, get_voucher_api())
+    const { mutate: createMutation } = usePost(get_create_voucher_api(), undefined, () => {
+        alert("thanh cong");
+     }, () => { }, get_voucher_api())
 
     const createVoucher = (values) => {
         const { name, description, type, code, value, start_date, end_date, maximum_use, maximum_use_per_user, minimum_order_value, products } = values;

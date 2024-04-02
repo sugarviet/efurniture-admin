@@ -4,14 +4,23 @@ import AppSuspense from "../components/AppSuspense";
 
 import AppSider from "../components/Sider";
 import { Outlet } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import Logo from "../components/Logo";
 import AccountInfo from "../components/AccountInfo";
 import Notification from "../components/Notification";
+import useSocket from "../hooks/useSocket";
 const RootLayout = () => {
+  const {subcribeHello} = useSocket()
   const [leftCollapsed, setLeftCollapsed] = useState(false);
   const [rightCollapsed, setRightCollapsed] = useState(false);
+
+
+  useEffect(() => {
+    subcribeHello();
+
+    
+  }, [])
 
   return (
     <main className="flex h-screen">

@@ -120,10 +120,6 @@ const adminRoutes = [
     element: <Staffs />,
   },
   {
-    path: pathSystem.vouchers,
-    element: <Vouchers />,
-  },
-  {
     path: pathSystem.flashsale,
     element: <FlashSale />,
   },

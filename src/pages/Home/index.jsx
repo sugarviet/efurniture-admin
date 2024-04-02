@@ -1,17 +1,14 @@
-import { get_today_revenue } from "../../api/revenueApi";
 import ECommerceStatusCard from "../../components/ECommerceStatusCard";
 import LocationMapBox from "../../components/MostPucharsedLocation";
 import StatisticCard from "../../components/StatisticCard";
 import TotalSellByMonth from "./components/TotalSellByMonth";
 
-
 const E_COMMERCE_STATUS_KEYS = ["new orders", "on hold", "out of stock"];
 
 const Home = () => {
-
   return (
     <main>
-    
+
       <div className="flex gap-4">
         {E_COMMERCE_STATUS_KEYS.map((key) => (
           <ECommerceStatusCard key={key} type={key} />

@@ -7,6 +7,7 @@ import { get_warehouse_detail } from "../../api/warehouseApi";
 import AddProductToWarehouseForm from "../../pages/WarehouseDetail/components/AddProductToWarehouseForm";
 
 const WarehouseDetailTable = ({ data }) => {
+  console.log(data);
   const columns = [
     {
       title: "Product name",
@@ -33,7 +34,7 @@ const WarehouseDetailTable = ({ data }) => {
           defaultValue={text}
           name={"stock"}
           url={add_more_stock_product(data._id)}
-          record={{ product: record._id, stock: record.stock }}
+          record={{ product: record.product._id, stock: record.stock }}
           type="number"
           refreshKey={() => get_warehouse_detail(data._id)}
         />
