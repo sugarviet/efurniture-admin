@@ -3,9 +3,10 @@ import EditButton from "../EditButton";
 import { isAdmin } from "../../utils/getCurrentUserRole";
 import { draft_subtypes_admin, get_all_draft_subType, get_all_publish_subType, publish_subtypes_admin } from "../../api/subtypeApi";
 import ChangeStatusButton from "../ChangeStatusButton";
-
+import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
 const SubtypesTable = ({ data, onEdit, published }) => {
-    console.log(data);
+  const { getColumnSearchProps } = useSearchTableColumn();
+
     const admin = isAdmin();
   
   const columns = [
@@ -25,6 +26,8 @@ const SubtypesTable = ({ data, onEdit, published }) => {
       title: "Type Name",
       dataIndex: "slug",
       key: "slug",
+      ...getColumnSearchProps("slug"),
+
     },
     {
         title: "Description",

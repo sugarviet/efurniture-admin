@@ -9,10 +9,12 @@ import {
   get_to_draft_room_api,
   get_to_publish_room_api,
 } from "../../api/roomApi";
+import PropTypes from "prop-types";
+
 
 function RoomTable({ data, published }) {
   const admin = isAdmin();
-
+  console.log(data);
   const STAFF_COLUMNS = [
     {
       title: "Room",
@@ -86,5 +88,11 @@ function RoomTable({ data, published }) {
     />
   );
 }
+
+
+RoomTable.propTypes = {
+  data: PropTypes.array,
+  published: PropTypes.bool,
+};
 
 export default RoomTable;

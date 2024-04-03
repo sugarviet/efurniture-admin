@@ -1,20 +1,25 @@
+import useNotificationStore from '../stores/useNotificationStore';
 import useSocketStore from '../stores/useSocketStore';
 import useNotification from './useNotification';
 
 const useSocket = () => {
     const { socket } = useSocketStore();
     const { refreshNotification } = useNotification()
+    const {hasNewNoti} = useNotificationStore();
 
 
     const subcribeLowStockWarehouseNotification = () => {
-        socket.on('lowstockWareHouse', (args) => {
+        socket.on('lowstockWareHouse', () => {
             refreshNotification()
+            hasNewNoti()
         })
     }
 
     const subcribeLowStockInventoryNotification = () => {
-        socket.on('lowstockInventory', (args) => {
+        socket.on('lowstockInventory', () => {
             refreshNotification()
+            hasNewNoti()
+
         })
     }
 

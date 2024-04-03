@@ -2,6 +2,7 @@ import { Space, Table } from "antd";
 import EditButton from "../EditButton";
 import PropTypes from "prop-types";
 import { formatCurrency } from "../../utils/formatCurrency";
+import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
 import { isAdmin } from "../../utils/getCurrentUserRole";
 import {
   get_published_product,
@@ -16,6 +17,7 @@ const { Column } = Table;
 
 const ProductTable = ({ data, onEdit, published }) => {
   const admin = isAdmin();
+  const { getColumnSearchProps } = useSearchTableColumn();
 
   return (
     <div>
@@ -43,7 +45,11 @@ const ProductTable = ({ data, onEdit, published }) => {
                 refreshKey={get_published_product}
               />
             );
+
           }}
+  
+          { ...getColumnSearchProps("name")}
+
         />
         <Column
           title="Image"

@@ -10,9 +10,10 @@ import {
 } from "../../api/typesApi";
 import { isAdmin } from "../../utils/getCurrentUserRole";
 import ChangeStatusButton from "../ChangeStatusButton";
-
+import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
 const TypeTable = ({ data, onEdit, published }) => {
   const admin = isAdmin();
+  const { getColumnSearchProps } = useSearchTableColumn();
 
   const columns = [
     {
@@ -31,6 +32,8 @@ const TypeTable = ({ data, onEdit, published }) => {
       title: "Type Name",
       dataIndex: "name",
       key: "name",
+      ...getColumnSearchProps("name"),
+
     },
     {
       title: "Actions",

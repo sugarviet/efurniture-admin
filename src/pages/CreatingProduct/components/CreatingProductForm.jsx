@@ -24,12 +24,6 @@ const CreatingProductForm = () => {
 
   const admin = isAdmin();
 
-  const colorOptions = [
-    { value: "red", label: "Red", color: "#FF0000" },
-    { value: "blue", label: "Blue", color: "#0000FF" },
-    { value: "green", label: "Green", color: "#008000" },
-  ];
-
   const onFinish = (values) => {
     console.log(values)
     const listImages = values.thumbs.fileList.map((image) => image.url);
@@ -51,8 +45,8 @@ const CreatingProductForm = () => {
         layout="vertical"
         requiredMark='optional'
         initialValues={{
-          regular_price: 100,
-          sale_price: 0,
+          regular_price: 1000000,
+          sale_price: 1000000,
           model3D: ""
         }}
         onFinish={onFinish}
@@ -84,14 +78,14 @@ const CreatingProductForm = () => {
           {/* Left */}
           <div className="flex-1">
             <FormInput
-            required
+              required
               label="Product Title"
               name="name"
               placeholder="Write title here..."
             />
 
             <FormTextArea
-            required
+              required
 
               label="Product Description"
               name="description"
@@ -102,18 +96,20 @@ const CreatingProductForm = () => {
               <Tabs tabPosition="left" className="mb-4">
                 <TabPane tab="Pricing" key="pricing">
                   <div className="flex gap-10">
-               
+
                     <FormInputNumber label="Regular Pricing"
-            required
+                      required
+                      prefix="VND"
 
                       name="regular_price"
                       placeholder="$$$" />
-                       <FormInputNumber   label="Sale Pricing"
-            required
+                    <FormInputNumber label="Sale Pricing"
+                      required
+                      prefix="VND"
 
                       name="sale_price"
-                      placeholder="$$$"  />
-                  
+                      placeholder="$$$" />
+
                   </div>
                 </TabPane>
 

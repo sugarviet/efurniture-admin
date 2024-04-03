@@ -20,7 +20,7 @@ const CreatingType = () => {
 
   return (
     <div>
-      <Form form={form} layout="vertical" onFinish={onFinish}>
+      <Form form={form} layout="vertical" onFinish={onFinish} requiredMark='optional'>
         <FormInput
           name="name"
           label="Type Name"
@@ -31,11 +31,11 @@ const CreatingType = () => {
         <FormUploadButton
           label="Type thumb"
           name="thumb"
-          className="xl:w-[19rem] lg:w-[10rem]"
+          className="xl:w-[23rem] lg:w-[10rem]"
           required
         />
 
-        <div className="flex gap-2">
+        <div className="flex gap-2 justify-center">
         
           <Button type="primary" className="primary" htmlType="submit">
             Create types

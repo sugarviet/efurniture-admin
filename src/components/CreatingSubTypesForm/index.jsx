@@ -54,7 +54,7 @@ const CreatingSubTypesForm = () => {
         required
       />
 
-      <FormSelectType label="Type" name="type_id" />
+      <FormSelectType label="Type" name="type_id" receiveValue='_id'/>
       <FormSelect
         label="Attributes"
         name="attributes"

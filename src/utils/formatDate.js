@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 
-function formatDate(isoDate, formatString) {
+export function formatDate(isoDate, formatString) {
     return dayjs(isoDate).format(formatString);
 }
 

@@ -11,9 +11,6 @@ import {
 } from "../../api/flashsaleApi";
 const FlashSaleTable = ({ data, onEdit, published }) => {
   const admin = isAdmin();
-
-  console.log(data);
-
   const { getColumnSearchProps } = useSearchTableColumn();
   const columns = [
     {

@@ -8,11 +8,11 @@ import { get_warehouse_detail } from "../../api/warehouseApi";
 import AddProductToWarehouseForm from "../../pages/WarehouseDetail/components/AddProductToWarehouseForm";
 import { Switch } from 'antd';
 import useWarehouse from "../../hooks/useWarehouse";
+
 const WarehouseDetailTable = ({ data }) => {
 
   const {handleSwitchNotification, handleUpdateProductLowstock} = useWarehouse(data._id)
 
-  console.log(data);
 
   const columns = [
     {
@@ -20,8 +20,9 @@ const WarehouseDetailTable = ({ data }) => {
       dataIndex: "product",
       key: "product",
       render: (text) => (
-       <span>{text.name}</span>
-      )
+         <span>{text.name}</span>
+      ),
+
     },
     {
       title: 'Thumb',

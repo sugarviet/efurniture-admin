@@ -50,7 +50,7 @@ const CreatingVariation = () => {
                                             Remove
                                         </p>
                                     </div>
-                                
+
 
                                     <FormSelectColor
                                         {...restField}
@@ -65,7 +65,8 @@ const CreatingVariation = () => {
                                             {...restField}
                                             label="Sub Price"
                                             name={[name, "sub_price"]}
-                                            
+                                            prefix="VND"
+
                                             message="Please enter the discount of ammount"
                                             placeholder="Enter discount ammount"
                                             className="w-full"

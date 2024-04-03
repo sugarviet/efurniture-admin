@@ -5,12 +5,11 @@ import PropTypes from "prop-types";
 
 
 const NotificationList = ({ data }) => {
-    console.log(data);
     return (
-        <div>
+        <div className="mt-2 p-4 h-40 overflow-y-auto">
             <ul>
                 {data.map((item) => (
-                    <li key={item._id}>
+                    <li key={item._id} className="mb-5">
                         <NotificationCard key={item._id} data={item} />
                     </li>
                 ))}

@@ -1,7 +1,7 @@
 import { Layout } from "antd";
-const { Sider, Content } = Layout;
+const { Sider, Content, Header } = Layout;
 import AppSuspense from "../components/AppSuspense";
-
+import Navbar from "../components/Navbar";
 import AppSider from "../components/Sider";
 import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -14,7 +14,7 @@ const RootLayout = () => {
   const {subcribeLowStockWarehouseNotification, subcribeLowStockInventoryNotification} = useSocket()
   const [leftCollapsed, setLeftCollapsed] = useState(false);
   const [rightCollapsed, setRightCollapsed] = useState(false);
-
+  const [collapsed, setCollapsed] = useState(false);
 
   useEffect(() => {
     subcribeLowStockWarehouseNotification();
@@ -25,72 +25,45 @@ const RootLayout = () => {
 
   return (
     <main className="flex h-screen">
-      <Layout>
-        <Sider
-          className="text-white h-screen relative"
-          theme="light"
-          trigger={null}
-          collapsible
-          collapsed={leftCollapsed}
-          breakpoint="lg"
-          onBreakpoint={(broken) => setLeftCollapsed(broken)}
+    <Layout>
+      <Sider
+        className="text-white h-screen relative"
+        theme="light"
+        trigger={null}
+        collapsible
+        collapsed={collapsed}
+        breakpoint="lg"
+        onBreakpoint={(broken) => setCollapsed(broken)}
+      >
+        <AppSider />
+        <div
+          className="w-full text-black text-xl cursor-pointer flex justify-center p-4 border absolute bottom-0"
+          onClick={() => setCollapsed(!collapsed)}
         >
-          <Logo className="h-12 my-12" />
-          <AppSider />
-          <div
-            className="w-full text-black text-xl cursor-pointer flex justify-center p-4 border absolute bottom-0"
-            onClick={() => setLeftCollapsed(!leftCollapsed)}
-          >
-            {leftCollapsed ? (
-              <MenuUnfoldOutlined />
-            ) : (
-              <>
-                <MenuFoldOutlined />{" "}
-                <span className="text-xs ml-2 transition-all">
-                  Collapse View
-                </span>
-              </>
-            )}
-          </div>
-        </Sider>
-
-        <Layout className="flex-1 flex flex-col">
-          <AppSuspense>
-            <Content className="p-4 overflow-y-auto">
-              <Outlet />
-            </Content>
-          </AppSuspense>
-        </Layout>
-
-        <Sider
-          className="text-white h-screen relative"
-          theme="light"
-          trigger={null}
-          collapsible
-          collapsed={rightCollapsed}
-          breakpoint="lg"
-          onBreakpoint={(broken) => setRightCollapsed(broken)}
-        >
-          <AccountInfo />
-          <Notification />
-          <div
-            className="w-full text-black text-xl cursor-pointer flex justify-center p-4 border absolute bottom-0"
-            onClick={() => setRightCollapsed(!rightCollapsed)}
-          >
-            {rightCollapsed ? (
-              <MenuUnfoldOutlined />
-            ) : (
-              <>
-                <MenuFoldOutlined />{" "}
-                <span className="text-xs ml-2 transition-all">
-                  Collapse View
-                </span>
-              </>
-            )}
-          </div>
-        </Sider>
+          {collapsed ? (
+            <MenuUnfoldOutlined />
+          ) : (
+            <>
+              <MenuFoldOutlined />{" "}
+              <span className="text-xs ml-2 transition-all">
+                Collapsed View
+              </span>
+            </>
+          )}
+        </div>
+      </Sider>
+      <Layout className="flex-1 flex flex-col">
+        <Header className="bg-white shadow-md w-full p-0">
+          <Navbar />
+        </Header>
+        <AppSuspense>
+          <Content className="p-4 overflow-y-auto">
+            <Outlet />
+          </Content>
+        </AppSuspense>
       </Layout>
-    </main>
+    </Layout>
+  </main>
   );
 };
 export default RootLayout;

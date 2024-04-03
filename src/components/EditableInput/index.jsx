@@ -50,6 +50,7 @@ const EditableInput = ({
       value={editedValue}
       onChange={(e) => setEditedValue(e.target.value)}
       onBlur={handleSave}
+      
     />
   );
 };
