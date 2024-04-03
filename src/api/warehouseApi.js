@@ -10,3 +10,12 @@ export const get_warehouse_detail = (param) => {
     return `/warehouse/${param.id}`
 }
 
+export const get_switch_notification_in_warehouse = (param) => {
+
+    return `/warehouse/${param.id}`
+}
+
+export const update_lowstock_qty_in_warehouse = (param) => {
+
+    return `/warehouse/${param.id}`
+}

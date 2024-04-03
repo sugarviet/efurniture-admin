@@ -38,6 +38,8 @@ const ProductTable = ({ data, onEdit, published }) => {
                 name={columnName}
                 url={edit_product(record.slug)}
                 record={record}
+                notiType="product"
+                notiAction="edit"
                 refreshKey={get_published_product}
               />
             );

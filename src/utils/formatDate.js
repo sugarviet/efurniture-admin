@@ -9,5 +9,5 @@ export function formatDateByDateAndTime(isoDate) {
 }
 
 export function formatDateByDateAndMinute(isoDate) {
-    return formatDate(isoDate, 'DD/MM/YYYY:HH:mm');
+    return formatDate(isoDate, 'YYYY-MM-DD:HH:mm');
 }

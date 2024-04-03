@@ -1,7 +1,28 @@
 import { message } from "antd";
-
+import { useQueryClient } from '@tanstack/react-query';
+import { get_all_notification } from "../api/notificationApi";
 
 const type = {
+  warehouse: {
+    success: {
+      add: 'Successfully added warehouse',
+      edit: 'Successfully edited warehouse',
+      delete: 'Successfully deleted delete',
+      add_product: 'Successfully added product to warehouse',
+      update_stock: 'Successfully updated stock',
+      update_low_stock: 'Successfully updated low stock',
+      receive_low_stock: 'Successfully received low stock',
+    },
+    fail: {
+      add: 'Failed added warehouse',
+      edit: 'Failed edited warehouse',
+      delete: 'Failed deleted delete',
+      add_product: 'Failed added product to warehouse',
+      update_stock: 'Failed updated stock',
+      update_low_stock: 'Failed updated low stock',
+      receive_low_stock: 'Failed received low stock',
+    }
+  },
   address: {
     success: {
       add: 'Successfully added address',
@@ -124,6 +145,13 @@ const type = {
 }
 
 function useNotification() {
+  const queryClient = useQueryClient();
+
+  const refreshNotification = () => {
+    queryClient.invalidateQueries(get_all_notification());
+
+  }
+
   const success_message = (msg, action, custom) => {
     message.success(custom ? custom : type[msg].success[action]);
   };
@@ -134,6 +162,7 @@ function useNotification() {
   return {
     success_message,
     error_message,
+    refreshNotification
   };
 }
 

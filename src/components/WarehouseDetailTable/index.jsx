@@ -3,11 +3,16 @@ import PropTypes from "prop-types";
 import TableCard from "../TableCard";
 import EditableInput from "../EditableInput";
 import { add_more_stock_product } from "../../api/productApi";
+import { update_lowstock_qty_in_warehouse } from "../../api/warehouseApi";
 import { get_warehouse_detail } from "../../api/warehouseApi";
 import AddProductToWarehouseForm from "../../pages/WarehouseDetail/components/AddProductToWarehouseForm";
-
+import { Switch } from 'antd';
+import useWarehouse from "../../hooks/useWarehouse";
 const WarehouseDetailTable = ({ data }) => {
   console.log(data);
+  const {handleSwitchNotification, handleUpdateProductLowstock} = useWarehouse(data._id)
+
+
   const columns = [
     {
       title: "Product name",
@@ -35,9 +40,34 @@ const WarehouseDetailTable = ({ data }) => {
           name={"stock"}
           url={add_more_stock_product(data._id)}
           record={{ product: record.product._id, stock: record.stock }}
+          notiType="warehouse"
+          notiAction="update_stock"
           type="number"
           refreshKey={() => get_warehouse_detail(data._id)}
         />
+      ),
+    },
+    {
+      title: "Low Stock",
+      dataIndex: "stock",
+      key: "stock",
+      render: (text, record) => (
+        <EditableInput
+          defaultValue={text}
+          name={"lowstock"}
+          url={update_lowstock_qty_in_warehouse(data._id)}
+          record={{ product: record.product._id, stock: record.stock }}
+          type="number"
+          refreshKey={() => get_warehouse_detail(data._id)}
+        />
+      ),
+    },
+    {
+      title: "Received Stock",
+      dataIndex: "stock",
+      key: "stock",
+      render: (text, record) => (
+        <Switch onChange={(e) => handleSwitchNotification(e, record.product._id)}/>
       ),
     },
   ];

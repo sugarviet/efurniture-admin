@@ -11,13 +11,14 @@ import AccountInfo from "../components/AccountInfo";
 import Notification from "../components/Notification";
 import useSocket from "../hooks/useSocket";
 const RootLayout = () => {
-  const {subcribeHello} = useSocket()
+  const {subcribeLowStockWarehouseNotification, subcribeLowStockInventoryNotification} = useSocket()
   const [leftCollapsed, setLeftCollapsed] = useState(false);
   const [rightCollapsed, setRightCollapsed] = useState(false);
 
 
   useEffect(() => {
-    subcribeHello();
+    subcribeLowStockWarehouseNotification();
+    subcribeLowStockInventoryNotification();
 
     
   }, [])
