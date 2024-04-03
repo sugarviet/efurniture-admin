@@ -73,6 +73,25 @@ const ProductTable = ({ data, onEdit, published }) => {
           sorter={(a, b) => a.price - b.price}
         />
         <Column
+          title="Price"
+          dataIndex="sale_price"
+          key="sale_price"
+          render={(text, record) => {
+            const columnName = "sale_price";
+            return (
+              <EditableInput
+                defaultValue={text}
+                name={columnName}
+                url={edit_product(record.slug)}
+                record={record}
+                refreshKey={get_published_product}
+                type="number"
+              />
+            );
+          }}
+          sorter={(a, b) => a.price - b.price}
+        />
+        <Column
           title="Action"
           key="action"
           width="30%"

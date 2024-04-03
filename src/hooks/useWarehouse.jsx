@@ -1,5 +1,5 @@
 import { usePost, useUpdate } from "./api-hooks";
-import { add_product_to_warehouse } from "../api/productApi";
+import { add_product_to_warehouse } from "../api/warehouseApi";
 import {
   create_warehouse,
   get_all_warehouse,
@@ -9,7 +9,7 @@ import {
 } from "../api/warehouseApi";
 import useNotification from "./useNotification";
 
-export default function useWarehouse(id) {
+export default function useWarehouse(id = '') {
   const { error_message, success_message } = useNotification();
   const { mutate: addProductToWarehouse } = useUpdate(
     add_product_to_warehouse(id),
@@ -51,7 +51,11 @@ export default function useWarehouse(id) {
   })
 
   const handleSwitchNotification = (value, productId) => {
-    console.log(value, productId);
+    const body = {
+      product: productId,
+      isNoti: value
+    }
+    switchNotification(body)
   }
 
   const handleUpdateProductLowstock = () => { }
