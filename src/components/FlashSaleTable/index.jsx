@@ -12,6 +12,8 @@ import {
 const FlashSaleTable = ({ data, onEdit, published }) => {
   const admin = isAdmin();
 
+  console.log(data);
+
   const { getColumnSearchProps } = useSearchTableColumn();
   const columns = [
     {
@@ -41,7 +43,7 @@ const FlashSaleTable = ({ data, onEdit, published }) => {
       render: (text, record) => (
         <Space className="flex gap-4">
           <EditButton onClick={() => onEdit(data)} />
-          {admin && !published ? (
+          {/* {admin && !published ? (
             <ChangeStatusButton
               url={publish_flash_sale(record._id)}
               resetPublishkey={get_all_flash_sale()}
@@ -63,7 +65,7 @@ const FlashSaleTable = ({ data, onEdit, published }) => {
                 Draft
               </ChangeStatusButton>
             )
-          )}
+          )} */}
         </Space>
       ),
     },

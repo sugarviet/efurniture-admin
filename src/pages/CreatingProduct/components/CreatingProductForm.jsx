@@ -13,6 +13,7 @@ import CreatingSubTypesForm from "./CreatingSubTypesForm";
 import useCreatingProductManagement from "../hooks/useCreatingProductManagement";
 import FormMeasurementInput from "../../../components/FormMeasurementInput";
 import FormInputNumber from "../../../components/FormInputNumber";
+import CreatingVariation from "./CreatingVariation";
 
 const { TabPane } = Tabs;
 
@@ -23,14 +24,21 @@ const CreatingProductForm = () => {
 
   const admin = isAdmin();
 
+  const colorOptions = [
+    { value: "red", label: "Red", color: "#FF0000" },
+    { value: "blue", label: "Blue", color: "#0000FF" },
+    { value: "green", label: "Green", color: "#008000" },
+  ];
+
   const onFinish = (values) => {
+    console.log(values)
     const listImages = values.thumbs.fileList.map((image) => image.url);
 
     const data = {
       ...values,
       thumbs: listImages
     }
-    // console.log("Success:", data);
+    console.log("Success:", data);
 
     create_draft_product(data);
 
@@ -144,7 +152,7 @@ const CreatingProductForm = () => {
                   <div>
                     {listAttribute?.map((attribute) => (
                       <FormMeasurementInput
-                        required
+                        // required
                         label={attribute.name}
                         name={["attributes", "attributeType", attribute.name]}
                         key={attribute._id}
@@ -181,6 +189,11 @@ const CreatingProductForm = () => {
             <Card>
               <p className="text-2xl font-bold mb-4">Create attributes</p>
               <CreatingAttribute />
+            </Card>
+
+            <Card>
+              <p className="text-2xl font-bold mb-4">Create Variations</p>
+              <CreatingVariation />
             </Card>
           </div>
         </section>

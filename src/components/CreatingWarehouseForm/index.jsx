@@ -18,7 +18,7 @@ const CreatingWarehouseForm = () => {
     get_district_in_saigon()
   );
   const { data: wardList } = useFetchOutsideSystem(
-    get_ward_in_saigon(selectedDistrict.id),
+    get_ward_in_saigon(selectedDistrict?.id),
     null,
     !!selectedDistrict
   );

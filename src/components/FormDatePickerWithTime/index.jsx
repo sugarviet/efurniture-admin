@@ -26,7 +26,7 @@ export default function FormDatePickerWithTime({
         )}
         placeholder={placeholder}
         showTime
-        format="YYYY-MM-DD HH:mm"
+        format="YYYY-MM-DD:HH:mm"
       />
     </FormItem>
   );

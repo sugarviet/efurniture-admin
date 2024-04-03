@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useUpdate } from "../../hooks/api-hooks";
 import { Input } from "antd";
 import PropTypes from "prop-types";
+import useNotification from "../../hooks/useNotification";
 
 const EditableInput = ({
   defaultValue,
@@ -10,15 +11,21 @@ const EditableInput = ({
   name,
   refreshKey,
   type = "text",
+  notiType,
+  notiAction,
   ...others
 }) => {
+  const {error_message, success_message} = useNotification();
   const { mutate: edit } = useUpdate(
     url,
     undefined,
     () => {
-      alert("thanh cong");
+      success_message(notiType, notiAction)
     },
-    () => {},
+    () => {
+      error_message(notiType, notiAction)
+
+    },
     refreshKey()
   );
   const [editedValue, setEditedValue] = useState(defaultValue);
@@ -56,4 +63,6 @@ EditableInput.propTypes = {
   name: PropTypes.string,
   refreshKey: PropTypes.func,
   type: PropTypes.string,
+  notiType: PropTypes.string,
+  notiAction: PropTypes.string,
 };
