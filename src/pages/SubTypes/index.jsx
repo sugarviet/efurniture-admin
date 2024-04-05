@@ -1,12 +1,12 @@
 import { withFetchData } from "../../hocs/withFetchData";
 import TableCard from "../../components/TableCard";
 import SubtypesTable from "../../components/SubtypesTable";
-import { get_all_draft_subType, get_all_subType } from "../../api/subtypeApi";
+import { get_all_draft_subType, get_all_publish_subType, get_all_subType } from "../../api/subtypeApi";
 import { isAdmin } from "../../utils/getCurrentUserRole";
 import { Card } from "antd";
 import CreatingSubTypesForm from "../../components/CreatingSubTypesForm";
 
-const PublishSubtypesTable = withFetchData(SubtypesTable, get_all_subType);
+const PublishSubtypesTable = withFetchData(SubtypesTable, get_all_publish_subType);
 const DraftSubtypesTable = withFetchData(SubtypesTable, get_all_draft_subType);
 const SubTypes = () => {
   const admin = isAdmin();

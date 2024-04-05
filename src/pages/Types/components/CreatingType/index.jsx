@@ -14,6 +14,7 @@ const CreatingType = () => {
     }
 
     createDraftType(data)
+    form.resetFields();
    
 
   };

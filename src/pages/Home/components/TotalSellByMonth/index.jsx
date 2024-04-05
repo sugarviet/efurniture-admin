@@ -1,4 +1,4 @@
-import { Select } from "antd";
+import { Card, Select } from "antd";
 import {
   CartesianGrid,
   Line,
@@ -15,6 +15,7 @@ const TotalSellByMonth = () => {
     useManageTotalSell();
 
   return (
+    <Card>
     <section className="w-full">
       <div className="flex items-end justify-between my-4">
         <div>
@@ -57,6 +58,8 @@ const TotalSellByMonth = () => {
         </LineChart>
       </ResponsiveContainer>
     </section>
+
+    </Card>
   );
 };
 

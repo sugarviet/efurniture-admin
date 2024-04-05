@@ -13,7 +13,7 @@ const WarehouseDetailTable = ({ data }) => {
 
   const {handleSwitchNotification, handleUpdateProductLowstock} = useWarehouse(data._id)
 
-
+  console.log(data);
   const columns = [
     {
       title: "Product name",

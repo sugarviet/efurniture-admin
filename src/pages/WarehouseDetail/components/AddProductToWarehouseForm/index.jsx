@@ -3,6 +3,8 @@ import React from "react";
 import FormList from "../../../../components/FormList";
 import { DeleteOutlined } from "@ant-design/icons";
 import FurnitureSelection from "../../../../components/FurnitureSelection";
+import FurnitureSelectionWarehouse from "../../../../components/FurnitureSelectionWarehouse";
+
 import FormInputNumber from "../../../../components/FormInputNumber";
 import useWarehouse from "../../../../hooks/useWarehouse";
 
@@ -14,9 +16,15 @@ const AddProductToWarehouseForm = ({ id }) => {
     const body = {
       products: values.products.map((item) => ({
         product: item.product._id,
+        variation: [{
+          variation_id: item.product.variation[0]._id,
+          property_id: item.product.selectedVariation._id,
+
+        }],
         stock: item.stock,
       })),
     };
+    console.log(body);
     addProductToWarehouse([...body.products])
   };
   return (
@@ -42,9 +50,15 @@ const AddProductToWarehouseForm = ({ id }) => {
                       validator(rule, value) {
                         const products = [...getFieldValue(["products"])] || [];
 
+                        console.log('product', products)
+                        console.log('value', value)
+
+
                         const isDuplicate =
                           products.filter(
-                            (item) => item.product._id === value._id
+                            (item) => item.product._id === value._id && item.product.
+                            selectedVariation.value === value.selectedVariation.value
+                            
                           ).length >= 2;
 
                         if (isDuplicate) {
@@ -59,14 +73,13 @@ const AddProductToWarehouseForm = ({ id }) => {
                   className="col-span-4"
                   name={[name, "product"]}
                 >
-                  <FurnitureSelection className="h-12" />
+                  <FurnitureSelectionWarehouse className="h-12" />
                 </Form.Item>
                 <div className="flex gap-4 col-span-2">
                   <FormInputNumber
                     min={1}
                     className="h-12"
                     name={[name, "stock"]}
-                    defaultValue={1}
                   />
                   <DeleteOutlined
                     onClick={() => remove(name)}

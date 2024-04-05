@@ -116,7 +116,7 @@ const CreatingProductForm = () => {
                 <TabPane tab="Attributes" key="attributes">
                   <div className="grid grid-cols-2 items-center gap-52">
                     <FormSelectType />
-                    <Button
+                    {/* <Button
                       className="w-40"
                       onClick={() => setOpenModalCreate(true)}
                     >
@@ -127,11 +127,11 @@ const CreatingProductForm = () => {
                       setIsOpen={setOpenModalCreate}
                     >
                       {openModalCreate ? <CreatingType /> : null}
-                    </AppModal>
+                    </AppModal> */}
                   </div>
                   <div className="grid grid-cols-2 items-center gap-52">
                     <FormSelectSubTypes />
-                    <Button
+                    {/* <Button
                       className="w-40"
                       onClick={() => setOpenModalSubtypeCreate(true)}
                     >
@@ -142,7 +142,7 @@ const CreatingProductForm = () => {
                       setIsOpen={setOpenModalSubtypeCreate}
                     >
                       <CreatingSubTypesForm />
-                    </AppModal>
+                    </AppModal> */}
                   </div>
 
                   <div>

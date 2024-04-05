@@ -27,7 +27,8 @@ export function useGetSiderItem() {
     go_to_subtypes,
     go_to_vouchers,
     go_to_create_room,
-    go_to_create_voucher
+    go_to_create_voucher,
+    go_to_transactions
   } = useNavigation();
 
   function getItem(label, key, icon, children, type, onClick) {
@@ -87,6 +88,14 @@ export function useGetSiderItem() {
     {
       type: "divider",
     },
+    getItem(
+      "Transactions",
+      "/transactions",
+      <AreaChartOutlined />,
+      null,
+      null,
+      go_to_transactions
+    ),
     getItem(
       "Orders",
       "/orders",
