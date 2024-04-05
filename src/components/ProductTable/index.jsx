@@ -26,9 +26,103 @@ const ProductTable = ({ data, onEdit, published }) => {
   const admin = isAdmin();
   const { getColumnSearchProps } = useSearchTableColumn();
 
+  const STAFF_COLUMNS = [
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+      ...getColumnSearchProps("name"),
+    },
+    {
+      title: "Thumb",
+      dataIndex: "thumb",
+      key: "thumb",
+      render: (text, record) => (
+        <img
+          src={record.thumbs[0]}
+          alt={record.name}
+          style={{ width: 100, height: 100 }}
+        />
+      ),
+    },
+    {
+      title: "Price",
+      dataIndex: "regular_price",
+      key: "regular_price",
+
+    },
+    {
+      title: "Sale Price",
+      dataIndex: "sale_price",
+      key: "sale_price",
+
+    },
+    {
+      title: "Description",
+      render: (_, record) => (
+        <span className="text-[#959798] text-xs">{record.description}</span>
+      ),
+    },
+    (!admin && !published) && {
+      title: "Actions",
+      render: (_, record) => (
+        <Space className="flex gap-4">
+          <EditButton>
+            <CreatingProductProvider>
+              <UpdateProductForm data={record} />
+            </CreatingProductProvider>
+          </EditButton>
+        </Space>
+      ),
+    },
+  ].filter(Boolean);
+
+
+  const ADMIN_COLUMNS = [
+    ...STAFF_COLUMNS,
+    {
+      title: "Actions",
+      render: (_, record) => {
+        return (
+          <Space className="flex gap-4">
+            {admin && !published ? (
+              <ChangeStatusButton
+                url={publish_product_admin(record.type.slug, record.slug)}
+                resetPublishkey={get_published_product()}
+                resetDraftKey={get_draft_product()}
+                type="products"
+                action="publish"
+              >
+                Publish
+              </ChangeStatusButton>
+            ) : (
+              admin && (
+                <ChangeStatusButton
+                  url={draft_product_admin(record.type.slug, record.slug)}
+                  resetPublishkey={get_published_product()}
+                  resetDraftKey={get_draft_product()}
+                  type="products"
+                  action="draft"
+                >
+                  Draft
+                </ChangeStatusButton>
+              )
+            )}
+
+
+            {admin && !published ? (
+              <DeleteButton url={remove_draft_product()} notiType="product" notiAction="delete" refreshKey={get_draft_product()} id={record.slug} />
+            ) : null
+            }
+          </Space>
+        )
+      },
+    },
+  ]
+
   return (
     <div>
-      <Table
+      {/* <Table
         rowKey="_id"
         dataSource={data.data}
         pagination={{ pageSize: 10, hideOnSinglePage: true }}
@@ -38,23 +132,6 @@ const ProductTable = ({ data, onEdit, published }) => {
           title="Product Name"
           dataIndex="name"
           key="name"
-          render={(text, record) => {
-            const columnName = "name";
-
-            return (
-              <EditableInput
-                defaultValue={text}
-                name={columnName}
-                url={edit_product(record.slug)}
-                record={record}
-                notiType="product"
-                notiAction="edit"
-                refreshKey={get_published_product}
-              />
-            );
-
-          }}
-
           {...getColumnSearchProps("name")}
 
         />
@@ -149,7 +226,12 @@ const ProductTable = ({ data, onEdit, published }) => {
             </Space>
           )}
         />
-      </Table>
+      </Table> */}
+
+      <Table rowKey="_id"
+        dataSource={data.data}
+        pagination={{ pageSize: 10, hideOnSinglePage: true }}
+        bordered columns={admin ? ADMIN_COLUMNS : STAFF_COLUMNS} />
     </div>
   );
 };

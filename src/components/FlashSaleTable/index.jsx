@@ -9,6 +9,7 @@ import {
   get_all_flash_sale,
   publish_flash_sale,
 } from "../../api/flashsaleApi";
+import EditFlashsaleForm from "../EditFlashsaleForm";
 const FlashSaleTable = ({ data, onEdit, published }) => {
   const admin = isAdmin();
   const { getColumnSearchProps } = useSearchTableColumn();
@@ -39,7 +40,9 @@ const FlashSaleTable = ({ data, onEdit, published }) => {
       width: "30%",
       render: (text, record) => (
         <Space className="flex gap-4">
-          <EditButton onClick={() => onEdit(data)} />
+          <EditButton>
+            <EditFlashsaleForm />
+          </EditButton>
           {/* {admin && !published ? (
             <ChangeStatusButton
               url={publish_flash_sale(record._id)}

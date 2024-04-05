@@ -1,17 +1,13 @@
-import { Button, Form } from "antd"
+import { Form } from "antd"
 import FormInput from "../FormInput";
 import FormTextArea from "../FormTextArea";
 import FormInputNumber from "../FormInputNumber";
-import FormSelectSubTypes from "../../pages/CreatingProduct/components/FormSelectSubTypes";
-import FormSelectType from "../../pages/CreatingProduct/components/FormSelectType";
 import useCreatingProductManagement from "../../pages/CreatingProduct/hooks/useCreatingProductManagement";
-import FormMeasurementInput from "../FormMeasurementInput";
 import FormUploadButton from "../FormUploadButton";
 import PropTypes from "prop-types";
 import { formatThumbs } from "../../utils/formatThumb";
 import { useUpdate } from "../../hooks/api-hooks";
 import { get_draft_product, update_product_staff } from "../../api/productApi";
-import { useEffect } from "react";
 import { useCreatingProductValues } from "../../pages/CreatingProduct/CreatingProductContext";
 
 const UpdateProductForm = ({ data }) => {
@@ -29,8 +25,6 @@ const UpdateProductForm = ({ data }) => {
         type: data.type.name,
         subTypes: data.type.subTypes,
     }
-
-    console.log(formData);
 
     const attributeType = Object.entries(data.attributes.attributeType).map(([key, value]) => ({
         name: key,
@@ -133,9 +127,7 @@ const UpdateProductForm = ({ data }) => {
                     value=""
                     placeholder="Write title here..."
                 />
-
-
-                <Button type="primary" htmlType="submit" className="primary mx-auto flex justify-center font-bold" size="large">Submit</Button>
+                <button className="furniture-button mx-auto flex justify-center">Edit</button>
             </Form>
         </div>
     )

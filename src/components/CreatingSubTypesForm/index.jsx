@@ -15,10 +15,10 @@ import { transferSelectOption } from "@utils/transferSelectOption";
 import useNotification from "../../hooks/useNotification";
 
 const CreatingSubTypesForm = () => {
-  const {error_message, success_message} = useNotification();
+  const { error_message, success_message } = useNotification();
   const [form] = Form.useForm();
-  const { data: allAtrributes, isLoading:loadingAtrribute } = useFetch(get_attribute());
-  const { data: allSubtypesGroup, isLoading:loadingSubtypegroup } = useFetch(get_sub_type_group());
+  const { data: allAtrributes, isLoading: loadingAtrribute } = useFetch(get_attribute());
+  const { data: allSubtypesGroup, isLoading: loadingSubtypegroup } = useFetch(get_sub_type_group());
   const { mutate: createSubtype } = usePost(
     create_subtype(),
     undefined,
@@ -32,10 +32,10 @@ const CreatingSubTypesForm = () => {
     get_all_subType()
   );
 
-  if(loadingAtrribute) return;
-  if(loadingSubtypegroup) return;
+  if (loadingAtrribute) return;
+  if (loadingSubtypegroup) return;
 
-  
+
   const typesAttributeOptions = transferSelectOption(
     allAtrributes,
     "name",
@@ -64,7 +64,7 @@ const CreatingSubTypesForm = () => {
         required
       />
 
-      <FormSelectType label="Type" name="type_id" receiveValue='_id'/>
+      <FormSelectType label="Type" name="type_id" receiveValue='_id' />
       <FormSelect
         label="Attributes"
         name="attributes"
@@ -91,9 +91,8 @@ const CreatingSubTypesForm = () => {
         placeholder="Enter description"
         className="w-full"
       />
-      <Button type="primary" className="primary" htmlType="submit">
-        Create types
-      </Button>
+      <button className="furniture-button mx-auto flex justify-center">Create Types</button>
+
     </Form>
   );
 };

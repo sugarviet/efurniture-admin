@@ -50,10 +50,6 @@ const AddProductToWarehouseForm = ({ id }) => {
                       validator(rule, value) {
                         const products = [...getFieldValue(["products"])] || [];
 
-                        console.log('product', products)
-                        console.log('value', value)
-
-
                         const isDuplicate =
                           products.filter(
                             (item) => item.product._id === value._id && item.product.

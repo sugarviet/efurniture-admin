@@ -105,7 +105,6 @@ export function useGetSiderItem() {
       go_to_order
     ),
     getItem("Rooms", "/rooms", <ShopOutlined />, null, null, go_to_rooms),
-    getItem("Reports", "/reports", <AlertOutlined />),
     getItem(
       "Types",
       "/types",
@@ -165,7 +164,6 @@ export function useGetSiderItem() {
         go_to_create_room
       ),
     ]),
-    getItem("Reports", "/report", <AlertOutlined />),
     getItem(
       "Types",
       "/types",

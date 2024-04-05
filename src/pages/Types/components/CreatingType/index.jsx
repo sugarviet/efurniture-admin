@@ -38,9 +38,8 @@ const CreatingType = () => {
 
         <div className="flex gap-2 justify-center">
         
-          <Button type="primary" className="primary" htmlType="submit">
-            Create types
-          </Button>
+        <button className="furniture-button mx-auto flex justify-center">Create</button>
+
         </div>
       </Form>
     </div>
