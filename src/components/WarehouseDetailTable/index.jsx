@@ -10,7 +10,7 @@ import { Switch } from 'antd';
 import useWarehouse from "../../hooks/useWarehouse";
 
 const WarehouseDetailTable = ({ data }) => {
-
+  console.log(data);
   const {handleSwitchNotification, handleUpdateProductLowstock} = useWarehouse(data._id)
 
   console.log(data);
@@ -30,6 +30,13 @@ const WarehouseDetailTable = ({ data }) => {
       key: 'thumb',
       render: (text) => (
         <img src={text.thumbs[0]} alt={text.name} width="100" />
+      )
+    },
+    {
+      title: 'Color',
+   
+      render: (text, record) => (
+        <div style={{ backgroundColor: record.variation[0] ? record.variation[0].color: 'black', width: 20, height: 20, borderRadius: '50%' }}/>
       )
     },
     {
