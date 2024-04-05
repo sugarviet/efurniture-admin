@@ -15,7 +15,7 @@ const TypeTable = ({ data, onEdit, published }) => {
   const admin = isAdmin();
   const { getColumnSearchProps } = useSearchTableColumn();
 
-  const columns = [
+  const STAFF_COLUMNS = [
     {
       title: "Thumb",
       dataIndex: "thumb",
@@ -35,11 +35,15 @@ const TypeTable = ({ data, onEdit, published }) => {
       ...getColumnSearchProps("name"),
 
     },
+  ]
+
+  const ADMIN_COLUMNS = [
+    ...STAFF_COLUMNS,
     {
       title: "Actions",
       render: (_, record) => (
         <Space className="flex gap-4">
-          <EditButton onClick={() => onEdit(record)} />
+          {/* <EditButton onClick={() => onEdit(record)} /> */}
           {admin && !published ? (
             <ChangeStatusButton
               url={publish_types_admin(record.slug)}
@@ -66,12 +70,13 @@ const TypeTable = ({ data, onEdit, published }) => {
         </Space>
       ),
     },
-  ];
+  ]
+
   return (
     <Table
       rowKey="_id"
       dataSource={data}
-      columns={columns}
+      columns={admin ? ADMIN_COLUMNS : STAFF_COLUMNS}
       pagination={{
         pageSize: 10,
         hideOnSinglePage: true,

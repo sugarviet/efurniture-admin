@@ -119,6 +119,24 @@ const type = {
       enable: 'Failed enable product',
     }
   },
+  room: {
+    success: {
+      add_draft: 'Successfully add draft room',
+      edit: 'Successfully edited room',
+      publish: 'Successfully publish room',
+      draft: 'Successfully draft room',
+      disable: 'Successfully disable room',
+      enable: 'Successfully enable room',
+    },
+    fail: {
+      add_draft: 'Failed added draft room',
+      edit: 'Failed edited room',
+      disable: 'Failed disable room',
+      publish: 'Failed publish room',
+      draft: 'Failed draft room',
+      enable: 'Failed enable room',
+    }
+  },
   flashsale: {
     success: {
       add: 'Successfully add flash sale',

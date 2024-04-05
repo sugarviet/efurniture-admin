@@ -1,4 +1,4 @@
-import { Space, Table } from "antd";
+import { Button, Space, Table } from "antd";
 import EditButton from "../EditButton";
 import { isAdmin } from "../../utils/getCurrentUserRole";
 import { draft_subtypes_admin, get_all_draft_subType, get_all_publish_subType, publish_subtypes_admin } from "../../api/subtypeApi";
@@ -8,9 +8,9 @@ import PropTypes from "prop-types";
 
 const SubtypesTable = ({ data, onEdit, published }) => {
   const { getColumnSearchProps } = useSearchTableColumn();
-    const admin = isAdmin();
-  
-  const columns = [
+  const admin = isAdmin();
+
+  const STAFF_COLUMNS = [
     {
       title: "Thumb",
       dataIndex: "thumb",
@@ -31,17 +31,31 @@ const SubtypesTable = ({ data, onEdit, published }) => {
 
     },
     {
-        title: "Description",
-        render: (_, record) => (
-          <span className="text-[#959798] text-xs">{record.description}</span>
-        ),
-      },
+      title: "Description",
+      render: (_, record) => (
+        <span className="text-[#959798] text-xs">{record.description}</span>
+      ),
+    },
+    !admin && {
+      title: "Actions",
+      render: (_, record) => (
+        <Space className="flex gap-4">
+          <EditButton onClick={() => onEdit(record)}>
+            Edit
+          </EditButton>
+        </Space>
+      ),
+    },
+  ].filter(Boolean);
+
+  const ADMIN_COLUMNS = [
+    ...STAFF_COLUMNS,
     {
       title: "Actions",
       render: (_, record) => (
         <Space className="flex gap-4">
-        <EditButton onClick={() => onEdit(record)} />
-        {admin && !published ? (
+
+          {admin && !published ? (
             <ChangeStatusButton
               url={publish_subtypes_admin(record.typeSlug, record.slug)}
               resetPublishkey={get_all_publish_subType()}
@@ -51,7 +65,7 @@ const SubtypesTable = ({ data, onEdit, published }) => {
             >
               Publish
             </ChangeStatusButton>
-          ) : ( 
+          ) : (
 
             admin &&
             <ChangeStatusButton
@@ -64,15 +78,16 @@ const SubtypesTable = ({ data, onEdit, published }) => {
               Draft
             </ChangeStatusButton>
           )}
-      </Space>
+        </Space>
       ),
     },
-  ];
+  ]
   return (
     <Table
       rowKey="_id"
       dataSource={data}
-      columns={columns}
+      columns={admin ? ADMIN_COLUMNS : STAFF_COLUMNS}
+
       pagination={{
         pageSize: 8,
         hideOnSinglePage: true,
