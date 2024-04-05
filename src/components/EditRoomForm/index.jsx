@@ -20,7 +20,18 @@ const EditRoomForm = ({ data }) => {
         url: data.thumb
     }
     const handleSubmit = async (values) => {
-        handleEditRoom(values)
+        const products = values.products.map(product => {
+            return {
+                product: product.product._id,
+                quantity: product.quantity
+            }
+        })
+        const body = {
+            ...values,
+            products
+        }
+        handleEditRoom(body)
+
     };
     return (
         <Form
