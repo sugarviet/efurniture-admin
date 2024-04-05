@@ -30,3 +30,7 @@ export const publish_types_admin= (type) => {
 export const draft_types_admin= (type) => {
     return `/type/admin/draft/${type}`;
 }
+
+export const remove_types= () => {
+    return `/type/admin/draft`;
+}

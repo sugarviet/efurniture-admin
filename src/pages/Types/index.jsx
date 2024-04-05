@@ -22,9 +22,7 @@ const Types = () => {
 
   return (
     <main>
-      <div className="flex justify-between px-3 my-3">
-        <PageTitle title="Type management" />
-      </div>
+     
 
       <section className="flex gap-6">
         <div className="flex-1">
@@ -47,9 +45,7 @@ const Types = () => {
           </div>
         )}
       </section>
-      <AppModal isOpen={isModalCreateOpen} setIsOpen={setIsModalCreateOpen}>
-        <CreatingType />
-      </AppModal>
+     
     </main>
   );
 };

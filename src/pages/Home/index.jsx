@@ -1,3 +1,4 @@
+import { Card } from "antd";
 import ECommerceStatusCard from "../../components/ECommerceStatusCard";
 import LocationMapBox from "../../components/MostPucharsedLocation";
 import StatisticCard from "../../components/StatisticCard";
@@ -9,11 +10,14 @@ const Home = () => {
   return (
     <main>
 
+      <Card>
       <div className="flex gap-4">
         {E_COMMERCE_STATUS_KEYS.map((key) => (
           <ECommerceStatusCard key={key} type={key} />
         ))}
       </div>
+
+      </Card>
 
       <TotalSellByMonth />
       <div className="grid grid-cols-2 gap-4">

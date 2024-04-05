@@ -2,21 +2,30 @@ import { Table, Tag } from "antd";
 import { formatDateByDateAndTime } from "../../utils/formatDate";
 import { formatCurrency } from "../../utils/formatCurrency";
 import EditButton from "../EditButton";
-
+import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
 function VoucherTable({ data }) {
-  console.log(data);
+  const { getColumnSearchProps } = useSearchTableColumn();
+  
   const columns = [
     {
       title: "Name",
+      dataIndex: "name",
+      key: "name",
       render: (_, record) => <span>{record.name}</span>,
+      ...getColumnSearchProps("name"),
+
     },
     {
       title: "Description",
+      dataIndex: "description",
+      key: "description",
       render: (_, record) => (
         <span className="text-[#959798] text-xs line-clamp-3">
           {record.description}
         </span>
       ),
+      ...getColumnSearchProps("description"),
+
     },
     {
       title: "Type",

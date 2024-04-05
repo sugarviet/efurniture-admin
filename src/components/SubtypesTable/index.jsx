@@ -3,9 +3,11 @@ import EditButton from "../EditButton";
 import { isAdmin } from "../../utils/getCurrentUserRole";
 import { draft_subtypes_admin, get_all_draft_subType, get_all_publish_subType, publish_subtypes_admin } from "../../api/subtypeApi";
 import ChangeStatusButton from "../ChangeStatusButton";
+import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
+import PropTypes from "prop-types";
 
 const SubtypesTable = ({ data, onEdit, published }) => {
-    console.log(data);
+  const { getColumnSearchProps } = useSearchTableColumn();
     const admin = isAdmin();
   
   const columns = [
@@ -25,6 +27,8 @@ const SubtypesTable = ({ data, onEdit, published }) => {
       title: "Type Name",
       dataIndex: "slug",
       key: "slug",
+      ...getColumnSearchProps("slug"),
+
     },
     {
         title: "Description",
@@ -39,7 +43,7 @@ const SubtypesTable = ({ data, onEdit, published }) => {
         <EditButton onClick={() => onEdit(record)} />
         {admin && !published ? (
             <ChangeStatusButton
-              url={publish_subtypes_admin(record.type.name, record.slug)}
+              url={publish_subtypes_admin(record.typeSlug, record.slug)}
               resetPublishkey={get_all_publish_subType()}
               resetDraftKey={get_all_draft_subType()}
               type="types"
@@ -51,7 +55,7 @@ const SubtypesTable = ({ data, onEdit, published }) => {
 
             admin &&
             <ChangeStatusButton
-              url={draft_subtypes_admin(record.type.name, record.slug)}
+              url={draft_subtypes_admin(record.typeSlug, record.slug)}
               resetPublishkey={get_all_publish_subType()}
               resetDraftKey={get_all_draft_subType()}
               type="types"
@@ -75,6 +79,12 @@ const SubtypesTable = ({ data, onEdit, published }) => {
       }}
     />
   );
+};
+
+SubtypesTable.propTypes = {
+  data: PropTypes.array,
+  onEdit: PropTypes.func,
+  published: PropTypes.bool,
 };
 
 export default SubtypesTable;

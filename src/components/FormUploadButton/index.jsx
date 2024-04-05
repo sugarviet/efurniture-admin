@@ -38,6 +38,10 @@ const FormUploadButton = (props) => {
     }
   };
 
+  const renderItem = (file) => (
+    <image className="w-10 h-10" src={file.url} />
+  );
+
   return (
     <FormItem label={label} name={name} required>
       <Upload
@@ -45,7 +49,9 @@ const FormUploadButton = (props) => {
         defaultFileList={defaultFileList}
         multiple
         showUploadList
+        listType="picture"
         customRequest={handleUploadImage}
+        renderItem={renderItem}
       
       >
         <button

@@ -30,6 +30,7 @@ const ProductDetail = lazy(() => import("./pages/ProductDetail"));
 const CashRequest = lazy(() => import("./pages/CashRequest"));
 const OrderDetail = lazy(() => import("./pages/OrderDetail"));
 const SubTypes = lazy(() => import("./pages/SubTypes"));
+const DeliveryTrip = lazy(() => import("./pages/DeliveryTrip"));
 
 // HOCs
 import withAuth from "./hocs/withAuth";
@@ -73,6 +74,8 @@ export const pathSystem = {
   flashsale: "/flashsales",
   creatingFlashSale: "/flashsale/create",
   subtypes: "/subtypes",
+  deliveryTrip: "/deliveryTrip",
+
 };
 
 const adminMasterRoutes = [
@@ -213,6 +216,10 @@ const staffRoutes = [
   {
     path: pathSystem.warehouseDetail,
     element: <WarehouseDetail />,
+  },
+  {
+    path: pathSystem.deliveryTrip,
+    element: <DeliveryTrip />,
   },
 ];
 

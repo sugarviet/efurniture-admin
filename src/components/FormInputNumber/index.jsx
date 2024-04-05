@@ -15,6 +15,7 @@ const FormInputNumber = ({
   style,
   ...others
 }) => {
+
   return (
     <FormItem
       label={label}
@@ -32,8 +33,10 @@ const FormInputNumber = ({
           "border-black rounded-none w-full flex items-center",
           className
         )}
-        type="number"
+ 
         {...others}
+        formatter={(value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+      parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
       />
     </FormItem>
   );

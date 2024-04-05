@@ -6,18 +6,9 @@ import { router } from "./router";
 function App() {
   return (
     <>
-      <ConfigProvider
-        theme={{
-          components: {
-            Button: {
-              algorithm: true,
-              borderRadius: "12px",
-            },
-          },
-        }}
-      >
+    
         <RouterProvider router={router} />
-      </ConfigProvider>
+     
     </>
   );
 }

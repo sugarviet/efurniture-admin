@@ -1,8 +1,10 @@
 import { Table } from "antd";
 import PropTypes from "prop-types";
 import LinkItem from "../LinkItem";
-
+import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
 const WarehouseTable = ({ data }) => {
+  const { getColumnSearchProps } = useSearchTableColumn();
+
   const columns = [
     {
       title: "Location",
@@ -11,16 +13,21 @@ const WarehouseTable = ({ data }) => {
       render: (text, record) => (
         <LinkItem to={`/warehouse/${record._id}`}>{text}</LinkItem>
       ),
+
     },
     {
       title: "District",
       dataIndex: "district",
       key: "district",
+      ...getColumnSearchProps("district"),
+
     },
     {
       title: "Ward",
       dataIndex: "ward",
       key: "ward",
+      ...getColumnSearchProps("ward"),
+
     },
   ];
   return (

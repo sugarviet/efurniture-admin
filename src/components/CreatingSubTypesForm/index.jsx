@@ -12,15 +12,23 @@ import { usePost } from "@hooks/api-hooks";
 import { create_subtype } from "@api/subtypeApi";
 import FormSelectType from "../FormSelectType";
 import { transferSelectOption } from "@utils/transferSelectOption";
+import useNotification from "../../hooks/useNotification";
 
 const CreatingSubTypesForm = () => {
+  const {error_message, success_message} = useNotification();
+  const [form] = Form.useForm();
   const { data: allAtrributes, isLoading:loadingAtrribute } = useFetch(get_attribute());
   const { data: allSubtypesGroup, isLoading:loadingSubtypegroup } = useFetch(get_sub_type_group());
   const { mutate: createSubtype } = usePost(
     create_subtype(),
     undefined,
-    () => {},
-    () => {},
+    () => {
+      success_message('subtypes', 'add_draft')
+    },
+    (error) => {
+      error_message('subtypes', 'add_draft', error)
+
+    },
     get_all_subType()
   );
 
@@ -44,6 +52,8 @@ const CreatingSubTypesForm = () => {
       thumb: values.thumb.file.url,
     };
     createSubtype(data);
+    form.resetFields();
+
   };
   return (
     <Form layout="vertical" onFinish={onFinish} requiredMark='optional'>
@@ -54,7 +64,7 @@ const CreatingSubTypesForm = () => {
         required
       />
 
-      <FormSelectType label="Type" name="type_id" />
+      <FormSelectType label="Type" name="type_id" receiveValue='_id'/>
       <FormSelect
         label="Attributes"
         name="attributes"

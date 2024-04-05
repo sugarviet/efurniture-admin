@@ -2,6 +2,7 @@ import { Space, Table } from "antd";
 import EditButton from "../EditButton";
 import PropTypes from "prop-types";
 import { formatCurrency } from "../../utils/formatCurrency";
+import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
 import { isAdmin } from "../../utils/getCurrentUserRole";
 import {
   get_published_product,
@@ -9,13 +10,21 @@ import {
   draft_product_admin,
   get_draft_product,
   edit_product,
+  remove_draft_product,
 } from "../../api/productApi";
+import AppModal from "@components/AppModal";
 import ChangeStatusButton from "../ChangeStatusButton";
 import EditableInput from "../EditableInput";
+import DeleteButton from "../DeleteButton";
+import { useState } from "react";
+import UpdateProductForm from "../UpdateProductForm";
+import { CreatingProductProvider } from "../../pages/CreatingProduct/CreatingProductContext";
+
 const { Column } = Table;
 
 const ProductTable = ({ data, onEdit, published }) => {
   const admin = isAdmin();
+  const { getColumnSearchProps } = useSearchTableColumn();
 
   return (
     <div>
@@ -43,7 +52,11 @@ const ProductTable = ({ data, onEdit, published }) => {
                 refreshKey={get_published_product}
               />
             );
+
           }}
+
+          {...getColumnSearchProps("name")}
+
         />
         <Column
           title="Image"
@@ -97,7 +110,13 @@ const ProductTable = ({ data, onEdit, published }) => {
           width="30%"
           render={(text, record) => (
             <Space className="flex gap-4">
-              <EditButton onClick={() => onEdit(record)} />
+
+              <EditButton>
+                <CreatingProductProvider>
+                  <UpdateProductForm data={record} />
+                </CreatingProductProvider>
+              </EditButton>
+
               {admin && !published ? (
                 <ChangeStatusButton
                   url={publish_product_admin(record.type.slug, record.slug)}
@@ -121,6 +140,12 @@ const ProductTable = ({ data, onEdit, published }) => {
                   </ChangeStatusButton>
                 )
               )}
+
+
+              {admin && !published ? (
+                <DeleteButton url={remove_draft_product()} notiType="product" notiAction="delete" refreshKey={get_draft_product()} id={record.slug} />
+              ) : null
+              }
             </Space>
           )}
         />
