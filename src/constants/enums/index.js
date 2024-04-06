@@ -25,6 +25,30 @@ export const E_COMMERCE_STATUS = new Map([
             status: "Out of stock",
         },
     ],
+    [
+        "products",
+        {
+            icon: ICONS.products,
+            title: "Products",
+            status: "Available products",
+        },
+    ],
+    [
+        "orders",
+        {
+            icon: ICONS.orders,
+            title: "Orders",
+            status: "Total orders",
+        },
+    ],
+    [
+        "users",
+        {
+            icon: ICONS.users,
+            title: "Users",
+            status: "Total users",
+        },
+    ],
 ])
 
 export const COORDINATES = new Map([

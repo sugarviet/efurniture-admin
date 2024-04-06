@@ -64,6 +64,7 @@ function VoucherForm() {
           label="Value"
           required
           name="value"
+          prefix="VND"
           message="Please enter the value"
         />
       </div>
@@ -85,6 +86,8 @@ function VoucherForm() {
           required
           name="minimum_order_value"
           message="Please enter the value"
+          
+
         />
       </div>
       <div className="grid grid-cols-2 gap-4">

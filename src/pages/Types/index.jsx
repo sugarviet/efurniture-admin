@@ -1,38 +1,52 @@
-import { Button } from "antd";
 import PageTitle from "@components/PageTitle";
 import CreatingType from "./components/CreatingType";
 import AppModal from "@components/AppModal";
 import { useState } from "react";
-import PublishedTypeTable from "./components/PublishedTypeTable";
-import DraftedTypeTable from "./components/DraftedTypeTable";
+import { withFetchData } from "../../hocs/withFetchData";
+import TypeTable from "../../components/TypeTable";
+import { get_draft_type, get_published_type } from "../../api/typesApi";
+import TableCard from "../../components/TableCard";
+import { isAdmin } from "../../utils/getCurrentUserRole";
+import { Card } from "antd";
+
+const PublishedTypeTable = withFetchData(TypeTable, get_published_type);
+const DraftedTypeTable = withFetchData(TypeTable, get_draft_type);
 
 const Types = () => {
   const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
+  const admin = isAdmin();
 
   const handleOpenModalCreate = () => {
     setIsModalCreateOpen(true);
   };
 
   return (
-    <div>
-      <div className="flex justify-between px-3 my-3">
-        <PageTitle title="Type management" />
-        <Button
-          type="primary"
-          className="primary"
-          onClick={handleOpenModalCreate}
-        >
-          Create new type
-        </Button>
-      </div>
+    <main>
+     
 
-      <PublishedTypeTable />
-      <DraftedTypeTable />
+      <section className="flex gap-6">
+        <div className="flex-1">
+          <TableCard label="Public types">
+            <PublishedTypeTable published />
+          </TableCard>
 
-      <AppModal isOpen={isModalCreateOpen} setIsOpen={setIsModalCreateOpen}>
-        <CreatingType />
-      </AppModal>
-    </div>
+          {admin ? (
+            <TableCard label="Draft types">
+              <DraftedTypeTable />
+            </TableCard>
+          ) : null}
+        </div>
+
+        {admin ? null : (
+          <div className="w-[26rem]">
+            <Card title='Create new types'>
+              <CreatingType />
+            </Card>
+          </div>
+        )}
+      </section>
+     
+    </main>
   );
 };
 

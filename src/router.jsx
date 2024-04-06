@@ -14,10 +14,7 @@ const UserDetail = lazy(() => import("./pages/UserDetail"));
 const Products = lazy(() => import("./pages/Products"));
 const CreatingProduct = lazy(() => import("./pages/CreatingProduct"));
 const Orders = lazy(() => import("./pages/Orders"));
-const Catalogs = lazy(() => import("./pages/Catalogs"));
-const CreatingCatalog = lazy(() => import("./pages/CreatingCatalog"));
 const Warehouse = lazy(() => import("./pages/Warehouse"));
-const CatalogDetail = lazy(() => import("./pages/CatalogDetail"));
 const Transactions = lazy(() => import("./pages/Transactions"));
 const Reports = lazy(() => import("./pages/Reports"));
 const ReportDetail = lazy(() => import("./pages/ReportDetail"));
@@ -25,8 +22,6 @@ const Rooms = lazy(() => import("./pages/Rooms"));
 const Types = lazy(() => import("./pages/Types"));
 const Vouchers = lazy(() => import("./pages/Vouchers"));
 const CreateVoucher = lazy(() => import("./pages/CreatingVoucher"));
-const Events = lazy(() => import("./pages/Events"));
-const CreateEvents = lazy(() => import("./pages/CreatingEvents"));
 const FlashSale = lazy(() => import("./pages/FlashSale"));
 const CreatingFlashSale = lazy(() => import("./pages/CreatingFlashSale"));
 const CategoryDetail = lazy(() => import("./pages/CategoryDetail"));
@@ -34,6 +29,8 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 const ProductDetail = lazy(() => import("./pages/ProductDetail"));
 const CashRequest = lazy(() => import("./pages/CashRequest"));
 const OrderDetail = lazy(() => import("./pages/OrderDetail"));
+const SubTypes = lazy(() => import("./pages/SubTypes"));
+const DeliveryTrip = lazy(() => import("./pages/DeliveryTrip"));
 
 // HOCs
 import withAuth from "./hocs/withAuth";
@@ -41,6 +38,9 @@ import Cookies from "js-cookie";
 
 import Login from "@pages/Login";
 import CreateRoom from "./pages/CreateRoom";
+import WarehouseDetail from "./pages/WarehouseDetail";
+import CreatingWarehouse from "./pages/CreatingWarehouse";
+
 const WrappedComponentWithAuth = withAuth(RootLayout);
 
 export const pathSystem = {
@@ -66,19 +66,22 @@ export const pathSystem = {
   catalogCreate: "/catelog/create",
   types: "/types",
   categoryDetail: "/category/:id",
-  warehouse: "/warehouse",
+  warehouse: "/warehouses",
+  createWarehouse: '/warehouse/create',
+  warehouseDetail: "/warehouse/:id",
   rooms: "/rooms",
   createRoom: "/room/create",
   flashsale: "/flashsales",
   creatingFlashSale: "/flashsale/create",
-
+  subtypes: "/subtypes",
+  deliveryTrip: "/delivery-trip",
 
 };
 
 const adminMasterRoutes = [
   {
     path: pathSystem.base,
-    element: <Navigate to={pathSystem.users} />,
+    element: <Navigate to={`${pathSystem.users}?page=1&limit=10`} />,
   },
   {
     path: pathSystem.users,
@@ -104,10 +107,6 @@ const adminRoutes = [
     element: <Products />,
   },
   {
-    path: pathSystem.createProduct,
-    element: <CreatingProduct />,
-  },
-  {
     path: pathSystem.productDetail,
     element: <ProductDetail />,
   },
@@ -122,14 +121,6 @@ const adminRoutes = [
   {
     path: pathSystem.staffs,
     element: <Staffs />,
-  },
-  {
-    path: pathSystem.vouchers,
-    element: <Vouchers />,
-  },
-  {
-    path: pathSystem.createVoucher,
-    element: <CreateVoucher />,
   },
   {
     path: pathSystem.flashsale,
@@ -152,6 +143,10 @@ const adminRoutes = [
     element: <Types />,
   },
   {
+    path: pathSystem.subtypes,
+    element: <SubTypes />,
+  },
+  {
     path: pathSystem.reports,
     element: <Reports />,
   },
@@ -167,6 +162,18 @@ const adminRoutes = [
     path: pathSystem.rooms,
     element: <Rooms />,
   },
+  {
+    path: pathSystem.warehouse,
+    element: <Warehouse />,
+  },
+  {
+    path: pathSystem.createWarehouse,
+    element: <CreatingWarehouse />,
+  },
+  {
+    path: pathSystem.warehouseDetail,
+    element: <WarehouseDetail />,
+  },
 ];
 
 const staffRoutes = [
@@ -177,14 +184,6 @@ const staffRoutes = [
   {
     path: pathSystem.createProduct,
     element: <CreatingProduct />,
-  },
-  {
-    path: pathSystem.events,
-    element: <Events />,
-  },
-  {
-    path: pathSystem.eventCreate,
-    element: <CreateEvents />,
   },
   {
     path: pathSystem.vouchers,
@@ -209,6 +208,18 @@ const staffRoutes = [
   {
     path: pathSystem.types,
     element: <Types />,
+  },
+  {
+    path: pathSystem.subtypes,
+    element: <SubTypes />,
+  },
+  {
+    path: pathSystem.warehouseDetail,
+    element: <WarehouseDetail />,
+  },
+  {
+    path: pathSystem.deliveryTrip,
+    element: <DeliveryTrip />,
   },
 ];
 

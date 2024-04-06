@@ -1,12 +1,28 @@
-import { Table } from "antd";
+import { Space, Table } from "antd";
 import BriefInfo from "../BriefInfo";
-import EditButton from "../EditButton";
 import { formatCurrency } from "../../utils/formatCurrency";
+import { isAdmin } from "../../utils/getCurrentUserRole";
+import ChangeStatusButton from "../ChangeStatusButton";
+import {
+  get_draft_rooms_api,
+  get_published_rooms_api,
+  get_to_draft_room_api,
+  get_to_publish_room_api,
+  remove_draft_room,
+} from "../../api/roomApi";
+import PropTypes from "prop-types";
+import EditButton from "../EditButton";
+import EditRoomForm from "../EditRoomForm";
+import DeleteButton from "../DeleteButton";
 
-function RoomTable({ data, onEdit }) {
-  const columns = [
+
+function RoomTable({ data, published }) {
+  const admin = isAdmin();
+  console.log(data);
+  const STAFF_COLUMNS = [
     {
       title: "Room",
+      width: '15%',
       render: (_, record) => (
         <BriefInfo col img_class="h-20 w-16" info={record} />
       ),
@@ -14,24 +30,73 @@ function RoomTable({ data, onEdit }) {
     {
       title: "Description",
       render: (_, record) => (
-        <span className="text-[#959798] text-xs">{record.description}</span>
+        <span className="text-[#959798] text-xs line-clamp-6">
+          {record.description}
+        </span>
       ),
     },
     {
       title: "Furniture",
+      width: '15%',
       render: (_, record) => (
-        <span className="text-xs">Chair x 3, Sofa x 1</span>
+        <div>
+          {record.products.map(product => (
+            <span key={product._id} className="text-xs block w-full">{product.product.name} x {product.quantity}</span>
+          ))}
+        </div>
       ),
     },
-    {
-      title: "Total",
+    (!admin && !published) && {
+      title: "Actions",
       render: (_, record) => (
-        <span className="text-xs font-semibold">{formatCurrency(1000000)}</span>
+        <Space className="flex gap-4">
+          <EditButton>
+              <EditRoomForm data={record} />
+            </EditButton>
+        </Space>
       ),
     },
+    
+  ].filter(Boolean);
+
+  const ADMIN_COLUMNS = [
+    ...STAFF_COLUMNS,
     {
       title: "Actions",
-      render: (_, record) => <EditButton onClick={() => onEdit(data)} />,
+      render: (_, record) => {
+        return (
+          <Space className="flex gap-4">
+           
+            {!published ? (
+              <ChangeStatusButton
+                url={get_to_publish_room_api(record._id)}
+                resetPublishkey={get_published_rooms_api()}
+                resetDraftKey={get_draft_rooms_api()}
+                type="rooms"
+                action="publish"
+                published={published}
+              >
+                Publish
+              </ChangeStatusButton>
+            ) : (
+              <ChangeStatusButton
+                url={get_to_draft_room_api(record._id)}
+                resetPublishkey={get_published_rooms_api()}
+                resetDraftKey={get_draft_rooms_api()}
+                type="rooms"
+                action="draft"
+                published={published}
+              >
+                Draft
+              </ChangeStatusButton>
+            )}
+            {admin && !published ? (
+              <DeleteButton url={remove_draft_room()} notiType="room" notiAction="delete" refreshKey={get_draft_rooms_api()} id={record.slug} />
+            ) : null
+            }
+          </Space>
+        )
+      },
     },
   ];
 
@@ -39,7 +104,7 @@ function RoomTable({ data, onEdit }) {
     <Table
       rowKey="_id"
       dataSource={data}
-      columns={columns}
+      columns={admin ? ADMIN_COLUMNS : STAFF_COLUMNS}
       pagination={{
         pageSize: 10,
         hideOnSinglePage: true,
@@ -47,5 +112,11 @@ function RoomTable({ data, onEdit }) {
     />
   );
 }
+
+
+RoomTable.propTypes = {
+  data: PropTypes.array,
+  published: PropTypes.bool,
+};
 
 export default RoomTable;

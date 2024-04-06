@@ -1,8 +1,22 @@
-import { get_create_room_api, get_draft_rooms_api } from "../api/roomApi";
-import { usePost } from "./api-hooks";
+import { get_create_room_api, get_draft_rooms_api, update_room_staff } from "../api/roomApi";
+import { usePost, useUpdate } from "./api-hooks";
+import useNotification from "./useNotification";
 
-function useRoom() {
-    const { mutate: createRoomMutation } = usePost(get_create_room_api(), undefined, () => { }, () => { }, get_draft_rooms_api());
+function useRoom(slug) {
+    const { success_message, error_message } = useNotification();
+    const { mutate: createRoomMutation } = usePost(get_create_room_api(), undefined, () => {
+        success_message('room', 'add_draft')
+    }, () => {
+        error_message('room', 'add_draft')
+    }, get_draft_rooms_api());
+
+    const { mutate: editRoom } = useUpdate(update_room_staff(slug), undefined, () => {
+        success_message('room', 'edit')
+
+    }, () => {
+        error_message('room', 'edit')
+
+    }, get_draft_rooms_api())
 
     const createRoom = (data) => {
         const { name, description, thumb, products } = data;
@@ -17,7 +31,13 @@ function useRoom() {
         createRoomMutation(body);
     }
 
-    return { createRoom };
+    const handleEditRoom = (data) => {
+
+
+        editRoom(data);
+    }
+
+    return { createRoom, handleEditRoom };
 }
 
 export default useRoom;

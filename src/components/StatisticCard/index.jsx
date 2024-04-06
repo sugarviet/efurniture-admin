@@ -2,6 +2,8 @@ import { Statistic } from "antd";
 import CountUp from "react-countup";
 import FurnitureBarChart from "../FurnitureBarChart";
 import PropTypes from "prop-types";
+import { withFetchData } from "@hocs/withFetchData";
+import { get_7_days_last_order } from "../../api/statisticApi";
 
 const data = [
   {
@@ -35,7 +37,8 @@ const data = [
 ];
 
 const formatter = (value) => <CountUp end={value} separator="," />;
-function StatisticCard({ label, description }) {
+function StatisticCard({ label, description, data }) {
+  console.log('statis', data);
   return (
     <section className="flex flex-col items-center justify-between w-full border bg-white rounded-md p-6">
       <div className="flex items-center justify-between w-full">
@@ -54,7 +57,7 @@ function StatisticCard({ label, description }) {
   );
 }
 
-export default StatisticCard;
+export default withFetchData(StatisticCard, get_7_days_last_order);
 
 StatisticCard.propTypes = {
   label: PropTypes.string.isRequired,

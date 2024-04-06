@@ -14,8 +14,6 @@ const DraftProductTable = withFetchData(ProductTable, get_draft_product);
 const Products = () => {
   const admin = isAdmin();
 
-  console.log(admin);
-
   return (
     <main>
       <div className="flex px-2 justify-between items-center my-4">
@@ -23,7 +21,7 @@ const Products = () => {
       </div>
 
       <TableCard label="Public Products">
-        <PublishedProductTable />
+        <PublishedProductTable published={true} />
       </TableCard>
 
       {admin ? (

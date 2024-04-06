@@ -1,6 +1,7 @@
 import Map, { Marker } from "react-map-gl";
 import { COORDINATES } from "../../constants/enums";
 import PropTypes from "prop-types";
+import { Card } from "antd";
 
 const ACCESS_TOKEN =
   "pk.eyJ1Ijoibm9iaXRhODkiLCJhIjoiY2xyajRxMGVnMDVuajJrcW41aGFtYzh5YSJ9.1A258o2oKsYxbYY8Qfx2yQ";
@@ -8,6 +9,8 @@ const STYLE_URL = "mapbox://styles/nobita89/clrn549cu004j01o3h8f38nmr";
 
 function MapBox({ locations }) {
   return (
+
+   
     <Map
       mapboxAccessToken={ACCESS_TOKEN}
       initialViewState={{
@@ -36,6 +39,7 @@ function MapBox({ locations }) {
         );
       })}
     </Map>
+
   );
 }
 

@@ -1,4 +1,7 @@
+import { get_all_district } from "../../api/districtApi";
 import MapBox from "../Map";
+import { withFetchData } from "@hocs/withFetchData";
+import PropTypes from "prop-types";
 
 const MOST_PURCHASED_LOCATIONS = [
   {
@@ -11,7 +14,8 @@ const MOST_PURCHASED_LOCATIONS = [
   },
 ];
 
-function LocationMapBox() {
+function LocationMapBox({data}) {
+  console.log(data);
   return (
     <section className="w-full h-96">
       <MapBox locations={MOST_PURCHASED_LOCATIONS} />
@@ -19,4 +23,8 @@ function LocationMapBox() {
   );
 }
 
-export default LocationMapBox;
+LocationMapBox.propTypes = {
+  data: PropTypes.array,
+};
+
+export default withFetchData(LocationMapBox, get_all_district);

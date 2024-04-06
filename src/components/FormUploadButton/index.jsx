@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { Upload } from "antd";
+import { Upload, Form } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import PropTypes from "prop-types";
 import { API_KEY, UPLOAD_IMG_URL } from "@config/uploadImage";
@@ -9,7 +9,7 @@ import FormItem from "../FormItem";
 import { classNames } from "../../utils/classNames";
 
 const FormUploadButton = (props) => {
-  const { className, name, label, required } = props;
+  const { className, name, label, required,  defaultFileList, multiple=true } = props;
 
   const handleUploadImage = async ({ file, onSuccess, onError }) => {
     const formData = new FormData();
@@ -38,13 +38,21 @@ const FormUploadButton = (props) => {
     }
   };
 
+  const renderItem = (file) => (
+    <image className="w-10 h-10" src={file.url} />
+  );
+
   return (
     <FormItem label={label} name={name} required>
       <Upload
         className="h-full"
-        multiple
+        defaultFileList={defaultFileList}
+        multiple={multiple}
         showUploadList
+        listType="picture"
         customRequest={handleUploadImage}
+        renderItem={renderItem}
+      
       >
         <button
           type="button"

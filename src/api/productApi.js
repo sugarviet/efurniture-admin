@@ -17,3 +17,33 @@ export const create_product_staff = () => {
 
     return "/product/staff";
 }
+
+export const update_product_staff = (slug) => {
+
+    return `/product/staff/${slug}`;
+}
+
+export const publish_product_admin = (type, slug) => {
+    return `/product/admin/publish/${type}/${slug}`;   
+}
+
+export const draft_product_admin = (type, slug) => {
+    return `/product/admin/draft/${type}/${slug}`;   
+}
+
+export const edit_product = (slug) => {
+    return `/product/staff/${slug}`;
+}
+
+export const remove_draft_product = () => {
+    return `/product/admin`;
+}
+
+export const add_more_stock_product = (id) => {
+    return `/warehouse/staff/stock/update/${id}`
+}
+
+export const add_product_to_warehouse = (id) => {
+    return `/warehouse/staff/${id}`
+
+}

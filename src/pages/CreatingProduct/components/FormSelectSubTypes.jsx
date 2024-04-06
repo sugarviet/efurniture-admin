@@ -9,6 +9,8 @@ const FormSelectSubTypes = () => {
   
   const {data} = useFetch(get_sub_type_by_type(productType), undefined, !!productType)
 
+  console.log(data, productType);
+
 
   const subTypesSelectOptions = transferSelectOption(data, "slug", "slug");
 
