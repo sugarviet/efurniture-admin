@@ -24,8 +24,8 @@ const AddProductToWarehouseForm = ({ id }) => {
         stock: item.stock,
       })),
     };
-    console.log(body);
     addProductToWarehouse([...body.products])
+    form.resetFields();
   };
   return (
     <Card>

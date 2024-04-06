@@ -22,6 +22,7 @@ function useNavigation() {
   const go_to_vouchers = () => navigation("/vouchers");
   const go_to_create_voucher = () => navigation("/voucher/create");
   const go_to_transactions = () => navigation("/transactions");
+  const go_to_delivery_trip = () => navigation("/delivery-trip");
 
 
   return {
@@ -41,7 +42,8 @@ function useNavigation() {
     go_to_vouchers,
     go_to_create_room,
     go_to_create_voucher,
-    go_to_transactions
+    go_to_transactions,
+    go_to_delivery_trip
   };
 }
 

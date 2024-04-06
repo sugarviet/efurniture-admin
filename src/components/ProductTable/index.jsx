@@ -103,6 +103,7 @@ const ProductTable = ({ data, onEdit, published }) => {
                   resetDraftKey={get_draft_product()}
                   type="products"
                   action="draft"
+                published={published}
                 >
                   Draft
                 </ChangeStatusButton>

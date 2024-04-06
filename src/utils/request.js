@@ -3,6 +3,9 @@ import Cookies from 'js-cookie';
 import { ACCESS_TOKEN, ACCOUNT_ID, REFRESH_TOKEN } from "../constants/token";
 
 const API_URL_DEVELOPMENT = "http://34.126.181.161:4646/api/v1";
+
+const SECURE_API_DEVELOPMENT = "https://dream-editor.tech/api/v1"
+
 const API_URL_PRODUCTION = "http://localhost:3000";
 console.log(API_URL_PRODUCTION);
 

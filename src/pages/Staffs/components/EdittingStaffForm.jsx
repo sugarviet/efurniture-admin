@@ -24,6 +24,7 @@ const EdittingStaffForm = ({ data }) => {
       <Form
         form={form}
         layout="vertical"
+        requiredMark='optional'
         onFinish={onFinish}
         initialValues={{ ...data, role: selectOptions }}
       >

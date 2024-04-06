@@ -3,7 +3,7 @@ import { Modal } from "antd";
 import PropTypes from "prop-types";
 import { classNames } from "../../utils/classNames";
 
-const AppModal = ({ children, isOpen, setIsOpen, className }) => {
+const AppModal = ({ children, isOpen, setIsOpen, className, width = 600 }) => {
   const handleOk = () => {
     setIsOpen(false);
   };
@@ -18,6 +18,7 @@ const AppModal = ({ children, isOpen, setIsOpen, className }) => {
         onCancel={handleCancel}
         open={isOpen}
         footer={null}
+        width={width}
       >
         <div className={classNames("pt-6", className)}>{children}</div>
       </Modal>

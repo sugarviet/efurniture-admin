@@ -50,17 +50,6 @@ function UserTable({ data }) {
       width: "20%",
       ...getColumnSearchProps("age"),
     },
-    {
-      title: "Actions",
-      key: "actions",
-      width: "20%",
-      render: (text, record) => (
-        <Space>
-          <Button>Edit</Button>
-          <Button danger>Disable</Button>
-        </Space>
-      ),
-    },
   ];
 
   return (

@@ -1,8 +1,13 @@
-import React from 'react'
+import TableCard from '../../components/TableCard'
+import DeliveryTripTable from '../../components/DeliveryTripTable'
 
 const DeliveryTrip = () => {
   return (
-    <div>DeliveryTrip</div>
+    <main>
+      <TableCard label="Delivery Trip">
+        <DeliveryTripTable />
+      </TableCard>
+    </main>
   )
 }
 

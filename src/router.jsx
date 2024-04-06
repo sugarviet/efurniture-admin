@@ -74,7 +74,7 @@ export const pathSystem = {
   flashsale: "/flashsales",
   creatingFlashSale: "/flashsale/create",
   subtypes: "/subtypes",
-  deliveryTrip: "/deliveryTrip",
+  deliveryTrip: "/delivery-trip",
 
 };
 
