@@ -74,6 +74,8 @@ const SubtypesTable = ({ data, onEdit, published }) => {
               resetDraftKey={get_all_draft_subType()}
               type="types"
               action="draft"
+              published={published}
+
             >
               Draft
             </ChangeStatusButton>

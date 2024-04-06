@@ -12,6 +12,8 @@ import {
 } from "@api/userApi";
 import Proptypes from "prop-types";
 import useAccountManagement from "./hooks/useAccountManagement";
+import TableCard from "../../components/TableCard";
+import { PlusCircleFilled } from "@ant-design/icons";
 
 const Staffs = ({ data }) => {
 
@@ -97,16 +99,16 @@ const Staffs = ({ data }) => {
 
   return (
     <main>
-      <div className="flex justify-between items-center my-3">
-        <h1 className="text-3xl font-bold">Staffs management</h1>
-        <Button type="primary" onClick={handleOpenCreateStaffModal}>
-          Create new staffs
-        </Button>
-      </div>
 
-      <div className="float-right">
-        <ExcelButton data={[]} />
-      </div>
+      <TableCard label={'Staff management'} addMoreButton={
+          <Button
+            className="flex items-center px-4 py-4"
+            type="link"
+            onClick={handleOpenCreateStaffModal}
+          >
+            Add Staffs <PlusCircleFilled />
+          </Button>
+        }>
 
       <Table
         rowKey="_id"
@@ -120,6 +122,8 @@ const Staffs = ({ data }) => {
           hideOnSinglePage: true,
         }}
       />
+
+      </TableCard>
 
       <AppModal
         isOpen={openCreateStaffModal}

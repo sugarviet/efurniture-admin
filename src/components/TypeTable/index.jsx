@@ -63,6 +63,7 @@ const TypeTable = ({ data, onEdit, published }) => {
               resetDraftKey={get_draft_type()}
               type="types"
               action="draft"
+              published={published}
             >
               Draft
             </ChangeStatusButton>

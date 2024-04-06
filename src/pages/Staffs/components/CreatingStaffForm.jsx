@@ -20,7 +20,7 @@ const CreatingStaffForm = () => {
       <p className="font-semibold text-3xl mb-4">
         eFurniture creating staff form
       </p>
-      <Form form={form} layout="vertical" onFinish={onFinish}>
+      <Form form={form} layout="vertical" onFinish={onFinish} requiredMark='optional'>
         <div className="grid grid-cols-2 gap-4">
           <FormInput
             name="first_name"
@@ -58,7 +58,7 @@ const CreatingStaffForm = () => {
 
         <Button
           type="primary"
-          className="primary py-5 px-10 text-center flex justify-center items-center font-bold"
+          className="primary py-5 px-10 text-center flex justify-center items-center font-bold mx-auto"
           htmlType="submit"
         >
           Submit
