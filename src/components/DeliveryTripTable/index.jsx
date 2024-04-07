@@ -5,6 +5,7 @@ import AppModal from '../AppModal';
 import DetailButton from '../DetailButton';
 import ConfirmDeliveryButton from '../ConfirmDeliveryButton';
 import { formatDateByDateAndTime } from '../../utils/formatDate';
+import TripDetail from '../TripDetail';
 
 const DeliveryTripTable = ({data}) => {
   console.log(data);
@@ -38,7 +39,9 @@ const DeliveryTripTable = ({data}) => {
       render: (text, record) => (
         <Space size="middle">
          
-          <DetailButton data={record._id}/>
+          <DetailButton>
+            <TripDetail data={record.orders}/>
+          </DetailButton>
           <ConfirmDeliveryButton deliveryId={record._id}/>
         </Space>
       ),

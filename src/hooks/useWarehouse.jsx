@@ -1,3 +1,4 @@
+import { Form } from "antd";
 import { usePost, useUpdate } from "./api-hooks";
 import { add_product_to_warehouse } from "../api/warehouseApi";
 import {
@@ -10,12 +11,15 @@ import {
 import useNotification from "./useNotification";
 
 export default function useWarehouse(id = '') {
+  const [form] = Form.useForm();
+
   const { error_message, success_message } = useNotification();
   const { mutate: addProductToWarehouse } = useUpdate(
     add_product_to_warehouse(id),
     undefined,
     () => {
       success_message('warehouse', 'add_product')
+      form.resetFields();
     },
     () => {
       error_message('warehouse', 'add_product');
@@ -63,6 +67,7 @@ export default function useWarehouse(id = '') {
     createWarehouse,
     addProductToWarehouse,
     handleSwitchNotification,
-    handleUpdateProductLowstock
+    handleUpdateProductLowstock,
+    form
   };
 }

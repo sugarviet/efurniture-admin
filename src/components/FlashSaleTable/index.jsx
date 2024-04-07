@@ -8,8 +8,10 @@ import {
   draft_flash_sale,
   get_all_flash_sale,
   publish_flash_sale,
+  remove_flash_sale,
 } from "../../api/flashsaleApi";
 import EditFlashsaleForm from "../EditFlashsaleForm";
+import DeleteButton from "../DeleteButton";
 const FlashSaleTable = ({ data, onEdit, published }) => {
   const admin = isAdmin();
   const { getColumnSearchProps } = useSearchTableColumn();
@@ -43,6 +45,7 @@ const FlashSaleTable = ({ data, onEdit, published }) => {
           <EditButton>
             <EditFlashsaleForm />
           </EditButton>
+          <DeleteButton url={remove_flash_sale()} notiType="flashsale" notiAction="delete" refreshKey={get_all_flash_sale()} id={record._id} />
           {/* {admin && !published ? (
             <ChangeStatusButton
               url={publish_flash_sale(record._id)}

@@ -8,20 +8,51 @@ import { get_warehouse_detail } from "../../api/warehouseApi";
 import AddProductToWarehouseForm from "../../pages/WarehouseDetail/components/AddProductToWarehouseForm";
 import { Switch } from 'antd';
 import useWarehouse from "../../hooks/useWarehouse";
+import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
 
 const WarehouseDetailTable = ({ data }) => {
   console.log(data);
-  const {handleSwitchNotification, handleUpdateProductLowstock} = useWarehouse(data._id)
+  const { getColumnSearchProps } = useSearchTableColumn();
+  const {handleSwitchNotification} = useWarehouse(data._id)
 
   console.log(data);
   const columns = [
     {
       title: "Product name",
-      dataIndex: "product",
+      dataIndex: ['product', 'name'],
       key: "product",
-      render: (text) => (
-         <span>{text.name}</span>
+    
+      filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+        <div style={{ padding: 8 }}>
+          <Input
+            placeholder="Search product name"
+            value={selectedKeys[0]}
+            onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+            onPressEnter={() => confirm()}
+            style={{ width: 188, marginBottom: 8, display: 'block' }}
+          />
+          <button
+            type="button"
+            onClick={() => {
+              clearFilters();
+            }}
+            style={{ width: 90, marginRight: 8 }}
+          >
+            Reset
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              confirm();
+            }}
+            style={{ width: 90 }}
+          >
+            Filter
+          </button>
+        </div>
       ),
+      onFilter: (value, record) => record.product.name.toLowerCase().includes(value.toLowerCase()),
+      render: (text) => text,
 
     },
     {

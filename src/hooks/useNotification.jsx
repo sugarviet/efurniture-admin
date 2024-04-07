@@ -3,6 +3,18 @@ import { useQueryClient } from '@tanstack/react-query';
 import { get_all_notification } from "../api/notificationApi";
 
 const type = {
+  voucher: {
+    success: {
+      add: 'Successfully added voucher',
+      edit: 'Successfully edited voucher',
+      delete: 'Successfully deleted voucher',
+    },
+    fail: {
+      add: 'Failed added voucher',
+      edit: 'Failed edited voucher',
+      delete: 'Failed deleted voucher',
+    }
+  },
   warehouse: {
     success: {
       add: 'Successfully added warehouse',
@@ -143,12 +155,14 @@ const type = {
       edit: 'Successfully edited flash sale',
       disable: 'Successfully disable flash sale',
       enable: 'Successfully enable flash sale',
+      delete: 'Successfully remove flash sale',
     },
     fail: {
       add: 'Failed added flash sale',
       edit: 'Failed edited flash sale',
       disable: 'Failed disable flash sale',
       enable: 'Failed enable flash sale',
+      delete: 'Failed remove flash sale',
     }
   },
   login: {
