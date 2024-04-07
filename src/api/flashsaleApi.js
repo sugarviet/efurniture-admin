@@ -13,3 +13,7 @@ export const publish_flash_sale = (id) => {
 export const draft_flash_sale = (id) => {
     return `/flashsale/admin/draft/${id}`
 }
+
+export const remove_flash_sale = () => {
+    return `/flashsale/admin`
+}

@@ -24,6 +24,7 @@ const CreatingSubTypesForm = () => {
     undefined,
     () => {
       success_message('subtypes', 'add_draft')
+      form.resetFields();
     },
     (error) => {
       error_message('subtypes', 'add_draft', error)

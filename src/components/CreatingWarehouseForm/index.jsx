@@ -10,8 +10,7 @@ import { useState } from "react";
 import getCoordinates from "../../utils/getCoordinate";
 import useWarehouse from "../../hooks/useWarehouse";
 const CreatingWarehouseForm = () => {
-  const {createWarehouse} = useWarehouse();
-  const [form] = Form.useForm();
+  const {createWarehouse, form} = useWarehouse();
   const [selectedDistrict, setSelectedDistrict] = useState({});
   const [selectedWard, setSelectedWard] = useState({});
   const { data: districtList } = useFetchOutsideSystem(
@@ -50,7 +49,6 @@ const CreatingWarehouseForm = () => {
     }
     createWarehouse(body);
     form.resetFields();
-    console.log(body);
 
   };
 

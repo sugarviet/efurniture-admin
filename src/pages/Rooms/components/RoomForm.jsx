@@ -1,4 +1,4 @@
-import { Form, Button } from "antd";
+import { Form } from "antd";
 import FormInput from "@components/FormInput";
 import FormUploadButton from "@components/FormUploadButton";
 import FormTextArea from "@components/FormTextArea";
@@ -9,8 +9,7 @@ import useRoom from "../../../hooks/useRoom";
 import { DeleteOutlined } from "@ant-design/icons";
 
 const RoomForm = () => {
-  const { createRoom } = useRoom();
-  const [form] = Form.useForm();
+  const { createRoom, form } = useRoom();
 
   const handleSubmit = async (values) => {
     createRoom(values);

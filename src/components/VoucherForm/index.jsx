@@ -9,9 +9,8 @@ import FormSelect from "../FormSelect";
 import useVoucher from "../../hooks/useVoucher";
 
 function VoucherForm() {
-  const [form] = Form.useForm();
 
-  const { createVoucher } = useVoucher();
+  const { createVoucher, form } = useVoucher();
 
   const onFinish = (value) => {
     createVoucher(value);
@@ -86,7 +85,7 @@ function VoucherForm() {
           required
           name="minimum_order_value"
           message="Please enter the value"
-          
+
 
         />
       </div>
