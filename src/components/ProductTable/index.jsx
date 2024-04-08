@@ -19,10 +19,12 @@ import DeleteButton from "../DeleteButton";
 import { useState } from "react";
 import UpdateProductForm from "../UpdateProductForm";
 import { CreatingProductProvider } from "../../pages/CreatingProduct/CreatingProductContext";
+import { render } from "react-dom";
 
 const { Column } = Table;
 
 const ProductTable = ({ data, onEdit, published }) => {
+  console.log(data);
   const admin = isAdmin();
   const { getColumnSearchProps } = useSearchTableColumn();
 
@@ -46,16 +48,25 @@ const ProductTable = ({ data, onEdit, published }) => {
       ),
     },
     {
+      title: 'Color',
+   
+      render: (text, record) => (
+        <div className="flex gap-2">
+            {record.variation[0].properties.map(property => <div key={property._id} style={{ backgroundColor: property.value , width: 20, height: 20, borderRadius: '50%' }}/> )}
+        </div>
+      )
+    },
+    {
       title: "Price",
       dataIndex: "regular_price",
       key: "regular_price",
-
+      render: (text) => formatCurrency(text),
     },
     {
       title: "Sale Price",
       dataIndex: "sale_price",
       key: "sale_price",
-
+      render: (text) => formatCurrency(text),
     },
     {
       title: "Description",

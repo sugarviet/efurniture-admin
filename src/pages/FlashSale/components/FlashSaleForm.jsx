@@ -6,8 +6,13 @@ import FormList from "../../../components/FormList";
 import { DeleteOutlined } from "@ant-design/icons";
 import FormDatePickerWithTime from "../../../components/FormDatePickerWithTime";
 import useFlashSale from "../../../hooks/useFlashSale";
+import FurnitureSelectionFlashsale from "../../CreatingFlashSale/components/FurnitureSelectionFlashsale";
+import { useState } from "react";
+import { formatDateByDateAndTime } from "../../../utils/formatDate";
 const FlashSaleForm = () => {
   const { form, handleCreateFlashsale } = useFlashSale();
+  const [startDay, setStartDay] = useState();
+  const [endDay, setEndDay] = useState();
 
   const handleSubmit = async (values) => {
     handleCreateFlashsale(values);
@@ -35,6 +40,7 @@ const FlashSaleForm = () => {
               label="Start date"
               name="startDay"
               required
+              onChange={setStartDay}
               message="Please enter the expiration date"
               placeholder="Enter end date"
               className="w-full h-10"
@@ -43,6 +49,7 @@ const FlashSaleForm = () => {
               label="End date"
               name="endDay"
               required
+              onChange={setEndDay}
               message="Please enter the expiration date"
               placeholder="Enter end date"
               className="w-full h-10"
@@ -82,7 +89,11 @@ const FlashSaleForm = () => {
                     className="col-span-4"
                     name={[name, "product"]}
                   >
-                    <FurnitureSelection className="h-12" />
+                    {/* <FurnitureSelection className="h-12" /> */}
+                    <FurnitureSelectionFlashsale 
+                    data={{ startDay, endDay }}
+                    
+                    className='h-12'/>
                   </Form.Item>
                   <div className="flex gap-4 col-span-2">
                     <FormInputNumber

@@ -3,6 +3,7 @@ import { Table, Button, Space } from "antd";
 import AppModal from "@components/AppModal";
 import AppSuspense from "@components/AppSuspense";
 import PageTitle from "../../components/PageTitle";
+import TableCard from "../../components/TableCard";
 
 const data = [
   {
@@ -64,26 +65,18 @@ const Reports = () => {
           dataIndex: "type",
           key: "type",
         },
-        {
-          title: "Action",
-          key: "action",
-          width: "30%",
-          render: () => (
-            <Space className="flex gap-4">
-              
-                <Button className="primary" type="primary" onClick={toggleModalDetail}>
-                  Detail
-                </Button>
-              
-              
-            </Space>
-          ),
-        },
+       
       ];
   return (
     <div>
-      <PageTitle title="Reports management"/>
+     
+      <TableCard
+        label="Reports"
+       
+      >
       <Table dataSource={data} columns={columns} />
+
+      </TableCard>
 
       <AppModal isOpen={isModalDetailOpen} setIsOpen={setIsModalDetailOpen}>
         <AppSuspense>

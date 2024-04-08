@@ -23,6 +23,8 @@ function useNavigation() {
   const go_to_create_voucher = () => navigation("/voucher/create");
   const go_to_transactions = () => navigation("/transactions");
   const go_to_delivery_trip = () => navigation("/delivery-trip");
+  const go_to_reports = () => navigation("/reports");
+  const go_to_report_detail = () => navigation("/report/:id");
 
 
   return {
@@ -43,7 +45,9 @@ function useNavigation() {
     go_to_create_room,
     go_to_create_voucher,
     go_to_transactions,
-    go_to_delivery_trip
+    go_to_delivery_trip,
+    go_to_reports,
+    go_to_report_detail
   };
 }
 

@@ -8,11 +8,9 @@ import { get_warehouse_detail } from "../../api/warehouseApi";
 import AddProductToWarehouseForm from "../../pages/WarehouseDetail/components/AddProductToWarehouseForm";
 import { Switch } from 'antd';
 import useWarehouse from "../../hooks/useWarehouse";
-import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
 
 const WarehouseDetailTable = ({ data }) => {
   console.log(data);
-  const { getColumnSearchProps } = useSearchTableColumn();
   const {handleSwitchNotification} = useWarehouse(data._id)
 
   console.log(data);
@@ -79,7 +77,7 @@ const WarehouseDetailTable = ({ data }) => {
           defaultValue={text}
           name={"stock"}
           url={add_more_stock_product(data._id)}
-          record={{ product: record.product._id, stock: record.stock }}
+          record={{ product: record.product._id, stock: record.stock, code: record.code }}
           notiType="warehouse"
           notiAction="update_stock"
           type="number"
@@ -103,6 +101,11 @@ const WarehouseDetailTable = ({ data }) => {
           refreshKey={() => get_warehouse_detail(data._id)}
         />
       ),
+    },
+    {
+      title: "Sold",
+      dataIndex: 'sold',
+      key: "sold",
     },
     {
       title: "Received Stock",

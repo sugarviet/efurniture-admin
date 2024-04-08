@@ -7,7 +7,7 @@ const RefundConfirm = () => {
   };
   return (
     <Card>
-      <Form layout="vertical" onFinish={onFinish}>
+      <Form layout="vertical" onFinish={onFinish} requiredMark='optional'>
         <FormUploadButton
           className="xl:w-[21rem] lg:w-full"
           label="Refund Amount"

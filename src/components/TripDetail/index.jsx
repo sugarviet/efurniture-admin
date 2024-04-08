@@ -77,7 +77,12 @@ const TripDetail = ({ data }) => {
             {record.order.warehouses.map((warehouse, index) => (
                 warehouse.products.map((product, productIndex) => (
                     <li key={`${index}-${productIndex}`}>
-                        {product.name}: {product.quantity}
+                        <div className='flex gap-4'>
+                         #{productIndex + 1}   {product.name} x {product.quantity}
+                        {product.variation.map(variation => (
+                            <div key={variation.variation_id} style={{ width: 20, height:20, borderRadius: '50%', backgroundColor: variation.color }}/>
+                        ))}
+                        </div>
                     </li>
                 ))
             ))}

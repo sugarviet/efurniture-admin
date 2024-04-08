@@ -16,10 +16,6 @@ const Products = () => {
 
   return (
     <main>
-      <div className="flex px-2 justify-between items-center my-4">
-        <PageTitle title="Product management" />
-      </div>
-
       <TableCard label="Public Products">
         <PublishedProductTable published={true} />
       </TableCard>
