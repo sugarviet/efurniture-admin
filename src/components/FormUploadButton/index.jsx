@@ -9,7 +9,7 @@ import FormItem from "../FormItem";
 import { classNames } from "../../utils/classNames";
 
 const FormUploadButton = (props) => {
-  const { className, name, label, required,  defaultFileList, multiple=true } = props;
+  const { className, name, label, required,  defaultFileList, maxCount = 4 } = props;
 
   const handleUploadImage = async ({ file, onSuccess, onError }) => {
     const formData = new FormData();
@@ -47,7 +47,7 @@ const FormUploadButton = (props) => {
       <Upload
         className="h-full"
         defaultFileList={defaultFileList}
-        multiple={multiple}
+        maxCount={maxCount}
         showUploadList
         listType="picture"
         customRequest={handleUploadImage}

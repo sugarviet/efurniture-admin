@@ -80,6 +80,7 @@ const CreatingSubTypesForm = () => {
         required
       />
       <FormUploadButton
+        maxCount={1}
         label="Subtype thumb"
         name="thumb"
         className="xl:w-96 lg:w-96 md:w-[8rem]"

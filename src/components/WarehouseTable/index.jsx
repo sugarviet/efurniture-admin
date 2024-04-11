@@ -1,10 +1,11 @@
-import { Table } from "antd";
+import { Table, Space } from "antd";
 import PropTypes from "prop-types";
 import LinkItem from "../LinkItem";
 import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
+import EditButton from "../EditButton";
+import EditWarehouseForm from "../EditWarehouseForm";
 const WarehouseTable = ({ data }) => {
   const { getColumnSearchProps } = useSearchTableColumn();
-
   const columns = [
     {
       title: "Location",
@@ -27,7 +28,20 @@ const WarehouseTable = ({ data }) => {
       dataIndex: "ward",
       key: "ward",
       ...getColumnSearchProps("ward"),
-
+    },
+    {
+      title: "Action",
+      key: "action",
+      width: "30%",
+      render: (text, record) => (
+        <Space className="flex gap-4">
+          <EditButton>
+            <EditWarehouseForm data={record}/>
+          </EditButton>
+          {/* <DeleteButton url={remove_flash_sale()} notiType="flashsale" notiAction="delete" refreshKey={get_all_flash_sale()} id={record._id} /> */}
+        
+        </Space>
+      ),
     },
   ];
   return (

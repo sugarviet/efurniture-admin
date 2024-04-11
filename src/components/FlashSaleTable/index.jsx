@@ -12,8 +12,10 @@ import {
 } from "../../api/flashsaleApi";
 import EditFlashsaleForm from "../EditFlashsaleForm";
 import DeleteButton from "../DeleteButton";
+import { formatDateByDateAndTime, formatGMTDate } from "../../utils/formatDate";
 const FlashSaleTable = ({ data, onEdit, published }) => {
   const admin = isAdmin();
+  console.log(data);
   const { getColumnSearchProps } = useSearchTableColumn();
   const columns = [
     {
@@ -22,19 +24,35 @@ const FlashSaleTable = ({ data, onEdit, published }) => {
       key: "name",
       ...getColumnSearchProps("name"),
     },
+    // {
+    //   title: "Furniture",
+    //   render: (text) => <span className="text-xs">Chair x 3, Sofa x 1</span>,
+    // },
     {
       title: "Furniture",
-      render: (text) => <span className="text-xs">Chair x 3, Sofa x 1</span>,
+      width: '15%',
+      render: (_, record) => (
+        <div>
+          {record.products.map(product => (
+            <span key={product._id} className="text-xs block w-full">Chair x {product.count}</span>
+          ))}
+        </div>
+      ),
     },
     {
       title: "Start Date",
       dataIndex: "startDay",
       key: "startDay",
+      render: (text) => {
+
+        return <span className="text-xs">{formatGMTDate(text)}</span>
+      },
     },
     {
       title: "End Date",
       dataIndex: "endDay",
       key: "endDay",
+      render: (text) => <span className="text-xs">{formatGMTDate(text)}</span>,
     },
     {
       title: "Action",

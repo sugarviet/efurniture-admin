@@ -58,14 +58,17 @@ const CreatingProductForm = () => {
             <p className="text-gray-500">Orders placed across your store</p>
           </div>
           <div className="flex gap-2">
+          <button className="furniture-button rounded-md">Save draft</button>
             <Button
+            className="px-5 py-1"
               onClick={() => {
                 form.resetFields();
               }}
             >
               Discard
             </Button>
-            <Button htmlType="submit">Save draft</Button>
+            {/* <Button htmlType="submit">Save draft</Button> */}
+            
             {admin ? (
               <Button type="primary" className="primary" htmlType="submit">
                 Publish

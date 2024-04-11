@@ -15,7 +15,7 @@ const MOST_PURCHASED_LOCATIONS = [
 ];
 
 function LocationMapBox({data}) {
-  console.log(data);
+  console.log('disctrict', data);
   return (
     <section className="w-full h-96">
       <MapBox locations={MOST_PURCHASED_LOCATIONS} />

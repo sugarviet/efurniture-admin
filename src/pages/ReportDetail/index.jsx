@@ -1,6 +1,7 @@
 
 import { Table } from "antd";
 import RefundConfirm from "./components/RefundConfirm";
+import TableCard from "../../components/TableCard";
 
 const ReportDetail = () => {
   const data = [
@@ -55,11 +56,16 @@ const ReportDetail = () => {
   return (
     <main className="flex gap-10">
       <section className="flex-1">
+      <TableCard
+        label="Order details"
+       
+      >
         <Table
           dataSource={data}
           columns={columns}
           pagination={{ hideOnSinglePage: true }}
         />
+        </TableCard>
         <div className="border-t-2 border-b-2 flex justify-between py-3 text-lg font-semibold">
           <p className="text-lg font-semibold">Items subtotal:</p>
           <p>$7,686</p>

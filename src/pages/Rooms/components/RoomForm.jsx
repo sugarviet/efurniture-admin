@@ -94,6 +94,7 @@ const RoomForm = () => {
         </div>
         <FormUploadButton
           required
+          maxCount={1}
           className="h-96"
           label="Image"
           name="thumb"

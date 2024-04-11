@@ -11,6 +11,7 @@ export default function FormDatePickerWithTime({
   required,
   message,
   className,
+  onChange,
 }) {
   return (
     <FormItem
@@ -26,7 +27,7 @@ export default function FormDatePickerWithTime({
           "border-black border-[1px] rounded-none",
           className
         )}
-        
+        onChange={onChange}
         placeholder={placeholder}
         showTime
         format="YYYY-MM-DD:HH:mm"
