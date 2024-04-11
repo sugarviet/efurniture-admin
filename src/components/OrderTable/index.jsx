@@ -48,7 +48,7 @@ function OrderTable({ data, onDetail }) {
     });   
   };
 
-  const handleStatusFilter = (status) => {        setSearchParams((params) => ({
+  const handleStatusFilter = (status) => {        setSearchParams(() => ({
       page: searchParams.get("page"),
       limit: searchParams.get("limit"),
       type: status, 

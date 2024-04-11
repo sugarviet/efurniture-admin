@@ -1,6 +1,5 @@
 import { Space, Table } from "antd";
 import BriefInfo from "../BriefInfo";
-import { formatCurrency } from "../../utils/formatCurrency";
 import { isAdmin } from "../../utils/getCurrentUserRole";
 import ChangeStatusButton from "../ChangeStatusButton";
 import {

@@ -18,11 +18,11 @@ const SubTypes = () => {
           <TableCard label="Public SubTypes">
             <PublishSubtypesTable published />
           </TableCard>
-          {admin ? (
+        
             <TableCard label="Draft SubTypes">
               <DraftSubtypesTable />
             </TableCard>
-          ) : null}
+        
         </div>
 
         {admin ? null : (

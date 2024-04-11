@@ -12,7 +12,7 @@ import useManageTotalSell from "../../hooks/useManageTotalSell";
 
 const TotalSellByMonth = () => {
   const { revenueData, handleChangeRangeDate, selectOptionsDateRange } =
-    useManageTotalSell();
+    useManageTotalSell()
 
   return (
     <Card>

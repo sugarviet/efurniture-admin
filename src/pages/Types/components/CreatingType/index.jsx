@@ -32,6 +32,7 @@ const CreatingType = () => {
         <FormUploadButton
           label="Type thumb"
           name="thumb"
+          maxCount={1}
           className="xl:w-[23rem] lg:w-[10rem]"
           required
         />

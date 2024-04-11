@@ -8,12 +8,11 @@ const { Meta } = Card;
 import Proptypes from "prop-types";
 
 const ProductCard = (props) => {
-  const {title} = props
-    console.log(props)
+  const { title } = props
   return (
     <>
       <Card
-      className="mx-auto"
+        className="mx-auto"
         style={{
           width: 300,
         }}

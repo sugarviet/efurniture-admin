@@ -6,6 +6,7 @@ import DetailButton from '../DetailButton';
 import ConfirmDeliveryButton from '../ConfirmDeliveryButton';
 import { formatDateByDateAndTime } from '../../utils/formatDate';
 import TripDetail from '../TripDetail';
+import RejectButton from '../../pages/DeliveryTrip/components/RejectButton';
 
 const DeliveryTripTable = ({ data }) => {
   console.log(data);
@@ -43,6 +44,7 @@ const DeliveryTripTable = ({ data }) => {
             <TripDetail data={record.orders} />
           </DetailButton>
           <ConfirmDeliveryButton deliveryId={record._id} />
+          <RejectButton id={record._id} />
         </Space>
       ),
     },

@@ -1,7 +1,7 @@
 import PageTitle from "@components/PageTitle";
 import { withFetchData } from "../../hocs/withFetchData";
 import ProductTable from "../../components/ProductTable";
-import { get_draft_product, get_published_product } from "../../api/productApi";
+import { get_draft_product, get_draft_product_staff, get_published_product } from "../../api/productApi";
 import { isAdmin } from "../../utils/getCurrentUserRole";
 import TableCard from "../../components/TableCard";
 
@@ -11,6 +11,7 @@ const PublishedProductTable = withFetchData(
 );
 
 const DraftProductTable = withFetchData(ProductTable, get_draft_product);
+const DraftProductTableStaff = withFetchData(ProductTable, get_draft_product_staff);
 const Products = () => {
   const admin = isAdmin();
 
@@ -24,7 +25,9 @@ const Products = () => {
         <TableCard label="Draft Products">
           <DraftProductTable />
         </TableCard>
-      ) : null}
+      ) : <TableCard label="Draft Products">
+        <DraftProductTableStaff />
+      </TableCard>}
     </main>
   );
 };

@@ -1,6 +1,7 @@
 import { Table } from 'antd';
 import { withFetchData } from '../../hocs/withFetchData';
 import { get_all_transactions } from '../../api/transactionsApi';
+import PropTypes from "prop-types";
 
 const TransactionsTable = ({data}) => {
     console.log(data);
@@ -37,7 +38,7 @@ const TransactionsTable = ({data}) => {
           dataIndex: 'description',
           key: 'description',
         },
-        // Add more columns as needed
+
       ];
   return (
     <div>
@@ -45,5 +46,10 @@ const TransactionsTable = ({data}) => {
     </div>
   )
 }
+
+TransactionsTable.propTypes = {
+  data: PropTypes.array,
+};
+
 
 export default withFetchData(TransactionsTable, get_all_transactions)

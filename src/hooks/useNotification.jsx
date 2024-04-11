@@ -165,6 +165,16 @@ const type = {
       delete: 'Failed remove flash sale',
     }
   },
+  deliveryTrip: {
+    success: {
+      confirm: 'Successfully confirm delivery trip',
+      reject: 'Successfully reject delivery trip',
+    },
+    fail: {
+      confirm: 'Failed confirm delivery trip',
+      reject: 'Failed reject delivery trip',
+    }
+  },
   login: {
     success: {
       login: 'Successfully logged in'

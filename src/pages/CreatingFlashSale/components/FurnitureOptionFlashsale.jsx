@@ -5,10 +5,15 @@ import { get_published_product } from "../../../api/productApi";
 import { formatCurrency } from "../../../utils/formatCurrency";
 import SearchInput from "../../../components/SearchInput";
 import PropTypes from "prop-types";
+import { usePost } from "../../../hooks/api-hooks";
+import { get_valid_product_flash_sale } from "../../../api/flashsaleApi";
 
-function FurnitureOptionFlashsale({ data, onSelect, startDay, endDay}) {
-    console.log('FurnitureOptionFlashsale', startDay, endDay);
-  const [furniture, setFurniture] = useState(data.data || []);
+function FurnitureOptionFlashsale({ data, onSelect, startDay, endDay }) {
+  console.log('FurnitureOptionFlashsale', startDay, endDay);
+  const { mutate: mutateValidProduct, data: listProductFlashsale } = usePost(get_valid_product_flash_sale(), undefined)
+  console.log(listProductFlashsale)
+  // const [furniture, setFurniture] = useState(data.data || []);
+  const [furniture, setFurniture] = useState(listProductFlashsale || []);
 
   const handleSearch = (value) => {
     const furnitureClone = [...data.data];
@@ -20,6 +25,11 @@ function FurnitureOptionFlashsale({ data, onSelect, startDay, endDay}) {
     setFurniture(filteredFurniture);
   };
 
+
+  useEffect(() => {
+    mutateValidProduct({startDay, endDay});
+  }, [startDay, endDay])
+
   return (
     <div>
       <SearchInput
@@ -27,7 +37,7 @@ function FurnitureOptionFlashsale({ data, onSelect, startDay, endDay}) {
         placeholder="Find furniture by name..."
       />
       <ul>
-        {furniture.map((item) => {
+        {listProductFlashsale?.map((item) => {
           const { _id, thumbs, name, sale_price } = item;
           return (
             <li
@@ -49,13 +59,13 @@ function FurnitureOptionFlashsale({ data, onSelect, startDay, endDay}) {
 }
 
 FurnitureOptionFlashsale.propTypes = {
-    data: PropTypes.func,
-    className: PropTypes.string,
-    value: PropTypes.object,
-    multiple: PropTypes.bool,
-    onSelect: PropTypes.func,
-    startDay: PropTypes.string,
-    endDay: PropTypes.string,
-  };
+  data: PropTypes.func,
+  className: PropTypes.string,
+  value: PropTypes.object,
+  multiple: PropTypes.bool,
+  onSelect: PropTypes.func,
+  startDay: PropTypes.string,
+  endDay: PropTypes.string,
+};
 
 export default withFetchData(FurnitureOptionFlashsale, get_published_product);

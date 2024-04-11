@@ -36,16 +36,16 @@ const SubtypesTable = ({ data, onEdit, published }) => {
         <span className="text-[#959798] text-xs">{record.description}</span>
       ),
     },
-    !admin && {
-      title: "Actions",
-      render: (_, record) => (
-        <Space className="flex gap-4">
-          <EditButton onClick={() => onEdit(record)}>
-            Edit
-          </EditButton>
-        </Space>
-      ),
-    },
+    // !admin && {
+    //   title: "Actions",
+    //   render: (_, record) => (
+    //     <Space className="flex gap-4">
+    //       <EditButton onClick={() => onEdit(record)}>
+    //         Edit
+    //       </EditButton>
+    //     </Space>
+    //   ),
+    // },
   ].filter(Boolean);
 
   const ADMIN_COLUMNS = [

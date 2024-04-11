@@ -9,14 +9,17 @@ import { formatThumbs } from "../../utils/formatThumb";
 import { useUpdate } from "../../hooks/api-hooks";
 import { get_draft_product, update_product_staff } from "../../api/productApi";
 import { useCreatingProductValues } from "../../pages/CreatingProduct/CreatingProductContext";
+import useNotification from "../../hooks/useNotification";
 
 const UpdateProductForm = ({ data }) => {
-    console.log('data', data)
+    const {error_message, success_message} = useNotification();
     const { listAttribute, form } = useCreatingProductManagement();
     
     const { mutate: edit } = useUpdate(update_product_staff(data.slug), undefined, () => {
-        alert('hi')
-    }, () => { }, get_draft_product())
+        success_message('products', 'edit')
+    }, () => { 
+        error_message('products', 'edit')
+    }, get_draft_product())
 
     const {handleSelectType, handleSelectSubType} = useCreatingProductValues();
 
