@@ -6,6 +6,7 @@ import FormItem from "../FormItem";
 const FormList = ({ children, name, initialValues, isAddMore = true, ...others }) => {
   return (
     <Form.List name={name} {...others} initialValue={initialValues}>
+      
       {(fields, { add, remove }) => (
         <>
           {fields.map(({ key, name, fieldKey, ...restField }, index) => (

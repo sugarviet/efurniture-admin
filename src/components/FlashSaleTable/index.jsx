@@ -8,10 +8,14 @@ import {
   draft_flash_sale,
   get_all_flash_sale,
   publish_flash_sale,
+  remove_flash_sale,
 } from "../../api/flashsaleApi";
 import EditFlashsaleForm from "../EditFlashsaleForm";
+import DeleteButton from "../DeleteButton";
+import { formatDateByDateAndTime, formatGMTDate } from "../../utils/formatDate";
 const FlashSaleTable = ({ data, onEdit, published }) => {
   const admin = isAdmin();
+  console.log(data);
   const { getColumnSearchProps } = useSearchTableColumn();
   const columns = [
     {
@@ -20,19 +24,35 @@ const FlashSaleTable = ({ data, onEdit, published }) => {
       key: "name",
       ...getColumnSearchProps("name"),
     },
+    // {
+    //   title: "Furniture",
+    //   render: (text) => <span className="text-xs">Chair x 3, Sofa x 1</span>,
+    // },
     {
       title: "Furniture",
-      render: (text) => <span className="text-xs">Chair x 3, Sofa x 1</span>,
+      width: '15%',
+      render: (_, record) => (
+        <div>
+          {record.products.map(product => (
+            <span key={product._id} className="text-xs block w-full">Chair x {product.count}</span>
+          ))}
+        </div>
+      ),
     },
     {
       title: "Start Date",
       dataIndex: "startDay",
       key: "startDay",
+      render: (text) => {
+
+        return <span className="text-xs">{formatGMTDate(text)}</span>
+      },
     },
     {
       title: "End Date",
       dataIndex: "endDay",
       key: "endDay",
+      render: (text) => <span className="text-xs">{formatGMTDate(text)}</span>,
     },
     {
       title: "Action",
@@ -43,6 +63,7 @@ const FlashSaleTable = ({ data, onEdit, published }) => {
           <EditButton>
             <EditFlashsaleForm />
           </EditButton>
+          <DeleteButton url={remove_flash_sale()} notiType="flashsale" notiAction="delete" refreshKey={get_all_flash_sale()} id={record._id} />
           {/* {admin && !published ? (
             <ChangeStatusButton
               url={publish_flash_sale(record._id)}

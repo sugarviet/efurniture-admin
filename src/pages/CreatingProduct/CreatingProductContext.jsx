@@ -6,8 +6,6 @@ function CreatingProductProvider(props) {
   const [productType, setProductType] = useState();
   const [productSubType, setProductSubType] = useState();
 
-  console.log(productType, productSubType)
-
   const handleSelectType = (value) => {
     setProductType(value);
   };

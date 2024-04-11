@@ -221,6 +221,14 @@ const staffRoutes = [
     path: pathSystem.deliveryTrip,
     element: <DeliveryTrip />,
   },
+  {
+    path: pathSystem.reports,
+    element: <Reports />,
+  },
+  {
+    path: pathSystem.reportDetail,
+    element: <ReportDetail />,
+  },
 ];
 
 const getRoutesBasedOnRole = () => {

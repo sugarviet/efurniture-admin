@@ -118,7 +118,7 @@ const Staffs = ({ data }) => {
         pagination={{
           current: searchParams.get("page") || 1,
           pageSize: 10,
-          total: data.size,
+          total: data.total,
           hideOnSinglePage: true,
         }}
       />

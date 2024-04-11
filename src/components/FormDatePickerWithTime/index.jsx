@@ -2,6 +2,7 @@ import FormItem from "@components/FormItem";
 import { DatePicker } from "antd";
 import PropTypes from "prop-types";
 import { classNames } from "../../utils/classNames";
+import locale from "antd/es/date-picker/locale/de_DE";
 export default function FormDatePickerWithTime({
   label,
   name,
@@ -10,6 +11,7 @@ export default function FormDatePickerWithTime({
   required,
   message,
   className,
+  onChange,
 }) {
   return (
     <FormItem
@@ -20,13 +22,23 @@ export default function FormDatePickerWithTime({
       message={message}
     >
       <DatePicker
+      
         className={classNames(
           "border-black border-[1px] rounded-none",
           className
         )}
+        onChange={onChange}
         placeholder={placeholder}
         showTime
         format="YYYY-MM-DD:HH:mm"
+        locale={{
+          ...locale,
+          lang: {
+            ...locale.lang,
+            now: "Current Time",
+            ok: "Submit",
+          }
+        }}
       />
     </FormItem>
   );

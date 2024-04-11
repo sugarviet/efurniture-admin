@@ -1,5 +1,6 @@
+import { Form } from "antd";
 import { usePost, useUpdate } from "./api-hooks";
-import { add_product_to_warehouse } from "../api/warehouseApi";
+import { add_product_to_warehouse, update_warehouse } from "../api/warehouseApi";
 import {
   create_warehouse,
   get_all_warehouse,
@@ -10,15 +11,29 @@ import {
 import useNotification from "./useNotification";
 
 export default function useWarehouse(id = '') {
+  const [form] = Form.useForm();
+
   const { error_message, success_message } = useNotification();
   const { mutate: addProductToWarehouse } = useUpdate(
     add_product_to_warehouse(id),
     undefined,
     () => {
       success_message('warehouse', 'add_product')
+      form.resetFields();
     },
     () => {
       error_message('warehouse', 'add_product');
+    },
+    get_warehouse_detail({ id })
+  );
+  const { mutate: updateWarehouse } = useUpdate(
+    update_warehouse(id),
+    undefined,
+    () => {
+      success_message('warehouse', 'edit')
+    },
+    () => {
+      error_message('warehouse', 'edit');
     },
     get_warehouse_detail({ id })
   );
@@ -27,7 +42,7 @@ export default function useWarehouse(id = '') {
     undefined,
     () => {
       success_message('warehouse', 'add')
-
+      form.resetFields();
     },
     () => {
       error_message('warehouse', 'add');
@@ -63,6 +78,8 @@ export default function useWarehouse(id = '') {
     createWarehouse,
     addProductToWarehouse,
     handleSwitchNotification,
-    handleUpdateProductLowstock
+    handleUpdateProductLowstock,
+    updateWarehouse,
+    form
   };
 }

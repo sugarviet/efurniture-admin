@@ -35,6 +35,7 @@ const EditRoomForm = ({ data }) => {
     };
     return (
         <Form
+            maxCount={1}
             initialValues={data}
             form={form}
             layout="vertical"

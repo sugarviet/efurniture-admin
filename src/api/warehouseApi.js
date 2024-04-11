@@ -5,6 +5,11 @@ export const get_all_warehouse = () => {
 export const create_warehouse = () => {
     return '/warehouse/staff'
 }
+
+export const update_warehouse = (id) => {
+    return `/warehouse/staff/${id}`
+}
+
 export const get_warehouse_detail = (param) => {
 
     return `/warehouse/${param.id}`

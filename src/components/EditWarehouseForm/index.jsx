@@ -6,11 +6,12 @@ import {
   get_ward_in_saigon,
 } from "../../api/addressApi";
 import { useFetchOutsideSystem } from "../../hooks/api-hooks";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import getCoordinates from "../../utils/getCoordinate";
 import useWarehouse from "../../hooks/useWarehouse";
-const CreatingWarehouseForm = () => {
-  const {createWarehouse, form} = useWarehouse();
+const EditWarehouseForm = ({data}) => {
+    console.log('warehouse', data);
+  const {updateWarehouse, form} = useWarehouse(data._id);
   const [selectedDistrict, setSelectedDistrict] = useState({});
   const [selectedWard, setSelectedWard] = useState({});
   const { data: districtList } = useFetchOutsideSystem(
@@ -37,27 +38,30 @@ const CreatingWarehouseForm = () => {
   };
   const onFinish = async(value) => {
     const coordinates = await getCoordinates(
-      `${value.location} ${selectedDistrict.name.label} ${selectedWard.name.label} ${value.province}`
+      `${value.street} ${selectedDistrict?.name?.label || selectedDistrict} ${selectedWard?.name?.labe || setSelectedWard} ${value.province}`
     );
   
     const body = {
       ...value,
-      district: selectedDistrict.name.label,
-      ward: selectedWard.name.label,
+      district: selectedDistrict?.name?.label || selectedDistrict,
+      ward: selectedWard?.name?.label || selectedWard,
       longitude: coordinates[0],
       latitude: coordinates[1],
     }
-    createWarehouse(body);
+    updateWarehouse(body);
 
   };
+
+  useEffect(() => {
+    setSelectedDistrict(data.district)
+    setSelectedWard(data.ward);
+  }, [])
 
   return (
     <Form
       form={form}
       requiredMark="optional"
-      initialValues={{ 
-        province: 'TP HCM'
-       }}
+      initialValues={data}
       layout="vertical"
       onFinish={onFinish}
     >
@@ -76,14 +80,14 @@ const CreatingWarehouseForm = () => {
         placeholder="Enter location"
         className="h-10"
       />
-      {/* <FormInput
+      <FormInput
         label="Street"
         name="street"
         required
         message="Please enter the code of message"
         placeholder="Enter street"
         className="h-10"
-      /> */}
+      />
 
       <FormSelect
         label="District"
@@ -109,10 +113,10 @@ const CreatingWarehouseForm = () => {
       />
 
       <button type="submit" className="furniture-button">
-        Create
+        Edit
       </button>
     </Form>
   );
 };
 
-export default CreatingWarehouseForm;
+export default EditWarehouseForm;

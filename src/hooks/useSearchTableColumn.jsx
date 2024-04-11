@@ -17,11 +17,6 @@ export function useSearchTableColumn(){
       setSearchText('');
     };
 
-    /**
-     * 
-     * @param {string} dataIndex - receive the dataIndex of the table column
-     * @returns 
-     */
     const getColumnSearchProps = (dataIndex) => ({
       filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
         <div

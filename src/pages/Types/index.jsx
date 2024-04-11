@@ -22,7 +22,7 @@ const Types = () => {
 
   return (
     <main>
-     
+
 
       <section className="flex gap-6">
         <div className="flex-1">
@@ -30,11 +30,11 @@ const Types = () => {
             <PublishedTypeTable published />
           </TableCard>
 
-          {admin ? (
-            <TableCard label="Draft types">
-              <DraftedTypeTable />
-            </TableCard>
-          ) : null}
+
+          <TableCard label="Draft types">
+            <DraftedTypeTable />
+          </TableCard>
+
         </div>
 
         {admin ? null : (
@@ -45,7 +45,7 @@ const Types = () => {
           </div>
         )}
       </section>
-     
+
     </main>
   );
 };
