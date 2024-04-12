@@ -6,9 +6,11 @@ import {
   update_account
 } from "@api/userApi";
 import { useDelete, usePost, useUpdate } from "@hooks/api-hooks";
+import { useSearchParams } from "react-router-dom";
 import useNotification from "@hooks/useNotification";
 
 export default function useAccountManagement(accountId) {
+  const [searchParams] = useSearchParams();
   const { success_message, error_message } = useNotification();
   const { mutate: enableAccount } = useDelete(
     enable_account(),
@@ -19,7 +21,7 @@ export default function useAccountManagement(accountId) {
     () => {
       error_message("staffs", "enable");
     },
-    get_all_system_account()
+    get_all_system_account(undefined, { page: +searchParams.get('page'), limit: +searchParams.get('limit') })
   );
 
   const { mutate: disableAccount } = useDelete(
@@ -31,7 +33,7 @@ export default function useAccountManagement(accountId) {
     () => {
       error_message("staffs", "disable");
     },
-    get_all_system_account()
+    get_all_system_account(undefined, { page: +searchParams.get('page'), limit: +searchParams.get('limit') })
   );
   const { mutate: addAccount } = usePost(
     create_user(),

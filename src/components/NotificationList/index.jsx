@@ -1,10 +1,15 @@
 import { get_all_notification } from "../../api/notificationApi"
 import { withFetchData } from "../../hocs/withFetchData"
+import useGetNotiByRole from "../../hooks/useGetNotiByRole";
 import NotificationCard from "../NotificationCard"
 import PropTypes from "prop-types";
 
 
-const NotificationList = ({ data }) => {
+const NotificationList = () => {
+    const { data, isLoading } = useGetNotiByRole();
+    if (isLoading) return;
+
+    console.log(data);
     return (
         <div className="mt-2 p-4 h-40 overflow-y-auto">
             <ul>

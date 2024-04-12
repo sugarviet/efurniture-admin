@@ -7,7 +7,7 @@ import FormUploadButton from "../FormUploadButton";
 import PropTypes from "prop-types";
 import { formatThumbs } from "../../utils/formatThumb";
 import { useUpdate } from "../../hooks/api-hooks";
-import { get_draft_product, update_product_staff } from "../../api/productApi";
+import { get_draft_product, get_draft_product_staff, update_product_staff } from "../../api/productApi";
 import { useCreatingProductValues } from "../../pages/CreatingProduct/CreatingProductContext";
 import useNotification from "../../hooks/useNotification";
 
@@ -19,7 +19,7 @@ const UpdateProductForm = ({ data }) => {
         success_message('products', 'edit')
     }, () => { 
         error_message('products', 'edit')
-    }, get_draft_product())
+    }, get_draft_product_staff())
 
     const {handleSelectType, handleSelectSubType} = useCreatingProductValues();
 

@@ -16,9 +16,9 @@ import TableCard from "../../components/TableCard";
 import { PlusCircleFilled } from "@ant-design/icons";
 
 const Staffs = ({ data }) => {
-
+  console.log(data);
   const [searchParams, setSearchParams] = useSearchParams();
-  const {enableAccount, disableAccount} = useAccountManagement();
+  const { enableAccount, disableAccount } = useAccountManagement();
 
   const [openCreateStaffModal, setOpenCreateStaffModal] = useState(false);
   const [selectedUser, setSelecteUser] = useState(null);
@@ -47,6 +47,7 @@ const Staffs = ({ data }) => {
       dataIndex: "first_name",
       key: "first_name",
       width: "20%",
+      render: (text) => <span className="text-base">{text}</span>,
       ...getColumnSearchProps("first_name"),
     },
     {
@@ -54,7 +55,8 @@ const Staffs = ({ data }) => {
       dataIndex: "last_name",
       key: "last_name",
       width: "20%",
-      ...getColumnSearchProps("first_name"),
+      render: (text) => <span className="text-base">{text}</span>,
+      ...getColumnSearchProps("last_name"),
     },
     {
       title: "Email",
@@ -67,7 +69,7 @@ const Staffs = ({ data }) => {
       title: "Status",
       dataIndex: "status",
       key: "status",
-      render: () => <Tag color="green">Active</Tag>,
+      render: (text) => <Tag color={text == 1 ? 'green' : 'red'}><span>{text == 1 ? 'Active': 'Unactive'}</span></Tag> ,
     },
     {
       title: "Actions",
@@ -101,27 +103,27 @@ const Staffs = ({ data }) => {
     <main>
 
       <TableCard label={'Staff management'} addMoreButton={
-          <Button
-            className="flex items-center px-4 py-4"
-            type="link"
-            onClick={handleOpenCreateStaffModal}
-          >
-            Add Staffs <PlusCircleFilled />
-          </Button>
-        }>
+        <Button
+          className="flex items-center px-4 py-4"
+          type="link"
+          onClick={handleOpenCreateStaffModal}
+        >
+          Add Staffs <PlusCircleFilled />
+        </Button>
+      }>
 
-      <Table
-        rowKey="_id"
-        columns={columns}
-        dataSource={data.data}
-        onChange={handleTableChange}
-        pagination={{
-          current: searchParams.get("page") || 1,
-          pageSize: 10,
-          total: data.total,
-          hideOnSinglePage: true,
-        }}
-      />
+        <Table
+          rowKey="_id"
+          columns={columns}
+          dataSource={data.data}
+          onChange={handleTableChange}
+          pagination={{
+            current: searchParams.get("page") || 1,
+            pageSize: 10,
+            total: data.total,
+            hideOnSinglePage: true,
+          }}
+        />
 
       </TableCard>
 
@@ -133,7 +135,7 @@ const Staffs = ({ data }) => {
       </AppModal>
 
       <AppModal isOpen={openEditStaffModal} setIsOpen={setOpenEditStaffModal}>
-        <EdittingStaffForm data={selectedUser}/>
+        <EdittingStaffForm data={selectedUser} />
       </AppModal>
     </main>
   );

@@ -56,7 +56,7 @@ const WarehouseDetailTable = ({ data }) => {
         </div>
       ),
       onFilter: (value, record) => record.product.name.toLowerCase().includes(value.toLowerCase()),
-      render: (text) => text,
+      render: (text) => <span className="text-base">{text}</span>,
 
     },
     {

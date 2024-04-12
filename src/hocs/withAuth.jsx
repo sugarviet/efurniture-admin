@@ -2,6 +2,8 @@
 import useAuth from "@stores/useAuth";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { ErrorBoundary } from "react-error-boundary";
+import FallbackComponent from "../components/FallbackComponent";
 
 const withAuth = (WrappedComponent) => {
   return () => {
@@ -9,13 +11,17 @@ const withAuth = (WrappedComponent) => {
     const { accessToken } = useAuth();
 
     useEffect(() => {
-      if(!accessToken){
+      if (!accessToken) {
         navigate('/login')
       }
     }, [accessToken])
 
 
-    return accessToken ? <WrappedComponent /> : null;
+    return accessToken ?
+      <ErrorBoundary fallback={<FallbackComponent />}>
+        <WrappedComponent />
+      </ErrorBoundary>
+      : null;
   };
 };
 
