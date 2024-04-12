@@ -7,9 +7,10 @@ import FormTextArea from "@components/FormTextArea";
 import FormItem from "../FormItem";
 import FormSelect from "../FormSelect";
 import useVoucher from "../../hooks/useVoucher";
+import { useState } from "react";
 
 function VoucherForm() {
-
+  const [type, setType] = useState('');
   const { createVoucher, form } = useVoucher();
 
   const onFinish = (value) => {
@@ -19,11 +20,15 @@ function VoucherForm() {
   return (
     <Form
       form={form}
+      initialValues={{ 
+        max_discount: 100000,
+        type: 'percentage'
+       }}
       requiredMark="optional"
       layout="vertical"
       onFinish={onFinish}
     >
-      <div className="grid grid-cols-2 gap-4">
+      {/* <div className="grid grid-cols-2 gap-4">
         <FormInput
           label="Code"
           name="code"
@@ -32,6 +37,7 @@ function VoucherForm() {
           placeholder="Enter voucher code"
           className="h-10"
         />
+      </div> */}
         <FormInput
           label="Name"
           name="name"
@@ -40,7 +46,6 @@ function VoucherForm() {
           placeholder="Enter voucher name"
           className="h-10"
         />
-      </div>
       <FormTextArea
         label="Description"
         name="description"
@@ -48,11 +53,12 @@ function VoucherForm() {
         placeholder="Enter voucher description"
         message="Please enter the description of the voucher"
       />
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-3 gap-4">
         <FormSelect
           label="Type"
           name="type"
           required
+          onChange={setType}
           placeholder="Choose the type of voucher"
           options={[
             { value: "percentage", label: "percentage" },
@@ -62,7 +68,15 @@ function VoucherForm() {
         <FormInputNumber
           label="Value"
           required
+          prefix={type === 'fixed_amount' ? "VND" : "%"}
           name="value"
+          message="Please enter the value"
+        />
+         <FormInputNumber
+          label="Max discount"
+          disabled={type === 'fixed_amount'}
+          required={type !== 'fixed_amount'}
+          name="max_discount"
           prefix="VND"
           message="Please enter the value"
         />
@@ -111,7 +125,7 @@ function VoucherForm() {
         <FurnitureSelection multiple className="h-12" />
       </FormItem>
 
-      <button onClick={onFinish} className="furniture-button">
+      <button className="furniture-button">
         Create
       </button>
     </Form>

@@ -5,6 +5,7 @@ import { useQueryClient } from '@tanstack/react-query';
 const NOTI_BY_ROLE = {
     admin: () => get_notification_admin(),
     staff: () => get_notification_staff(),
+    superAdmin: () => () => {},
 }
 
 const useGetNotiByRole = () => {
