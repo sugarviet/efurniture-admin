@@ -29,7 +29,7 @@ function RoomTable({ data, published }) {
     {
       title: "Description",
       render: (_, record) => (
-        <span className="text-[#959798] text-xs line-clamp-6">
+        <span className="text-[#959798] text-base line-clamp-6">
           {record.description}
         </span>
       ),
@@ -40,7 +40,7 @@ function RoomTable({ data, published }) {
       render: (_, record) => (
         <div>
           {record.products.map(product => (
-            <span key={product._id} className="text-xs block w-full">{product.product.name} x {product.quantity}</span>
+            <span key={product._id} className="text-base block w-full">{product.product.name} x {product.quantity}</span>
           ))}
         </div>
       ),

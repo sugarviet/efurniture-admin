@@ -87,12 +87,12 @@ const OrderDetail = ({ data }) => {
                         {formatCurrency(data.order_checkout.paid.paid_amount)}
                     </Descriptions.Item>
                     <Descriptions.Item label="Payment Status">
-                        <Tag color={data.order_checkout.is_paid ? 'success' : 'error'}>
+                        <Tag color={data.order_checkout.is_paid ? 'success' : 'error'} className='font-bold'>
                             {data.order_checkout.is_paid ? 'Paid' : 'Not Paid'}
                         </Tag>
                     </Descriptions.Item>
                     <Descriptions.Item label="Deposit Required">
-                        <Tag>
+                        <Tag className='font-bold'>
                             {data.order_checkout.paid.type}
                         </Tag>
 
@@ -105,7 +105,7 @@ const OrderDetail = ({ data }) => {
                     <Descriptions.Item label="Email">{data.order_shipping.email}</Descriptions.Item>
                     <Descriptions.Item label="Phone">{data.order_shipping.phone}</Descriptions.Item>
                     <Descriptions.Item label="Order Status">
-                        <Tag color={ORDER_STATE[data.order_tracking.length].color} className='uppercase'>
+                        <Tag color={ORDER_STATE[data.order_tracking.length].color} className='uppercase font-bold'>
                             {ORDER_STATE[data.order_tracking.length].status}
                         </Tag>
                     </Descriptions.Item>

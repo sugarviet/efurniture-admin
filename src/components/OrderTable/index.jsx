@@ -37,6 +37,7 @@ export const ORDER_STATE = [
 ];
 
 function OrderTable({ data, onDetail }) {
+  console.log('order', data);
   const [searchParams, setSearchParams] = useSearchParams();
   const { getColumnSearchProps } = useSearchTableColumn();
 
@@ -48,7 +49,7 @@ function OrderTable({ data, onDetail }) {
     });   
   };
 
-  const handleStatusFilter = (status) => {        setSearchParams(() => ({
+  const handleStatusFilter = (status) => {setSearchParams(() => ({
       page: searchParams.get("page"),
       limit: searchParams.get("limit"),
       type: status, 
@@ -62,7 +63,7 @@ function OrderTable({ data, onDetail }) {
       dataIndex: 'order_code',
       key: 'order_code',
       render: (text) => (
-        <span className="text-xs font-semibold">{text}</span>
+        <span className="text-base font-semibold">{text}</span>
       ),
       ...getColumnSearchProps("order_code"),
 
@@ -70,7 +71,7 @@ function OrderTable({ data, onDetail }) {
     {
       title: "Total",
       render: (_, record) => (
-        <span className="text-xs">
+        <span className="text-base">
           {formatCurrency(record.order_checkout.final_total)}
         </span>
       ),
@@ -91,8 +92,8 @@ function OrderTable({ data, onDetail }) {
       render: (_, record) => {
         const { status, color } = ORDER_STATE[record.order_tracking.length];
         return (
-          <Tag className="text-bold uppercase" color={color} onClick={() => handleStatusFilter(status)}>
-            {status}
+          <Tag className="text-bold uppercase" color={color}>
+            <span className="font-bold">{status}</span>
           </Tag>
         );
       },
@@ -107,7 +108,7 @@ function OrderTable({ data, onDetail }) {
             className="text-bold uppercase"
             color={isPaid ? "success" : "error"}
           >
-            {label}
+            <span className="font-bold">{label}</span>
           </Tag>
         );
       },
@@ -116,7 +117,7 @@ function OrderTable({ data, onDetail }) {
       title: "Create at",
       render: (_, record) => {
         return (
-          <span className="text-xs">
+          <span className="text-base">
             {formatDateByDateAndTime(record.createdAt)}
           </span>
         );

@@ -1,6 +1,5 @@
 import { withFetchData } from "@hocs/withFetchData";
 import { get_all_warehouse } from "../../api/warehouseApi";
-import PropTypes from "prop-types";
 import WarehouseTable from "../../components/WarehouseTable";
 import TableCard from "../../components/TableCard";
 import AppModal from "../../components/AppModal";

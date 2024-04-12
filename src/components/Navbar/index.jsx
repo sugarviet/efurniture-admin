@@ -37,6 +37,7 @@ const Navbar = () => {
       className="flex justify-between w-full h-full text-white items-center px-2"
     >
       <div className="ml-auto flex gap-3 items-center p-3 ">
+        {role === 'superAdmin' ? null :(
         <Dropdown
           overlay={notificationMenu}
           trigger={["hover"]}
@@ -63,6 +64,8 @@ const Navbar = () => {
           </div>
 
         </Dropdown>
+
+        )}
         <div className="flex items-center justify-between p-4 gap-2">
 
           <Dropdown

@@ -30,7 +30,7 @@ export default function useFlashSale() {
   const handleCreateFlashsale = (data) => {
     const {name, endDay, startDay, products, thumb, background} = data;
 
-    console.log(typeof formatDateByDateAndMinute(startDay), formatDateByDateAndMinute(endDay))
+  
     const body = {
         name,
         endDay: formatDateByDateAndMinute(endDay),

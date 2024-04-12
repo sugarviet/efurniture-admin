@@ -1,32 +1,39 @@
+import useAuth from '../stores/useAuth';
 import useNotificationStore from '../stores/useNotificationStore';
 import useSocketStore from '../stores/useSocketStore';
-import useNotification from './useNotification';
+import useGetNotiByRole from './useGetNotiByRole';
 
 const useSocket = () => {
+    const { role } = useAuth();
     const { socket } = useSocketStore();
-    const { refreshNotification } = useNotification()
-    const {hasNewNoti} = useNotificationStore();
+    const { refreshNotification } = useGetNotiByRole()
+    const { hasNewNoti } = useNotificationStore();
 
+    const notificationSubscriptions = {
+        admin: [
+            'lowstockWareHouse',
+            'lowstockInventory',
+        ],
+        staff: [
+            'requestDeliveryTrip',
+        ]
+    };
 
-    const subcribeLowStockWarehouseNotification = () => {
-        socket.on('lowstockWareHouse', () => {
-            refreshNotification()
-            hasNewNoti()
-        })
-    }
+   
+    const subcribeToNoti = () => {
+        const subscriptions = notificationSubscriptions[role] || [];
+        subscriptions.forEach((eventName) => {
+            socket.on(eventName, () => {
+                refreshNotification();
+                hasNewNoti();
+            });
+        });
+    };
 
-    const subcribeLowStockInventoryNotification = () => {
-        socket.on('lowstockInventory', () => {
-            refreshNotification()
-            hasNewNoti()
-
-        })
-    }
 
 
     return {
-        subcribeLowStockWarehouseNotification,
-        subcribeLowStockInventoryNotification
+        subcribeToNoti
     };
 }
 

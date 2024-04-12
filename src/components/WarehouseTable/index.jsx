@@ -12,7 +12,7 @@ const WarehouseTable = ({ data }) => {
       dataIndex: "location",
       key: "location",
       render: (text, record) => (
-        <LinkItem to={`/warehouse/${record._id}`}>{text}</LinkItem>
+        <LinkItem to={`/warehouse/${record._id}`}><span className="text-base">{text}</span></LinkItem>
       ),
 
     },
