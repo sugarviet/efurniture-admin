@@ -27,13 +27,17 @@ const SubtypesTable = ({ data, onEdit, published }) => {
       title: "Type Name",
       dataIndex: "slug",
       key: "slug",
+      render: (text) => (
+        <span className="text-base">{text}</span>
+      ),
       ...getColumnSearchProps("slug"),
+      
 
     },
     {
       title: "Description",
       render: (_, record) => (
-        <span className="text-[#959798] text-xs">{record.description}</span>
+        <span className="text-[#959798] text-base">{record.description}</span>
       ),
     },
     // !admin && {

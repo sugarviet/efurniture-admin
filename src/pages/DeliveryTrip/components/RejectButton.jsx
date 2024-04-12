@@ -8,16 +8,18 @@ import useNotification from '../../../hooks/useNotification';
 import PropTypes from "prop-types";
 
 const RejectButton = ({ id }) => {
+    const [openRejectModal, setOpenRejectModal] = useState(false)
+    const [form] = Form.useForm()
     const { success_message, error_message } = useNotification();
-    console.log(id)
     const { mutate: reject } = useUpdate(reject_delivery_trip(id), undefined, () => {
         success_message('deliveryTrip', 'reject')
-
+        form.resetFields();
+        setOpenRejectModal(false);
     }, () => {
         error_message('deliveryTrip', 'reject')
 
     }, get_all_delivery_trip_pending_staff())
-    const [openRejectModal, setOpenRejectModal] = useState(false)
+   
 
     const onFinish = (values) => {
         reject(values)

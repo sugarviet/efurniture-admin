@@ -1,26 +1,22 @@
 import { Layout } from "antd";
 const { Sider, Content, Header } = Layout;
-import AppSuspense from "../components/AppSuspense";
-import Navbar from "../components/Navbar";
-import AppSider from "../components/Sider";
-import { Outlet } from "react-router-dom";
-import { useEffect, useState } from "react";
+import AppSuspense from "../AppSuspense";
+import Navbar from "../Navbar";
+import { useErrorBoundary } from "react-error-boundary";
+import AppSider from "../Sider";
+import { useState } from "react";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
-import useSocket from "../hooks/useSocket";
-const RootLayout = () => {
-  const {subcribeToNoti} = useSocket()
+const FallbackComponent = () => {
+  const { resetBoundary } = useErrorBoundary();
   const [collapsed, setCollapsed] = useState(false);
 
-  useEffect(() => {
-    subcribeToNoti();
 
-    
-  }, [])
 
   return (
     <main className="flex h-screen">
     <Layout>
       <Sider
+      onClick={resetBoundary}
         className="text-white h-screen relative"
         theme="light"
         trigger={null}
@@ -52,7 +48,12 @@ const RootLayout = () => {
         </Header>
         <AppSuspense>
           <Content className="p-4 overflow-y-auto">
-            <Outlet />
+            <div className="flex flex-col justify-center mx-auto items-center translate-y-52">
+            <h1 className='font-bold text-3xl text-center'>Opps ! Something went wrong :(</h1>
+                <h2 className='text-center text-lg text-slate-500 font-bold'>Please try again !</h2>
+                <button className="furniture-button mx-auto flex justify-center mt-6" onClick={resetBoundary}>Try Again</button>
+
+            </div>
           </Content>
         </AppSuspense>
       </Layout>
@@ -60,4 +61,4 @@ const RootLayout = () => {
   </main>
   );
 };
-export default RootLayout;
+export default FallbackComponent;

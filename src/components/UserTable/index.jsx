@@ -5,6 +5,7 @@ import { Button, Space, Table } from "antd";
 import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
 
 function UserTable({ data }) {
+  console.log(data);
   const { getColumnSearchProps } = useSearchTableColumn();
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -26,21 +27,23 @@ function UserTable({ data }) {
 
   const columns = [
     {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+      width: "20%",
+      render: (_, record) => <span className="text-base">{record.first_name} {record.last_name}</span>,
+    },
+    {
       title: "Username",
       dataIndex: "username",
       key: "username",
       width: "30%",
       ...getSorter("username"),
       ...getColumnSearchProps("username"),
-      render: (text, record) => (
-        <Link
-          to={urlcat(pathSystem.userDetail, {
-            id: record._id,
-          })}
-          className="link"
-        >
+      render: (text) => (
+        <span className="text-base">
           {text}
-        </Link>
+        </span>
       ),
     },
     {
@@ -48,6 +51,11 @@ function UserTable({ data }) {
       dataIndex: "email",
       key: "email",
       width: "20%",
+      render: (text) => (
+        <span className="text-base">
+          {text}
+        </span>
+      ),
       ...getColumnSearchProps("age"),
     },
   ];
