@@ -12,8 +12,12 @@ export function formatDateByDateAndMinute(isoDate) {
     return formatDate(isoDate, 'YYYY-MM-DD:HH:mm');
 }
 
+export function formatDateByDateAndMinuteSplash(isoDate) {
+    return formatDate(isoDate, 'YYYY/MM/DD:HH:mm');
+}
+
 export function formatGMTDate(gmtDate) {
     const date = new Date(gmtDate).toLocaleString("en-US", { timeZone: "UTC" });
 
-    return formatDateByDateAndTime(date);
+    return formatDateByDateAndMinuteSplash(date);
 }

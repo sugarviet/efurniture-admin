@@ -15,6 +15,14 @@ const type = {
       delete: 'Failed deleted voucher',
     }
   },
+  report: {
+    success: {
+      confirm: 'Successfully confirm request refund',
+    },
+    fail: {
+      confirm: 'Failed confirm request refund',
+    }
+  },
   warehouse: {
     success: {
       add: 'Successfully added warehouse',

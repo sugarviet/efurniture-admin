@@ -2,9 +2,9 @@ import { useState, lazy } from "react";
 import { Table, Button, Space } from "antd";
 import AppModal from "@components/AppModal";
 import AppSuspense from "@components/AppSuspense";
-import PageTitle from "../../components/PageTitle";
 import TableCard from "../../components/TableCard";
-
+import { withFetchData } from "../../hocs/withFetchData";
+import { get_all_reports } from "../../api/reportApi";
 const data = [
   {
     key: "1",

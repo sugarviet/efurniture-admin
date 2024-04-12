@@ -13,6 +13,7 @@ const FormInputNumber = ({
   className,
   prefix,
   style,
+  disabled,
   ...others
 }) => {
 
@@ -27,6 +28,7 @@ const FormInputNumber = ({
 
     >
       <InputNumber
+      disabled={disabled}
       prefix={prefix}
         placeholder={placeholder}
         className={classNames(

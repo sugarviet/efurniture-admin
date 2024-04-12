@@ -4,7 +4,7 @@ import { useState } from "react";
 import { classNames } from "../../../utils/classNames";
 import BriefInfo from "../../../components/BriefInfo";
 import FurnitureOptionFlashsale from "./FurnitureOptionFlashsale";
-import { formatDateByDateAndTime } from "../../../utils/formatDate";
+import { formatDateByDateAndMinuteSplash, formatDateByDateAndTime } from "../../../utils/formatDate";
 import PropTypes from "prop-types";
 
 function FurnitureSelectionFlashsale({ onChange, className, value, multiple, data }) {
@@ -82,8 +82,8 @@ function FurnitureSelectionFlashsale({ onChange, className, value, multiple, dat
             </button>
             <AppModal className="h-96" isOpen={modalOpen} setIsOpen={setModalOpen}>
                 <FurnitureOptionFlashsale
-                    startDay={formatDateByDateAndTime(data?.startDay)}
-                    endDay={formatDateByDateAndTime(data?.endDay)}
+                    startDay={formatDateByDateAndMinuteSplash(data?.startDay)}
+                    endDay={formatDateByDateAndMinuteSplash(data?.endDay)}
                     onSelect={(furniture) => {
                         handleSelect(furniture);
                         if (multiple) handleDuplicate(furniture._id);
