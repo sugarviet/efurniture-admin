@@ -1,7 +1,7 @@
 import { Card } from "antd";
 import ECommerceStatusCard from "../../components/ECommerceStatusCard";
 import LocationMapBox from "../../components/MostPucharsedLocation";
-import StatisticCard from "../../components/StatisticCard";
+// import StatisticCard from "../../components/StatisticCard";
 import TotalSellByMonth from "./components/TotalSellByMonth";
 import ECommerceStatusCardList from "../../components/ECommerceStatusCardList";
 
@@ -14,9 +14,9 @@ const Home = () => {
 
       <TotalSellByMonth />
       
-      <div className="grid grid-cols-2 gap-4">
+      {/* <div className="grid grid-cols-2 gap-4">
         <StatisticCard label={"Total orders"} description={"Last 7 days"} />
-      </div>
+      </div> */}
       <LocationMapBox />
     </main>
   );
