@@ -5,6 +5,7 @@ import { get_all_draft_subType, get_all_publish_subType, get_all_subType } from 
 import { isAdmin } from "../../utils/getCurrentUserRole";
 import { Card } from "antd";
 import CreatingSubTypesForm from "../../components/CreatingSubTypesForm";
+import CreatingAttribute from "../CreatingProduct/components/CreatingAttribute";
 
 const PublishSubtypesTable = withFetchData(SubtypesTable, get_all_publish_subType);
 const DraftSubtypesTable = withFetchData(SubtypesTable, get_all_draft_subType);
@@ -32,6 +33,10 @@ const SubTypes = () => {
             </Card>
           </div>
         )}
+        <Card>
+              <p className="text-2xl font-bold mb-4">Create attributes</p>
+              <CreatingAttribute />
+            </Card>
       </section>
     </main>
   );
