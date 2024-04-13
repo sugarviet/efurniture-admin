@@ -24,7 +24,7 @@ function FurnitureOption({ data, onSelect }) {
         onSearch={handleSearch}
         placeholder="Find furniture by name..."
       />
-      <ul>
+      <ul className="h-72 overflow-y-auto no-scrollbar">
         {furniture.map((item) => {
           const { _id, thumbs, name, sale_price } = item;
           return (
@@ -34,7 +34,7 @@ function FurnitureOption({ data, onSelect }) {
               key={_id}
             >
               <BriefInfo
-                img_class="h-8"
+                img_class="h-12 w-12 object-contain"
                 info={{ thumb: thumbs[0], name: name }}
               />
               <span className="text-sm">{formatCurrency(sale_price)}</span>

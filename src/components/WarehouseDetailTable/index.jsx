@@ -64,7 +64,7 @@ const WarehouseDetailTable = ({ data }) => {
       dataIndex: 'product',
       key: 'thumb',
       render: (text) => (
-        <img src={text.thumbs[0]} alt={text.name} width="100" />
+        <img src={text.thumbs[0]} alt={text.name} style={{ width: 100, height: 100, objectFit: 'contain' }} />
       )
     },
     {

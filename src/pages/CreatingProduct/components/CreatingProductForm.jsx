@@ -25,14 +25,12 @@ const CreatingProductForm = () => {
   const admin = isAdmin();
 
   const onFinish = (values) => {
-    console.log(values)
     const listImages = values.thumbs.fileList.map((image) => image.url);
 
     const data = {
       ...values,
       thumbs: listImages
     }
-    console.log("Success:", data);
 
     create_draft_product(data);
 
@@ -185,20 +183,18 @@ const CreatingProductForm = () => {
           {/* Right */}
 
           <div className="flex-1 flex flex-col gap-4">
-          
+            {/* <Card>
+              <p className="text-2xl font-bold mb-4">Create attributes</p>
+              <CreatingAttribute />
+            </Card> */}
 
             <Card>
               <p className="text-2xl font-bold mb-4">Create Variations</p>
               <CreatingVariation />
             </Card>
-
           </div>
         </section>
       </Form>
-            {/* <Card>
-              <p className="text-2xl font-bold mb-4">Create attributes</p>
-              <CreatingAttribute />
-            </Card> */}
     </main>
   );
 };

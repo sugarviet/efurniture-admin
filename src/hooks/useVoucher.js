@@ -32,8 +32,8 @@ function useVoucher() {
             "is_active": 1,
             "products": products ? products.map(item => item._id) : []
         }
-        console.log(body);
-        // createMutation(body)
+        // console.log(body);
+        createMutation(body)
     }
 
     return { createVoucher, form };

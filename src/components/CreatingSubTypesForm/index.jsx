@@ -13,6 +13,7 @@ import { create_subtype } from "@api/subtypeApi";
 import FormSelectType from "../FormSelectType";
 import { transferSelectOption } from "@utils/transferSelectOption";
 import useNotification from "../../hooks/useNotification";
+import { get_all_draft_subType } from "../../api/subtypeApi";
 
 const CreatingSubTypesForm = () => {
   const { error_message, success_message } = useNotification();
@@ -30,7 +31,7 @@ const CreatingSubTypesForm = () => {
       error_message('subtypes', 'add_draft', error)
 
     },
-    get_all_subType()
+    get_all_draft_subType()
   );
 
   if (loadingAtrribute) return;

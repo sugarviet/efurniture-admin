@@ -43,3 +43,13 @@ body {
   overflow-y: hidden;
   z-index: 1; /* Ensure the Sider is above other elements */
 }
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+      display: none;
+  }
+  .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none; 
+}
+}
