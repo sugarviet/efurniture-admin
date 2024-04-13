@@ -8,13 +8,13 @@ const CreatingType = () => {
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
-    const data = {
-      ...values,
-      thumb: values.thumb.file.url
-    }
+    // const data = {
+    //   ...values,
+    //   thumb: values.thumb.file.url
+    // }
 
-    createDraftType(data)
-    form.resetFields();
+    createDraftType(values)
+    // form.resetFields();
    
 
   };
@@ -29,13 +29,20 @@ const CreatingType = () => {
           required
         />
 
-        <FormUploadButton
+        <FormInput
+          name="thumb"
+          label="thumb"
+          placeholder="thumb"
+          required
+        />
+
+        {/* <FormUploadButton
           label="Type thumb"
           name="thumb"
           maxCount={1}
           className="xl:w-[23rem] lg:w-[10rem]"
           required
-        />
+        /> */}
 
         <div className="flex gap-2 justify-center">
         
