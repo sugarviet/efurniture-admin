@@ -35,7 +35,7 @@ const ProductTable = ({ data, onEdit, published }) => {
         <img
           src={record.thumbs[0]}
           alt={record.name}
-          style={{ width: 100, height: 100 }}
+          style={{ width: 100, height: 100, objectFit: 'contain' }}
         />
       ),
     },

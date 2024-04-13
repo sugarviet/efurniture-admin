@@ -80,14 +80,14 @@ const EditWarehouseForm = ({data}) => {
         placeholder="Enter location"
         className="h-10"
       />
-      <FormInput
+      {/* <FormInput
         label="Street"
         name="street"
         required
         message="Please enter the code of message"
         placeholder="Enter street"
         className="h-10"
-      />
+      /> */}
 
       <FormSelect
         label="District"

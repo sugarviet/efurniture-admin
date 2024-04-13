@@ -17,8 +17,6 @@ const FlashSaleForm = () => {
 
   const hasStartDayAndEndDay = !!startDay && !!endDay
 
-  console.log(hasStartDayAndEndDay);
-
   const handleSubmit = async (values) => {
     handleCreateFlashsale(values);
   };

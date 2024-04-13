@@ -24,7 +24,7 @@ const TypeTable = ({ data, onEdit, published }) => {
         <img
           src={record.thumb}
           alt={record.name}
-          style={{ width: 100, height: 100 }}
+          style={{ width: 100, height: 100, objectFit: 'contain' }}
         />
       ),
     },
