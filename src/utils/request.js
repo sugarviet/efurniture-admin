@@ -9,7 +9,7 @@ const SECURE_API_DEVELOPMENT = "https://dream-editor.tech/api/v1"
 const API_URL_PRODUCTION = "http://localhost:3000";
 console.log(API_URL_PRODUCTION);
 
-const BASE_URL = API_URL_DEVELOPMENT;
+const BASE_URL = SECURE_API_DEVELOPMENT;
 
 
 const cookies = () => ({

@@ -1,4 +1,4 @@
-import { Space, Table } from "antd";
+import { Space, Table, Tag } from "antd";
 import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
 import EditButton from "../EditButton";
 import PropTypes from "prop-types";
@@ -17,6 +17,21 @@ const FlashSaleTable = ({ data, onEdit, published }) => {
   const admin = isAdmin();
   console.log(data);
   const { getColumnSearchProps } = useSearchTableColumn();
+
+  const FLASH_SALE_STATUS = {
+    0: {
+      name: 'Up comming',
+      color: 'blue'
+    },
+    1: {
+      name: 'On going',
+      color: 'green'
+    },
+    2: {
+      name: 'finished',
+      color: 'yellow'
+    },
+  }
   const columns = [
     {
       title: "Name",
@@ -24,17 +39,13 @@ const FlashSaleTable = ({ data, onEdit, published }) => {
       key: "name",
       ...getColumnSearchProps("name"),
     },
-    // {
-    //   title: "Furniture",
-    //   render: (text) => <span className="text-xs">Chair x 3, Sofa x 1</span>,
-    // },
     {
       title: "Furniture",
-      width: '15%',
+      width: '25%',
       render: (_, record) => (
         <div>
           {record.products.map(product => (
-            <span key={product._id} className="text-xs block w-full">Chair x {product.count}</span>
+            <span key={product._id} className="text-xs block w-full">{product.productId.name} x {product.count}</span>
           ))}
         </div>
       ),
@@ -53,6 +64,12 @@ const FlashSaleTable = ({ data, onEdit, published }) => {
       dataIndex: "endDay",
       key: "endDay",
       render: (text) => <span className="text-xs">{formatGMTDate(text)}</span>,
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+      render: (text) => <Tag color={FLASH_SALE_STATUS[text].color}><span className="text-xs font-bold uppercase">{FLASH_SALE_STATUS[text].name}</span></Tag>,
     },
     {
       title: "Action",

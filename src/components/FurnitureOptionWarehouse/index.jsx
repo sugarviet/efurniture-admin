@@ -34,7 +34,7 @@ function FurnitureOptionWarehouse({ data, onSelect }) {
       />
 
       <Note type='color'/>
-      <ul>
+      <ul className="h-72 overflow-y-auto no-scrollbar">
         {furniture.map((item) => {
 
           const selectedVariation = variationColor
@@ -68,7 +68,7 @@ function FurnitureOptionWarehouse({ data, onSelect }) {
               onClick={handleChooseFurniture}
               >
                 <BriefInfo
-                  img_class="h-8"
+                  img_class="h-12 w-12 object-contain"
                   info={{ thumb: thumbs[0], name: name }}
                 />
                 <span className="text-sm">{formatCurrency(!isVariationChosen ? sale_price : selectedVariation.sub_price + sale_price)}</span>
