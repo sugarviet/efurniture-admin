@@ -24,3 +24,7 @@ export const disable_account = () => {
 export const update_account = (id) => {
     return `${USER_API}/role/${id}`
 }
+
+export const get_user_detail = (param) => {
+    return `/account/${param.id}`
+}

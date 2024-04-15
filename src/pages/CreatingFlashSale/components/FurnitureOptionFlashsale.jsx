@@ -36,7 +36,7 @@ function FurnitureOptionFlashsale({ data, onSelect, startDay, endDay }) {
         onSearch={handleSearch}
         placeholder="Find furniture by name..."
       />
-      <ul className="h-72 overflow-y-auto no-scrollbar">
+      <ul className="h-72 overflow-y-auto thin-scroll-bar mr-2">
         {listProductFlashsale?.map((item) => {
           const { _id, thumbs, name, sale_price } = item;
           return (

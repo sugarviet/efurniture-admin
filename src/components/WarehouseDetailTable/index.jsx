@@ -1,201 +1,101 @@
-import { Input, Table, Button } from "antd";
+import { Input, Table, Button, Space, Switch } from "antd";
 import PropTypes from "prop-types";
 import TableCard from "../TableCard";
 import EditableInput from "../EditableInput";
-import { add_more_stock_product } from "../../api/warehouseApi";
+import { add_more_stock_product, get_first_warehouse, remove_product_from_warehouse } from "../../api/warehouseApi";
 import { update_lowstock_qty_in_warehouse } from "../../api/warehouseApi";
 import { get_warehouse_detail } from "../../api/warehouseApi";
 import AddProductToWarehouseForm from "../../pages/WarehouseDetail/components/AddProductToWarehouseForm";
-import { Switch } from 'antd';
 import useWarehouse from "../../hooks/useWarehouse";
-import { PlusCircleFilled } from "@ant-design/icons";
+import { PlusCircleFilled, EditOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import AppModal from "../AppModal";
 import { isAdmin } from "../../utils/getCurrentUserRole";
 import DeleteButton from "../DeleteButton";
-import { get_draft_product, remove_draft_product } from "../../api/productApi";
-
+import { get_draft_product, get_published_product, remove_draft_product } from "../../api/productApi";
+import RemoveProductWarehouseButton from "../RemoveProductWarehouseButton";
+import { withFetchData } from "../../hocs/withFetchData";
+import ProductTable from "../ProductTable";
+import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
+import { formatCurrency } from "../../utils/formatCurrency";
+import DetailButton from "../DetailButton";
+import WarehouseProductDetail from "../WarehouseProductDetail";
+import EditWarehouseForm from "../EditWarehouseForm";
+import { useFetch } from "../../hooks/api-hooks";
+const PublishedProductTable = withFetchData(
+  ProductTable,
+  get_published_product
+);
 const WarehouseDetailTable = ({ data }) => {
   const admin = isAdmin();
+
   const { handleSwitchNotification } = useWarehouse(data._id)
-  const [openAddProductModal, setOpenAddProductModal] = useState(false);
+  const [openEditWarehouseModal, setopenEditWarehouseModal] = useState(false);
 
-  const STAFF_COLUMNS = [
+  console.log(data);
+  const { getColumnSearchProps } = useSearchTableColumn()
+  const COLUMNS = [
     {
-      title: "Product name",
-      dataIndex: ['product', 'name'],
-      key: "product",
-
-      filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
-        <div style={{ padding: 8 }}>
-          <Input
-            placeholder="Search product name"
-            value={selectedKeys[0]}
-            onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-            onPressEnter={() => confirm()}
-            style={{ width: 188, marginBottom: 8, display: 'block' }}
-          />
-          <button
-            type="button"
-            onClick={() => {
-              clearFilters();
-            }}
-            style={{ width: 90, marginRight: 8 }}
-          >
-            Reset
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              confirm();
-            }}
-            style={{ width: 90 }}
-          >
-            Filter
-          </button>
-        </div>
-      ),
-      onFilter: (value, record) => record.product.name.toLowerCase().includes(value.toLowerCase()),
-      render: (text) => <span className="text-base">{text}</span>,
-
+      title: "Name",
+      dataIndex: ["product", "name"],
+      key: "name",
+      ...getColumnSearchProps("name"),
     },
     {
-      title: 'Thumb',
-      dataIndex: 'product',
-      key: 'thumb',
-      render: (text) => (
-        <img src={text.thumbs[0]} alt={text.name} style={{ width: 100, height: 100, objectFit: 'contain' }} />
-      )
+      title: "Thumb",
+      dataIndex: ["product", "thumb"],
+
+      key: "thumb",
+      render: (text, record) => (
+        <img
+          src={record.product.thumbs[0]}
+          alt={record.product.name}
+          style={{ width: 100, height: 100, objectFit: 'contain' }}
+        />
+      ),
     },
     {
       title: 'Color',
 
       render: (text, record) => (
-        <div style={{ backgroundColor: record.variation[0] ? record.variation[0].color : 'black', width: 20, height: 20, borderRadius: '50%' }} />
+        <div className="flex gap-2">
+          {record.product.variation.map(property => <div key={property._id} style={{ backgroundColor: property.value, width: 20, height: 20, borderRadius: '50%' }} />)}
+        </div>
       )
     },
     {
-      title: "Stock",
-      dataIndex: "stock",
-      key: "stock",
-      render: (text, record) => (
-        <EditableInput
-          defaultValue={text}
-          name={"stock"}
-          url={add_more_stock_product(data._id)}
-          record={{ product: record.product._id, stock: record.stock, code: record.code }}
-          notiType="warehouse"
-          notiAction="update_stock"
-          type="number"
-          refreshKey={() => get_warehouse_detail(data._id)}
-        />
-      ),
+      title: "Price",
+      dataIndex: ['product', "regular_price"],
+      key: "regular_price",
+      render: (text) => formatCurrency(text),
     },
     {
-      title: "Low Stock",
-      dataIndex: "lowStock",
-      key: "lowStock",
-      render: (text, record) => (
-        <EditableInput
-          defaultValue={text}
-          name={"lowStock"}
-          url={update_lowstock_qty_in_warehouse(data._id)}
-          record={{ product: record.product._id, lowStock: record.lowStock }}
-          notiType="warehouse"
-          notiAction="update_stock"
-          type="number"
-          refreshKey={() => get_warehouse_detail(data._id)}
-        />
-      ),
+      title: "Sale Price",
+      dataIndex: ['product', "sale_price"],
+      key: "sale_price",
+      render: (text) => formatCurrency(text),
     },
     {
-      title: "Sold",
-      dataIndex: 'sold',
-      key: "sold",
-    },
-    {
-      title: "Received Stock",
-      dataIndex: "isNoti",
-      key: "isNoti",
+      title: "Description",
+      dataIndex: ['product', "description"],
+
       render: (text, record) => (
-        <Switch onChange={(e) => handleSwitchNotification(e, record.product._id)} defaultChecked={text} />
+        <span className="text-[#959798] text-xs">{text}</span>
       ),
     },
     {
       title: "Actions",
-      render: (_, record) => <DeleteButton url={remove_draft_product()} notiType="product" notiAction="delete" refreshKey={get_draft_product()} id={record.slug} />,
-    },
-  ];
-  const ADMIN_COLUMNS = [
-    {
-      title: "Product name",
-      dataIndex: ['product', 'name'],
-      key: "product",
-
-      filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
-        <div style={{ padding: 8 }}>
-          <Input
-            placeholder="Search product name"
-            value={selectedKeys[0]}
-            onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-            onPressEnter={() => confirm()}
-            style={{ width: 188, marginBottom: 8, display: 'block' }}
-          />
-          <button
-            type="button"
-            onClick={() => {
-              clearFilters();
-            }}
-            style={{ width: 90, marginRight: 8 }}
-          >
-            Reset
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              confirm();
-            }}
-            style={{ width: 90 }}
-          >
-            Filter
-          </button>
-        </div>
-      ),
-      onFilter: (value, record) => record.product.name.toLowerCase().includes(value.toLowerCase()),
-      render: (text) => text,
-
-    },
-    {
-      title: 'Thumb',
-      dataIndex: 'product',
-      key: 'thumb',
       render: (text) => (
-        <img src={text.thumbs[0]} alt={text.name} width="100" />
-      )
-    },
-    {
-      title: 'Color',
+        <Space className="flex gap-4">
+          <DetailButton>
+            <WarehouseProductDetail productId={record._id}/>
 
-      render: (text, record) => (
-        <div style={{ backgroundColor: record.variation[0] ? record.variation[0].color : 'black', width: 20, height: 20, borderRadius: '50%' }} />
-      )
+          </DetailButton>
+        </Space>
+      ),
     },
-    {
-      title: "Stock",
-      dataIndex: "stock",
-      key: "stock",
-    },
-    {
-      title: "Low Stock",
-      dataIndex: "lowStock",
-      key: "lowStock",
-    },
-    {
-      title: "Sold",
-      dataIndex: 'sold',
-      key: "sold",
-    },
-  ];
+  ]
+
   return (
     <div className="flex gap-6">
       <div className="flex-1">
@@ -204,27 +104,30 @@ const WarehouseDetailTable = ({ data }) => {
           <Button
             className="flex items-center px-4 py-4"
             type="link"
-            onClick={() => setOpenAddProductModal(true)}
+            onClick={() => setopenEditWarehouseModal(true)}
           >
-            Add more product <PlusCircleFilled />
+            Edit warehouse <EditOutlined />
           </Button>
         }>
           <Table
             rowKey="_id"
-            columns={admin ? ADMIN_COLUMNS : STAFF_COLUMNS}
+            columns={COLUMNS}
             dataSource={data.products}
             pagination={{ hideOnSinglePage: true }}
           />
+          {/* <PublishedProductTable /> */}
         </TableCard>
       </div>
 
-      <AppModal isOpen={openAddProductModal} setIsOpen={setOpenAddProductModal}>
+      <AppModal isOpen={openEditWarehouseModal} setIsOpen={setopenEditWarehouseModal}>
     
-        {openAddProductModal ? <AddProductToWarehouseForm id={data._id} /> : null }
+        {/* {openEditWarehouseModal ? <AddProductToWarehouseForm id={data._id} /> : null } */}
+        {openEditWarehouseModal ? 
+        <EditWarehouseForm data={data}/>
+          :null
+        }
+
       </AppModal>
-      {/* <div className="w-[27rem]">
-        <AddProductToWarehouseForm id={data._id} />
-      </div> */}
     </div>
   );
 };

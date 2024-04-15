@@ -3,6 +3,8 @@ import { Card, Descriptions, Tabs } from "antd";
 import InProgress from "./components/InProgress";
 import Shipping from "./components/Shipping";
 import PurchasedHistory from "./components/PurchasedHistory";
+import { withFetchData } from "../../hocs/withFetchData";
+import { get_user_detail } from "../../api/userApi";
 
 const tabs = [
   {
@@ -22,7 +24,8 @@ const tabs = [
   },
 ]
 
-const UserDetail = () => {
+const UserDetail = ({data}) => {
+  console.log(data);
   const { id } = useParams();
   const items = [
     {
@@ -47,6 +50,7 @@ const UserDetail = () => {
     },
    
   ];
+
 
   const onChange = (key) => {
     console.log(key, id);
@@ -85,4 +89,4 @@ const UserDetail = () => {
   );
 };
 
-export default UserDetail;
+export default withFetchData(UserDetail, get_user_detail);

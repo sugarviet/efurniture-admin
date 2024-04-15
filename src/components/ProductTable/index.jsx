@@ -15,6 +15,7 @@ import ChangeStatusButton from "../ChangeStatusButton";
 import DeleteButton from "../DeleteButton";
 import UpdateProductForm from "../UpdateProductForm";
 import { CreatingProductProvider } from "../../pages/CreatingProduct/CreatingProductContext";
+import AddNewVariationButton from "../AddNewVariationButton";
 
 const ProductTable = ({ data, onEdit, published }) => {
   const admin = isAdmin();
@@ -41,10 +42,13 @@ const ProductTable = ({ data, onEdit, published }) => {
     },
     {
       title: 'Color',
-   
+
       render: (text, record) => (
-        <div className="flex gap-2">
-            {record.variation[0].properties.map(property => <div key={property._id} style={{ backgroundColor: property.value , width: 20, height: 20, borderRadius: '50%' }}/> )}
+        
+        <div className="flex gap-2 items-center">
+          {record.variation[0].properties.map(property => <div key={property._id} style={{ backgroundColor: property.value, width: 20, height: 20, borderRadius: '50%', border: '1px solid #d3d3d3' }} />)}
+          <AddNewVariationButton id={record._id}/>
+
         </div>
       )
     },
@@ -62,14 +66,40 @@ const ProductTable = ({ data, onEdit, published }) => {
     },
     {
       title: "Description",
+      width: '20%',
       render: (_, record) => (
         <span className="text-[#959798] text-xs">{record.description}</span>
       ),
     },
-    (!admin && !published) && {
+    !admin && {
       title: "Actions",
       render: (_, record) => (
         <Space className="flex gap-4">
+          {!published ? (
+            <ChangeStatusButton
+              url={publish_product_admin(record.type.slug, record.slug)}
+              resetPublishkey={get_published_product()}
+              resetDraftKey={get_draft_product()}
+              type="products"
+              action="publish"
+            >
+              Publish
+            </ChangeStatusButton>
+          ) : (
+
+            <ChangeStatusButton
+              url={draft_product_admin(record.type.slug, record.slug)}
+              resetPublishkey={get_published_product()}
+              resetDraftKey={get_draft_product()}
+              type="products"
+              action="draft"
+              published={published}
+            >
+              Draft
+            </ChangeStatusButton>
+
+          )}
+
           <EditButton>
             <CreatingProductProvider>
               <UpdateProductForm data={record} />
@@ -106,7 +136,7 @@ const ProductTable = ({ data, onEdit, published }) => {
                   resetDraftKey={get_draft_product()}
                   type="products"
                   action="draft"
-                published={published}
+                  published={published}
                 >
                   Draft
                 </ChangeStatusButton>

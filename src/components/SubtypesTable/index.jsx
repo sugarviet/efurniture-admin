@@ -10,7 +10,7 @@ const SubtypesTable = ({ data, onEdit, published }) => {
   const { getColumnSearchProps } = useSearchTableColumn();
   const admin = isAdmin();
 
-  const STAFF_COLUMNS = [
+  const COLUMNS = [
     {
       title: "Thumb",
       dataIndex: "thumb",
@@ -40,6 +40,39 @@ const SubtypesTable = ({ data, onEdit, published }) => {
         <span className="text-[#959798] text-base">{record.description}</span>
       ),
     },
+    {
+      title: "Actions",
+      render: (_, record) => (
+        <Space className="flex gap-4">
+
+          {!published ? (
+            <ChangeStatusButton
+              url={publish_subtypes_admin(record.typeSlug, record.slug)}
+              resetPublishkey={get_all_publish_subType()}
+              resetDraftKey={get_all_draft_subType()}
+              type="types"
+              action="publish"
+            >
+              Publish
+            </ChangeStatusButton>
+          ) : (
+
+          
+            <ChangeStatusButton
+              url={draft_subtypes_admin(record.typeSlug, record.slug)}
+              resetPublishkey={get_all_publish_subType()}
+              resetDraftKey={get_all_draft_subType()}
+              type="types"
+              action="draft"
+              published={published}
+
+            >
+              Draft
+            </ChangeStatusButton>
+          )}
+        </Space>
+      ),
+    },
     // !admin && {
     //   title: "Actions",
     //   render: (_, record) => (
@@ -53,7 +86,7 @@ const SubtypesTable = ({ data, onEdit, published }) => {
   ].filter(Boolean);
 
   const ADMIN_COLUMNS = [
-    ...STAFF_COLUMNS,
+    ...COLUMNS,
     {
       title: "Actions",
       render: (_, record) => (
@@ -92,7 +125,7 @@ const SubtypesTable = ({ data, onEdit, published }) => {
     <Table
       rowKey="_id"
       dataSource={data}
-      columns={admin ? ADMIN_COLUMNS : STAFF_COLUMNS}
+      columns={COLUMNS}
 
       pagination={{
         pageSize: 8,

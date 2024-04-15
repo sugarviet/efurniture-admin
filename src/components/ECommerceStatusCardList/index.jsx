@@ -7,14 +7,15 @@ const ECommerceStatusCardList = ({data}) => {
 
     console.log(formatData);
   return (
-    <Card>
-        <div className="flex gap-4">
+  
+        <div className="flex gap-4 w-full justify-between">
             {formatData.map(data => (
+              
                 <ECommerceStatusCard type={data.name} key={data.name} data={data.value}/>
             ))}
         </div>
 
-    </Card>
+ 
   )
 }
 

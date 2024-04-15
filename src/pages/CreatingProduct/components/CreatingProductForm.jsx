@@ -104,7 +104,7 @@ const CreatingProductForm = () => {
 
                       name="regular_price"
                       placeholder="$$$" />
-                    <FormInputNumber label="Sale Pricing"
+                    <FormInputNumber label="Sell Pricing"
                       required
                       prefix="VND"
 
@@ -171,12 +171,12 @@ const CreatingProductForm = () => {
                 value=""
                 placeholder="Write title here..."
               />
-              <iframe
+              {/* <iframe
                 src="https://admin.roomle.com/login"
                 title="W3Schools Free Online Web Tutorials"
                 height={600}
                 width={900}
-              ></iframe>
+              ></iframe> */}
             </Card>
           </div>
 

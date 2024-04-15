@@ -50,7 +50,7 @@ export default function useWarehouse(id = '') {
     },
     get_all_warehouse()
   );
-  const { mutate: switchNotification } = useUpdate(get_switch_notification_in_warehouse(id), undefined, () => {
+  const { mutate: switchNotification } = useUpdate(get_switch_notification_in_warehouse(), undefined, () => {
     success_message('warehouse', 'receive_low_stock')
 
   }, () => {
@@ -65,9 +65,9 @@ export default function useWarehouse(id = '') {
 
   })
 
-  const handleSwitchNotification = (value, productId) => {
+  const handleSwitchNotification = (value, code) => {
     const body = {
-      product: productId,
+      code: code,
       isNoti: value
     }
     switchNotification(body)
