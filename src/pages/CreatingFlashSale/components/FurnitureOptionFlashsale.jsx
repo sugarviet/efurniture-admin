@@ -9,10 +9,9 @@ import { usePost } from "../../../hooks/api-hooks";
 import { get_valid_product_flash_sale } from "../../../api/flashsaleApi";
 
 function FurnitureOptionFlashsale({ data, onSelect, startDay, endDay }) {
-  console.log('FurnitureOptionFlashsale', startDay, endDay);
+
   const { mutate: mutateValidProduct, data: listProductFlashsale } = usePost(get_valid_product_flash_sale(), undefined)
-  console.log(listProductFlashsale)
-  // const [furniture, setFurniture] = useState(data.data || []);
+ 
   const [furniture, setFurniture] = useState(listProductFlashsale || []);
 
   const handleSearch = (value) => {

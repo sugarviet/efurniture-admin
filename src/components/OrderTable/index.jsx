@@ -37,7 +37,6 @@ export const ORDER_STATE = [
 ];
 
 function OrderTable({ data, onDetail }) {
-  console.log('order', data);
   const [searchParams, setSearchParams] = useSearchParams();
   const { getColumnSearchProps } = useSearchTableColumn();
 

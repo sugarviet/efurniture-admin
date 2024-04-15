@@ -28,15 +28,10 @@ const PublishedProductTable = withFetchData(
 const WarehouseProductDetail = ({ productId }) => {
   const admin = isAdmin();
   const {data: warehouse, isLoading:isWarehouseLoading} = useFetch(get_first_warehouse())
-  console.log(warehouse);
   const { handleSwitchNotification } = useWarehouse();
   const [openAddProductModal, setOpenAddProductModal] = useState(false);
 
-  // console.log(data);
-
   const {data, isLoading} = useFetch(get_product_in_warehouse(productId))
-
-  console.log(data);
 
   if(isLoading) return;
   if(isWarehouseLoading) return;

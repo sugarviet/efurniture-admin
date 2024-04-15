@@ -13,7 +13,6 @@ import useNotification from "../../hooks/useNotification";
 import EditingVariationForm from "../EditingVariationForm";
 
 const UpdateProductForm = ({ data }) => {
-    console.log("Update Product", data);
     const { error_message, success_message } = useNotification();
     const { listAttribute, form } = useCreatingProductManagement();
 
