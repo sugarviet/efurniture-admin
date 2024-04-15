@@ -7,6 +7,7 @@ import { Form } from 'antd';
 import FormTextArea from '../FormTextArea';
 import FormInput from '../FormInput';
 import useRoom from '../../hooks/useRoom';
+import PropTypes from "prop-types";
 
 const EditRoomForm = ({ data }) => {
     const [form] = Form.useForm();
@@ -122,5 +123,10 @@ const EditRoomForm = ({ data }) => {
         </Form>
     )
 }
+
+EditRoomForm.propTypes = {
+    data: PropTypes.object,
+  };
+  
 
 export default EditRoomForm

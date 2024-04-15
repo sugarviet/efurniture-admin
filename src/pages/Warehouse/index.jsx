@@ -1,43 +1,41 @@
 import { withFetchData } from "@hocs/withFetchData";
-import { get_all_warehouse } from "../../api/warehouseApi";
+import { get_all_warehouse, get_first_warehouse } from "../../api/warehouseApi";
 import WarehouseTable from "../../components/WarehouseTable";
 import TableCard from "../../components/TableCard";
-import AppModal from "../../components/AppModal";
-
+import { EditOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import CreatingWarehouseForm from "../../components/CreatingWarehouseForm";
+import { isAdmin } from "../../utils/getCurrentUserRole";
 import { Button } from "antd";
-import { PlusCircleFilled } from "@ant-design/icons";
+import PropTypes from "prop-types";
 
-const PublishedWarehouseTable = withFetchData(
-  WarehouseTable,
-  get_all_warehouse
-);
+const Warehouse = ({ data }) => {
+  const admin = isAdmin();
 
-const Warehouse = () => {
-  const [openCreateModal, setIsOpenCreateModal] = useState(false);
+  const [openEditWarehouseModal, setopenEditWarehouseModal] = useState(false);
   return (
     <div>
       <TableCard
-        label="Warehouse"
-        addMoreButton={
-          <Button
-            className="flex items-center px-4 py-4"
-            type="link"
-            onClick={() => setIsOpenCreateModal(true)}
-          >
-            Add Warehouse <PlusCircleFilled />
-          </Button>
+        label={`${data.location} - ${data.district}`} addMoreButton={
+          admin ? null :
+            <Button
+              className="flex items-center px-4 py-4"
+              type="link"
+              onClick={() => setopenEditWarehouseModal(true)}
+            >
+              Edit warehouse <EditOutlined />
+            </Button>
         }
-      >
-        <PublishedWarehouseTable />
-      </TableCard>
 
-      <AppModal isOpen={openCreateModal} setIsOpen={setIsOpenCreateModal}>
-        {openCreateModal ? <CreatingWarehouseForm /> : null}
-      </AppModal>
+      >
+        <WarehouseTable />
+      </TableCard>
     </div>
   );
 };
 
-export default withFetchData(Warehouse, get_all_warehouse);
+Warehouse.propTypes = {
+  data: PropTypes.object,
+};
+
+export default withFetchData(Warehouse, get_first_warehouse);

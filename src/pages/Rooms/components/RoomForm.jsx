@@ -80,7 +80,6 @@ const RoomForm = () => {
                       min={1}
                       className="h-12"
                       name={[name, "quantity"]}
-                      defaultValue={1}
                     />
                     <DeleteOutlined
                       onClick={() => remove(name)}

@@ -31,7 +31,12 @@ function UserTable({ data }) {
       dataIndex: "name",
       key: "name",
       width: "20%",
-      render: (_, record) => <span className="text-base">{record.first_name} {record.last_name}</span>,
+      render: (_, record) => 
+      <Link to={`/user/${record._id}`} className="underline">
+      <span className="text-base">
+        {record.first_name} {record.last_name}
+        </span>
+      </Link>
     },
     {
       title: "Username",

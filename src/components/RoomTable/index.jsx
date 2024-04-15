@@ -45,13 +45,41 @@ function RoomTable({ data, published }) {
         </div>
       ),
     },
-    (!admin && !published) && {
+    (!admin) && {
       title: "Actions",
       render: (_, record) => (
         <Space className="flex gap-4">
           <EditButton>
               <EditRoomForm data={record} />
             </EditButton>
+              
+            {!published ? (
+              <ChangeStatusButton
+                url={get_to_publish_room_api(record._id)}
+                resetPublishkey={get_published_rooms_api()}
+                resetDraftKey={get_draft_rooms_api()}
+                type="rooms"
+                action="publish"
+                published={published}
+              >
+                Publish
+              </ChangeStatusButton>
+            ) : (
+              <ChangeStatusButton
+                url={get_to_draft_room_api(record._id)}
+                resetPublishkey={get_published_rooms_api()}
+                resetDraftKey={get_draft_rooms_api()}
+                type="rooms"
+                action="draft"
+                published={published}
+              >
+                Draft
+              </ChangeStatusButton>
+            )}
+            {!published ? (
+              <DeleteButton url={remove_draft_room()} notiType="room" notiAction="delete" refreshKey={get_draft_rooms_api()} id={record.slug} />
+            ) : null
+            }
         </Space>
       ),
     },

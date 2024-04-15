@@ -52,3 +52,8 @@ export const add_product_to_warehouse = (id) => {
     return `/warehouse/staff/${id}`
 
 }
+
+export const add_variation_to_product = (id) => {
+    return `/product/staff/addVariation/${id}`
+
+}

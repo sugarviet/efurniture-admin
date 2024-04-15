@@ -27,8 +27,9 @@ const type = {
     success: {
       add: 'Successfully added warehouse',
       edit: 'Successfully edited warehouse',
-      delete: 'Successfully deleted delete',
+      delete: 'Successfully deleted warehouse',
       add_product: 'Successfully added product to warehouse',
+      remove_product: 'Successfully remove product from warehouse',
       update_stock: 'Successfully updated stock',
       update_low_stock: 'Successfully updated low stock',
       receive_low_stock: 'Successfully received low stock',
@@ -36,8 +37,9 @@ const type = {
     fail: {
       add: 'Failed added warehouse',
       edit: 'Failed edited warehouse',
-      delete: 'Failed deleted delete',
+      delete: 'Failed deleted warehouse',
       add_product: 'Failed added product to warehouse',
+      remove_product: 'Failed remove product from warehouse',
       update_stock: 'Failed updated stock',
       update_low_stock: 'Failed updated low stock',
       receive_low_stock: 'Failed received low stock',
@@ -128,6 +130,7 @@ const type = {
       publish: 'Successfully publish product',
       draft: 'Successfully draft product',
       disable: 'Successfully disable product',
+      add_new_variation: 'Successfully add new variation product',
       enable: 'Successfully enable product',
     },
     fail: {
@@ -136,6 +139,7 @@ const type = {
       disable: 'Failed disable product',
       publish: 'Failed publish product',
       draft: 'Failed draft product',
+      add_new_variation: 'Failed add new variation product',
       enable: 'Failed enable product',
     }
   },

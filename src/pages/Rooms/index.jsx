@@ -1,7 +1,3 @@
-import { Button } from "antd";
-import { useState, lazy } from "react";
-import AppModal from "@components/AppModal";
-import AppSuspense from "@components/AppSuspense";
 import RoomTable from "../../components/RoomTable";
 import { withFetchData } from "../../hocs/withFetchData";
 import {

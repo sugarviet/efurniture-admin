@@ -16,6 +16,7 @@ const FormSelectColor = ({
     allowClear,
     style,
     onChange,
+    disabled,
 }) => {
     
     const colorOptions = [
@@ -43,6 +44,7 @@ const FormSelectColor = ({
             <Select
                 placeholder="Select color"
                 showSearch
+                disabled={disabled}
                 filterOption={(input, option) =>
                     option.label.toLowerCase().indexOf(input.toLowerCase()) >= 0
                 }
@@ -62,6 +64,7 @@ const FormSelectColor = ({
                                     height: "20px",
                                     marginRight: "8px",
                                     backgroundColor: option.color,
+                                    border: '1px solid #d3d3d3',
                                     borderRadius: '50%'
                                 }}
                             />
@@ -79,6 +82,7 @@ const FormSelectColor = ({
                                     height: '20px',
                                     marginRight: '8px',
                                     backgroundColor: option.color,
+                                    border: '1px solid #d3d3d3',
                                     borderRadius: '50%',
                                 }}
                             />

@@ -1,7 +1,7 @@
-import { get_create_room_api, get_draft_rooms_api, update_room_staff } from "../api/roomApi";
-import { usePost, useUpdate } from "./api-hooks";
+import { get_create_room_api, get_draft_rooms_api, get_published_rooms_api, update_room_staff } from "../api/roomApi";
+import { usePost, useUpdateWithMultipleKeys } from "./api-hooks";
 import useNotification from "./useNotification";
-import { Form, Button } from "antd";
+import { Form } from "antd";
 
 function useRoom(slug) {
   const [form] = Form.useForm();
@@ -13,13 +13,13 @@ function useRoom(slug) {
         error_message('room', 'add_draft')
     }, get_draft_rooms_api());
 
-    const { mutate: editRoom } = useUpdate(update_room_staff(slug), undefined, () => {
+    const { mutate: editRoom } = useUpdateWithMultipleKeys(update_room_staff(slug), undefined, () => {
         success_message('room', 'edit')
 
     }, () => {
         error_message('room', 'edit')
 
-    }, get_draft_rooms_api())
+    }, [get_draft_rooms_api(), get_published_rooms_api()])
 
     const createRoom = (data) => {
         const { name, description, thumb, products } = data;

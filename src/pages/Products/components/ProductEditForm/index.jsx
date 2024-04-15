@@ -134,7 +134,7 @@ const ProductEditForm = ({ data }) => {
             placeholder="$$$"
           />
           <FormInputNumber
-            label="Sale Pricing"
+            label="Sell Pricing"
             required
             name="sale_price"
             placeholder="$$$"

@@ -37,7 +37,6 @@ export const ORDER_STATE = [
 ];
 
 function OrderTable({ data, onDetail }) {
-  console.log('order', data);
   const [searchParams, setSearchParams] = useSearchParams();
   const { getColumnSearchProps } = useSearchTableColumn();
 
@@ -88,12 +87,12 @@ function OrderTable({ data, onDetail }) {
     },
     {
       title: "Status",
-      dataIndex: "order_tracking.length",
-      render: (_, record) => {
+      dataIndex: ["current_order_tracking", "name"],
+      render: (text, record) => {
         const { status, color } = ORDER_STATE[record.order_tracking.length];
         return (
           <Tag className="text-bold uppercase" color={color}>
-            <span className="font-bold">{status}</span>
+            <span className="font-bold">{text}</span>
           </Tag>
         );
       },
