@@ -28,6 +28,14 @@ export const draft_subtypes_admin = (type, slug) => {
     return `/subType/admin/draft/${type}/${slug}`;   
 }
 
+export const publish_subtypes_staff = (type, slug) => {
+    return `/subType/staff/${type}/${slug}`;   
+}
+
+export const draft_subtypes_staff = (type, slug) => {
+    return `/subType/staff/draft/${type}/${slug}`;   
+}
+
 export const remove_sub_types= () => {
     return `/type/admin/draft`;
 }

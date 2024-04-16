@@ -14,6 +14,10 @@ export const get_to_publish_room_api = (id) => ROOM_URL + '/admin' + '/publish' 
 
 export const get_to_draft_room_api = (id) => ROOM_URL + '/admin' + '/draft' + `/${id}`
 
+export const get_to_publish_room_staff_api = (id) => ROOM_URL + '/staff' + '/publish' + `/${id}`
+
+export const get_to_draft_room_staff_api = (id) => ROOM_URL + '/staff' + '/draft' + `/${id}`
+
 export const remove_draft_room = () => {
     return `/room/admin`;
 }

@@ -10,6 +10,8 @@ import {
   draft_product_admin,
   get_draft_product,
   remove_draft_product,
+  publish_product_staff,
+  draft_product_staff,
 } from "../../api/productApi";
 import ChangeStatusButton from "../ChangeStatusButton";
 import DeleteButton from "../DeleteButton";
@@ -77,7 +79,7 @@ const ProductTable = ({ data, onEdit, published }) => {
         <Space className="flex gap-4">
           {!published ? (
             <ChangeStatusButton
-              url={publish_product_admin(record.type.slug, record.slug)}
+              url={publish_product_staff(record.type.slug, record.slug)}
               resetPublishkey={get_published_product()}
               resetDraftKey={get_draft_product()}
               type="products"
@@ -88,7 +90,7 @@ const ProductTable = ({ data, onEdit, published }) => {
           ) : (
 
             <ChangeStatusButton
-              url={draft_product_admin(record.type.slug, record.slug)}
+              url={draft_product_staff(record.type.slug, record.slug)}
               resetPublishkey={get_published_product()}
               resetDraftKey={get_draft_product()}
               type="products"

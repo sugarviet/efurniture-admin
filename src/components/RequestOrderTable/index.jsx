@@ -13,22 +13,8 @@ import OrderDetail from "../../pages/Orders/components/OrderDetail";
 import AppModal from "../AppModal";
 import ShipperAssignModal from "../ShipperAssignModal";
 
-const mockData = [
-  {
-    _id: "1",
-    order_code: "ORD001",
-    total: 10000,
-  },
-  {
-    _id: "2",
-    order_code: "ORD002",
-    total: 20000,
-  },
-];
-
-const RequestOrderTable = ({data}) => {
-    console.log(data);
-    const [openAssignDelivery, setOpenAssignDelivery] = useState(false);
+const RequestOrderTable = ({ data }) => {
+  const [openAssignDelivery, setOpenAssignDelivery] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const { getColumnSearchProps } = useSearchTableColumn();
   const handleTableChange = (pagination) => {
@@ -45,9 +31,7 @@ const RequestOrderTable = ({data}) => {
   };
 
   const handleRequestButtonClick = () => {
-    
     console.log("Selected IDs:", selectedRowKeys);
-   
   };
 
   const rowSelection = {
@@ -57,78 +41,70 @@ const RequestOrderTable = ({data}) => {
 
   const COLUMN = [
     {
-        title: "Order",
-        dataIndex: 'order_code',
-        key: 'order_code',
-        render: (text) => (
-          <span className="text-base font-semibold">{text}</span>
-        ),
-        ...getColumnSearchProps("order_code"),
-  
+      title: "Order",
+      dataIndex: "order_code",
+      key: "order_code",
+      render: (text) => <span className="text-base font-semibold">{text}</span>,
+      ...getColumnSearchProps("order_code"),
+    },
+    {
+      title: "Total",
+      render: (_, record) => (
+        <span className="text-base">
+          {formatCurrency(record.order_checkout.final_total)}
+        </span>
+      ),
+    },
+    {
+      title: "Customer",
+      render: (_, record) => {
+        return <UserBrief data={record.order_shipping} />;
       },
-      {
-        title: "Total",
-        render: (_, record) => (
+    },
+    {
+      title: "Status",
+      dataIndex: ["current_order_tracking", "name"],
+      render: (text, record) => {
+        return (
+          <Tag className="text-bold uppercase" color={ORDER_STATE[text].color}>
+            <span className="font-bold">{text}</span>
+          </Tag>
+        );
+      },
+    },
+    {
+      title: "Payment status",
+      render: (_, record) => {
+        const isPaid = record.order_checkout.is_paid;
+        const label = isPaid ? "paid" : "not paid";
+        return (
+          <Tag
+            className="text-bold uppercase"
+            color={isPaid ? "success" : "error"}
+          >
+            <span className="font-bold">{label}</span>
+          </Tag>
+        );
+      },
+    },
+    {
+      title: "Create at",
+      render: (_, record) => {
+        return (
           <span className="text-base">
-            {formatCurrency(record.order_checkout.final_total)}
+            {formatDateByDateAndTime(record.createdAt)}
           </span>
-        ),
+        );
       },
-      {
-        title: "Customer",
-        render: (_, record) => {
-          return (
-            <UserBrief data={record.order_shipping}/>
-  
-          )
-          
-        },
-      },
-      {
-        title: "Status",
-        dataIndex: ["current_order_tracking", "name"],
-        render: (text, record) => {
-          
-          return (
-            <Tag className="text-bold uppercase" color={ORDER_STATE[text].color}>
-              <span className="font-bold">{text}</span>
-            </Tag>
-          );
-        },
-      },
-      {
-        title: "Payment status",
-        render: (_, record) => {
-          const isPaid = record.order_checkout.is_paid;
-          const label = isPaid ? "paid" : "not paid";
-          return (
-            <Tag
-              className="text-bold uppercase"
-              color={isPaid ? "success" : "error"}
-            >
-              <span className="font-bold">{label}</span>
-            </Tag>
-          );
-        },
-      },
-      {
-        title: "Create at",
-        render: (_, record) => {
-          return (
-            <span className="text-base">
-              {formatDateByDateAndTime(record.createdAt)}
-            </span>
-          );
-        },
-      },
-      {
-        title: "Action",
-        render: (_, record) => (
-          <DetailButton>
-              <OrderDetail data={record}/>
-            </DetailButton>
-        ),
-      },
+    },
+    {
+      title: "Action",
+      render: (_, record) => (
+        <DetailButton>
+          <OrderDetail data={record} />
+        </DetailButton>
+      ),
+    },
   ];
 
   return (
@@ -148,7 +124,10 @@ const RequestOrderTable = ({data}) => {
         onChange={handleTableChange}
       />
       <AppModal setIsOpen={setOpenAssignDelivery} isOpen={openAssignDelivery}>
-            <ShipperAssignModal orderId={selectedRowKeys} setOpenModal={setOpenAssignDelivery}/>
+        <ShipperAssignModal
+          orderId={selectedRowKeys}
+          setOpenModal={setOpenAssignDelivery}
+        />
       </AppModal>
     </div>
   );
