@@ -181,10 +181,13 @@ const type = {
     success: {
       confirm: 'Successfully confirm delivery trip',
       reject: 'Successfully reject delivery trip',
+      assign: 'Successfully assign shipper for delivery trip',
+
     },
     fail: {
       confirm: 'Failed confirm delivery trip',
       reject: 'Failed reject delivery trip',
+      assign: 'Failed assign shipper for delivery trip',
     }
   },
   login: {

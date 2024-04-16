@@ -5,8 +5,9 @@ import DetailButton from '../DetailButton';
 import WarehouseProductDetail from '../WarehouseProductDetail';
 import { withFetchData } from '../../hocs/withFetchData';
 import { get_published_product } from '../../api/productApi';
+import { isAdmin } from '../../utils/getCurrentUserRole';
 const WarehouseProductTable = ({ data }) => {
-    console.log('details:', data)
+    const admin = isAdmin();
     const { getColumnSearchProps } = useSearchTableColumn()
     const STAFF_COLUMNS = [
         {
@@ -58,17 +59,17 @@ const WarehouseProductTable = ({ data }) => {
                 <span className="text-[#959798] text-xs">{record.description}</span>
             ),
         },
-        {
-            title: "Actions",
-            render: (text, record) => (
-                <Space className="flex gap-4">
-                    <DetailButton>
-                        <WarehouseProductDetail productId={record._id}/>
-
-                    </DetailButton>
-                </Space>
-            ),
-        },
+        admin ? null :
+            {
+                title: "Actions",
+                render: (text, record) => (
+                    <Space className="flex gap-4">
+                        <DetailButton>
+                            <WarehouseProductDetail productId={record._id} />
+                        </DetailButton>
+                    </Space>
+                ),
+            },
 
     ].filter(Boolean);
     return (

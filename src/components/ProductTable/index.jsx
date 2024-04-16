@@ -44,10 +44,10 @@ const ProductTable = ({ data, onEdit, published }) => {
       title: 'Color',
 
       render: (text, record) => (
-        
+
         <div className="flex gap-2 items-center">
           {record.variation[0].properties.map(property => <div key={property._id} style={{ backgroundColor: property.value, width: 20, height: 20, borderRadius: '50%', border: '1px solid #d3d3d3' }} />)}
-          <AddNewVariationButton id={record._id}/>
+          <AddNewVariationButton id={record._id} />
 
         </div>
       )
@@ -105,7 +105,14 @@ const ProductTable = ({ data, onEdit, published }) => {
               <UpdateProductForm data={record} />
             </CreatingProductProvider>
           </EditButton>
+          
+          {!published ? (
+            <DeleteButton url={remove_draft_product()} notiType="product" notiAction="delete" refreshKey={get_draft_product()} id={record.slug} />
+          ) : null
+          }
         </Space>
+
+
       ),
     },
   ].filter(Boolean);

@@ -30,7 +30,8 @@ export function useGetSiderItem() {
     go_to_create_voucher,
     go_to_transactions,
     go_to_delivery_trip,
-    go_to_reports
+    go_to_reports,
+    go_to_order_request
   } = useNavigation();
 
   function getItem(label, key, icon, children, type, onClick) {

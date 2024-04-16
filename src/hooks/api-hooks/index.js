@@ -117,3 +117,12 @@ export const useUpdateWithMultipleKeys = (url, params, onSuccessAPI = () => { },
   );
 };
 
+export const usePostWithMultipleKeys = (url, params, onSuccessAPI = () => { }, onErrorAPI = () => { }, keys) => {
+  return useGenericMutationMultipleKeys(
+    (data) => request.post(url, data),
+    keys,
+    params,
+    onSuccessAPI,
+    onErrorAPI
+  );
+};
