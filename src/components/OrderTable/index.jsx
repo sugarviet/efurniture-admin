@@ -7,34 +7,7 @@ import DetailButton from '../DetailButton';
 import OrderDetail from "../../pages/Orders/components/OrderDetail";
 import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
 import PropTypes from "prop-types";
-
-export const ORDER_STATE = [
-  {},
-  {
-    status: "pending",
-    color: "warning",
-  },
-  {
-    status: "processing",
-    color: "processing",
-  },
-  {
-    status: "shipping",
-    color: "purple",
-  },
-  {
-    status: "done",
-    color: "success",
-  },
-  {
-    status: "failed",
-    color: "error",
-  },
-  {
-    status: "cancelled",
-    color: "default",
-  },
-];
+import { ORDER_STATE } from "../../constants/order";
 
 function OrderTable({ data, onDetail }) {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -89,9 +62,9 @@ function OrderTable({ data, onDetail }) {
       title: "Status",
       dataIndex: ["current_order_tracking", "name"],
       render: (text, record) => {
-        const { status, color } = ORDER_STATE[record.order_tracking.length];
+        
         return (
-          <Tag className="text-bold uppercase" color={color}>
+          <Tag className="text-bold uppercase" color={ORDER_STATE[text].color}>
             <span className="font-bold">{text}</span>
           </Tag>
         );
@@ -158,6 +131,14 @@ function OrderTable({ data, onDetail }) {
         {
           value: 'shipping',
           label: 'Shipping',
+        },
+        {
+          value: 'done',
+          label: 'Done',
+        },
+        {
+          value: 'cancelled',
+          label: 'Cancelled',
         },
       
       ]}
