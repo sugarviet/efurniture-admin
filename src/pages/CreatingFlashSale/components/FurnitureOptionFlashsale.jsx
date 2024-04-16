@@ -9,10 +9,9 @@ import { usePost } from "../../../hooks/api-hooks";
 import { get_valid_product_flash_sale } from "../../../api/flashsaleApi";
 
 function FurnitureOptionFlashsale({ data, onSelect, startDay, endDay }) {
-  console.log('FurnitureOptionFlashsale', startDay, endDay);
+
   const { mutate: mutateValidProduct, data: listProductFlashsale } = usePost(get_valid_product_flash_sale(), undefined)
-  console.log(listProductFlashsale)
-  // const [furniture, setFurniture] = useState(data.data || []);
+ 
   const [furniture, setFurniture] = useState(listProductFlashsale || []);
 
   const handleSearch = (value) => {
@@ -36,7 +35,7 @@ function FurnitureOptionFlashsale({ data, onSelect, startDay, endDay }) {
         onSearch={handleSearch}
         placeholder="Find furniture by name..."
       />
-      <ul className="h-72 overflow-y-auto no-scrollbar">
+      <ul className="h-72 overflow-y-auto thin-scroll-bar mr-2">
         {listProductFlashsale?.map((item) => {
           const { _id, thumbs, name, sale_price } = item;
           return (

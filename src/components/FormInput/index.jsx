@@ -12,12 +12,14 @@ const FormInput = ({
   message,
   inputType,
   className,
+  noStyle,
   readOnly
 }) => {
   return (
     <FormItem
       label={label}
       name={name}
+      noStyle={noStyle}
       type={type}
       required={required}
       message={message}

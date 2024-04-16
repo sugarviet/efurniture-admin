@@ -15,6 +15,7 @@ const FormSelect = ({
   className,
   mode,
   allowClear,
+  disabled,
   style,
   onChange,
 }) => {
@@ -29,6 +30,7 @@ const FormSelect = ({
     >
       <Select
         mode={mode}
+        disabled={disabled}
         allowClear={allowClear}
         value={defaultValue}
         placeholder={placeholder}

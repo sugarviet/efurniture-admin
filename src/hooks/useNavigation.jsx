@@ -25,6 +25,7 @@ function useNavigation() {
   const go_to_delivery_trip = () => navigation("/delivery-trip");
   const go_to_reports = () => navigation("/reports");
   const go_to_report_detail = () => navigation("/report/:id");
+  const go_to_order_request = () => navigation("/order-request");
 
 
   return {
@@ -47,7 +48,8 @@ function useNavigation() {
     go_to_transactions,
     go_to_delivery_trip,
     go_to_reports,
-    go_to_report_detail
+    go_to_report_detail,
+    go_to_order_request
   };
 }
 

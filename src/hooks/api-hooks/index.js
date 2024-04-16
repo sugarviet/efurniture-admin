@@ -45,9 +45,39 @@ const useGenericMutation = (func, key, params, onSuccessAPI, onErrorAPI) => {
   });
 };
 
+const useGenericMutationMultipleKeys = (func, keys, params, onSuccessAPI, onErrorAPI) => {
+  const queryClient = useQueryClient();
+  return useMutation(func, {
+    onSuccess: (data) => {
+      onSuccessAPI(data);
+    },
+    onError: (error) => {
+      onErrorAPI(error);
+    },
+    onSettled: () => {
+      keys.forEach(key => {
+        queryClient.invalidateQueries([key, params]);
+      });
+    },
+  });
+};
+
 export const useDelete = (url, params, onSuccessAPI = () => { }, onErrorAPI = () => { }, key) => {
   return useGenericMutation(
     (id) => request.delete(`${url}/${id}`),
+    key,
+    params,
+    onSuccessAPI,
+    onErrorAPI
+  );
+};
+
+export const useDeleteWithBody = (url, params, onSuccessAPI = () => { }, onErrorAPI = () => { }, key) => {
+  return useGenericMutation(
+    (data) => {
+      const { _id, body } = data
+      return request.delete(`${url}/${_id}`, { data: body })
+    },
     key,
     params,
     onSuccessAPI,
@@ -77,4 +107,22 @@ export const useUpdate = (url, params, onSuccessAPI = () => { }, onErrorAPI = ()
   );
 };
 
+export const useUpdateWithMultipleKeys = (url, params, onSuccessAPI = () => { }, onErrorAPI = () => { }, keys) => {
+  return useGenericMutationMultipleKeys(
+    (data) => request.put(url, data),
+    keys,
+    params,
+    onSuccessAPI,
+    onErrorAPI
+  );
+};
 
+export const usePostWithMultipleKeys = (url, params, onSuccessAPI = () => { }, onErrorAPI = () => { }, keys) => {
+  return useGenericMutationMultipleKeys(
+    (data) => request.post(url, data),
+    keys,
+    params,
+    onSuccessAPI,
+    onErrorAPI
+  );
+};

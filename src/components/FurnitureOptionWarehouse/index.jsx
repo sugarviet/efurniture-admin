@@ -34,7 +34,7 @@ function FurnitureOptionWarehouse({ data, onSelect }) {
       />
 
       <Note type='color'/>
-      <ul className="h-72 overflow-y-auto no-scrollbar">
+      <ul className="h-72 overflow-y-auto thin-scroll-bar mr-2">
         {furniture.map((item) => {
 
           const selectedVariation = variationColor

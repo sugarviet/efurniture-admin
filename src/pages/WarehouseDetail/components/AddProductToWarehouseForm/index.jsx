@@ -12,7 +12,7 @@ const AddProductToWarehouseForm = ({ id }) => {
   const { addProductToWarehouse } = useWarehouse(id);
   const [form] = Form.useForm();
   const handleSubmit = (values) => {
-    console.log("Received values of form: ", values);
+  
     const body = {
       products: values.products.map((item) => ({
         product: item.product._id,

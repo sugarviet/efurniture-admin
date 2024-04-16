@@ -4,53 +4,56 @@ import LinkItem from "../LinkItem";
 import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
 import EditButton from "../EditButton";
 import EditWarehouseForm from "../EditWarehouseForm";
+import WarehouseProductTable from "../WarehouseProductTable";
 const WarehouseTable = ({ data }) => {
   const { getColumnSearchProps } = useSearchTableColumn();
-  const columns = [
-    {
-      title: "Location",
-      dataIndex: "location",
-      key: "location",
-      render: (text, record) => (
-        <LinkItem to={`/warehouse/${record._id}`}><span className="text-base">{text}</span></LinkItem>
-      ),
+  console.log(data)
+  // const columns = [
+  //   {
+  //     title: "Location",
+  //     dataIndex: "location",
+  //     key: "location",
+  //     render: (text, record) => (
+  //       <LinkItem to={`/warehouse/${record._id}`}><span className="text-base">{text}</span></LinkItem>
+  //     ),
 
-    },
-    {
-      title: "District",
-      dataIndex: "district",
-      key: "district",
-      ...getColumnSearchProps("district"),
+  //   },
+  //   {
+  //     title: "District",
+  //     dataIndex: "district",
+  //     key: "district",
+  //     ...getColumnSearchProps("district"),
 
-    },
-    {
-      title: "Ward",
-      dataIndex: "ward",
-      key: "ward",
-      ...getColumnSearchProps("ward"),
-    },
-    {
-      title: "Action",
-      key: "action",
-      width: "30%",
-      render: (text, record) => (
-        <Space className="flex gap-4">
-          <EditButton>
-            <EditWarehouseForm data={record}/>
-          </EditButton>
-          {/* <DeleteButton url={remove_flash_sale()} notiType="flashsale" notiAction="delete" refreshKey={get_all_flash_sale()} id={record._id} /> */}
+  //   },
+  //   {
+  //     title: "Ward",
+  //     dataIndex: "ward",
+  //     key: "ward",
+  //     ...getColumnSearchProps("ward"),
+  //   },
+  //   {
+  //     title: "Action",
+  //     key: "action",
+  //     width: "30%",
+  //     render: (text, record) => (
+  //       <Space className="flex gap-4">
+  //         <EditButton>
+  //           <EditWarehouseForm data={record}/>
+  //         </EditButton>
+  //         {/* <DeleteButton url={remove_flash_sale()} notiType="flashsale" notiAction="delete" refreshKey={get_all_flash_sale()} id={record._id} /> */}
         
-        </Space>
-      ),
-    },
-  ];
+  //       </Space>
+  //     ),
+  //   },
+  // ];
   return (
-    <Table
-      rowKey="_id"
-      columns={columns}
-      dataSource={data}
-      pagination={{ hideOnSinglePage: true }}
-    />
+    // <Table
+    //   rowKey="_id"
+    //   columns={columns}
+    //   dataSource={data}
+    //   pagination={{ hideOnSinglePage: true }}
+    // />
+    <WarehouseProductTable />
   );
 };
 

@@ -1,25 +1,11 @@
-import { Table, Button, Descriptions, Tag } from 'antd';
+import { Table, Descriptions, Tag } from 'antd';
 import { formatCurrency } from '../../../../utils/formatCurrency';
 import PropTypes from "prop-types";
-import UserBrief from '../../../../components/UserBrief';
-import { ORDER_STATE } from '../../../../components/OrderTable';
+import { ORDER_STATE } from '../../../../constants/order';
 
 const OrderDetail = ({ data }) => {
     console.log('detail', data);
-    const PAYMENT_TYPE = {
-        "Not Paid": {
-            title: "Not Paid",
-            color: "red",
-        },
-        "Paid": {
-            title: "Paid",
-            color: "green",
-        },
-        "Deposit": {
-            title: "Deposit",
-            color: "blue",
-        },
-    }
+    
     const productColumns = [
         {
             title: "Thumb",
@@ -105,8 +91,8 @@ const OrderDetail = ({ data }) => {
                     <Descriptions.Item label="Email">{data.order_shipping.email}</Descriptions.Item>
                     <Descriptions.Item label="Phone">{data.order_shipping.phone}</Descriptions.Item>
                     <Descriptions.Item label="Order Status">
-                        <Tag color={ORDER_STATE[data.order_tracking.length].color} className='uppercase font-bold'>
-                            {ORDER_STATE[data.order_tracking.length].status}
+                        <Tag color={ORDER_STATE[data.current_order_tracking.name].color} className='uppercase font-bold'>
+                            {data.current_order_tracking.name}
                         </Tag>
                     </Descriptions.Item>
                 </Descriptions>

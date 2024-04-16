@@ -53,3 +53,21 @@ body {
       scrollbar-width: none; 
 }
 }
+
+@layer utilities {
+  .thin-scroll-bar::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .thin-scroll-bar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  .thin-scroll-bar::-webkit-scrollbar-thumb {
+    background: #d3d3d3;
+  }
+
+  .thin-scroll-bar {
+      
+}
+}

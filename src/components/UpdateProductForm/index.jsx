@@ -6,22 +6,23 @@ import useCreatingProductManagement from "../../pages/CreatingProduct/hooks/useC
 import FormUploadButton from "../FormUploadButton";
 import PropTypes from "prop-types";
 import { formatThumbs } from "../../utils/formatThumb";
-import { useUpdate } from "../../hooks/api-hooks";
-import { get_draft_product, get_draft_product_staff, update_product_staff } from "../../api/productApi";
+import { useUpdate, useUpdateWithMultipleKeys } from "../../hooks/api-hooks";
+import { get_draft_product, get_draft_product_staff, get_published_product, update_product_staff } from "../../api/productApi";
 import { useCreatingProductValues } from "../../pages/CreatingProduct/CreatingProductContext";
 import useNotification from "../../hooks/useNotification";
+import EditingVariationForm from "../EditingVariationForm";
 
 const UpdateProductForm = ({ data }) => {
-    const {error_message, success_message} = useNotification();
+    const { error_message, success_message } = useNotification();
     const { listAttribute, form } = useCreatingProductManagement();
-    
-    const { mutate: edit } = useUpdate(update_product_staff(data.slug), undefined, () => {
-        success_message('products', 'edit')
-    }, () => { 
-        error_message('products', 'edit')
-    }, get_draft_product_staff())
 
-    const {handleSelectType, handleSelectSubType} = useCreatingProductValues();
+    const { mutate: edit } = useUpdateWithMultipleKeys(update_product_staff(data.slug), undefined, () => {
+        success_message('products', 'edit')
+    }, () => {
+        error_message('products', 'edit')
+    }, [get_draft_product_staff(), get_published_product()])
+
+    const { handleSelectType, handleSelectSubType } = useCreatingProductValues();
 
     const formData = {
         ...data,
@@ -43,9 +44,19 @@ const UpdateProductForm = ({ data }) => {
     }));
 
     const onFinish = (values) => {
-
+        const variation = values.variation.map(variation => {
+            const { stock, ...rest } = variation;
+            return {
+              ...rest,
+              properties: rest.properties.map(property => {
+                const { stock, ...restProperty } = property;
+                return restProperty;
+              })
+            };
+          })
         const data = {
             ...values,
+            variation: variation,
             thumbs: formatThumbs(values.thumbs)
         }
         edit(data)
@@ -89,7 +100,7 @@ const UpdateProductForm = ({ data }) => {
 
                         name="regular_price"
                         placeholder="$$$" />
-                    <FormInputNumber label="Sale Pricing"
+                    <FormInputNumber label="Sell Pricing"
                         required
                         prefix="VND"
 
@@ -124,6 +135,7 @@ const UpdateProductForm = ({ data }) => {
                             )}
                 </div> */}
                 <FormUploadButton label="Display images" name="thumbs" defaultFileList={transformedThumbs} />
+                <EditingVariationForm data={data} />
                 <FormInput
                     label="3D model's id"
                     name="model3D"

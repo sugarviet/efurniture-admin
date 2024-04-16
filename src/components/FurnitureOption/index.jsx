@@ -24,13 +24,13 @@ function FurnitureOption({ data, onSelect }) {
         onSearch={handleSearch}
         placeholder="Find furniture by name..."
       />
-      <ul className="h-72 overflow-y-auto no-scrollbar">
+      <ul className="h-72 overflow-y-auto thin-scroll-bar">
         {furniture.map((item) => {
           const { _id, thumbs, name, sale_price } = item;
           return (
             <li
               onClick={() => onSelect(item)}
-              className="hover:cursor-pointer hover:opacity-50 my-2 border-b-[1px] py-2 flex justify-between"
+              className="hover:cursor-pointer hover:opacity-50 my-2 border-b-[1px] py-2 flex justify-between mr-2"
               key={_id}
             >
               <BriefInfo

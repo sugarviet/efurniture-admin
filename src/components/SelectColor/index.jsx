@@ -15,8 +15,6 @@ const SelectColor = ({
     onChange,
     value
 }) => {
-
-    console.log(data);
   return (
     <div>
          <Select

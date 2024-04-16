@@ -9,7 +9,7 @@ const E_COMMERCE_STATUS_KEYS = ["new orders", "on hold", "out of stock"];
 
 const Home = () => {
   return (
-    <main>
+    <main className="flex flex-col gap-4">
       <ECommerceStatusCardList />
 
       <TotalSellByMonth />

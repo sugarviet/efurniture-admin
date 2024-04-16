@@ -1,11 +1,15 @@
-import FormList from '../../../components/FormList';
+import FormList from '../FormList';
 import { Divider } from 'antd';
-import FormSelectColor from '../../../components/FormSelectColor';
-import FormInputNumber from '../../../components/FormInputNumber';
+import FormSelectColor from '../FormSelectColor';
+import FormInputNumber from '../FormInputNumber';
 import FormSelect from "@components/FormSelect";
+import FormInput from '../FormInput';
+import PropTypes from "prop-types";
 
 const variationSelect = [{ label: 'color', value: 'color' }]
-const CreatingVariation = () => {
+const EditingVariationForm = ({ data }) => {
+
+    const initialVariationLength = data.variation.length;
     return (
 
         <FormList
@@ -16,7 +20,8 @@ const CreatingVariation = () => {
             {({ name, restField, remove }, index) => (
                 <div className="w-full">
                     <div className="flex justify-between my-2">
-                       
+                        <p className="text-base">Variations</p>
+
                     </div>
                     <FormSelect
                         {...restField}
@@ -30,28 +35,33 @@ const CreatingVariation = () => {
                     <div>
                         <FormList
                             initialValues={[{ value: undefined, sub_price: 10000 }]}
+                            isAddMore={false}
                             name={[name, "properties"]}
                         >
 
                             {({ name, restField, remove }, index) => (
                                 <div className="w-full">
                                     <div className="flex justify-between my-2">
-
-                                        <p
+                                        {index <= initialVariationLength ? null : <p
                                             onClick={() => remove(name)}
                                             className="cursor-pointer underline hover:text-red-700 text-red-500"
                                         >
                                             Remove
-                                        </p>
+                                        </p>}
+
                                     </div>
 
-
+                                    <FormInput name={[name, 'propertyId']} className='w-full'
+                                        inputType='hidden'
+                                        noStyle={true}
+                                        label="propertyId" />
                                     <FormSelectColor
                                         {...restField}
                                         name={[name, "value"]}
                                         className="w-full"
                                         label="Value"
                                         required
+                                        disabled={index <= initialVariationLength}
 
 
                                     />
@@ -85,4 +95,9 @@ const CreatingVariation = () => {
     )
 }
 
-export default CreatingVariation
+EditingVariationForm.propTypes = {
+    data: PropTypes.object,
+};
+
+
+export default EditingVariationForm

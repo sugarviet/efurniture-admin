@@ -10,7 +10,7 @@ const Users = () => {
     <div>
 
       <TableCard label={'User management'}>
-      <PublishedUserTable />
+        <PublishedUserTable />
       </TableCard>
     </div>
   );
