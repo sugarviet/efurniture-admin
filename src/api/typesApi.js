@@ -31,6 +31,14 @@ export const draft_types_admin= (type) => {
     return `/type/admin/draft/${type}`;
 }
 
+export const publish_types_staff= (type) => {
+    return `/type/staff/${type}`;
+}
+
+export const draft_types_staff= (type) => {
+    return `/type/staff/draft/${type}`;
+}
+
 export const remove_types= () => {
     return `/type/admin/draft`;
 }

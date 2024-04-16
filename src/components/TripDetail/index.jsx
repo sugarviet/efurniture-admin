@@ -74,17 +74,23 @@ const TripDetail = ({ data }) => {
 
     const expandedRowRender = (record) => (
         <ul>
-            {record.order.warehouses.map((warehouse, index) => (
-                warehouse.products.map((product, productIndex) => (
-                    <li key={`${index}-${productIndex}`}>
+            {record.order.order_products.map((product, index) => (
+               
+                    <li key={`${index}-${index}`}>
                         <div className='flex gap-4'>
-                         #{productIndex + 1}   {product.name} x {product.quantity}
+                         #{index + 1} 
+                         <div className='flex items-center gap-2'>
+                            <div>
+                                <img src={product.product.thumbs[0]} alt={product.product.name} style={{height: 20, width: 20}}/>
+                            </div>
+                           {product.product.name} x {product.quantity}
+                         </div>
                         {product.variation.map(variation => (
                             <div key={variation.variation_id} style={{ width: 20, height:20, borderRadius: '50%', backgroundColor: variation.color }}/>
                         ))}
                         </div>
                     </li>
-                ))
+                
             ))}
         </ul>
     );

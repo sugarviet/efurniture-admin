@@ -14,12 +14,11 @@ import useCreatingProductManagement from "../hooks/useCreatingProductManagement"
 import FormMeasurementInput from "../../../components/FormMeasurementInput";
 import FormInputNumber from "../../../components/FormInputNumber";
 import CreatingVariation from "./CreatingVariation";
+import Note from "../../../components/Note";
 
 const { TabPane } = Tabs;
 
 const CreatingProductForm = () => {
-  const [openModalCreate, setOpenModalCreate] = useState(false);
-  const [openModalSubtypeCreate, setOpenModalSubtypeCreate] = useState(false);
   const { listAttribute, form, create_draft_product } = useCreatingProductManagement();
 
   const admin = isAdmin();
@@ -65,7 +64,7 @@ const CreatingProductForm = () => {
             >
               Discard
             </Button>
-            {/* <Button htmlType="submit">Save draft</Button> */}
+          
             
             {admin ? (
               <Button type="primary" className="primary" htmlType="submit">
@@ -93,6 +92,8 @@ const CreatingProductForm = () => {
               placeholder="Write description here..."
             />
 
+            <Note type="product_shipping_fee"/>
+
             <Card>
               <Tabs tabPosition="left" className="mb-4">
                 <TabPane tab="Pricing" key="pricing">
@@ -117,33 +118,11 @@ const CreatingProductForm = () => {
                 <TabPane tab="Attributes" key="attributes">
                   <div className="grid grid-cols-2 items-center gap-52">
                     <FormSelectType />
-                    {/* <Button
-                      className="w-40"
-                      onClick={() => setOpenModalCreate(true)}
-                    >
-                      Create new type
-                    </Button>
-                    <AppModal
-                      isOpen={openModalCreate}
-                      setIsOpen={setOpenModalCreate}
-                    >
-                      {openModalCreate ? <CreatingType /> : null}
-                    </AppModal> */}
+                 
                   </div>
                   <div className="grid grid-cols-2 items-center gap-52">
                     <FormSelectSubTypes />
-                    {/* <Button
-                      className="w-40"
-                      onClick={() => setOpenModalSubtypeCreate(true)}
-                    >
-                      Create new subtype
-                    </Button>
-                    <AppModal
-                      isOpen={openModalSubtypeCreate}
-                      setIsOpen={setOpenModalSubtypeCreate}
-                    >
-                      <CreatingSubTypesForm />
-                    </AppModal> */}
+                  
                   </div>
 
                   <div>
@@ -171,12 +150,7 @@ const CreatingProductForm = () => {
                 value=""
                 placeholder="Write title here..."
               />
-              {/* <iframe
-                src="https://admin.roomle.com/login"
-                title="W3Schools Free Online Web Tutorials"
-                height={600}
-                width={900}
-              ></iframe> */}
+             
             </Card>
           </div>
 

@@ -3,7 +3,7 @@ import AppModal from '../../../components/AppModal'
 import { Form } from 'antd'
 import FormTextArea from "@components/FormTextArea";
 import { useUpdate } from '../../../hooks/api-hooks';
-import { get_all_delivery_trip_pending_staff, reject_delivery_trip } from '../../../api/deliveryTripApi';
+import { get_all_delivery_trip_pending_staff, reject_delivery_trip, get_all_delivery_trip_staff } from '../../../api/deliveryTripApi';
 import useNotification from '../../../hooks/useNotification';
 import PropTypes from "prop-types";
 
@@ -18,7 +18,7 @@ const RejectButton = ({ id }) => {
     }, () => {
         error_message('deliveryTrip', 'reject')
 
-    }, get_all_delivery_trip_pending_staff())
+    }, get_all_delivery_trip_staff())
    
 
     const onFinish = (values) => {
