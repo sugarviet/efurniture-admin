@@ -6,8 +6,10 @@ import {
   get_draft_rooms_api,
   get_published_rooms_api,
   get_to_draft_room_api,
+  get_to_publish_room_staff_api,
   get_to_publish_room_api,
   remove_draft_room,
+  get_to_draft_room_staff_api,
 } from "../../api/roomApi";
 import PropTypes from "prop-types";
 import EditButton from "../EditButton";
@@ -55,7 +57,7 @@ function RoomTable({ data, published }) {
               
             {!published ? (
               <ChangeStatusButton
-                url={get_to_publish_room_api(record._id)}
+                url={get_to_publish_room_staff_api(record._id)}
                 resetPublishkey={get_published_rooms_api()}
                 resetDraftKey={get_draft_rooms_api()}
                 type="rooms"
@@ -66,7 +68,7 @@ function RoomTable({ data, published }) {
               </ChangeStatusButton>
             ) : (
               <ChangeStatusButton
-                url={get_to_draft_room_api(record._id)}
+                url={get_to_draft_room_staff_api(record._id)}
                 resetPublishkey={get_published_rooms_api()}
                 resetDraftKey={get_draft_rooms_api()}
                 type="rooms"

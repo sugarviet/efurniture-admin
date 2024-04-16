@@ -1,4 +1,4 @@
-import { confirm_delivery_trip_pending, get_all_delivery_trip_pending_staff } from "../../api/deliveryTripApi"
+import { confirm_delivery_trip_pending, get_all_delivery_trip_pending_staff, get_all_delivery_trip_staff } from "../../api/deliveryTripApi"
 import { useUpdate } from "../../hooks/api-hooks"
 import useNotification from "../../hooks/useNotification";
 import PropTypes from "prop-types";
@@ -10,7 +10,7 @@ const ConfirmDeliveryButton = ({ deliveryId }) => {
     }, () => {
         error_message('deliveryTrip', 'confirm')
 
-    }, get_all_delivery_trip_pending_staff());
+    }, get_all_delivery_trip_staff());
     return (
         <button onClick={() => confirm()} className="bg-black text-white font-bold px-3 py-2 rounded-lg hover:opacity-80">Confirm</button>
 

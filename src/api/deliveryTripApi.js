@@ -2,6 +2,10 @@ export const get_all_delivery_trip_pending_staff = () => {
     return '/deliveryTrip/staff/pending'
 }
 
+export const get_all_delivery_trip_staff = () => {
+    return '/deliveryTrip/staff'
+}
+
 export const confirm_delivery_trip_pending = (deliveryTripId) => {
     return `/deliveryTrip/staff/confirm/${deliveryTripId}`
 }
@@ -19,5 +23,5 @@ export const get_all_delivery_account = () => {
 }
 
 export const create_delivery_trip = () => {
-    return '/deliveryTrip'
+    return '/deliveryTrip/staff'
 }

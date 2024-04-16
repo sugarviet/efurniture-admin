@@ -6,7 +6,6 @@ const RequestOrder = () => {
     <main>
         <TableCard label="Request Order">
             <RequestOrderTable />
-
         </TableCard>
     </main>
   )

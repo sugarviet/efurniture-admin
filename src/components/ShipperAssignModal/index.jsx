@@ -1,4 +1,4 @@
-import { Form, Radio, Tag } from 'antd'
+import { Radio, Tag } from 'antd'
 import { useState } from 'react'
 import SearchInput from '../SearchInput';
 import { classNames } from '../../utils/classNames';
@@ -22,8 +22,8 @@ const SHIPPER_STATUS = {
 
 const ShipperAssignModal = ({ orderId, data, setOpenModal }) => {
     const { success_message, error_message } = useNotification();
-   
-    const { mutate } = usePost(create_delivery_trip(), undefined, () => {
+    
+    const { mutate: assignOrder } = usePost(create_delivery_trip(), undefined, () => {
         success_message('deliveryTrip', 'assign')
     }, () => {
         error_message('deliveryTrip', 'assign')
@@ -35,7 +35,7 @@ const ShipperAssignModal = ({ orderId, data, setOpenModal }) => {
 
     };
 
-    console.log(shipper);
+    console.log(data);
     const handleSelectShipper = (selectedShipper) => {
         setShipper(selectedShipper);
     };
@@ -44,9 +44,10 @@ const ShipperAssignModal = ({ orderId, data, setOpenModal }) => {
         const orders = orderId.map((orderId) => ({
             order: orderId
         }));
-        console.log('Selected shipper:', { accountId: shipper._id, orders: orders });
-        setShipper(null)
-        setOpenModal(false);
+        console.log('Selected shipper:', { account_id: shipper._id, orders: orders });
+        // setShipper(null)
+        // setOpenModal(false);
+        assignOrder({ account_id: shipper._id, orders: orders })
     };
     return (
         <div>
