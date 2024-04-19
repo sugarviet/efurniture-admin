@@ -2,13 +2,6 @@ import { Select } from "antd"
 import { classNames } from "../../utils/classNames"
 const SelectColorWarehouse = ({
     data,
-    label,
-    name,
-    placeholder,
-    type,
-    required,
-    message,
-    defaultValue,
     className,
     allowClear,
     style,

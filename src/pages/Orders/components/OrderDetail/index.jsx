@@ -102,6 +102,7 @@ const OrderDetail = ({ data }) => {
             <div>
                 <span className='font-bold text-lg uppercase'>### List order products</span>
                 <Table
+                    rowKey="code"
                     dataSource={data.order_products}
                     columns={productColumns}
                     pagination={false}

@@ -29,10 +29,12 @@ const cookies = () => ({
 
 export const request = axios.create({
     baseURL: BASE_URL,
+    withCredentials: true,
   });
 
   request.interceptors.request.use(
     (config) => {
+      config.headers['Access-Control-Allow-Origin'] = '*';
       config.headers[cookies()['accessToken'].key] = cookies()['accessToken'].value;
       config.headers[cookies()['refreshToken'].key] = cookies()['refreshToken'].value;
       config.headers[cookies()['accountId'].key] = cookies()['accountId'].value;

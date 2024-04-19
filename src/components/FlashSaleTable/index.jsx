@@ -2,19 +2,14 @@ import { Space, Table, Tag } from "antd";
 import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
 import EditButton from "../EditButton";
 import PropTypes from "prop-types";
-import ChangeStatusButton from "../ChangeStatusButton";
-import { isAdmin } from "../../utils/getCurrentUserRole";
 import {
-  draft_flash_sale,
   get_all_flash_sale,
-  publish_flash_sale,
   remove_flash_sale,
 } from "../../api/flashsaleApi";
 import EditFlashsaleForm from "../EditFlashsaleForm";
 import DeleteButton from "../DeleteButton";
-import { formatDateByDateAndTime, formatGMTDate } from "../../utils/formatDate";
+import { formatGMTDate } from "../../utils/formatDate";
 const FlashSaleTable = ({ data, onEdit, published }) => {
-  const admin = isAdmin();
   console.log(data);
   const { getColumnSearchProps } = useSearchTableColumn();
 
@@ -81,29 +76,7 @@ const FlashSaleTable = ({ data, onEdit, published }) => {
             <EditFlashsaleForm />
           </EditButton>
           <DeleteButton url={remove_flash_sale()} notiType="flashsale" notiAction="delete" refreshKey={get_all_flash_sale()} id={record._id} />
-          {/* {admin && !published ? (
-            <ChangeStatusButton
-              url={publish_flash_sale(record._id)}
-              resetPublishkey={get_all_flash_sale()}
-              resetDraftKey={get_all_flash_sale()}
-              type="flashsales"
-              action="publish"
-            >
-              Publish
-            </ChangeStatusButton>
-          ) : (
-            admin && (
-              <ChangeStatusButton
-                url={draft_flash_sale(record._id)}
-                resetPublishkey={get_all_flash_sale()}
-                resetDraftKey={get_all_flash_sale()}
-                type="flashsales"
-                action="draft"
-              >
-                Draft
-              </ChangeStatusButton>
-            )
-          )} */}
+          
         </Space>
       ),
     },
@@ -124,7 +97,7 @@ const FlashSaleTable = ({ data, onEdit, published }) => {
 };
 
 FlashSaleTable.propTypes = {
-  data: PropTypes.object,
+  data: PropTypes.array,
   onEdit: PropTypes.func,
 };
 

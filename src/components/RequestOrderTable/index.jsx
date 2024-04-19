@@ -120,6 +120,9 @@ const RequestOrderTable = ({ data }) => {
         rowKey="_id"
         rowSelection={rowSelection}
         columns={COLUMN}
+        pagination={{ 
+          hideOnSinglePage: true
+         }}
         dataSource={data.data}
         onChange={handleTableChange}
       />

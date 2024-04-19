@@ -64,7 +64,7 @@ const WarehouseProductTable = ({ data }) => {
                 title: "Actions",
                 render: (text, record) => (
                     <Space className="flex gap-4">
-                        <DetailButton>
+                        <DetailButton modalWidth={1000}>
                             <WarehouseProductDetail productId={record._id} />
                         </DetailButton>
                     </Space>
