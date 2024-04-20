@@ -70,6 +70,7 @@ const CreatingSubTypesForm = () => {
       <FormSelect
         label="Attributes"
         name="attributes"
+        placeholder="Select Attributes"
         options={typesAttributeOptions}
         mode="multiple"
         required
@@ -77,6 +78,7 @@ const CreatingSubTypesForm = () => {
       <FormSelect
         label="Group attributes"
         name="group"
+        placeholder="Select Group Attributes"
         options={allSubtypesGroupOptions}
         required
       />
@@ -90,7 +92,7 @@ const CreatingSubTypesForm = () => {
       <FormTextArea
         label="Description"
         name="description"
-        required
+        type='text'
         placeholder="Enter description"
         className="w-full"
       />

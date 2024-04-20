@@ -11,6 +11,27 @@ const validateWhitespace = () => ({
   },
 });
 
+const validateLeadingTrailingWhitespace = () => ({
+  validator(rule, value, callback) {
+    if (value.trim() !== value) {
+      callback("Input cannot have leading or trailing whitespace!");
+    } else {
+      callback();
+    }
+  },
+});
+
+const validateSpecialCharacters = () => ({
+  validator(rule, value, callback) {
+    const specialCharacters = /[!@#$%^&*(),.?":{}|<>]/;
+    if (specialCharacters.test(value)) {
+      callback("Input cannot contain special characters!");
+    } else {
+      callback();
+    }
+  },
+});
+
 const validateConfirmPassword = ({ getFieldValue }) => ({
   validator(_, value) {
     if (!value || getFieldValue("password") === value) {
@@ -40,8 +61,11 @@ const FORM_TYPES = {
       { type: "email", required: true, message: "Please enter a valid email" },
     ],
   },
+  text:{
+    rules: [{ required: true }, validateWhitespace, validateSpecialCharacters, validateLeadingTrailingWhitespace]
+  },
   default: {
-    rules: [{ required: false, message: "" }],
+    rules: [{ required: false, message: "" }, validateWhitespace],
   },
 };
 

@@ -28,7 +28,7 @@ const RoomForm = () => {
           <FormInput
             label="Name"
             name="name"
-            required
+            type='text'
             placeholder="Write room name here..."
             message="Please enter the name of the room"
           />
@@ -36,6 +36,7 @@ const RoomForm = () => {
           <FormTextArea
             label="Description"
             name="description"
+            type='text'
             required
             placeholder="Write description here..."
             message="Please enter the description of the room"

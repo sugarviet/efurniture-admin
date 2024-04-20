@@ -5,15 +5,31 @@ import FormDatePickerWithTime from "../FormDatePickerWithTime";
 import FormList from "../FormList";
 import FurnitureSelection from "../FurnitureSelection";
 import FormInputNumber from "../FormInputNumber";
+import dayjs from "dayjs";
+import { formatIntoTypeDate } from "../../utils/formatDate";
+import useFlashSale from "../../hooks/useFlashSale";
 
-const EditFlashsaleForm = () => {
+const EditFlashsaleForm = ({ data }) => {
+    console.log(data);
+    const formateData = {
+        ...data,
+        startDay: formatIntoTypeDate(data.startDay),
+        endDay: formatIntoTypeDate(data.endDay),
+    };
+    const { handleEditFlashsale } = useFlashSale(data._id)
+
+    console.log(formateData);
+
     const [form] = Form.useForm();
-    const handleSubmit = () => { }
+    const handleSubmit = (values) => { 
+        handleEditFlashsale(values)
+    };
     return (
         <div>
             <Form
                 form={form}
                 layout="vertical"
+                initialValues={formateData}
                 requiredMark="optional"
                 onFinish={handleSubmit}
                 autoComplete="off"
@@ -47,7 +63,9 @@ const EditFlashsaleForm = () => {
                         </div>
 
                         <FormList
-                            initialValues={[{ product: undefined, salePrice: 10000, count: 1 }]}
+                            initialValues={[
+                                { product: undefined, salePrice: 10000, count: 1 },
+                            ]}
                             name="products"
                         >
                             {({ name, remove, restField }) => {
@@ -62,9 +80,12 @@ const EditFlashsaleForm = () => {
                                                         const products =
                                                             [...getFieldValue(["products"])] || [];
 
+                                                            console.log(products);
+
                                                         const isDuplicate =
                                                             products.filter(
-                                                                (item) => item.product._id === value._id
+                                                                (item) => item.productId
+                                                                ._id === value._id
                                                             ).length >= 2;
 
                                                         if (isDuplicate) {
@@ -76,20 +97,22 @@ const EditFlashsaleForm = () => {
                                                     },
                                                 }),
                                             ]}
-                                            className="col-span-4"
-                                            name={[name, "product"]}
+                                            className="col-span-3"
+                                            name={[name, "productId"]}
                                         >
-                                            <FurnitureSelection className="h-12" />
+                                            <FurnitureSelection className="h-12 w-44"/>
                                         </Form.Item>
-                                        <div className="flex gap-4 col-span-2">
+                                        <div className="flex gap-4 col-span-3">
                                             <FormInputNumber
                                                 min={1}
+                                                required
                                                 className="h-12"
                                                 name={[name, "count"]}
                                             />
                                             <FormInputNumber
                                                 prefix="VND"
                                                 min={1}
+                                                 required
                                                 className="h-12"
                                                 name={[name, "salePrice"]}
                                                 placeholder="Sale price"
@@ -109,7 +132,7 @@ const EditFlashsaleForm = () => {
                 <button className="furniture-button">Edit</button>
             </Form>
         </div>
-    )
-}
+    );
+};
 
-export default EditFlashsaleForm
+export default EditFlashsaleForm;

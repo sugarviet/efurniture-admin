@@ -21,3 +21,7 @@ export function formatGMTDate(gmtDate) {
 
     return formatDateByDateAndMinuteSplash(date);
 }
+
+export function formatIntoTypeDate(date){
+    return dayjs(date)
+}

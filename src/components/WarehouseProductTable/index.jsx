@@ -6,6 +6,8 @@ import WarehouseProductDetail from '../WarehouseProductDetail';
 import { withFetchData } from '../../hocs/withFetchData';
 import { get_published_product } from '../../api/productApi';
 import { isAdmin } from '../../utils/getCurrentUserRole';
+import { DEPLOY_PRODUCT_DETAIL_URL } from '../../constants/url';
+import LinkNewTab from '../LinkNewTab';
 const WarehouseProductTable = ({ data }) => {
     const admin = isAdmin();
     const { getColumnSearchProps } = useSearchTableColumn()
@@ -15,6 +17,7 @@ const WarehouseProductTable = ({ data }) => {
             dataIndex: "name",
             key: "name",
             ...getColumnSearchProps("name"),
+            render: (text, record) => <LinkNewTab to={`${DEPLOY_PRODUCT_DETAIL_URL}/${record.slug}`}>{text}</LinkNewTab>,
         },
         {
             title: "Thumb",

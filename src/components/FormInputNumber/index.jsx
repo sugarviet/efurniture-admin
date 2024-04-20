@@ -14,6 +14,7 @@ const FormInputNumber = ({
   prefix,
   style,
   disabled,
+  min,
   ...others
 }) => {
 
@@ -28,6 +29,7 @@ const FormInputNumber = ({
 
     >
       <InputNumber
+      min={min}
       disabled={disabled}
       prefix={prefix}
         placeholder={placeholder}
@@ -54,6 +56,8 @@ FormInputNumber.propTypes = {
   className: PropTypes.string,
   style: PropTypes.object,
   prefix: PropTypes.string,
+  disabled: PropTypes.bool,
+  min: PropTypes.number
 };
 
 FormInputNumber.defaultProps = {
@@ -62,7 +66,10 @@ FormInputNumber.defaultProps = {
   message: "Please fill in this field",
   type: "default",
   className: "",
-  prefix: ""
+  prefix: "",
+  disabled: false,
+  min: 0
+
 };
 
 export default FormInputNumber;

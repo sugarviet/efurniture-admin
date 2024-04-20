@@ -26,7 +26,7 @@ const CreatingType = () => {
           name="name"
           label="Type Name"
           placeholder="Type name"
-          required
+          type='text'
         />
 
         <FormUploadButton

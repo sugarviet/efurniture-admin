@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import { ORDER_STATE } from '../../../../constants/order';
 
 const OrderDetail = ({ data }) => {
-    console.log('detail', data);
     
     const productColumns = [
         {

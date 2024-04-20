@@ -72,8 +72,8 @@ const FlashSaleTable = ({ data, onEdit, published }) => {
       width: "30%",
       render: (text, record) => (
         <Space className="flex gap-4">
-          <EditButton>
-            <EditFlashsaleForm />
+          <EditButton >
+            <EditFlashsaleForm data={record} />
           </EditButton>
           <DeleteButton url={remove_flash_sale()} notiType="flashsale" notiAction="delete" refreshKey={get_all_flash_sale()} id={record._id} />
           

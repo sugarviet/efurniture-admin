@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 
 const variationSelect = [{ label: 'color', value: 'color' }]
 const EditingVariationForm = ({ data }) => {
-
+    console.log(data);
     const initialVariationLength = data.variation.length;
     return (
 
@@ -34,7 +34,6 @@ const EditingVariationForm = ({ data }) => {
 
                     <div>
                         <FormList
-                            initialValues={[{ value: undefined, sub_price: 10000 }]}
                             isAddMore={false}
                             name={[name, "properties"]}
                         >

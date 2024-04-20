@@ -30,11 +30,11 @@ const UpdateProductForm = ({ data }) => {
         subTypes: data.type.subTypes,
     }
 
-    const attributeType = Object.entries(data.attributes.attributeType).map(([key, value]) => ({
-        name: key,
-        value: value.value,
-        unit: value.unit
-    }));
+    // const attributeType = Object.entries(data.attributes.attributeType).map(([key, value]) => ({
+    //     name: key,
+    //     value: value.value,
+    //     unit: value.unit
+    // }));
 
     const transformedThumbs = formData.thumbs.map((thumb, index) => ({
         uid: `-${index + 1}`,
@@ -47,13 +47,13 @@ const UpdateProductForm = ({ data }) => {
         const variation = values.variation.map(variation => {
             const { stock, ...rest } = variation;
             return {
-              ...rest,
-              properties: rest.properties.map(property => {
-                const { stock, ...restProperty } = property;
-                return restProperty;
-              })
+                ...rest,
+                properties: rest.properties.map(property => {
+                    const { stock, ...restProperty } = property;
+                    return restProperty;
+                })
             };
-          })
+        })
         const data = {
             ...values,
             variation: variation,
@@ -79,15 +79,14 @@ const UpdateProductForm = ({ data }) => {
                 autoComplete="off"
             >
                 <FormInput
-                    required
+                    type='text'
                     label="Product Title"
                     name="name"
                     placeholder="Write title here..."
                 />
 
                 <FormTextArea
-                    required
-
+                    type='text'
                     label="Product Description"
                     name="description"
                     placeholder="Write description here..."

@@ -6,6 +6,10 @@ export const create_flash_sale = () => {
     return '/flashsale/admin/'
 }
 
+export const edit_flashsale = (id) => {
+    return `/flashsale/admin/${id}`
+}
+
 export const publish_flash_sale = (id) => {
     return `/flashsale/admin/publish/${id}`
 }

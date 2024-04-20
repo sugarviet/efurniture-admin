@@ -34,7 +34,7 @@ const CreatingAttribute = () => {
         <FormInput
           name="name"
           label="Attribute Name"
-          required
+          type="text"
           placeholder="Enter attribute Name"
         />
         <FormSelect
