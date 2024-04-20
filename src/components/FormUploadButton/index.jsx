@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Upload, Form } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-import PropTypes from "prop-types";
 import { API_KEY, UPLOAD_IMG_URL } from "@config/uploadImage";
 import { message } from "antd";
 import axios from "axios";

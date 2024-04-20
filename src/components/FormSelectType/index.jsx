@@ -11,6 +11,7 @@ function FormSelectType({ data, label = "Type", name = "type", receiveValue = 's
       name={name}
       options={typesSelectOptions}
       required
+      placeholder="Select type"
     />
   );
 }

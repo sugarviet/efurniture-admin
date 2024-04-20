@@ -1,6 +1,6 @@
 import { Form } from "antd";
 import { usePost, useUpdate } from "./api-hooks";
-import { add_product_to_warehouse, update_warehouse } from "../api/warehouseApi";
+import { add_product_to_warehouse, get_first_warehouse, update_warehouse } from "../api/warehouseApi";
 import {
   create_warehouse,
   get_all_warehouse,
@@ -27,7 +27,7 @@ export default function useWarehouse(id = '') {
     get_warehouse_detail({ id })
   );
   const { mutate: updateWarehouse } = useUpdate(
-    update_warehouse(id),
+    update_warehouse(),
     undefined,
     () => {
       success_message('warehouse', 'edit')
@@ -35,7 +35,7 @@ export default function useWarehouse(id = '') {
     () => {
       error_message('warehouse', 'edit');
     },
-    get_warehouse_detail({ id })
+    get_first_warehouse()
   );
   const { mutate: createWarehouse } = usePost(
     create_warehouse(),

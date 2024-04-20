@@ -1,17 +1,14 @@
 import { Table, Button } from 'antd';
 import { useState } from 'react';
 import { formatCurrency } from '../../utils/formatCurrency';
-import { useFetch } from '../../hooks/api-hooks';
-import { get_all_delivery_trip_detail } from '../../api/deliveryTripApi';
 import { CaretRightOutlined, CaretDownOutlined } from '@ant-design/icons';
+import PropTypes from "prop-types";
 
 const TripDetail = ({ data }) => {
-    // const { data: tripDetail, isLoading } = useFetch(get_all_delivery_trip_detail(data))
-
-    console.log('detail', data);
     const [expandedRowKeys, setExpandedRowKeys] = useState([]);
 
-    // if(isLoading) return null;
+    console.log('detail', data);
+
 
     const columns = [
         {
@@ -39,14 +36,13 @@ const TripDetail = ({ data }) => {
             title: 'Amount',
             dataIndex: 'amount',
             key: 'amount',
-            render: (text, record) => formatCurrency(text),
+            render: (text) => formatCurrency(text),
         },
         {
             title: 'Payment',
             dataIndex: 'payment',
             key: 'payment',
         },
-        // Products column with arrow button
         {
             title: 'Products',
             key: 'products',
@@ -63,11 +59,11 @@ const TripDetail = ({ data }) => {
 
     const toggleExpand = (record) => {
         const expandedKeys = [...expandedRowKeys];
-        const index = expandedKeys.indexOf(record.key);
+        const index = expandedKeys.indexOf(record._id);
         if (index > -1) {
             expandedKeys.splice(index, 1);
         } else {
-            expandedKeys.push(record.key);
+            expandedKeys.push(record._id);
         }
         setExpandedRowKeys(expandedKeys);
     };
@@ -76,7 +72,7 @@ const TripDetail = ({ data }) => {
         <ul>
             {record.order.order_products.map((product, index) => (
                
-                    <li key={`${index}-${index}`}>
+                    <li key={`${index}`}>
                         <div className='flex gap-4'>
                          #{index + 1} 
                          <div className='flex items-center gap-2'>
@@ -98,6 +94,7 @@ const TripDetail = ({ data }) => {
     return (
         <div>
             <Table
+                rowKey="_id"
                 columns={columns}
                 dataSource={data}
                 pagination={{ hideOnSinglePage: true }}
@@ -106,11 +103,15 @@ const TripDetail = ({ data }) => {
                     expandedRowKeys: expandedRowKeys,
                     expandedRowRender: expandedRowRender,
                     onExpand: (_, record) => toggleExpand(record),
-                    expandIcon: () => null, // Disable default expand icon
+                    expandIcon: () => null, 
                 }}
             />
         </div>
     )
 }
+
+TripDetail.propTypes = {
+    data: PropTypes.array,
+  };
 
 export default TripDetail;

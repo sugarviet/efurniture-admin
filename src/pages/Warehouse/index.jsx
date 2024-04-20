@@ -7,7 +7,10 @@ import { useState } from "react";
 import CreatingWarehouseForm from "../../components/CreatingWarehouseForm";
 import { isAdmin } from "../../utils/getCurrentUserRole";
 import { Button } from "antd";
+import AppModal from "../../components/AppModal";
+
 import PropTypes from "prop-types";
+import EditWarehouseForm from "../../components/EditWarehouseForm";
 
 const Warehouse = ({ data }) => {
   const admin = isAdmin();
@@ -30,6 +33,15 @@ const Warehouse = ({ data }) => {
       >
         <WarehouseTable />
       </TableCard>
+
+      <AppModal isOpen={openEditWarehouseModal} setIsOpen={setopenEditWarehouseModal}>
+
+        {openEditWarehouseModal ?
+          <EditWarehouseForm data={data} />
+          : null
+        }
+
+      </AppModal>
     </div>
   );
 };

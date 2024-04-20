@@ -21,7 +21,7 @@ function useNavigation() {
   const go_to_subtypes = () => navigation("/subtypes");
   const go_to_vouchers = () => navigation("/vouchers");
   const go_to_create_voucher = () => navigation("/voucher/create");
-  const go_to_transactions = () => navigation("/transactions");
+  const go_to_transactions = () => navigation("/transactions?page=1&limit=10");
   const go_to_delivery_trip = () => navigation("/delivery-trip");
   const go_to_reports = () => navigation("/reports");
   const go_to_report_detail = () => navigation("/report/:id");

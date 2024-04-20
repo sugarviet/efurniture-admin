@@ -36,6 +36,8 @@ const WarehouseProductDetail = ({ productId }) => {
   if(isLoading) return;
   if(isWarehouseLoading) return;
 
+  console.log(data)
+
 
   const STAFF_COLUMNS = [
     {
@@ -202,7 +204,7 @@ const WarehouseProductDetail = ({ productId }) => {
       <div className="flex-1">
        
           <Table
-            rowKey="_id"
+            rowKey="code"
             columns={admin ? ADMIN_COLUMNS : STAFF_COLUMNS}
             dataSource={data}
             pagination={{ hideOnSinglePage: true }}
@@ -216,6 +218,6 @@ const WarehouseProductDetail = ({ productId }) => {
 };
 
 WarehouseProductDetail.propTypes = {
-  data: PropTypes.array,
+  data: PropTypes.object,
 };
 export default withFetchData(WarehouseProductDetail, get_first_warehouse);

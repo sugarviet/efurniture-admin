@@ -10,8 +10,8 @@ export const create_warehouse = () => {
     return '/warehouse/staff'
 }
 
-export const update_warehouse = (id) => {
-    return `/warehouse/staff/${id}`
+export const update_warehouse = () => {
+    return `/warehouse/staff/edit`
 }
 
 export const get_warehouse_detail = (param) => {

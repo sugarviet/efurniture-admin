@@ -55,17 +55,17 @@ const CreatingProductForm = () => {
             <p className="text-gray-500">Orders placed across your store</p>
           </div>
           <div className="flex gap-2">
-          <button className="furniture-button rounded-md">Save draft</button>
+            <button className="furniture-button rounded-md">Save draft</button>
             <Button
-            className="px-5 py-1"
+              className="px-5 py-1"
               onClick={() => {
                 form.resetFields();
               }}
             >
               Discard
             </Button>
-          
-            
+
+
             {admin ? (
               <Button type="primary" className="primary" htmlType="submit">
                 Publish
@@ -78,21 +78,20 @@ const CreatingProductForm = () => {
           {/* Left */}
           <div className="flex-1">
             <FormInput
-              required
+              type="text"
               label="Product Title"
               name="name"
               placeholder="Write title here..."
             />
 
             <FormTextArea
-              required
-
+              type="text"
               label="Product Description"
               name="description"
               placeholder="Write description here..."
             />
 
-            <Note type="product_shipping_fee"/>
+            <Note type="product_shipping_fee" />
 
             <Card>
               <Tabs tabPosition="left" className="mb-4">
@@ -102,7 +101,6 @@ const CreatingProductForm = () => {
                     <FormInputNumber label="Regular Pricing"
                       required
                       prefix="VND"
-
                       name="regular_price"
                       placeholder="$$$" />
                     <FormInputNumber label="Sell Pricing"
@@ -118,17 +116,17 @@ const CreatingProductForm = () => {
                 <TabPane tab="Attributes" key="attributes">
                   <div className="grid grid-cols-2 items-center gap-52">
                     <FormSelectType />
-                 
+
                   </div>
                   <div className="grid grid-cols-2 items-center gap-52">
                     <FormSelectSubTypes />
-                  
+
                   </div>
 
                   <div>
                     {listAttribute?.map((attribute) => (
                       <FormMeasurementInput
-                        // required
+        
                         label={attribute.name}
                         name={["attributes", "attributeType", attribute.name]}
                         key={attribute._id}
@@ -150,7 +148,7 @@ const CreatingProductForm = () => {
                 value=""
                 placeholder="Write title here..."
               />
-             
+
             </Card>
           </div>
 

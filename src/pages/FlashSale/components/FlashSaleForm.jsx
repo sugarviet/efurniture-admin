@@ -34,7 +34,7 @@ const FlashSaleForm = () => {
           <FormInput
             label="Name"
             name="name"
-            required
+            type="text"
             placeholder="Write room name here..."
             message="Please enter the name of the room"
           />
@@ -108,11 +108,13 @@ const FlashSaleForm = () => {
                     </Form.Item>
                     <div className="flex gap-4 col-span-2">
                       <FormInputNumber
+                      required
                         min={1}
                         className="h-12"
                         name={[name, "count"]}
                       />
                       <FormInputNumber
+                      required
                         prefix="VND"
                         min={1}
                         className="h-12"

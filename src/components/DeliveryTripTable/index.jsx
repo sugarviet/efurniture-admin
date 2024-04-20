@@ -8,6 +8,7 @@ import ConfirmDeliveryButton from '../ConfirmDeliveryButton';
 import { formatDateByDateAndTime } from '../../utils/formatDate';
 import TripDetail from '../TripDetail';
 import RejectButton from '../../pages/DeliveryTrip/components/RejectButton';
+import PropTypes from "prop-types";
 
 const DELIVERY_STATUS = {
   0: {
@@ -47,7 +48,7 @@ const DeliveryTripTable = ({ data }) => {
     },
     {
       title: 'Shipper',
-      
+
       render: (_, record) => {
 
         return (
@@ -60,6 +61,11 @@ const DeliveryTripTable = ({ data }) => {
       dataIndex: 'status',
       key: 'status',
       render: (status) => (status === 0 ? 'Pending' : 'Accepted'),
+    },
+    {
+      title: 'Trip Status',
+      dataIndex: ['current_state', 'state'],
+      key: 'status',
     },
     {
       title: 'Created At',
@@ -84,9 +90,14 @@ const DeliveryTripTable = ({ data }) => {
   ];
   return (
     <div>
-      <Table columns={columns} dataSource={data} />
+      <Table rowKey="_id" columns={columns} dataSource={data} pagination={{
+        hideOnSinglePage: true
+      }} />
     </div>
   )
 }
+DeliveryTripTable.propTypes = {
+  data: PropTypes.array,
+};
 
 export default withFetchData(DeliveryTripTable, get_all_delivery_trip_staff);

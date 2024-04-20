@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import getCoordinates from "../../utils/getCoordinate";
 import useWarehouse from "../../hooks/useWarehouse";
 const EditWarehouseForm = ({data}) => {
-    console.log('warehouse', data);
+ 
   const {updateWarehouse, form} = useWarehouse(data._id);
   const [selectedDistrict, setSelectedDistrict] = useState({});
   const [selectedWard, setSelectedWard] = useState({});

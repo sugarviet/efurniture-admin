@@ -4,7 +4,7 @@ import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
 import { formatCurrency } from "../../utils/formatCurrency";
 import { useState } from "react";
 import { withFetchData } from "../../hocs/withFetchData";
-import { get_orders_request_staff_api } from "../../api/orderApi";
+import { get_orders_re_shipping_api, get_orders_request_staff_api } from "../../api/orderApi";
 import { formatDateByDateAndTime } from "../../utils/formatDate";
 import { ORDER_STATE } from "../../constants/order";
 import UserBrief from "../UserBrief";
@@ -12,11 +12,16 @@ import DetailButton from "../DetailButton";
 import OrderDetail from "../../pages/Orders/components/OrderDetail";
 import AppModal from "../AppModal";
 import ShipperAssignModal from "../ShipperAssignModal";
+import { useFetch } from "../../hooks/api-hooks";
 
 const RequestOrderTable = ({ data }) => {
   const [openAssignDelivery, setOpenAssignDelivery] = useState(false);
+  const {data: reOrderShipping, isLoading:isReOrderLoading} = useFetch(get_orders_re_shipping_api());
   const [searchParams, setSearchParams] = useSearchParams();
   const { getColumnSearchProps } = useSearchTableColumn();
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+
+  if(isReOrderLoading) return <span>Loading...</span>;
   const handleTableChange = (pagination) => {
     setSearchParams({
       page: pagination.current,
@@ -24,15 +29,11 @@ const RequestOrderTable = ({ data }) => {
     });
   };
 
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
   const handleSelectChange = (selectedRowKeys) => {
     setSelectedRowKeys(selectedRowKeys);
   };
 
-  const handleRequestButtonClick = () => {
-    console.log("Selected IDs:", selectedRowKeys);
-  };
 
   const rowSelection = {
     selectedRowKeys,
@@ -67,7 +68,7 @@ const RequestOrderTable = ({ data }) => {
       render: (text, record) => {
         return (
           <Tag className="text-bold uppercase" color={ORDER_STATE[text].color}>
-            <span className="font-bold">{text}</span>
+            <span className="font-bold">{text === 'Shipping' ? "Re-shipping": text}</span>
           </Tag>
         );
       },
@@ -107,6 +108,8 @@ const RequestOrderTable = ({ data }) => {
     },
   ];
 
+  console.log('reorder', reOrderShipping)
+
   return (
     <div>
       <Button
@@ -120,7 +123,10 @@ const RequestOrderTable = ({ data }) => {
         rowKey="_id"
         rowSelection={rowSelection}
         columns={COLUMN}
-        dataSource={data.data}
+        pagination={{ 
+          hideOnSinglePage: true
+         }}
+        dataSource={[...data.data, ...reOrderShipping.data]}
         onChange={handleTableChange}
       />
       <AppModal setIsOpen={setOpenAssignDelivery} isOpen={openAssignDelivery}>

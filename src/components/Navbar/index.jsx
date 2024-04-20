@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "../../stores/useAuth";
 import { jwtDecode } from "jwt-decode";
 import useNotificationStore from "../../stores/useNotificationStore";
+import { usePost } from "../../hooks/api-hooks";
+import { get_logout } from "../../api/authApi";
 
 const Navbar = () => {
   const { isNewNoti, hasReadNoti } = useNotificationStore()
@@ -12,6 +14,7 @@ const Navbar = () => {
   const { clearTokens, accessToken, role } = useAuth();
   const decode = jwtDecode(accessToken);
   const { username } = decode;
+  const { mutate: logout } = usePost(get_logout(), undefined, () => { handleLogout() }, () => { })
 
   const handleLogout = () => {
     clearTokens();
@@ -20,7 +23,7 @@ const Navbar = () => {
   const items = [
 
     {
-      label: <p onClick={handleLogout}>Logout</p>,
+      label: <p onClick={() => logout()}>Logout</p>,
       key: "1",
     },
   ];
@@ -37,33 +40,33 @@ const Navbar = () => {
       className="flex justify-between w-full h-full text-white items-center px-2"
     >
       <div className="ml-auto flex gap-3 items-center p-3 ">
-        {role === 'superAdmin' ? null :(
-        <Dropdown
-          overlay={notificationMenu}
-          trigger={["hover"]}
-          onOpenChange={hasReadNoti}
-        >
-          <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
-            <BellOutlined style={{ color: 'black', height: 20, width: 20, fontSize: '27px' }} />
+        {role === 'superAdmin' ? null : (
+          <Dropdown
+            overlay={notificationMenu}
+            trigger={["hover"]}
+            onOpenChange={hasReadNoti}
+          >
+            <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+              <BellOutlined style={{ color: 'black', height: 20, width: 20, fontSize: '27px' }} />
 
-            {isNewNoti ? (
-              <div
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  right: -2,
-                  backgroundColor: '#f2434a',
-                  width: 10,
-                  height: 10,
-                  borderRadius: '50%',
-                }}
-              >
-              </div>
-            ) : null}
+              {isNewNoti ? (
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    right: -2,
+                    backgroundColor: '#f2434a',
+                    width: 10,
+                    height: 10,
+                    borderRadius: '50%',
+                  }}
+                >
+                </div>
+              ) : null}
 
-          </div>
+            </div>
 
-        </Dropdown>
+          </Dropdown>
 
         )}
         <div className="flex items-center justify-between p-4 gap-2">
