@@ -19,6 +19,7 @@ const FormSelectSubTypes = () => {
       label="SubType"
       name={["attributes", "type"]}
       required
+      placeholder={"Select subtype..."}
       options={subTypesSelectOptions}
       mode="multiple"
       onChange={handleSelectSubType}

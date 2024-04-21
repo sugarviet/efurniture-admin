@@ -10,6 +10,7 @@ import { useState } from "react";
 import { formatDateByDateAndTime } from "../../../utils/formatDate";
 import FormUploadButton from "@components/FormUploadButton";
 import Note from "../../../components/Note";
+import { getCurrentDate } from "../../../utils/getCurrentDate";
 const FlashSaleForm = () => {
   const { form, handleCreateFlashsale } = useFlashSale();
   const [startDay, setStartDay] = useState();
@@ -26,6 +27,11 @@ const FlashSaleForm = () => {
       form={form}
       layout="vertical"
       requiredMark="optional"
+      initialValues={{ 
+        startDay: getCurrentDate(),
+        endDay: getCurrentDate(),
+
+       }}
       onFinish={handleSubmit}
       autoComplete="off"
     >
@@ -116,7 +122,7 @@ const FlashSaleForm = () => {
                       <FormInputNumber
                       required
                         prefix="VND"
-                        min={1}
+                        min={1000}
                         className="h-12"
                         name={[name, "salePrice"]}
                         placeholder="Sale price"

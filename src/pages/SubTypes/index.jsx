@@ -19,24 +19,24 @@ const SubTypes = () => {
           <TableCard label="Public SubTypes">
             <PublishSubtypesTable published />
           </TableCard>
-        
-            <TableCard label="Draft SubTypes">
-              <DraftSubtypesTable />
-            </TableCard>
-        
+
+          <TableCard label="Draft SubTypes">
+            <DraftSubtypesTable />
+          </TableCard>
+
         </div>
 
         {admin ? null : (
-          <div className="w-[26rem]">
+          <div className="w-[26rem] flex flex-col gap-3">
             <Card title="Create new Subtypes">
               <CreatingSubTypesForm />
             </Card>
-          </div>
-        )}
-        <Card>
+            <Card>
               <p className="text-2xl font-bold mb-4">Create attributes</p>
               <CreatingAttribute />
             </Card>
+          </div>
+        )}
       </section>
     </main>
   );

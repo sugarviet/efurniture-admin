@@ -158,7 +158,7 @@ const ProductTable = ({ data, onEdit, published }) => {
 
 
             {admin && !published ? (
-              <DeleteButton url={remove_draft_product()} notiType="product" notiAction="delete" refreshKey={get_draft_product()} id={record.slug} />
+              <DeleteButton url={remove_draft_product()} notiType="products" notiAction="delete" refreshKey={get_draft_product()} id={record.slug} />
             ) : null
             }
           </Space>

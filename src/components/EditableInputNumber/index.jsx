@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useUpdate } from "../../hooks/api-hooks";
-import { Input, InputNumber } from "antd";
+import { InputNumber } from "antd";
 import PropTypes from "prop-types";
 import useNotification from "../../hooks/useNotification";
 
@@ -33,7 +33,11 @@ const EditableInputNumber = ({
     setEditedValue(defaultValue)
   }, [defaultValue])
 
+  
   const handleSave = (e) => {
+    const specialCharacters = /[!@#$%^&*(),.?":{}|<>+-]/;
+    if (specialCharacters.test(e.target.value)) return setEditedValue(defaultValue)
+  
     const data = {
       ...record,
       [name]: +e.target.value,
@@ -46,9 +50,9 @@ const EditableInputNumber = ({
       className="border-transparent hover:border-black border-[1px] rounded-none"
       {...others}
       value={editedValue}
-      min={0}
+      // min={0}
       onChange={(e) => setEditedValue(e)}
-      onBlur={handleSave}
+      onBlur={(e) => handleSave(e)}
       
     />
   );
