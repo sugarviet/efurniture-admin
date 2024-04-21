@@ -65,7 +65,7 @@ const FORM_TYPES = {
     rules: [{ required: true }, validateWhitespace, validateSpecialCharacters, validateLeadingTrailingWhitespace]
   },
   default: {
-    rules: [{ required: false, message: "" }, validateWhitespace],
+    rules: [{ required: false, message: "" }],
   },
 };
 

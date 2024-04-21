@@ -8,6 +8,7 @@ import FormItem from "../FormItem";
 import FormSelect from "../FormSelect";
 import useVoucher from "../../hooks/useVoucher";
 import { useState } from "react";
+import { getCurrentDate } from "../../utils/getCurrentDate";
 
 function VoucherForm() {
   const [type, setType] = useState('');
@@ -22,7 +23,13 @@ function VoucherForm() {
       form={form}
       initialValues={{ 
         max_discount: 100000,
-        type: 'percentage'
+        type: 'percentage',
+        maximum_use: 1,
+        maximum_use_per_user: 1,
+        minimum_order_value: 1,
+        start_date: getCurrentDate(),
+        end_date: getCurrentDate(),
+
        }}
       requiredMark="optional"
       layout="vertical"
@@ -77,6 +84,7 @@ function VoucherForm() {
           disabled={type === 'fixed_amount'}
           required={type !== 'fixed_amount'}
           name="max_discount"
+          min={1}
           prefix="VND"
           message="Please enter the value"
         />

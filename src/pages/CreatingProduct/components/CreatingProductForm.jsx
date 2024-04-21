@@ -8,8 +8,6 @@ import AppModal from "@components/AppModal";
 import CreatingAttribute from "./CreatingAttribute";
 import FormSelectType from "./FormSelectType";
 import FormSelectSubTypes from "./FormSelectSubTypes";
-import CreatingType from "../../Types/components/CreatingType";
-import CreatingSubTypesForm from "./CreatingSubTypesForm";
 import useCreatingProductManagement from "../hooks/useCreatingProductManagement";
 import FormMeasurementInput from "../../../components/FormMeasurementInput";
 import FormInputNumber from "../../../components/FormInputNumber";
@@ -24,6 +22,7 @@ const CreatingProductForm = () => {
   const admin = isAdmin();
 
   const onFinish = (values) => {
+    console.log(values)
     const listImages = values.thumbs.fileList.map((image) => image.url);
 
     const data = {
@@ -102,11 +101,12 @@ const CreatingProductForm = () => {
                       required
                       prefix="VND"
                       name="regular_price"
+                      min={1000}
                       placeholder="$$$" />
                     <FormInputNumber label="Sell Pricing"
                       required
                       prefix="VND"
-
+                      min={1000}
                       name="sale_price"
                       placeholder="$$$" />
 
@@ -138,7 +138,7 @@ const CreatingProductForm = () => {
             </Card>
 
             <Card className="mt-4">
-              <FormUploadButton label="Display images" name="thumbs" />
+              <FormUploadButton label="Display images" name="thumbs"/>
             </Card>
             <Card className="mt-8">
               <p className="text-3xl font-bold mb-2">Create 3D model</p>
