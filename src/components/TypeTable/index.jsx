@@ -1,7 +1,4 @@
-import { Button, Space, Table } from "antd";
-import EditButton from "../EditButton";
-import useNotification from "../../hooks/useNotification";
-import { useUpdate } from "../../hooks/api-hooks";
+import { Space, Table } from "antd";
 import {
   draft_types_admin,
   draft_types_staff,
@@ -11,10 +8,12 @@ import {
   publish_types_staff,
 } from "../../api/typesApi";
 import { isAdmin } from "../../utils/getCurrentUserRole";
+import PropTypes from "prop-types";
 import ChangeStatusButton from "../ChangeStatusButton";
 import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
 const TypeTable = ({ data, onEdit, published }) => {
   const admin = isAdmin();
+  console.log(data);
   const { getColumnSearchProps } = useSearchTableColumn();
 
   const STAFF_COLUMNS = [
@@ -69,7 +68,7 @@ const TypeTable = ({ data, onEdit, published }) => {
         </Space>
       ),
     },
-  ]
+  ].filter(Boolean)
 
   const ADMIN_COLUMNS = [
     ...STAFF_COLUMNS,
@@ -119,6 +118,10 @@ const TypeTable = ({ data, onEdit, published }) => {
       }}
     />
   );
+};
+
+TypeTable.propTypes = {
+  data: PropTypes.array,
 };
 
 export default TypeTable;

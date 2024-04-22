@@ -5,6 +5,7 @@ import AppSuspense from "@components/AppSuspense";
 import TableCard from "../../components/TableCard";
 import { withFetchData } from "../../hocs/withFetchData";
 import { get_all_reports } from "../../api/reportApi";
+import ReportTable from "../../components/ReportTable";
 const data = [
   {
     key: "1",
@@ -25,9 +26,9 @@ const data = [
   },
 ];
 
-
 const ReportDetails = lazy(() => import('./components/ReportDetail'))
 
+const ReportTableData = withFetchData(ReportTable,  get_all_reports)
 
 const Reports = () => {
     const [isModalDetailOpen, setIsModalDetailOpen] = useState(false);
@@ -74,7 +75,8 @@ const Reports = () => {
         label="Reports"
        
       >
-      <Table dataSource={data} columns={columns} />
+    {/* <ReportTable /> */}
+    <ReportTableData />
 
       </TableCard>
 

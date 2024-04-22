@@ -7,9 +7,10 @@ import { message } from "antd";
 import axios from "axios";
 import FormItem from "../FormItem";
 import { classNames } from "../../utils/classNames";
+import Note from "../Note";
 
 const FormUploadButton = (props) => {
-  const { className, name, label, required,  defaultFileList, maxCount = 4 } = props;
+  const { className, name, label, required,  defaultFileList,  maxCount = 4 } = props;
 
   const handleUploadImage = async ({ file, onSuccess, onError }) => {
     const formData = new FormData();
@@ -37,22 +38,25 @@ const FormUploadButton = (props) => {
       message.error(`Failed to upload ${file.name}`);
     }
   };
-
   const renderItem = (file) => (
     <image className="w-10 h-10" src={file.url} />
   );
 
   return (
-    <FormItem label={label} name={name} required>
+    <Form.Item label={label} name={name} required>
+
       <Upload
         className="h-full"
         defaultFileList={defaultFileList}
+        multiple
         maxCount={maxCount}
-        showUploadList
         listType="picture"
+        showUploadList
         customRequest={handleUploadImage}
         renderItem={renderItem}
-      
+
+        accept=".png,.jpg,.jpeg"
+
       >
         <button
           type="button"
@@ -65,7 +69,7 @@ const FormUploadButton = (props) => {
           <UploadOutlined className="text-4xl" />
         </button>
       </Upload>
-    </FormItem>
+    </Form.Item>
   );
 };
 

@@ -33,6 +33,7 @@ export const request = axios.create({
 
   request.interceptors.request.use(
     (config) => {
+      // config.headers['Access-Control-Allow-Origin'] = '*';
       config.headers[cookies()['accessToken'].key] = cookies()['accessToken'].value;
       config.headers[cookies()['refreshToken'].key] = cookies()['refreshToken'].value;
       config.headers[cookies()['accountId'].key] = cookies()['accountId'].value;

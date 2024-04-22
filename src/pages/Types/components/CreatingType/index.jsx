@@ -8,6 +8,7 @@ const CreatingType = () => {
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
+
     const data = {
       ...values,
       thumb: values.thumb.file.url
@@ -26,7 +27,7 @@ const CreatingType = () => {
           name="name"
           label="Type Name"
           placeholder="Type name"
-          required
+          type='text'
         />
 
         <FormUploadButton
@@ -34,7 +35,7 @@ const CreatingType = () => {
           name="thumb"
           maxCount={1}
           className="xl:w-[23rem] lg:w-[10rem]"
-          required
+          
         />
 
         <div className="flex gap-2 justify-center">

@@ -4,7 +4,7 @@ const TYPE = {
   color: "* Please choose the color first",
   flashsale: "* Please choose the start day and end day first",
   product_shipping_fee: "* The product will plus 10% shipping fees",
-
+  upload_file: "* Image uploaded only allow [.png,.jpg,.jpeg]",
 
 }
 

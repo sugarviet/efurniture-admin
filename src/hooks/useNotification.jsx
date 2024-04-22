@@ -132,6 +132,8 @@ const type = {
       disable: 'Successfully disable product',
       add_new_variation: 'Successfully add new variation product',
       enable: 'Successfully enable product',
+      delete: 'Successfully delete product',
+
     },
     fail: {
       add_draft: 'Failed added draft product',
@@ -141,6 +143,8 @@ const type = {
       draft: 'Failed draft product',
       add_new_variation: 'Failed add new variation product',
       enable: 'Failed enable product',
+      delete: 'Failed delete product',
+
     }
   },
   room: {

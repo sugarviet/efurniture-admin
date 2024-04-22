@@ -25,7 +25,7 @@ function RoomTable({ data, published }) {
       title: "Room",
       width: '15%',
       render: (_, record) => (
-        <BriefInfo col img_class="h-20 w-16" info={record} />
+        <BriefInfo col img_class="h-20 w-16" info={record} published={published} />
       ),
     },
     {

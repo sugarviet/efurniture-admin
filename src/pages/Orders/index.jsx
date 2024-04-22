@@ -1,9 +1,7 @@
 import { useState } from "react";
-import { Table, Button, Space } from "antd";
 import AppModal from "@components/AppModal";
 import OrderDetail from "./components/OrderDetail";
 
-import PageTitle from "../../components/PageTitle";
 import OrderTable from "../../components/OrderTable";
 import { withFetchData } from "../../hocs/withFetchData";
 import { get_order_by_type_api } from "../../api/orderApi";

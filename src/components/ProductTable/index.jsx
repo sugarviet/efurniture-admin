@@ -18,6 +18,9 @@ import DeleteButton from "../DeleteButton";
 import UpdateProductForm from "../UpdateProductForm";
 import { CreatingProductProvider } from "../../pages/CreatingProduct/CreatingProductContext";
 import AddNewVariationButton from "../AddNewVariationButton";
+import { render } from "react-dom";
+import { DEPLOY_PRODUCT_DETAIL_URL } from "../../constants/url";
+import LinkNewTab from "../LinkNewTab";
 
 const ProductTable = ({ data, onEdit, published }) => {
   const admin = isAdmin();
@@ -29,6 +32,7 @@ const ProductTable = ({ data, onEdit, published }) => {
       dataIndex: "name",
       key: "name",
       ...getColumnSearchProps("name"),
+      render: (text, record) => published ? <LinkNewTab to={`${DEPLOY_PRODUCT_DETAIL_URL}/${record.slug}`}>{text}</LinkNewTab> : text,
     },
     {
       title: "Thumb",
@@ -49,7 +53,10 @@ const ProductTable = ({ data, onEdit, published }) => {
 
         <div className="flex gap-2 items-center">
           {record.variation[0].properties.map(property => <div key={property._id} style={{ backgroundColor: property.value, width: 20, height: 20, borderRadius: '50%', border: '1px solid #d3d3d3' }} />)}
+          {admin ? null : 
           <AddNewVariationButton id={record._id} />
+          
+          }
 
         </div>
       )
@@ -61,7 +68,7 @@ const ProductTable = ({ data, onEdit, published }) => {
       render: (text) => formatCurrency(text),
     },
     {
-      title: "Sale Price",
+      title: "Sell Price",
       dataIndex: "sale_price",
       key: "sale_price",
       render: (text) => formatCurrency(text),
@@ -107,7 +114,7 @@ const ProductTable = ({ data, onEdit, published }) => {
               <UpdateProductForm data={record} />
             </CreatingProductProvider>
           </EditButton>
-          
+
           {!published ? (
             <DeleteButton url={remove_draft_product()} notiType="product" notiAction="delete" refreshKey={get_draft_product()} id={record.slug} />
           ) : null
@@ -154,7 +161,7 @@ const ProductTable = ({ data, onEdit, published }) => {
 
 
             {admin && !published ? (
-              <DeleteButton url={remove_draft_product()} notiType="product" notiAction="delete" refreshKey={get_draft_product()} id={record.slug} />
+              <DeleteButton url={remove_draft_product()} notiType="products" notiAction="delete" refreshKey={get_draft_product()} id={record.slug} />
             ) : null
             }
           </Space>

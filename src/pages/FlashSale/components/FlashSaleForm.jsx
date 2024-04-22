@@ -10,6 +10,7 @@ import { useState } from "react";
 import { formatDateByDateAndTime } from "../../../utils/formatDate";
 import FormUploadButton from "@components/FormUploadButton";
 import Note from "../../../components/Note";
+import { getCurrentDate } from "../../../utils/getCurrentDate";
 const FlashSaleForm = () => {
   const { form, handleCreateFlashsale } = useFlashSale();
   const [startDay, setStartDay] = useState();
@@ -34,7 +35,7 @@ const FlashSaleForm = () => {
           <FormInput
             label="Name"
             name="name"
-            required
+            type="text"
             placeholder="Write room name here..."
             message="Please enter the name of the room"
           />
@@ -108,13 +109,15 @@ const FlashSaleForm = () => {
                     </Form.Item>
                     <div className="flex gap-4 col-span-2">
                       <FormInputNumber
+                      required
                         min={1}
                         className="h-12"
                         name={[name, "count"]}
                       />
                       <FormInputNumber
+                      required
                         prefix="VND"
-                        min={1}
+                        min={1000}
                         className="h-12"
                         name={[name, "salePrice"]}
                         placeholder="Sale price"

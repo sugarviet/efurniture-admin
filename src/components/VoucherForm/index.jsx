@@ -8,6 +8,7 @@ import FormItem from "../FormItem";
 import FormSelect from "../FormSelect";
 import useVoucher from "../../hooks/useVoucher";
 import { useState } from "react";
+import { getCurrentDate } from "../../utils/getCurrentDate";
 
 function VoucherForm() {
   const [type, setType] = useState('');
@@ -22,7 +23,13 @@ function VoucherForm() {
       form={form}
       initialValues={{ 
         max_discount: 100000,
-        type: 'percentage'
+        type: 'percentage',
+        maximum_use: 1,
+        maximum_use_per_user: 1,
+        minimum_order_value: 1,
+        start_date: getCurrentDate(),
+        end_date: getCurrentDate(),
+
        }}
       requiredMark="optional"
       layout="vertical"
@@ -41,7 +48,7 @@ function VoucherForm() {
         <FormInput
           label="Name"
           name="name"
-          required
+          type='text'
           message="Please enter the code of message"
           placeholder="Enter voucher name"
           className="h-10"
@@ -49,7 +56,7 @@ function VoucherForm() {
       <FormTextArea
         label="Description"
         name="description"
-        required
+        type='text'
         placeholder="Enter voucher description"
         message="Please enter the description of the voucher"
       />
@@ -77,6 +84,7 @@ function VoucherForm() {
           disabled={type === 'fixed_amount'}
           required={type !== 'fixed_amount'}
           name="max_discount"
+          min={1}
           prefix="VND"
           message="Please enter the value"
         />
@@ -85,18 +93,21 @@ function VoucherForm() {
         <FormInputNumber
           label="Maximum in use (MaxIU)"
           required
+          min={1}
           name="maximum_use"
           message="Please enter the value"
         />
         <FormInputNumber
           label="Maximum in use per user (MaxIU/U)"
           required
+          min={1}
           name="maximum_use_per_user"
           message="Please enter the value"
         />
         <FormInputNumber
           label="Minimum order value (MinOV)"
           required
+          min={1}
           name="minimum_order_value"
           message="Please enter the value"
 

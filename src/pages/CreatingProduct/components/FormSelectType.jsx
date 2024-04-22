@@ -14,6 +14,7 @@ function FormSelectType({ data, label = "Type", name = "type" }) {
       name={name}
       options={typesSelectOptions}
       onChange={handleSelectType}
+      placeholder={"Select type..."}
       required
     />
   );
