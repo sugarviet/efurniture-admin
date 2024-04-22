@@ -4,10 +4,34 @@ import { formatCurrency } from '../../utils/formatCurrency';
 import FormUploadButton from '../FormUploadButton';
 import { useUpdate } from '../../hooks/api-hooks';
 import { confirm_request_refund, get_all_reports } from '../../api/reportApi';
+import { formatThumbs } from '../../utils/formatThumb';
+import useNotification from '../../hooks/useNotification';
 
 const ReportDetail = ({ data }) => {
+    const transformedThumbs = data.thumbs.map((thumb, index) => ({
+        uid: `-${index + 1}`,
+        name: `image.png`,
+        status: 'done',
+        url: thumb
+    }));
     console.log(data);
-    const { mutate: confirmReport } = useUpdate(confirm_request_refund(data._id), undefined, () => { }, () => { }, get_all_reports());
+    const {error_message, success_message} = useNotification();
+    const { mutate: confirmReport } = useUpdate(confirm_request_refund(data._id), undefined, () => { 
+        success_message('report', 'confirm')
+    }, () => { 
+        error_message('report', 'confirm')
+    }, get_all_reports());
+
+    const onFinish = (values) => {
+       
+        const listImages = formatThumbs(values.thumbs)
+
+        const body = {
+            thumbs: listImages
+        }
+
+        confirmReport(body)
+    }
     return (
         <div className='flex flex-col gap-3'>
             <div>
@@ -25,8 +49,8 @@ const ReportDetail = ({ data }) => {
 
             </div>
             <Form layout="vertical"
-                requiredMark='optional' initialValues={{ thumbs: data.thumbs }}>
-                <FormUploadButton label="Image" name='image' className='xl:w-[45rem] lg:w-[40rem] xl:h-[10rem]' defaultFileList={data.thumbs}/>
+                requiredMark='optional' initialValues={{ thumbs: data.thumbs }} onFinish={onFinish}>
+                <FormUploadButton label="Image" name='thumbs' className='xl:w-[45rem] lg:w-[40rem] xl:h-[10rem]' defaultFileList={transformedThumbs}/>
                 <button className="furniture-button rounded-md flex mx-auto">Submit</button>
             </Form>
 

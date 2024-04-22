@@ -27,11 +27,6 @@ const FlashSaleForm = () => {
       form={form}
       layout="vertical"
       requiredMark="optional"
-      initialValues={{ 
-        startDay: getCurrentDate(),
-        endDay: getCurrentDate(),
-
-       }}
       onFinish={handleSubmit}
       autoComplete="off"
     >

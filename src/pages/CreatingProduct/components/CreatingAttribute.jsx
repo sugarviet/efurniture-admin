@@ -30,7 +30,12 @@ const CreatingAttribute = () => {
   };
   return (
     <div>
-      <Form form={form} requiredMark="optional" layout="vertical" onFinish={onFinish}>
+      <Form
+        form={form}
+        requiredMark="optional"
+        layout="vertical"
+        onFinish={onFinish}
+      >
         <FormInput
           name="name"
           label="Attribute Name"
@@ -40,6 +45,7 @@ const CreatingAttribute = () => {
         <FormSelect
           label="Type"
           name="type"
+          required
           defaultValue="string"
           placeholder="Enter type"
           options={[
@@ -54,13 +60,9 @@ const CreatingAttribute = () => {
           ]}
         />
 
-        <Button
-          type="primary"
-          className="primary py-5 px-10 text-center flex justify-center items-center font-bold"
-          htmlType="submit"
-        >
-          Submit
-        </Button>
+        <button className="furniture-button mx-auto flex justify-center">
+          Create attributes
+        </button>
       </Form>
     </div>
   );
