@@ -53,7 +53,10 @@ const ProductTable = ({ data, onEdit, published }) => {
 
         <div className="flex gap-2 items-center">
           {record.variation[0].properties.map(property => <div key={property._id} style={{ backgroundColor: property.value, width: 20, height: 20, borderRadius: '50%', border: '1px solid #d3d3d3' }} />)}
+          {admin ? null : 
           <AddNewVariationButton id={record._id} />
+          
+          }
 
         </div>
       )
