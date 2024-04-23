@@ -3,6 +3,7 @@ import { formatDateByDateAndTime } from "../../utils/formatDate";
 import { formatCurrency } from "../../utils/formatCurrency";
 import EditButton from "../EditButton";
 import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
+import EditVoucherForm from "../EditVoucherForm";
 function VoucherTable({ data }) {
   const { getColumnSearchProps } = useSearchTableColumn();
   
@@ -89,7 +90,9 @@ function VoucherTable({ data }) {
     },
     {
       title: "Actions",
-      render: (_, record) => <EditButton />,
+      render: (_, record) => <EditButton modalWidth={1000}>
+        <EditVoucherForm data={record}/>
+      </EditButton>,
     },
   ];
 

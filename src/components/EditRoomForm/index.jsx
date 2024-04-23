@@ -117,6 +117,12 @@ const EditRoomForm = ({ data }) => {
           );
         }}
       </FormList>
+      <FormInput
+                    label="3D model's id"
+                    name="model3D"
+                    value=""
+                    placeholder="Write title here..."
+                />
 
       <button className="furniture-button mx-auto flex justify-center">
         Edit

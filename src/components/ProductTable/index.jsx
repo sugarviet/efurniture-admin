@@ -12,13 +12,13 @@ import {
   remove_draft_product,
   publish_product_staff,
   draft_product_staff,
+  remove_draft_product_staff,
 } from "../../api/productApi";
 import ChangeStatusButton from "../ChangeStatusButton";
 import DeleteButton from "../DeleteButton";
 import UpdateProductForm from "../UpdateProductForm";
 import { CreatingProductProvider } from "../../pages/CreatingProduct/CreatingProductContext";
 import AddNewVariationButton from "../AddNewVariationButton";
-import { render } from "react-dom";
 import { DEPLOY_PRODUCT_DETAIL_URL } from "../../constants/url";
 import LinkNewTab from "../LinkNewTab";
 
@@ -116,7 +116,7 @@ const ProductTable = ({ data, onEdit, published }) => {
           </EditButton>
 
           {!published ? (
-            <DeleteButton url={remove_draft_product()} notiType="product" notiAction="delete" refreshKey={get_draft_product()} id={record.slug} />
+            <DeleteButton url={remove_draft_product_staff()} notiType="product" notiAction="delete" refreshKey={get_draft_product()} id={record.slug} />
           ) : null
           }
         </Space>

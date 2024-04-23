@@ -29,17 +29,17 @@ const EdittingStaffForm = ({ data }) => {
         initialValues={{ ...data, role: selectOptions }}
       >
         <div className="grid grid-cols-2 gap-4">
-          <FormInput name="first_name" label="First name" />
-          <FormInput name="last_name" label="Last name" />
+          <FormInput name="first_name" label="First name" required/>
+          <FormInput name="last_name" label="Last name" required/>
         </div>
-        <FormInput name="username" label="Username" />
+        <FormInput name="username" label="Username" required />
 
         <FormInput name="email" label="Email" type="email" />
         <FormSelectRole />
 
         <Button
           type="primary"
-          className="primary py-5 px-10 text-center flex justify-center items-center font-bold"
+          className="primary py-5 px-10 text-center flex justify-center items-center font-bold mx-auto"
           htmlType="submit"
         >
           Submit

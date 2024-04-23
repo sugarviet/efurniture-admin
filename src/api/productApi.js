@@ -51,6 +51,9 @@ export const edit_product = (slug) => {
 export const remove_draft_product = () => {
     return `/product/admin`;
 }
+export const remove_draft_product_staff = () => {
+    return `/product/staff`;
+}
 
 export const add_more_stock_product = (id) => {
     return `/warehouse/staff/stock/update/${id}`

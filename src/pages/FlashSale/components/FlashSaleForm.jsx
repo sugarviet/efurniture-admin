@@ -31,7 +31,7 @@ const FlashSaleForm = () => {
       autoComplete="off"
     >
       <div className="flex gap-5">
-        <div className="">
+        <div className="w-[80rem]">
           <FormInput
             label="Name"
             name="name"
@@ -72,7 +72,7 @@ const FlashSaleForm = () => {
               initialValues={[{ product: undefined, salePrice: 100000, count: 1 }]}
               name="products"
             >
-              {({ name, remove, restField }) => {
+              {({ name, remove, restField }, index) => {
                 return (
                   <div className="grid grid-cols-6 items-center gap-4">
                     <Form.Item
@@ -108,12 +108,12 @@ const FlashSaleForm = () => {
                         className='h-12' />
                     </Form.Item>
                     <div className="flex gap-4 col-span-2">
-                      <FormInputNumber
+                      {/* <FormInputNumber
                       required
                         min={1}
                         className="h-12"
                         name={[name, "count"]}
-                      />
+                      /> */}
                       <FormInputNumber
                       required
                         prefix="VND"
@@ -122,10 +122,14 @@ const FlashSaleForm = () => {
                         name={[name, "salePrice"]}
                         placeholder="Sale price"
                       />
+                    {index === 0 ? null :
+
                       <DeleteOutlined
                         onClick={() => remove(name)}
                         className="h-12 text-xl mx-auto text-rose-500"
                       />
+                    }
+
                     </div>
                   </div>
                 );
@@ -136,7 +140,7 @@ const FlashSaleForm = () => {
         <div>
         </div>
 
-        <div className="">
+        <div className="flex-1">
           <FormUploadButton
             required
             maxCount={1}

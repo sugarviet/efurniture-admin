@@ -92,7 +92,7 @@ const CreatingSubTypesForm = () => {
       <FormTextArea
         label="Description"
         name="description"
-        type='text'
+        type='description'
         placeholder="Enter description"
         className="w-full"
       />

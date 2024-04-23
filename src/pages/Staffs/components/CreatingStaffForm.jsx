@@ -25,20 +25,20 @@ const CreatingStaffForm = () => {
           <FormInput
             name="first_name"
             label="First name"
-            required
+            type='text'
             placeholder="Enter first name"
           />
           <FormInput
             name="last_name"
             label="Last name"
-            required
+            type='text'
             placeholder="Enter last name"
           />
         </div>
         <FormInput
           name="username"
           label="Username"
-          required
+          type='text'
           placeholder="Enter username"
         />
         <FormInput
