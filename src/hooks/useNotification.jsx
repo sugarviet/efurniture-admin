@@ -131,6 +131,7 @@ const type = {
       draft: 'Successfully draft product',
       disable: 'Successfully disable product',
       add_new_variation: 'Successfully add new variation product',
+      delete_variation: 'Successfully delete variation product',
       enable: 'Successfully enable product',
       delete: 'Successfully delete product',
 
@@ -142,6 +143,7 @@ const type = {
       publish: 'Failed publish product',
       draft: 'Failed draft product',
       add_new_variation: 'Failed add new variation product',
+      delete_variation: 'Failed delete variation product',
       enable: 'Failed enable product',
       delete: 'Failed delete product',
 
@@ -155,6 +157,8 @@ const type = {
       draft: 'Successfully draft room',
       disable: 'Successfully disable room',
       enable: 'Successfully enable room',
+      delete: 'Successfully delete room',
+
     },
     fail: {
       add_draft: 'Failed added draft room',
@@ -163,6 +167,8 @@ const type = {
       publish: 'Failed publish room',
       draft: 'Failed draft room',
       enable: 'Failed enable room',
+      delete: 'Failed delete room',
+
     }
   },
   flashsale: {

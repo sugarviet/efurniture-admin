@@ -46,7 +46,7 @@ const RoomForm = () => {
             initialValues={[{ product: undefined, quantity: 1 }]}
             name="products"
           >
-            {({ name, remove }) => {
+            {({ name, remove }, index) => {
               return (
                 <div className="grid grid-cols-6 gap-4 items-center">
                   <Form.Item
@@ -82,15 +82,24 @@ const RoomForm = () => {
                       className="h-12"
                       name={[name, "quantity"]}
                     />
+                    {index === 0 ? null :
                     <DeleteOutlined
                       onClick={() => remove(name)}
                       className="h-12 text-xl mx-auto text-rose-500"
                     />
+
+                    }
                   </div>
                 </div>
               );
             }}
           </FormList>
+          <FormInput
+                    label="3D model's id"
+                    name="model3D"
+                    value=""
+                    placeholder="Write title here..."
+                />
         </div>
         <FormUploadButton
           required

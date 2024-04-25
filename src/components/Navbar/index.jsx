@@ -83,7 +83,7 @@ const Navbar = () => {
             />
           </Dropdown>
           <div>
-            <span className="text-black font-semibold capitalize">{role}: </span>
+            {/* <span className="text-black font-semibold capitalize">{role}: </span> */}
             <span className="text-black">{username}</span>
           </div>
         </div>

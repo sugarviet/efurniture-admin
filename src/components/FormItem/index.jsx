@@ -43,11 +43,24 @@ const validateConfirmPassword = ({ getFieldValue }) => ({
   },
 });
 
+const validatePassword = () => ({
+  validator(rule, value, callback) {
+    const uppercaseRegex = /[A-Z]/;
+    const numberRegex = /[0-9]/;
+    if (!uppercaseRegex.test(value) || !numberRegex.test(value)) {
+      callback("Password must contain at least one uppercase letter and one number");
+    } else {
+      callback();
+    }
+  },
+});
+
 const FORM_TYPES = {
   password: {
     rules: [
       { required: true, message: "Please input your password!" },
       validateWhitespace,
+      validatePassword
     ],
   },
   confirmPassword: {
@@ -63,6 +76,9 @@ const FORM_TYPES = {
   },
   text:{
     rules: [{ required: true }, validateWhitespace, validateSpecialCharacters, validateLeadingTrailingWhitespace]
+  },
+  description:{
+    rules: [{ required: true }, validateWhitespace, validateLeadingTrailingWhitespace]
   },
   default: {
     rules: [{ required: false, message: "" }],

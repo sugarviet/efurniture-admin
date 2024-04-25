@@ -40,7 +40,7 @@ const FlashSaleTable = ({ data, onEdit, published }) => {
       render: (_, record) => (
         <div>
           {record.products.map(product => (
-            <span key={product._id} className="text-xs block w-full">{product.productId.name} x {product.count}</span>
+            <span key={product._id} className="text-báe block w-full font-bold">{product.productId.name}</span>
           ))}
         </div>
       ),
@@ -51,14 +51,14 @@ const FlashSaleTable = ({ data, onEdit, published }) => {
       key: "startDay",
       render: (text) => {
 
-        return <span className="text-xs">{formatGMTDate(text)}</span>
+        return <span className="text-xs font-bold">{formatGMTDate(text)}</span>
       },
     },
     {
       title: "End Date",
       dataIndex: "endDay",
       key: "endDay",
-      render: (text) => <span className="text-xs">{formatGMTDate(text)}</span>,
+      render: (text) => <span className="text-xs font-bold">{formatGMTDate(text)}</span>,
     },
     {
       title: "Status",
@@ -72,10 +72,17 @@ const FlashSaleTable = ({ data, onEdit, published }) => {
       width: "30%",
       render: (text, record) => (
         <Space className="flex gap-4">
+
+          {record.status === 1 ? null :
+          <>
           <EditButton >
             <EditFlashsaleForm data={record} />
           </EditButton>
           <DeleteButton url={remove_flash_sale()} notiType="flashsale" notiAction="delete" refreshKey={get_all_flash_sale()} id={record._id} />
+          
+          </>
+          
+          }
           
         </Space>
       ),
