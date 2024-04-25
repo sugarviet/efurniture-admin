@@ -15,10 +15,14 @@ const MOST_PURCHASED_LOCATIONS = [
 ];
 
 function LocationMapBox({data}) {
-  console.log('disctrict', data);
+  
   return (
-    <section className="w-full h-96">
-      <MapBox locations={MOST_PURCHASED_LOCATIONS} />
+    <section className="w-full h-[40rem]">
+      <div className="w-full h-full bg-white rounded-md p-4 flex flex-col gap-3">
+        <span className="text-xl font-bold">Total orders by district</span>
+        <MapBox locations={data} />
+
+      </div>
     </section>
   );
 }

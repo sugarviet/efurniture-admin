@@ -1,7 +1,6 @@
 import Map, { Marker } from "react-map-gl";
 import { COORDINATES } from "../../constants/enums";
 import PropTypes from "prop-types";
-import { Card } from "antd";
 
 const ACCESS_TOKEN =
   "pk.eyJ1Ijoibm9iaXRhODkiLCJhIjoiY2xyajRxMGVnMDVuajJrcW41aGFtYzh5YSJ9.1A258o2oKsYxbYY8Qfx2yQ";
@@ -16,24 +15,24 @@ function MapBox({ locations }) {
       initialViewState={{
         longitude: COORDINATES.get("TP HCM").longitude,
         latitude: COORDINATES.get("TP HCM").latitude,
-        zoom: 10,
+        zoom: 12,
       }}
       mapStyle={STYLE_URL}
       style={{ width: "100%", height: "100%" }}
     >
       {locations.map((location) => {
-        const { district, volume } = location;
-        const { latitude, longitude } = COORDINATES.get(district);
+        const { name, totalOrder,longitude, latitude, _id } = location;
+      
         return (
-          <Marker key={district} latitude={latitude} longitude={longitude}>
+          <Marker key={_id} latitude={longitude} longitude={latitude}>
             <section className="flex flex-col items-center">
               <div className="relative w-fit flex items-center justify-center aspect-square p-2 rounded-full bg-black">
                 <span className="font-semibold text-center text-white">
-                  {volume}
+                  {totalOrder}
                 </span>
                 <div className="rounded-full absolute -right-2 -left-2 -top-2 -bottom-2 bg-black opacity-20 -z-10"></div>
               </div>
-              <span className="font-bold">{district}</span>
+              <span className="font-bold">{name}</span>
             </section>
           </Marker>
         );

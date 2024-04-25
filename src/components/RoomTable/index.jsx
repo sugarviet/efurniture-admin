@@ -10,6 +10,7 @@ import {
   get_to_publish_room_api,
   remove_draft_room,
   get_to_draft_room_staff_api,
+  remove_draft_room_staff,
 } from "../../api/roomApi";
 import PropTypes from "prop-types";
 import EditButton from "../EditButton";
@@ -79,7 +80,7 @@ function RoomTable({ data, published }) {
               </ChangeStatusButton>
             )}
             {!published ? (
-              <DeleteButton url={remove_draft_room()} notiType="room" notiAction="delete" refreshKey={get_draft_rooms_api()} id={record.slug} />
+              <DeleteButton url={remove_draft_room_staff()} notiType="room" notiAction="delete" refreshKey={get_draft_rooms_api()} id={record.slug} />
             ) : null
             }
         </Space>

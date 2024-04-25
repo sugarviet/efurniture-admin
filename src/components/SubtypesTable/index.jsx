@@ -14,6 +14,7 @@ import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
 import PropTypes from "prop-types";
 
 const SubtypesTable = ({ data, onEdit, published }) => {
+  console.log(data)
   const { getColumnSearchProps } = useSearchTableColumn();
   const admin = isAdmin();
 

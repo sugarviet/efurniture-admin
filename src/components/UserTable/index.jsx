@@ -3,7 +3,8 @@ import urlcat from "urlcat";
 import { Link, useSearchParams } from "react-router-dom";
 import { Button, Space, Table } from "antd";
 import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
-
+import DetailButton from '../DetailButton';
+import UserDetail from "../UserDetail";
 function UserTable({ data }) {
   console.log(data);
   const { getColumnSearchProps } = useSearchTableColumn();
@@ -62,6 +63,19 @@ function UserTable({ data }) {
         </span>
       ),
       ...getColumnSearchProps("age"),
+    },
+    {
+      title: 'Actions',
+      key: 'actions',
+      render: (text, record) => (
+        <Space size="middle">
+
+          <DetailButton>
+            <UserDetail data={record} />
+          </DetailButton>
+         
+        </Space>
+      ),
     },
   ];
 

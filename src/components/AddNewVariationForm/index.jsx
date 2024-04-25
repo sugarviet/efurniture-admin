@@ -6,13 +6,14 @@ import FormSelectColor from '../FormSelectColor';
 import { useUpdateWithMultipleKeys } from '../../hooks/api-hooks';
 import { add_variation_to_product, get_draft_product_staff, get_published_product } from '../../api/productApi';
 import useNotification from '../../hooks/useNotification';
+import { message } from "antd";
 
 const AddNewVariationForm = ({ id }) => {
     const { error_message, success_message } = useNotification();
     const { mutate: addNewVariation } = useUpdateWithMultipleKeys(add_variation_to_product(id), undefined, () => {
         success_message('products', 'add_new_variation')
     }, (error) => {
-        error_message('products', 'add_new_variation', error)
+        message.error(error.response.data.error.message)
     }, [get_draft_product_staff(), get_published_product()])
     const [form] = Form.useForm();
     const onFinish = (values) => {

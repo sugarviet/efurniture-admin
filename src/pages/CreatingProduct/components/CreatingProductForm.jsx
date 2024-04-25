@@ -81,7 +81,7 @@ const CreatingProductForm = () => {
             />
 
             <FormTextArea
-              type="text"
+              type="description"
               label="Product Description"
               name="description"
               placeholder="Write description here..."

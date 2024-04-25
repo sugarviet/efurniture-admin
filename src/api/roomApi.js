@@ -21,3 +21,7 @@ export const get_to_draft_room_staff_api = (id) => ROOM_URL + '/staff' + '/draft
 export const remove_draft_room = () => {
     return `/room/admin`;
 }
+
+export const remove_draft_room_staff = () => {
+    return `/room/staff`;
+}

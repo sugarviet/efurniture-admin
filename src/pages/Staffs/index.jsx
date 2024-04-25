@@ -66,6 +66,17 @@ const Staffs = ({ data }) => {
       ...getColumnSearchProps("email"),
     },
     {
+      title: "Role",
+      width: "20%",
+     render: (text, record) => (
+      <div className="flex gap-2 items-center">
+        {record.role.map((role , index) => (
+          <span key={index}>{role.role} {role.action}</span>
+        ))}
+</div>
+     )
+    },
+    {
       title: "Status",
       dataIndex: "status",
       key: "status",

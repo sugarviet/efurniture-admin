@@ -9,7 +9,9 @@ import PropTypes from "prop-types";
 const variationSelect = [{ label: 'color', value: 'color' }]
 const EditingVariationForm = ({ data }) => {
     console.log(data);
-    const initialVariationLength = data.variation.length;
+    const initialVariationLength = data.variation[0].properties.length;
+
+    console.log(initialVariationLength)
     return (
 
         <FormList
