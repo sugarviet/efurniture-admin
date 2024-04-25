@@ -26,6 +26,7 @@ const UpdateProductForm = ({ data }) => {
 
     const formData = {
         ...data,
+        thumbs: formatThumbs(data.thumbs),
         type: data.type.name,
         subTypes: data.type.subTypes,
     }

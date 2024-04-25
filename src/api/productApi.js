@@ -68,3 +68,8 @@ export const add_variation_to_product = (id) => {
     return `/product/staff/addVariation/${id}`
 
 }
+
+export const remove_variation = (id) => {
+    return `/product/staff/removeVariation/${id}`
+
+}

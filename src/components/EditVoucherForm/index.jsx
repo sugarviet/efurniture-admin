@@ -12,7 +12,8 @@ import { formatIntoTypeDate } from "../../utils/formatDate";
 import PropTypes from "prop-types";
 
 const EditVoucherForm = ({ data }) => {
-    console.log(data);
+  const {editVoucher} = useVoucher(data._id);
+    
   const formateData = {
     ...data,
     start_date: formatIntoTypeDate(data.start_date),
@@ -25,6 +26,7 @@ const EditVoucherForm = ({ data }) => {
 
   const onFinish = (value) => {
     console.log(value);
+    editVoucher(value)
   };
   return (
     <div>

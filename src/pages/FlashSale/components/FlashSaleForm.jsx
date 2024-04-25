@@ -69,7 +69,7 @@ const FlashSaleForm = () => {
             }
             <FormList
 
-              initialValues={[{ product: undefined, salePrice: 100000, count: 1 }]}
+              initialValues={[{ product: undefined, salePrice: 100000 }]}
               name="products"
             >
               {({ name, remove, restField }, index) => {

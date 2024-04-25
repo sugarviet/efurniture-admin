@@ -3,7 +3,7 @@ import { usePost, useUpdate } from "./api-hooks";
 import { Form } from "antd";
 import useNotification from "./useNotification";
 import { v4 as uuidv4 } from "uuid";
-function useVoucher() {
+function useVoucher(id = '') {
   const { success_message, error_message } = useNotification();
   const [form] = Form.useForm();
   const { mutate: createMutation } = usePost(
@@ -19,7 +19,7 @@ function useVoucher() {
     get_voucher_api()
   );
   const { mutate: updateMutation } = useUpdate(
-    get_update_voucher_api(),
+    get_update_voucher_api(id),
     undefined,
     () => {
       success_message("voucher", "add");
@@ -73,6 +73,7 @@ function useVoucher() {
       value,
       start_date,
       end_date,
+      code,
       maximum_use,
       maximum_use_per_user,
       minimum_order_value,
@@ -84,7 +85,7 @@ function useVoucher() {
       name: name,
       description: description,
       type: type,
-      code: uuidv4(),
+      code: code,
       value: value,
       start_date: start_date,
       end_date: end_date,
@@ -96,7 +97,7 @@ function useVoucher() {
       products: products ? products.map((item) => item._id) : [],
     };
     // console.log(body);
-    createMutation(body);
+    updateMutation(body);
   };
 
   return { createVoucher, form, editVoucher };

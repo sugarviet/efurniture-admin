@@ -8,6 +8,7 @@ import FormTextArea from "../FormTextArea";
 import FormInput from "../FormInput";
 import useRoom from "../../hooks/useRoom";
 import PropTypes from "prop-types";
+import { formatThumbs } from "../../utils/formatThumb";
 
 const EditRoomForm = ({ data }) => {
   const [form] = Form.useForm();
@@ -28,12 +29,12 @@ const EditRoomForm = ({ data }) => {
     });
     const body = {
       ...values,
+      thumb: formatThumbs(values.thumb)[0],
       products,
     };
     handleEditRoom(body);
   };
 
-  console.log("edit room data", data);
   return (
     <Form
       maxCount={1}

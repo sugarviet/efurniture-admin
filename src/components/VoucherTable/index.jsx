@@ -1,10 +1,13 @@
-import { Table, Tag } from "antd";
+import { Space, Table, Tag } from "antd";
 import { formatDateByDateAndTime } from "../../utils/formatDate";
 import { formatCurrency } from "../../utils/formatCurrency";
 import EditButton from "../EditButton";
 import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
 import EditVoucherForm from "../EditVoucherForm";
+import DeleteButton from "../DeleteButton";
+import { get_voucher_api, remove_voucher_api } from "../../api/voucherApi";
 function VoucherTable({ data }) {
+  console.log("Voucher", data)
   const { getColumnSearchProps } = useSearchTableColumn();
   
   const columns = [
@@ -90,9 +93,14 @@ function VoucherTable({ data }) {
     },
     {
       title: "Actions",
-      render: (_, record) => <EditButton modalWidth={1000}>
+      render: (_, record) => 
+      <Space>
+
+      <EditButton modalWidth={1000}>
         <EditVoucherForm data={record}/>
-      </EditButton>,
+      </EditButton>
+      <DeleteButton url={remove_voucher_api()} notiType="voucher" notiAction="delete" refreshKey={get_voucher_api()} id={record._id} />
+      </Space>
     },
   ];
 

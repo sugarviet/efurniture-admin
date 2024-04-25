@@ -13,6 +13,7 @@ import {
   publish_product_staff,
   draft_product_staff,
   remove_draft_product_staff,
+  get_draft_product_staff,
 } from "../../api/productApi";
 import ChangeStatusButton from "../ChangeStatusButton";
 import DeleteButton from "../DeleteButton";
@@ -21,6 +22,7 @@ import { CreatingProductProvider } from "../../pages/CreatingProduct/CreatingPro
 import AddNewVariationButton from "../AddNewVariationButton";
 import { DEPLOY_PRODUCT_DETAIL_URL } from "../../constants/url";
 import LinkNewTab from "../LinkNewTab";
+import DeleteVariation from "../DeleteVariationProduct";
 
 const ProductTable = ({ data, onEdit, published }) => {
   const admin = isAdmin();
@@ -32,7 +34,14 @@ const ProductTable = ({ data, onEdit, published }) => {
       dataIndex: "name",
       key: "name",
       ...getColumnSearchProps("name"),
-      render: (text, record) => published ? <LinkNewTab to={`${DEPLOY_PRODUCT_DETAIL_URL}/${record.slug}`}>{text}</LinkNewTab> : text,
+      render: (text, record) =>
+        published ? (
+          <LinkNewTab to={`${DEPLOY_PRODUCT_DETAIL_URL}/${record.slug}`}>
+            {text}
+          </LinkNewTab>
+        ) : (
+          text
+        ),
     },
     {
       title: "Thumb",
@@ -42,24 +51,45 @@ const ProductTable = ({ data, onEdit, published }) => {
         <img
           src={record.thumbs[0]}
           alt={record.name}
-          style={{ width: 100, height: 100, objectFit: 'contain' }}
+          style={{ width: 100, height: 100, objectFit: "contain" }}
         />
       ),
     },
     {
-      title: 'Color',
+      title: "Color",
 
       render: (text, record) => (
-
         <div className="flex gap-2 items-center">
-          {record.variation[0].properties.map(property => <div key={property._id} style={{ backgroundColor: property.value, width: 20, height: 20, borderRadius: '50%', border: '1px solid #d3d3d3' }} />)}
-          {admin ? null : 
-          <AddNewVariationButton id={record._id} />
-          
-          }
-
+          {record.variation[0].properties.map((property) =>
+            !admin ? (
+              <DeleteVariation key={property._id} propertyId={property._id} productId={record._id}>
+                <div
+                  key={property._id}
+                  style={{
+                    backgroundColor: property.value,
+                    width: 20,
+                    height: 20,
+                    borderRadius: "50%",
+                    border: "1px solid #d3d3d3",
+                  }}
+                />
+              </DeleteVariation>
+            ) : (
+              <div
+                key={property._id}
+                style={{
+                  backgroundColor: property.value,
+                  width: 20,
+                  height: 20,
+                  borderRadius: "50%",
+                  border: "1px solid #d3d3d3",
+                }}
+              />
+            )
+          )}
+          {admin ? null : <AddNewVariationButton id={record._id} />}
         </div>
-      )
+      ),
     },
     {
       title: "Price",
@@ -75,7 +105,7 @@ const ProductTable = ({ data, onEdit, published }) => {
     },
     {
       title: "Description",
-      width: '20%',
+      width: "20%",
       render: (_, record) => (
         <span className="text-[#959798] text-xs">{record.description}</span>
       ),
@@ -95,7 +125,6 @@ const ProductTable = ({ data, onEdit, published }) => {
               Publish
             </ChangeStatusButton>
           ) : (
-
             <ChangeStatusButton
               url={draft_product_staff(record.type.slug, record.slug)}
               resetPublishkey={get_published_product()}
@@ -106,7 +135,6 @@ const ProductTable = ({ data, onEdit, published }) => {
             >
               Draft
             </ChangeStatusButton>
-
           )}
 
           <EditButton>
@@ -116,16 +144,18 @@ const ProductTable = ({ data, onEdit, published }) => {
           </EditButton>
 
           {!published ? (
-            <DeleteButton url={remove_draft_product_staff()} notiType="product" notiAction="delete" refreshKey={get_draft_product()} id={record.slug} />
-          ) : null
-          }
+            <DeleteButton
+              url={remove_draft_product_staff()}
+              notiType="products"
+              notiAction="delete"
+              refreshKey={get_draft_product_staff()}
+              id={record.slug}
+            />
+          ) : null}
         </Space>
-
-
       ),
     },
   ].filter(Boolean);
-
 
   const ADMIN_COLUMNS = [
     ...STAFF_COLUMNS,
@@ -159,23 +189,30 @@ const ProductTable = ({ data, onEdit, published }) => {
               )
             )}
 
-
             {admin && !published ? (
-              <DeleteButton url={remove_draft_product()} notiType="products" notiAction="delete" refreshKey={get_draft_product()} id={record.slug} />
-            ) : null
-            }
+              <DeleteButton
+                url={remove_draft_product()}
+                notiType="products"
+                notiAction="delete"
+                refreshKey={get_draft_product()}
+                id={record.slug}
+              />
+            ) : null}
           </Space>
-        )
+        );
       },
     },
-  ]
+  ];
 
   return (
     <div>
-      <Table rowKey="_id"
+      <Table
+        rowKey="_id"
         dataSource={data.data}
         pagination={{ pageSize: 10, hideOnSinglePage: true }}
-        bordered columns={admin ? ADMIN_COLUMNS : STAFF_COLUMNS} />
+        bordered
+        columns={admin ? ADMIN_COLUMNS : STAFF_COLUMNS}
+      />
     </div>
   );
 };
