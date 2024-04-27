@@ -12,6 +12,7 @@ const AddNewVariationForm = ({ id }) => {
     const { error_message, success_message } = useNotification();
     const { mutate: addNewVariation } = useUpdateWithMultipleKeys(add_variation_to_product(id), undefined, () => {
         success_message('products', 'add_new_variation')
+        form.resetFields();
     }, (error) => {
         message.error(error.response.data.error.message)
     }, [get_draft_product_staff(), get_published_product()])
@@ -67,8 +68,8 @@ const AddNewVariationForm = ({ id }) => {
                                         name={[name, "sub_price"]}
                                         prefix="VND"
                                         required
-                                        message="Please enter the discount of ammount"
-                                        placeholder="Enter discount ammount"
+                                        message="Please enter the variation price"
+                                        placeholder="Enter the variation price"
                                         className="w-full"
                                         min="0"
 

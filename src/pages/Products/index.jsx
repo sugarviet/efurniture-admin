@@ -16,7 +16,7 @@ const Products = () => {
 
   return (
     <main>
-      <TableCard label="Public Products">
+      <TableCard label="Published Products">
         <PublishedProductTable published={true} />
       </TableCard>
 

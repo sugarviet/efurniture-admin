@@ -32,6 +32,8 @@ const OrderDetail = lazy(() => import("./pages/OrderDetail"));
 const SubTypes = lazy(() => import("./pages/SubTypes"));
 const DeliveryTrip = lazy(() => import("./pages/DeliveryTrip"));
 const RequestOrder = lazy(() => import("./pages/RequestOrder"));
+const Unauthorized = lazy(() => import("./pages/Unauthorized"));
+
 
 
 // HOCs
@@ -78,6 +80,8 @@ export const pathSystem = {
   subtypes: "/subtypes",
   deliveryTrip: "/delivery-trip",
   orderRequest: "/order-request",
+  unauthorized: "/unauthorized",
+
 
 };
 
@@ -256,6 +260,10 @@ export const router = createBrowserRouter([
     element: <WrappedComponentWithAuth />,
     children: [
       ...getRoutesBasedOnRole(),
+      {
+        path: pathSystem.unauthorized,
+        element: <Unauthorized />,
+      },
       {
         path: "*",
         element: <NotFound />,

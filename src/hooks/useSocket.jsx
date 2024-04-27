@@ -13,17 +13,26 @@ const useSocket = () => {
         admin: [
             'lowstockWareHouse',
             'lowstockInventory',
+            'checkLogin'
         ],
         staff: [
             'requestDeliveryTrip',
+            'checkLogin'
+
         ]
     };
 
+    const loginSocket = () => {
+        socket.emit('login-user', socket.id);
+    }
+
    
     const subcribeToNoti = () => {
+        loginSocket();
         const subscriptions = notificationSubscriptions[role] || [];
         subscriptions.forEach((eventName) => {
-            socket.on(eventName, () => {
+            socket.on(eventName, (arg) => {
+                console.log(arg)
                 refreshNotification();
                 hasNewNoti();
             });
@@ -33,7 +42,10 @@ const useSocket = () => {
 
 
     return {
-        subcribeToNoti
+        subcribeToNoti,
+        loginSocket,
+        socket
+        
     };
 }
 

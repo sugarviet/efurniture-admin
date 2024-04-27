@@ -9,8 +9,9 @@ import {
 import EditFlashsaleForm from "../EditFlashsaleForm";
 import DeleteButton from "../DeleteButton";
 import { formatGMTDate } from "../../utils/formatDate";
+import StopFlashsaleButton from "../StopFlashsaleButton";
 const FlashSaleTable = ({ data, onEdit, published }) => {
-  console.log(data);
+  console.log('flashsale', data);
   const { getColumnSearchProps } = useSearchTableColumn();
 
   const FLASH_SALE_STATUS = {
@@ -83,6 +84,11 @@ const FlashSaleTable = ({ data, onEdit, published }) => {
           </>
           
           }
+          {record.status === 2 ? 
+          null:
+          <StopFlashsaleButton flashsaleId={record._id}/>
+          
+        }
           
         </Space>
       ),

@@ -25,3 +25,7 @@ export const remove_flash_sale = () => {
 export const get_valid_product_flash_sale = () => {
     return `/product/admin/validFlashSale`
 }
+
+export const stop_flashsale = (id) => {
+    return `/flashsale/admin/draft/${id}`
+}

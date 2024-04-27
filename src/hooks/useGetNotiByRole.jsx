@@ -11,7 +11,7 @@ const NOTI_BY_ROLE = {
 const useGetNotiByRole = () => {
   const queryClient = useQueryClient();
     const { role } = useAuth();
-    const { data, isLoading } = useFetch(NOTI_BY_ROLE[role]())
+    const { data, isLoading } = useFetch(NOTI_BY_ROLE[role]() || '')
 
     const refreshNotification = () => {
         queryClient.invalidateQueries(NOTI_BY_ROLE[role]());

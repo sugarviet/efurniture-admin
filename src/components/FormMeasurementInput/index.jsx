@@ -21,10 +21,6 @@ const FormMeasurementInput = ({name, label, required }) => {
               value: "m",
               label: "m",
             },
-            {
-              value: "kg",
-              label: "kg",
-            },
           ]}/>
       </Input.Group>
     </FormItem>

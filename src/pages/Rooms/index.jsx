@@ -12,7 +12,7 @@ const DraftRoomTable = withFetchData(RoomTable, get_draft_rooms_api);
 const Rooms = () => {
   return (
     <main>
-      <TableCard label={"Public Rooms"}>
+      <TableCard label={"Published Rooms"}>
         <PublicRoomTable published />
       </TableCard>
 

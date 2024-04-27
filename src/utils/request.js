@@ -32,13 +32,12 @@ const cookies = () => ({
 
 const logoutUser = async () => {
   try {
+    alert("Someone is logging into your account");
       Cookies.remove('accessToken')
       Cookies.remove('refreshToken')
       Cookies.remove('accountId')
 
-      message.error('Someone is logging into your account')
-      await sleep(2000);
-      window.location.replace("/login");
+      return window.location.replace("/login");
   } catch (error) {
       return Promise.reject(error);
   }
