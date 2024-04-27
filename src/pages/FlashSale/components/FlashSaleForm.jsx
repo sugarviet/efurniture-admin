@@ -10,7 +10,7 @@ import { useState } from "react";
 import { formatDateByDateAndTime } from "../../../utils/formatDate";
 import FormUploadButton from "@components/FormUploadButton";
 import Note from "../../../components/Note";
-import { getCurrentDate } from "../../../utils/getCurrentDate";
+
 const FlashSaleForm = () => {
   const { form, handleCreateFlashsale } = useFlashSale();
   const [startDay, setStartDay] = useState();
@@ -74,7 +74,8 @@ const FlashSaleForm = () => {
             >
               {({ name, remove, restField }, index) => {
                 return (
-                  <div className="grid grid-cols-6 items-center gap-4">
+                  <div className="grid grid-cols-6 items-center gap-4 flex items-center">
+                
                     <Form.Item
                       {...restField}
                       required
@@ -107,7 +108,7 @@ const FlashSaleForm = () => {
 
                         className='h-12' />
                     </Form.Item>
-                    <div className="flex gap-4 col-span-2">
+                    <div className="flex gap-4 col-span-2 items-center">
                       {/* <FormInputNumber
                       required
                         min={1}
@@ -118,6 +119,7 @@ const FlashSaleForm = () => {
                       required
                         prefix="VND"
                         min={1000}
+                       
                         className="h-12"
                         name={[name, "salePrice"]}
                         placeholder="Sale price"

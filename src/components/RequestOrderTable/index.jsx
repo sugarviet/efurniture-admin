@@ -2,7 +2,7 @@ import { Table, Button, Tag } from "antd";
 import { useSearchParams } from "react-router-dom";
 import { useSearchTableColumn } from "@hooks/useSearchTableColumn";
 import { formatCurrency } from "../../utils/formatCurrency";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { withFetchData } from "../../hocs/withFetchData";
 import { get_orders_re_shipping_api, get_orders_request_staff_api } from "../../api/orderApi";
 import { formatDateByDateAndTime } from "../../utils/formatDate";
@@ -20,6 +20,10 @@ const RequestOrderTable = ({ data }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { getColumnSearchProps } = useSearchTableColumn();
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+
+  useEffect(() => {
+    
+  }, [selectedRowKeys]); 
 
   if(isReOrderLoading) return <span>Loading...</span>;
   const handleTableChange = (pagination) => {
@@ -39,6 +43,7 @@ const RequestOrderTable = ({ data }) => {
     selectedRowKeys,
     onChange: handleSelectChange,
   };
+
 
   const COLUMN = [
     {
@@ -108,7 +113,8 @@ const RequestOrderTable = ({ data }) => {
     },
   ];
 
-  console.log('reorder', reOrderShipping)
+  
+
 
   return (
     <div>

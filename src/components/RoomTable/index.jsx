@@ -52,7 +52,7 @@ function RoomTable({ data, published }) {
       title: "Actions",
       render: (_, record) => (
         <Space className="flex gap-4">
-          <EditButton>
+          <EditButton modalWidth={700}>
               <EditRoomForm data={record} />
             </EditButton>
               

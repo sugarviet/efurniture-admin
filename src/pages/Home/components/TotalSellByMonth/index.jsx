@@ -49,7 +49,7 @@ const TotalSellByMonth = () => {
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" />
-          <YAxis />
+          <YAxis/>
           <Tooltip />
           <Line
             type="monotone"

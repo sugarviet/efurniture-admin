@@ -6,6 +6,7 @@ import { get_login } from "../api/authApi";
 import { jwtDecode } from "jwt-decode";
 import { getCurrentUserRole } from "@utils/getCurrentUserRole";
 import useNotification from "@hooks/useNotification";
+import useSocket from "./useSocket";
 const init_route = {
   superAdmin: "/",
   admin: "/",
@@ -27,7 +28,9 @@ export function useAuthentication() {
 
       setTokens(access_token, refresh_token, decode.account_id, role);
       success_message("login", "login");
+
       navigate(init_route[role]);
+      
       refreshPage();
     },
     () => {
