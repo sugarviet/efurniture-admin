@@ -1,4 +1,4 @@
-import { Table, Button, Space } from 'antd';
+import { Table, Button, Space, Tag } from 'antd';
 import { withFetchData } from '../../hocs/withFetchData';
 import { get_all_delivery_trip_pending_staff, get_all_delivery_trip_staff } from '../../api/deliveryTripApi';
 import AppModal from '../AppModal';
@@ -7,7 +7,6 @@ import DetailButton from '../DetailButton';
 import ConfirmDeliveryButton from '../ConfirmDeliveryButton';
 import { formatDateByDateAndTime } from '../../utils/formatDate';
 import TripDetail from '../TripDetail';
-import RejectButton from '../../pages/DeliveryTrip/components/RejectButton';
 import PropTypes from "prop-types";
 
 const DELIVERY_STATUS = {
@@ -31,7 +30,7 @@ const DELIVERY_STATUS = {
 
 const DeliveryTripTable = ({ data }) => {
   const { getColumnSearchProps } = useSearchTableColumn();
-  console.log(data);
+  console.log('DeliveryTripTable', data);
   const columns = [
     {
       title: 'Trip ID',
@@ -60,7 +59,7 @@ const DeliveryTripTable = ({ data }) => {
       title: 'Status',
       dataIndex: 'status',
       key: 'status',
-      render: (status) => (status === 0 ? 'Pending' : 'Accepted'),
+      render: (status) => <Tag color={DELIVERY_STATUS[status].color}><span className='font-bold'>{DELIVERY_STATUS[status].name}</span></Tag>,
     },
     {
       title: 'Trip Status',
@@ -79,7 +78,7 @@ const DeliveryTripTable = ({ data }) => {
       render: (text, record) => (
         <Space size="middle">
 
-          <DetailButton>
+          <DetailButton modalWidth={900}>
             <TripDetail data={record.orders} />
           </DetailButton>
           {/* <ConfirmDeliveryButton deliveryId={record._id} />

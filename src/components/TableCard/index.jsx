@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 function TableCard({ label, children, addMoreButton }) {
   return (
-    <section className="flex flex-col bg-white rounded-xl shadow-xl p-4 my-4">
+    <section className="flex flex-col bg-white shadow-xl p-4 my-4">
       <div className="flex justify-between">
         <span className="font-semibold tracking-wider text-xl mb-4">
           {label}

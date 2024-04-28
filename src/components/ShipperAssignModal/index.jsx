@@ -22,6 +22,8 @@ const SHIPPER_STATUS = {
 
 const ShipperAssignModal = ({ orderId, data, setOpenModal }) => {
     const { success_message, error_message } = useNotification();
+
+    console.log('order', data);
     
     const { mutate: assignOrder } = usePost(create_delivery_trip(), undefined, () => {
         success_message('deliveryTrip', 'assign')

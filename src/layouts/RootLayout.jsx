@@ -7,8 +7,10 @@ import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import useSocket from "../hooks/useSocket";
+import useAuth from "../stores/useAuth";
 const RootLayout = () => {
   const { subcribeToNoti } = useSocket()
+  const {accessToken} = useAuth()
   const [collapsed, setCollapsed] = useState(false);
 
   useEffect(() => {
@@ -19,7 +21,7 @@ const RootLayout = () => {
     <main className="flex h-screen">
       <Layout>
         <Sider
-          className="text-white h-screen relative"
+          className="text-white h-screen relative border border-r-2"
           theme="light"
           trigger={null}
           collapsible
@@ -49,7 +51,7 @@ const RootLayout = () => {
             <Navbar />
           </Header>
           <AppSuspense>
-            <Content className="p-4 overflow-y-auto">
+            <Content className="overflow-y-auto mt-1">
               <Outlet />
             </Content>
           </AppSuspense>
