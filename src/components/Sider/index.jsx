@@ -14,6 +14,10 @@ const AppSider = () => {
   const location = useLocation();
 
   return (
+    <>
+    <div className="px-2 my-2 mx-2">
+      <img src="../images/logo.svg" alt="" className="bg-black text-black" />
+    </div>
     <Menu
       theme="light"
       onClick={onClick}
@@ -22,6 +26,7 @@ const AppSider = () => {
       className={classNames("text-lg tracking-wide")}
       items={getItemByRole[role]}
     />
+    </>
   );
 };
 
