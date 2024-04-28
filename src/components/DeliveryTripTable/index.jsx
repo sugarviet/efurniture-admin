@@ -62,11 +62,6 @@ const DeliveryTripTable = ({ data }) => {
       render: (status) => <Tag color={DELIVERY_STATUS[status].color}><span className='font-bold'>{DELIVERY_STATUS[status].name}</span></Tag>,
     },
     {
-      title: 'Trip Status',
-      dataIndex: ['current_state', 'state'],
-      key: 'status',
-    },
-    {
       title: 'Created At',
       dataIndex: 'createdAt',
       key: 'createdAt',
