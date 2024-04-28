@@ -29,7 +29,7 @@ const EditRoomForm = ({ data }) => {
     });
     const body = {
       ...values,
-      thumb: formatThumbs(values.thumb)[0],
+      thumb: formatThumbs(values.thumb),
       products,
     };
     handleEditRoom(body);
@@ -67,6 +67,7 @@ const EditRoomForm = ({ data }) => {
         className="xl:w-[28rem] lg:w-[20rem]"
         label="Image"
         name="thumb"
+        maxCount={1}
       />
 
       <FormList

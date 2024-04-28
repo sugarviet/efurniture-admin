@@ -35,6 +35,7 @@ const SubtypesTable = ({ data, onEdit, published }) => {
       title: "Type Name",
       dataIndex: "slug",
       key: "slug",
+      width: "20%",
       render: (text) => <span className="text-base">{text}</span>,
       ...getColumnSearchProps("slug"),
     },

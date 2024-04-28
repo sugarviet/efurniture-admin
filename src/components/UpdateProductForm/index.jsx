@@ -87,20 +87,20 @@ const UpdateProductForm = ({ data }) => {
                 />
 
                 <FormTextArea
-                    type='text'
+                    required
                     label="Product Description"
                     name="description"
                     placeholder="Write description here..."
                 />
                 <div className="flex gap-10">
 
-                    <FormInputNumber label="Regular Pricing"
+                    <FormInputNumber label="Regular Price"
                         required
                         prefix="VND"
 
                         name="regular_price"
                         placeholder="$$$" />
-                    <FormInputNumber label="Sell Pricing"
+                    <FormInputNumber label="Sell Price"
                         required
                         prefix="VND"
 

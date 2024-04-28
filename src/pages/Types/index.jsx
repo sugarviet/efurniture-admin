@@ -16,7 +16,7 @@ const Types = () => {
     <main>
       <section className="flex gap-6">
         <div className="flex-1">
-          <TableCard label="Public types">
+          <TableCard label="Published types">
             <PublishedTypeTable published />
           </TableCard>
 

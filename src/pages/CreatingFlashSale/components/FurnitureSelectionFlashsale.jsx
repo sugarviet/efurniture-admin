@@ -5,11 +5,10 @@ import { classNames } from "../../../utils/classNames";
 import BriefInfo from "../../../components/BriefInfo";
 import FurnitureOptionFlashsale from "./FurnitureOptionFlashsale";
 import {
-  formatDateByDateAndMinuteSplash,
-  formatDateByDateAndTime,
   formatDateByDateAndMinute,
 } from "../../../utils/formatDate";
 import PropTypes from "prop-types";
+import BriefInfoFlashsale from "../../../components/BriefInfoFlashsale";
 
 function FurnitureSelectionFlashsale({
   onChange,
@@ -18,7 +17,7 @@ function FurnitureSelectionFlashsale({
   multiple,
   data,
 }) {
-  console.log(data);
+
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleSelect = (furniture) => {
@@ -54,12 +53,13 @@ function FurnitureSelectionFlashsale({
         )}
       >
         {value && !multiple && (
-          <BriefInfo
+          <BriefInfoFlashsale
             info={{
               thumb: value.thumbs[0],
               name: value.name,
+              sell_price: value.sale_price
             }}
-            img_class="h-6"
+            img_class="h-6 w-10"
           />
         )}
 

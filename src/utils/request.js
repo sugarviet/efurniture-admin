@@ -32,13 +32,12 @@ const cookies = () => ({
 
 const logoutUser = async () => {
   try {
-      Cookies.remove('accessToken')
-      Cookies.remove('refreshToken')
-      Cookies.remove('accountId')
+    // alert("Someone is logging into your account");
+    //   Cookies.remove('accessToken')
+    //   Cookies.remove('refreshToken')
+    //   Cookies.remove('accountId')
 
-      message.error('Someone is logging into your account')
-      await sleep(2000);
-      window.location.replace("/login");
+    //   return window.location.replace("/login");
   } catch (error) {
       return Promise.reject(error);
   }
@@ -48,6 +47,7 @@ const errorHandler = async (error) => {
   if (error.response) {
       switch (error.response.status) {
           case 409:
+            error.config.abortController && error.config.abortController.abort();
               return logoutUser(error.config);
           case 500:
               message.error('Something went wrong');

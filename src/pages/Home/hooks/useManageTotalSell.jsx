@@ -68,6 +68,8 @@ export default function useManageTotalSell() {
       endDay,
     });
   }, []);
+
+
   return {
     revenueData: formattedRevenueData,
     handleChangeRangeDate,
