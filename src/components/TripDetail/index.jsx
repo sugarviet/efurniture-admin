@@ -1,4 +1,4 @@
-import { Table, Button } from 'antd';
+import { Table, Button, Descriptions } from 'antd';
 import { useState } from 'react';
 import { formatCurrency } from '../../utils/formatCurrency';
 import { CaretRightOutlined, CaretDownOutlined } from '@ant-design/icons';
@@ -93,6 +93,7 @@ const TripDetail = ({ data }) => {
 
     return (
         <div>
+         
             <Table
                 rowKey="_id"
                 columns={columns}

@@ -17,10 +17,10 @@ const TotalSellByMonth = () => {
     console.log('revenueData', revenueData)
 
   return (
-    <Card>
-    <section className="w-full">
+    <div className="bg-white">
+    <section className="w-full px-2">
       <div className="flex items-end justify-between my-4">
-        <div>
+        <div className="ml-4">
           <h1 className="text-2xl font-bold">Total Sell</h1>
           <p className="text-gray-500">Payment received across all channels</p>
         </div>
@@ -61,7 +61,7 @@ const TotalSellByMonth = () => {
       </ResponsiveContainer>
     </section>
 
-    </Card>
+    </div>
   );
 };
 
