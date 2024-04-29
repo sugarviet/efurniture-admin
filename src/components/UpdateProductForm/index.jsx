@@ -92,18 +92,16 @@ const UpdateProductForm = ({ data }) => {
                     name="description"
                     placeholder="Write description here..."
                 />
-                <div className="flex gap-10">
+                <div className="grid grid-cols-2 gap-10">
 
                     <FormInputNumber label="Regular Price"
                         required
                         prefix="VND"
-
                         name="regular_price"
                         placeholder="$$$" />
                     <FormInputNumber label="Sell Price"
                         required
                         prefix="VND"
-
                         name="sale_price"
                         placeholder="$$$" />
 
@@ -134,7 +132,7 @@ const UpdateProductForm = ({ data }) => {
                             )
                             )}
                 </div> */}
-                <FormUploadButton label="Display images" name="thumbs" defaultFileList={transformedThumbs} />
+                <FormUploadButton label="Display images" name="thumbs" defaultFileList={transformedThumbs} className="lg:w-[30rem] lg:h-[10rem]"/>
                 <EditingVariationForm data={data} />
                 <FormInput
                     label="3D model's id"

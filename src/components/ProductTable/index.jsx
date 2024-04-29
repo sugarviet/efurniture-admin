@@ -137,7 +137,7 @@ const ProductTable = ({ data, onEdit, published }) => {
             </ChangeStatusButton>
           )}
 
-          <EditButton>
+          <EditButton modalWidth={800}>
             <CreatingProductProvider>
               <UpdateProductForm data={record} />
             </CreatingProductProvider>
@@ -209,7 +209,7 @@ const ProductTable = ({ data, onEdit, published }) => {
       <Table
         rowKey="_id"
         dataSource={data.data}
-        pagination={{ pageSize: 10, hideOnSinglePage: true }}
+        pagination={{ pageSize: 6, hideOnSinglePage: true }}
         bordered
         columns={admin ? ADMIN_COLUMNS : STAFF_COLUMNS}
       />

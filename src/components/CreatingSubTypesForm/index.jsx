@@ -14,6 +14,7 @@ import FormSelectType from "../FormSelectType";
 import { transferSelectOption } from "@utils/transferSelectOption";
 import useNotification from "../../hooks/useNotification";
 import { get_all_draft_subType } from "../../api/subtypeApi";
+import { message } from "antd";
 
 const CreatingSubTypesForm = () => {
   const { error_message, success_message } = useNotification();
@@ -28,7 +29,7 @@ const CreatingSubTypesForm = () => {
       form.resetFields();
     },
     (error) => {
-      error_message('subtypes', 'add_draft', error)
+      message.error(error.response.data.error.message)
 
     },
     get_all_draft_subType()

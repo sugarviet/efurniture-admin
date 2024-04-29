@@ -99,6 +99,7 @@ const EditVoucherForm = ({ data }) => {
           <FormInputNumber
             label="Minimum order value (MinOV)"
             required
+            prefix="VND"
             min={1}
             name="minimum_order_value"
             message="Please enter the value"
