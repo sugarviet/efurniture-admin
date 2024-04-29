@@ -1,8 +1,23 @@
-import { Table, Button, Descriptions } from 'antd';
+import { Table, Button, Descriptions, Tag } from 'antd';
 import { useState } from 'react';
 import { formatCurrency } from '../../utils/formatCurrency';
 import { CaretRightOutlined, CaretDownOutlined } from '@ant-design/icons';
 import PropTypes from "prop-types";
+
+const TRIP_STATUS = {
+    0: {
+        name: 'On Processing',
+        color: 'processing',
+    },
+    1: {
+        name: 'Completed',
+        color:'success',
+    },
+    2: {
+        name: 'Failed',
+        color: 'error',
+    }
+}
 
 const TripDetail = ({ data }) => {
     const [expandedRowKeys, setExpandedRowKeys] = useState([]);
@@ -54,6 +69,12 @@ const TripDetail = ({ data }) => {
                     icon={expandedRowKeys.includes(record.key) ? <CaretDownOutlined/> : <CaretRightOutlined />}
                 />
             ),
+        },
+        {
+            title: 'Status',
+            dataIndex: 'status',
+            key: 'status',
+            render: (text) => <Tag color={TRIP_STATUS[text].color}><span className='font-bold'>{TRIP_STATUS[text].name}</span></Tag>,
         },
     ];
 
