@@ -26,7 +26,7 @@ function VoucherForm() {
         type: 'percentage',
         maximum_use: 1,
         maximum_use_per_user: 1,
-        minimum_order_value: 1,
+        minimum_order_value: 100000,
         start_date: getCurrentDate(),
         end_date: getCurrentDate(),
 
@@ -35,16 +35,6 @@ function VoucherForm() {
       layout="vertical"
       onFinish={onFinish}
     >
-      {/* <div className="grid grid-cols-2 gap-4">
-        <FormInput
-          label="Code"
-          name="code"
-          required
-          message="Please enter the code of message"
-          placeholder="Enter voucher code"
-          className="h-10"
-        />
-      </div> */}
         <FormInput
           label="Name"
           name="name"
@@ -56,7 +46,7 @@ function VoucherForm() {
       <FormTextArea
         label="Description"
         name="description"
-        type='text'
+        type='description'
         placeholder="Enter voucher description"
         message="Please enter the description of the voucher"
       />
@@ -108,6 +98,7 @@ function VoucherForm() {
           label="Minimum order value (MinOV)"
           required
           min={1}
+          prefix="VND"
           name="minimum_order_value"
           message="Please enter the value"
 
