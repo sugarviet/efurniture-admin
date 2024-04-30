@@ -22,7 +22,8 @@ function MapMarker({ address }) {
 
   return (
     <Marker
-      color="black"
+      scale={0.75}
+      color="gray"
       latitude={coordinates[1]}
       longitude={coordinates[0]}
     />

@@ -25,7 +25,9 @@ const DeliveryTrip = () => {
         <RequestOrderTable onSelectOrders={handleSelectedOrders} />
       </TableCard>
 
-      <DirectionMap className="h-96" locations={locations} />
+      <div id="map">
+        <DirectionMap className="h-96" locations={locations} />
+      </div>
     </main>
   );
 };

@@ -1,9 +1,10 @@
-import Map, { Marker, useMap } from "react-map-gl";
+import Map, { Marker, Layer, Source } from "react-map-gl";
 import { COORDINATES } from "../../constants/enums";
 import PropTypes from "prop-types";
 import MapMarker from "../MapMarker";
 import { classNames } from "../../utils/classNames";
 import { useState } from "react";
+import DirectionLayer from "../DirectionLayer";
 
 const STORE_LOCATIONS = [
   {
@@ -23,8 +24,7 @@ const STYLE_URL = "mapbox://styles/nobita89/clrn549cu004j01o3h8f38nmr";
 
 function DirectionMap({ locations, className }) {
   const [store, setStore] = useState(STORE_LOCATIONS[0]);
-
-  const { current: map } = useMap();
+  const storeAddress = `${store.street} ${store.city} ${store.province}`;
 
   return (
     <div className={classNames(className)}>
@@ -38,14 +38,16 @@ function DirectionMap({ locations, className }) {
         mapStyle={STYLE_URL}
       >
         {locations.map((location, index) => {
+          return <DirectionLayer key={index} address={location} />;
+        })}
+        {locations.map((location, index) => {
           return <MapMarker key={index} address={location} />;
         })}
-        {STORE_LOCATIONS.map((location, index) => {
-          const { latitude, longitude } = location;
-          return (
-            <Marker color="black" latitude={latitude} longitude={longitude} />
-          );
-        })}
+        <Marker
+          color="black"
+          latitude={store.latitude}
+          longitude={store.longitude}
+        />
       </Map>
     </div>
   );
