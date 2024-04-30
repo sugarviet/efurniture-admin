@@ -8,8 +8,6 @@ const STYLE_URL = "mapbox://styles/nobita89/clrn549cu004j01o3h8f38nmr";
 
 function MapBox({ locations }) {
   return (
-
-   
     <Map
       mapboxAccessToken={ACCESS_TOKEN}
       initialViewState={{
@@ -21,8 +19,8 @@ function MapBox({ locations }) {
       style={{ width: "100%", height: "100%" }}
     >
       {locations.map((location) => {
-        const { name, totalOrder,longitude, latitude, _id } = location;
-      
+        const { name, totalOrder, longitude, latitude, _id } = location;
+
         return (
           <Marker key={_id} latitude={longitude} longitude={latitude}>
             <section className="flex flex-col items-center">
@@ -38,7 +36,6 @@ function MapBox({ locations }) {
         );
       })}
     </Map>
-
   );
 }
 

@@ -13,7 +13,6 @@
   "dependencies": {
     "@ant-design/compatible": "^5.1.2",
     "@ant-design/icons": "^5.2.6",
-    "@mapbox/mapbox-gl-directions": "^4.3.1",
     "@tanstack/react-query": "^4.29.7",
     "@tanstack/react-query-devtools": "^4.29.7",
     "@types/mapbox-gl": "^2.7.20",
