@@ -1,4 +1,4 @@
-import { Table, Button, Descriptions, Tag } from 'antd';
+import { Table, Button, Descriptions, Tag, Image } from 'antd';
 import { useState } from 'react';
 import { formatCurrency } from '../../utils/formatCurrency';
 import { CaretRightOutlined, CaretDownOutlined } from '@ant-design/icons';
@@ -54,6 +54,40 @@ const TripDetail = ({ data }) => {
             key: 'payment',
         },
         {
+            title: 'Status',
+            dataIndex: 'status',
+            key: 'status',
+            render: (text) => <Tag color={TRIP_STATUS[text].color}><span className='font-bold'>{TRIP_STATUS[text].name}</span></Tag>,
+        },
+        {
+            title: 'Note',
+            render: (_, record) => (
+                <>
+                    {record.order.order_tracking.map((item, index) => {
+                        if (item.name === 'Done') {
+                            return (
+                                <div key={index}>
+                                    <Image
+                                        width={50}
+                                        height={50}
+                                        src={item.note}
+                                    />
+                                </div>
+                            );
+                        }
+                        if (item.name === 'Failed') {
+                            return (
+                                <div key={index}>
+                                   <span>{item.note}</span>
+                                </div>
+                            );
+                        }
+                        return null; 
+                    })}
+                </>
+            ),
+        },
+        {
             title: 'Products',
             key: 'products',
             render: (_, record) => (
@@ -64,12 +98,6 @@ const TripDetail = ({ data }) => {
                     icon={expandedRowKeys.includes(record.key) ? <CaretDownOutlined/> : <CaretRightOutlined />}
                 />
             ),
-        },
-        {
-            title: 'Status',
-            dataIndex: 'status',
-            key: 'status',
-            render: (text) => <Tag color={TRIP_STATUS[text].color}><span className='font-bold'>{TRIP_STATUS[text].name}</span></Tag>,
         },
     ];
 

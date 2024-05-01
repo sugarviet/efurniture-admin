@@ -10,6 +10,7 @@ import PropTypes from "prop-types";
 import { ORDER_STATE } from "../../constants/order";
 
 function OrderTable({ data, onDetail }) {
+  console.log(data);
   const [searchParams, setSearchParams] = useSearchParams();
   const { getColumnSearchProps } = useSearchTableColumn();
 
