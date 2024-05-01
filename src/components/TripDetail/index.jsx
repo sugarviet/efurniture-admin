@@ -43,11 +43,6 @@ const TripDetail = ({ data }) => {
             key: 'address',
         },
         {
-            title: 'District',
-            dataIndex: ['order', 'order_shipping', 'district'],
-            key: 'district',
-        },
-        {
             title: 'Amount',
             dataIndex: 'amount',
             key: 'amount',
