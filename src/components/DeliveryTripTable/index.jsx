@@ -32,6 +32,7 @@ const DELIVERY_STATUS = {
 };
 
 const DeliveryTripTable = ({ data }) => {
+  console.log(data)
   const { getColumnSearchProps } = useSearchTableColumn();
   const columns = [
     {
@@ -78,7 +79,7 @@ const DeliveryTripTable = ({ data }) => {
       key: "actions",
       render: (text, record) => (
         <Space size="middle">
-          <DetailButton modalWidth={900}>
+          <DetailButton modalWidth={1100}>
             <TripDetail data={record.orders} />
           </DetailButton>
           {/* <ConfirmDeliveryButton deliveryId={record._id} />

@@ -29,6 +29,9 @@ const FormSelectColor = ({
         { value: '#FFFFFF', label: '#FFFFFF', color: '#FFFFFF', colorName: 'White' },
         { value: '#eadebd', label: '#eadebd', color: '#eadebd', colorName: 'Light Sand'},
         { value: '#f2e8d7', label: '#f2e8d7', color: '#f2e8d7', colorName: 'Sand' },
+        { value: '#121154', label: '#121154', color: '#121154', colorName: 'Dark Ocean' },
+        { value: '#41533B', label: '#41533B', color: '#41533B', colorName: 'Camo' },
+        { value: '#000000', label: '#000000', color: '#000000', colorName: 'Black' }
 
     ];
 

@@ -140,6 +140,7 @@ const RequestOrderTable = ({ data, onSelectOrders }) => {
       />
       <AppModal setIsOpen={setOpenAssignDelivery} isOpen={openAssignDelivery}>
         <ShipperAssignModal
+        setSelectedRowKeys={setSelectedRowKeys}
           orderId={selectedRowKeys}
           setOpenModal={setOpenAssignDelivery}
         />
