@@ -29,7 +29,7 @@ const EditRoomForm = ({ data }) => {
     });
     const body = {
       ...values,
-      thumb: formatThumbs(values.thumb),
+      thumb: formatThumbs(values.thumb)[0],
       products,
     };
     handleEditRoom(body);
