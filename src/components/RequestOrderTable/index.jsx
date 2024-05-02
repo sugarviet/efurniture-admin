@@ -36,10 +36,12 @@ const RequestOrderTable = ({ data, onSelectOrders }) => {
   };
 
   const handleSelectChange = (selectedRowKeys) => {
+    console.log(selectedRowKeys)
     const selectedOrders =
       [...data.data].filter((i) =>
         selectedRowKeys.some((key) => i._id === key)
       ) || [];
+      console.log('selectedOrders', selectedOrders)
     onSelectOrders(selectedOrders);
     setSelectedRowKeys(selectedRowKeys);
   };
