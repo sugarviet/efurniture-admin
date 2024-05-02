@@ -27,10 +27,19 @@ const convertMileToKiloMile = (value) => {
 };
 
 function DirectionMap({ locations, className }) {
+  console.log(locations)
   const [store, setStore] = useState(STORE_LOCATIONS[0]);
   const [directions, setDirections] = useState([]);
   const storeAddress = `${store.street} ${store.city} ${store.province}`;
 
+  useEffect(()=>{
+    if(!locations.length) setDirections([]);
+   
+  }, [locations])
+
+  console.log('direction', directions)
+
+ 
   return (
     <div className={classNames(className, "relative")}>
       <ul className="bg-transparent absolute right-0 top-0 z-50">
@@ -61,7 +70,10 @@ function DirectionMap({ locations, className }) {
           return (
             <DirectionLayer
               onDirection={(data) => {
+                console.log('direction', data);
                 const directionsClone = [...directions];
+
+              
                 directionsClone.push(data);
 
                 const sortedData = directionsClone.filter((item) =>
@@ -73,6 +85,8 @@ function DirectionMap({ locations, className }) {
                     sortedData.map((item) => [item["address"], item])
                   ).values(),
                 ];
+
+                console.log(uniqueData)
                 setDirections(uniqueData);
               }}
               key={index}
