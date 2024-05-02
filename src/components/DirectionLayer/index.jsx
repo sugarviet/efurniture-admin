@@ -3,6 +3,7 @@ import { Layer, Source } from "react-map-gl";
 import { get_geo_code_api } from "../../api/vietMapApi";
 import axios from "axios";
 import { message } from "antd";
+import { useEffect } from "react";
 
 const STORE_LOCATIONS = [
   {
@@ -69,10 +70,19 @@ const MapLayer = ({ start, end }) => {
   );
 };
 
-function DirectionLayer({ address }) {
+function DirectionLayer({ address, onDirection }) {
   const { data, isLoading } = useQuery([get_geo_code_api(address)], () =>
     fetcher(get_geo_code_api(address))
   );
+
+  useEffect(() => {
+    if (isLoading) return;
+
+    const { distance } = data.data.features[0].properties;
+
+    onDirection({ address, distance });
+  }, [data, isLoading, address]);
+
   if (isLoading) return null;
 
   const start = {
