@@ -8,6 +8,7 @@ const DeliveryTrip = () => {
   const [locations, setLocations] = useState([]);
 
   const handleSelectedOrders = (orders) => {
+    console.log('orders', orders);
     const shippingAddress = orders.map((order) => {
       const { address, district, ward, province } = order.order_shipping;
       return `${address} ${ward} ${district} ${province}`;
