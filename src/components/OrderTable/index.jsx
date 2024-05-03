@@ -108,7 +108,7 @@ function OrderTable({ data, onDetail }) {
   return (
     <div>
 
-      <div className="float-right flex gap-2 items-center mb-3">
+      {/* <div className="float-right flex gap-2 items-center mb-3">
         <span className='text-base'>Status:</span>
       <Select
       style={{
@@ -145,7 +145,7 @@ function OrderTable({ data, onDetail }) {
       ]}
     />
 
-      </div>
+      </div> */}
       <Table
         rowKey="_id"
         columns={columns}
