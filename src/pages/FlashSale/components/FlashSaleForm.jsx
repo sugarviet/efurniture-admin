@@ -31,7 +31,7 @@ const FlashSaleForm = () => {
       autoComplete="off"
     >
       <div className="flex gap-5">
-        <div className="w-[80rem]">
+        <div className="w-[60rem]">
           <FormInput
             label="Name"
             name="name"
