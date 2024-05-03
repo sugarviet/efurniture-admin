@@ -11,8 +11,8 @@ const useSocket = () => {
   const { hasNewNoti } = useNotificationStore();
   
   const notificationSubscriptions = {
-    admin: ["lowstockWareHouse", "lowstockInventory", "checkLogin"],
-    staff: ["requestDeliveryTrip", "checkLogin"],
+    admin: ["lowstockWareHouse", "lowstockInventory", "checkLogin", "requestDeliveryTrip"],
+    staff: ["checkLogin"],
     superAdmin: ["checkLogin"]
   };
 
