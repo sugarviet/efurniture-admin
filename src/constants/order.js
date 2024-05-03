@@ -19,6 +19,10 @@ export const ORDER_STATE = {
       status: "failed",
       color: "error",
     },
+    Refunded: {
+      status: "refunded",
+      color: "error",
+    },
     Cancelled: {
       status: "cancelled",
       color: "default",

@@ -1,4 +1,5 @@
-export const get_all_transactions = () => {
-    return 'transaction?page=1&limit=12';
+export const get_all_transactions = (q, param) => {
+
+    return `transaction?page=${param.page}&limit=10`;
 }
 
